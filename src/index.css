@@ -3,15 +3,29 @@
 @tailwind utilities;
 
 :root {
-    --surface-base: #0a0a0a;
-    --surface-raised: #111111;
-    --surface-app: #141414;
+    --color-theme-bg: #14120b;
+    --color-theme-card: #1c1b14;
+    --color-theme-card-hover: #25231b;
+    --color-theme-border: rgba(237,236,236,0.08);
+    --color-theme-text: #edecec;
+    --color-theme-text-sec: rgba(237,236,236,0.55);
+    --color-theme-text-ter: rgba(237,236,236,0.35);
 
-    --text-primary: #ffffff;
-    --text-secondary: rgba(255,255,255,0.55);
-    --border-subtle: rgba(255,255,255,0.08);
     --code-green: #4ADE80;
     --code-red: #F87171;
+
+    /* backward-compat aliases for old pages */
+    --surface-base: #14120b;
+    --text-primary: #edecec;
+    --text-secondary: rgba(237,236,236,0.55);
+    --border-subtle: rgba(237,236,236,0.08);
+    --color-canvas: #14120b;
+    --color-ink: #edecec;
+    --color-body: rgba(237,236,236,0.55);
+    --color-hairline: rgba(237,236,236,0.08);
+    --color-muted: rgba(237,236,236,0.4);
+    --color-surface-card: #1c1b14;
+    --surface-app: #1c1b14;
 
     --space-xs: 8px;
     --space-sm: 16px;
@@ -19,6 +33,7 @@
     --space-lg: 64px;
     --space-xl: 96px;
     --space-2xl: 128px;
+    --grid-gap: 24px;
 }
 
 * {
@@ -28,8 +43,8 @@
 }
 
 html {
-    background-color: #0a0a0a;
-    color: var(--text-primary);
+    background-color: #14120b;
+    color: var(--color-theme-text);
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -37,8 +52,8 @@ html {
 }
 
 body {
-    background-color: var(--surface-base);
-    color: var(--text-primary);
+    background-color: var(--color-theme-bg);
+    color: var(--color-theme-text);
     font-size: 16px;
     line-height: 1.6;
     overflow-x: hidden;
@@ -55,66 +70,64 @@ a {
 }
 
 /* ─── Buttons ─── */
-.btn-primary {
+.btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    background: #fff;
-    color: #000;
     font-family: 'Inter', sans-serif;
     font-size: 14px;
     font-weight: 500;
-    padding: 12px 24px;
-    border-radius: 999px;
     border: none;
     cursor: pointer;
-    transition: opacity 0.2s ease, transform 0.2s ease;
+    transition: opacity 0.15s ease;
     white-space: nowrap;
+    padding: 8px 16px;
+    border-radius: 6px;
 }
 
-.btn-primary:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
+.btn--primary {
+    background: #edecec;
+    color: #14120b;
+}
+.btn--primary:hover {
+    opacity: 0.85;
 }
 
-.btn-secondary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
+.btn--ghost {
     background: transparent;
-    color: rgba(255,255,255,0.7);
-    font-family: 'Inter', sans-serif;
+    color: var(--color-theme-text-sec);
+}
+.btn--ghost:hover {
+    color: var(--color-theme-text);
+}
+
+.btn--quinary {
+    background: transparent;
+    color: var(--color-theme-text-sec);
     font-size: 14px;
-    font-weight: 500;
-    padding: 12px 24px;
-    border-radius: 999px;
-    border: 1px solid rgba(255,255,255,0.15);
-    cursor: pointer;
-    transition: border-color 0.2s ease, transform 0.2s ease;
-    white-space: nowrap;
+    font-weight: 450;
+    padding: 6px 12px;
+}
+.btn--quinary:hover {
+    color: var(--color-theme-text);
 }
 
-.btn-secondary:hover {
-    border-color: rgba(255,255,255,0.3);
-    transform: translateY(-1px);
-}
-
-/* ─── Sections ─── */
-.section-pad {
-    padding: var(--space-2xl) var(--space-lg);
-}
-
-.section-pad-sm {
-    padding: var(--space-xl) var(--space-lg);
+.btn-sm {
+    padding: 6px 14px;
+    font-size: 13px;
 }
 
 /* ─── Container ─── */
 .container {
-    max-width: 1280px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 var(--space-md);
+}
+
+/* ─── Section ─── */
+.section {
+    padding: 96px 0;
 }
 
 /* ─── Section label ─── */
@@ -166,7 +179,7 @@ a {
 /* ─── Page transitions ─── */
 #root {
     min-height: 100vh;
-    background-color: #0a0a0a;
+    background-color: #14120b;
 }
 
 .page-enter {
@@ -180,4 +193,21 @@ a {
     to {
         opacity: 1;
     }
+}
+
+@keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(3px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeSlideRight {
+    from { opacity: 0; transform: translateX(-3px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.anim-fade-up {
+    animation: fadeSlideUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.anim-fade-right {
+    animation: fadeSlideRight 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
 }

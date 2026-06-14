@@ -86,7 +86,7 @@ const CTA = () => {
             flexWrap: "wrap",
           }}
         >
-          <a href="https://refract-ia.vercel.app" className="btn-primary" style={{ height: 48, fontSize: 15, padding: "0 24px" }}>
+          <a href="https://refract-dev.vercel.app" className="btn-primary" style={{ height: 48, fontSize: 15, padding: "0 24px" }}>
             Get Started <ArrowRight style={{ width: 15, height: 15 }} />
           </a>
         </div>

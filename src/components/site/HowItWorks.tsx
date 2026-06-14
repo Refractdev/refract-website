@@ -1,5 +1,3 @@
-import { AnimatedContainer } from "@/components/ui/animated-container";
-
 const steps = [
   {
     number: "01",
@@ -22,81 +20,41 @@ const steps = [
 
 const HowItWorks = () => {
   return (
-    <section id="how-it-works" className="w-full py-24 md:py-32">
-      <AnimatedContainer className="mx-auto max-w-[1300px] px-5 md:px-6">
-        <div className="mb-20 text-center md:mb-24">
-          <p
-            style={{
-              marginBottom: 12,
-              fontSize: "clamp(13px, 2vw, 15px)",
-              fontFamily: "'JetBrains Mono', monospace",
-              fontWeight: 500,
-              letterSpacing: "-0.01em",
-              color: "#9a9a9a",
-            }}
-          >
-            How It Works
+    <section id="how-it-works" className="section" style={{ borderTop: "1px solid var(--color-theme-border)" }}>
+      <div className="mx-auto max-w-[1200px] px-6">
+        <div className="mb-16 max-w-[680px]">
+          <p className="mb-2 font-serif italic" style={{ fontSize: 15, color: "var(--color-theme-text-sec)" }}>
+            How it works
           </p>
-          <h2
-            style={{
-              fontSize: "clamp(24px, 7vw, 34px)",
-              fontWeight: 400,
-              lineHeight: 1.08,
-              letterSpacing: "-0.06em",
-              color: "#fff",
-            }}
-          >
-            From messy code to production-ready<br />in three steps
+          <h2 className="text-balance" style={{ fontSize: "clamp(28px, 5vw, 38px)", fontWeight: 500, lineHeight: 1.15, letterSpacing: "-0.03em", color: "var(--color-theme-text)" }}>
+            From messy code to production-ready in three steps.
           </h2>
         </div>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: 48,
-            maxWidth: 1000,
-            margin: "0 auto",
-          }}
-        >
+        <div className="grid gap-6 md:grid-cols-3">
           {steps.map((step, i) => (
-            <AnimatedContainer key={step.number} delay={0.1 + i * 0.1}>
-              <div
-                style={{
-                  fontSize: 48,
-                  fontWeight: 300,
-                  color: "#fff",
-                  lineHeight: 1,
-                  marginBottom: 24,
-                }}
-              >
+            <div
+              key={step.number}
+              className="anim-fade-up flex flex-col rounded-md p-8"
+              style={{
+                background: "var(--color-theme-card)",
+                border: "1px solid var(--color-theme-border)",
+                animationDelay: `${i * 80}ms`,
+              }}
+            >
+              <span className="mb-4 font-serif italic" style={{ fontSize: 32, color: "var(--color-theme-text-ter)", lineHeight: 1 }}>
                 {step.number}
-              </div>
-              <h3
-                style={{
-                  fontSize: 20,
-                  fontWeight: 500,
-                  color: "#fff",
-                  marginBottom: 12,
-                }}
-              >
+              </span>
+              <h3 style={{ fontSize: 18, fontWeight: 500, color: "var(--color-theme-text)", marginBottom: 8 }}>
                 {step.title}
               </h3>
-              <p
-                style={{
-                  fontSize: 14,
-                  color: "#999",
-                  lineHeight: 1.6,
-                  maxWidth: 280,
-                  margin: "0 auto",
-                }}
-              >
+              <p style={{ fontSize: 14, color: "var(--color-theme-text-sec)", lineHeight: 1.6 }}>
                 {step.description}
               </p>
-            </AnimatedContainer>
+            </div>
           ))}
         </div>
-      </AnimatedContainer>
+      </div>
     </section>
   );
 };

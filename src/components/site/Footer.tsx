@@ -1,5 +1,4 @@
 import { Logo } from "./Logo";
-import { AnimatedContainer } from "@/components/ui/animated-container";
 
 interface FooterLink {
   label: string;
@@ -16,24 +15,22 @@ const footerLinks: FooterSection[] = [
     title: "Product",
     links: [
       { label: "Features", href: "/#features" },
-      { label: "Changelog", href: "#" },
-      { label: "Roadmap", href: "#" },
-      { label: "Status", href: "#" },
+      { label: "Roadmap", href: "/roadmap" },
+      { label: "Status", href: "/status" },
     ],
   },
   {
     title: "Documentation",
     links: [
       { label: "Getting Started", href: "/docs" },
-      { label: "Integrations", href: "#" },
+      { label: "Integrations", href: "/integrations" },
       { label: "FAQ", href: "/#faq" },
     ],
   },
   {
     title: "Company",
     links: [
-      { label: "About", href: "#" },
-      { label: "Careers", href: "#" },
+      { label: "About", href: "/about" },
       { label: "Privacy", href: "/privacy" },
       { label: "Terms", href: "/terms" },
     ],
@@ -49,11 +46,11 @@ const footerLinks: FooterSection[] = [
   {
     title: "Support",
     links: [
-      { label: "Help Center", href: "#" },
-      { label: "Contact", href: "#" },
-      { label: "Bugs", href: "#" },
-      { label: "Feature Requests", href: "#" },
-      { label: "Security", href: "#" },
+      { label: "Help Center", href: "/help" },
+      { label: "Contact", href: "/contact" },
+      { label: "Bugs", href: "/contact" },
+      { label: "Feature Requests", href: "/contact" },
+      { label: "Security", href: "/contact" },
     ],
   },
 ];
@@ -61,56 +58,43 @@ const footerLinks: FooterSection[] = [
 const Footer = () => {
   return (
     <footer
-      className="relative w-full flex flex-col items-center justify-center border-t px-6 py-12 lg:py-16"
+      className="section"
       style={{
-        borderTop: "1px solid rgba(255,255,255,0.08)",
-        background: "radial-gradient(35% 128px at 50% 0%, rgba(255,255,255,0.06), transparent) #0a0a0a",
+        borderTop: "1px solid var(--color-theme-border)",
+        background: "var(--color-theme-bg)",
+        paddingBottom: 48,
+        paddingTop: 64,
       }}
     >
-      {/* Glow line */}
-      <div
-        className="absolute left-1/2 top-0 h-px w-1/3 -translate-x-1/2 -translate-y-1/2 rounded-full blur"
-        style={{ background: "rgba(255,255,255,0.15)" }}
-      />
+      <div className="mx-auto max-w-[1200px] px-6">
+        <div className="grid gap-10 xl:grid-cols-3 xl:gap-12">
+          <div>
+            <Logo height={18} />
+            <p className="mt-4 text-sm" style={{ color: "var(--color-theme-text-sec)", maxWidth: 240, lineHeight: 1.6 }}>
+              Transform AI-generated code into maintainable, production-ready software.
+            </p>
+            <p className="mt-8 text-xs" style={{ color: "var(--color-theme-text-ter)" }}>
+              &copy; {new Date().getFullYear()} Refract Inc. All rights reserved.
+            </p>
+          </div>
 
-      <div className="grid w-full max-w-6xl gap-8 xl:grid-cols-3 xl:gap-8">
-        <AnimatedContainer className="space-y-4">
-          <Logo height={20} />
-          <p
-            className="mt-8 text-sm md:mt-0"
-            style={{ color: "rgba(255,255,255,0.4)", maxWidth: 240, lineHeight: 1.6 }}
-          >
-            Transform AI-generated code into maintainable, production-ready software.
-          </p>
-          <p
-            className="text-xs"
-            style={{ color: "rgba(255,255,255,0.3)", marginTop: 32 }}
-          >
-            &copy; {new Date().getFullYear()} Refract Inc. All rights reserved.
-          </p>
-        </AnimatedContainer>
-
-        <div className="mt-10 grid grid-cols-2 gap-8 md:grid-cols-4 xl:col-span-2 xl:mt-0">
-          {footerLinks.map((section, index) => (
-            <AnimatedContainer key={section.title} delay={0.1 + index * 0.1}>
-              <div className="mb-10 md:mb-0">
-                <h3
-                  className="text-xs font-semibold uppercase"
-                  style={{ color: "#fff", letterSpacing: "0.05em" }}
-                >
+          <div className="grid grid-cols-2 gap-8 md:grid-cols-3 xl:col-span-2">
+            {footerLinks.map((section) => (
+              <div key={section.title}>
+                <h3 className="mb-3 text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--color-theme-text)" }}>
                   {section.title}
                 </h3>
-                <ul className="mt-4 space-y-2 text-sm" style={{ color: "rgba(255,255,255,0.4)" }}>
+                <ul className="space-y-2">
                   {section.links.map((link) => (
                     <li key={link.label}>
                       <a
                         href={link.href}
                         target={link.href.startsWith("http") ? "_blank" : undefined}
                         rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                        className="inline-flex items-center transition-all duration-300"
-                        style={{ color: "inherit" }}
-                        onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
-                        onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.4)")}
+                        className="inline-block text-sm transition-colors"
+                        style={{ color: "var(--color-theme-text-sec)" }}
+                        onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-theme-text)")}
+                        onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-theme-text-sec)")}
                       >
                         {link.label}
                       </a>
@@ -118,8 +102,8 @@ const Footer = () => {
                   ))}
                 </ul>
               </div>
-            </AnimatedContainer>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </footer>

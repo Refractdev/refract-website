@@ -103,7 +103,7 @@ const Pricing = () => {
                 ))}
               </ul>
               <a
-                href="/signup"
+                href="https://refract-dev.vercel.app"
                 className={plan.highlighted ? "btn-primary" : "btn-secondary"}
                 style={{
                   textAlign: "center",

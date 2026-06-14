@@ -4,7 +4,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { AnimatedContainer } from "@/components/ui/animated-container";
 
 const faqs = [
   {
@@ -39,36 +38,13 @@ const faqs = [
 
 const FAQ = () => {
   return (
-    <section
-      id="faq"
-      className="w-full py-24 md:py-32"
-      style={{
-        borderTop: "1px solid #1a1b1c",
-      }}
-    >
-      <AnimatedContainer className="mx-auto max-w-[720px] px-5 md:px-6">
-        <div className="mb-16 text-center">
-          <p
-            style={{
-              marginBottom: 12,
-              fontSize: "clamp(13px, 2vw, 15px)",
-              fontFamily: "'JetBrains Mono', monospace",
-              fontWeight: 500,
-              letterSpacing: "-0.01em",
-              color: "#9a9a9a",
-            }}
-          >
+    <section id="faq" className="section" style={{ borderTop: "1px solid var(--color-theme-border)" }}>
+      <div className="mx-auto max-w-[720px] px-6">
+        <div className="mb-14">
+          <p className="mb-2 font-serif italic" style={{ fontSize: 15, color: "var(--color-theme-text-sec)" }}>
             FAQ
           </p>
-          <h2
-            style={{
-              fontSize: "clamp(24px, 7vw, 34px)",
-              fontWeight: 400,
-              lineHeight: 1.08,
-              letterSpacing: "-0.06em",
-              color: "#fff",
-            }}
-          >
+          <h2 className="text-balance" style={{ fontSize: "clamp(28px, 5vw, 38px)", fontWeight: 500, lineHeight: 1.15, letterSpacing: "-0.03em", color: "var(--color-theme-text)" }}>
             Questions, answered.
           </h2>
         </div>
@@ -79,19 +55,19 @@ const FAQ = () => {
               key={i}
               value={`item-${i}`}
               style={{
-                borderBottom: "1px solid rgba(255,255,255,0.06)",
+                borderBottom: "1px solid var(--color-theme-border)",
               }}
             >
               <AccordionTrigger
                 style={{
                   fontSize: 16,
                   fontWeight: 500,
-                  color: "#fff",
+                  color: "var(--color-theme-text)",
                   textAlign: "left",
-                  padding: "20px 0",
+                  padding: "18px 0",
                   textDecoration: "none",
                   lineHeight: 1.4,
-                  transition: "color 0.18s ease",
+                  transition: "color 0.15s ease",
                 }}
               >
                 {f.q}
@@ -99,9 +75,9 @@ const FAQ = () => {
               <AccordionContent
                 style={{
                   fontSize: 15,
-                  color: "#999",
+                  color: "var(--color-theme-text-sec)",
                   lineHeight: 1.7,
-                  paddingBottom: 20,
+                  paddingBottom: 18,
                 }}
               >
                 {f.a}
@@ -109,7 +85,7 @@ const FAQ = () => {
             </AccordionItem>
           ))}
         </Accordion>
-      </AnimatedContainer>
+      </div>
     </section>
   );
 };
