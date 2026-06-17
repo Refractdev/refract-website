@@ -128,11 +128,11 @@ export async function analyzeFile(filePath: string, relativePath: string): Promi
       const detectorIssues = await detector.detect(ast, relativePath, importMap, parsedFileName);
       issues.push(...detectorIssues);
     }
-  } catch (error) {
+  } catch (error: any) {
     if (error instanceof ParseError) {
-      console.error(`Parse error in ${filePath}:", error.message`);
+      console.error(`Parse error in ${filePath}:`, error.message);
     } else {
-      console.error(`Error analyzing ${filePath}:", error);
+      console.error(`Error analyzing ${filePath}:`, error);
     }
   }
 
@@ -206,7 +206,8 @@ class AnyTypeDetector extends BaseDetector {
           const line = typeAnnotation.node.loc.start.line;
           const column = typeAnnotation.node.loc.start.column;
 
-          issues.push({\n            id: `${relativePath}-any-type-${line}-${column}`,
+          issues.push({
+            id: `${relativePath}-any-type-${line}-${column}`,
             category: this.category,
             severity: this.calculateSeverity(8),
             impact: this.calculateImpact(this.description),

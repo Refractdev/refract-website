@@ -72,7 +72,7 @@ class AnalysisWorkerManager {
       });
 
       workerProcess.on("close", (code) => {
-        this.handleWorkerExit(worker, code);
+        this.handleWorkerExit(worker, code ?? 0);
       });
 
       workerProcess.on("error", (error) => {

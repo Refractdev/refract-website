@@ -1,125 +1,185 @@
-const plans = [
-  {
-    name: "Free",
-    price: "Free",
-    description: "For individual developers exploring Refract.",
-    features: ["AST analysis", "15+ detectors", "Quality dashboard", "Drift monitoring"],
-  },
-  {
-    name: "Pro",
-    price: "$19",
-    description: "For professional developers who ship daily.",
-    features: [
-      "Everything in Free",
-      "AI-powered suggestions",
-      "One-click PR generation",
-      "Auto-documentation",
-    ],
-    highlighted: true,
-  },
-  {
-    name: "Team",
-    price: "$49",
-    description: "For teams that need collaboration and CI/CD.",
-    features: [
-      "Everything in Pro",
-      "CI/CD integration",
-      "Team collaboration",
-      "Priority support",
-    ],
-  },
-];
+import React from 'react';
 
-const Pricing = () => {
+import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Check, Sparkles } from 'lucide-react';
+
+type PricingCardProps = {
+  titleBadge: string;
+  priceLabel: string;
+  priceSuffix?: string;
+  features: string[];
+  cta?: string;
+  className?: string;
+};
+
+function FilledCheck() {
   return (
-    <section id="pricing" className="section-pad">
-      <div className="container">
-        <div style={{ textAlign: "center", marginBottom: 64 }}>
-          <span className="section-label">Pricing</span>
-          <h2
-            style={{
-              fontSize: 40,
-              fontWeight: 700,
-              color: "#fff",
-              marginBottom: 12,
-            }}
-          >
+    <div className="bg-primary text-primary-foreground rounded-full p-0.5">
+      <Check className="size-3" strokeWidth={3} />
+    </div>
+  );
+}
+
+function PricingCard({
+  titleBadge,
+  priceLabel,
+  priceSuffix = '/month',
+  features,
+  cta = 'Subscribe',
+  className,
+}: PricingCardProps) {
+  return (
+    <div
+      className={cn(
+        'bg-background border-foreground/10 relative overflow-hidden rounded-md border',
+        'supports-[backdrop-filter]:bg-background/10 backdrop-blur',
+        className,
+      )}
+    >
+      <div className="flex items-center gap-3 p-4">
+        <Badge variant="secondary">{titleBadge}</Badge>
+        <div className="ml-auto">
+          <Button variant="outline">{cta}</Button>
+        </div>
+      </div>
+
+      <div className="flex items-end gap-2 px-4 py-2">
+        <span className="font-mono text-5xl font-semibold tracking-tight">
+          {priceLabel}
+        </span>
+        {priceLabel.toLowerCase() !== 'free' && (
+          <span className="text-muted-foreground text-sm">{priceSuffix}</span>
+        )}
+      </div>
+
+      <ul className="text-muted-foreground grid gap-4 p-4 text-sm">
+        {features.map((f, i) => (
+          <li key={i} className="flex items-center gap-3">
+            <FilledCheck />
+            <span>{f}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default function Pricing() {
+  return (
+    <section id="pricing" className="py-20 md:py-28">
+      <div className="mx-auto max-w-[1200px] px-6">
+        <div className="mb-16 max-w-[680px]">
+          <p className="mb-2 font-serif italic" style={{ fontSize: 15, color: "var(--color-theme-text-sec)" }}>
+            Pricing
+          </p>
+          <h2 className="text-balance" style={{ fontSize: "clamp(28px, 5vw, 38px)", fontWeight: 500, lineHeight: 1.15, letterSpacing: "-0.03em", color: "var(--color-theme-text)" }}>
             Simple, transparent pricing
           </h2>
-          <p style={{ fontSize: 16, color: "#999", maxWidth: 500, margin: "0 auto" }}>
+          <p style={{ fontSize: 15, color: "var(--color-theme-text-sec)", marginTop: 12 }}>
             Start for free, upgrade when you need more power.
           </p>
         </div>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: 24,
-            maxWidth: 960,
-            margin: "0 auto",
-          }}
-        >
-          {plans.map((plan) => (
-            <div
-              key={plan.name}
-              style={{
-                background: plan.highlighted ? "#1A1A1A" : "#111",
-                border: plan.highlighted ? "1px solid #5C6BF5" : "1px solid #2A2A2A",
-                borderRadius: 16,
-                padding: 32,
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              <h3 style={{ fontSize: 18, fontWeight: 600, color: "#fff", marginBottom: 4 }}>
-                {plan.name}
-              </h3>
-              <div style={{ marginBottom: 16 }}>
-                <span style={{ fontSize: 36, fontWeight: 700, color: "#fff" }}>{plan.price}</span>
-                {plan.price !== "Free" && (
-                  <span style={{ fontSize: 14, color: "#999", marginLeft: 4 }}>/month</span>
-                )}
+        <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-8">
+          <div
+            className={cn(
+              'bg-background border-foreground/10 relative w-full overflow-hidden rounded-md border',
+              'supports-[backdrop-filter]:bg-background/10 backdrop-blur',
+              'lg:col-span-5',
+            )}
+          >
+            <div className="pointer-events-none absolute top-0 left-1/2 -mt-2 -ml-20 h-full w-full [mask-image:linear-gradient(white,transparent)]">
+              <div className="from-foreground/5 to-foreground/2 absolute inset-0 bg-gradient-to-r [mask-image:radial-gradient(farthest-side_at_top,white,transparent)]">
+                <div
+                  aria-hidden="true"
+                  className={cn(
+                    'absolute inset-0 size-full mix-blend-overlay',
+                    'bg-[linear-gradient(to_right,--theme(--color-foreground/.1)_1px,transparent_1px)]',
+                    'bg-[size:24px]',
+                  )}
+                />
               </div>
-              <p style={{ fontSize: 14, color: "#999", marginBottom: 24, lineHeight: 1.5 }}>
-                {plan.description}
-              </p>
-              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 32px", flex: 1 }}>
-                {plan.features.map((f) => (
-                  <li
-                    key={f}
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 8,
-                      padding: "6px 0",
-                      fontSize: 14,
-                      color: "#ccc",
-                    }}
-                  >
-                    <span style={{ color: "#4ADE80", fontSize: 14 }}>✓</span>
-                    {f}
+            </div>
+
+            <div className="flex items-center gap-3 p-4">
+              <Badge variant="secondary">PRO</Badge>
+              <Badge variant="outline" className="hidden lg:flex">
+                <Sparkles className="me-1 size-3" /> Most Popular
+              </Badge>
+              <div className="ml-auto">
+                <Button>Subscribe</Button>
+              </div>
+            </div>
+            <div className="flex flex-col p-4 lg:flex-row">
+              <div className="pb-4 lg:w-[30%]">
+                <span className="font-mono text-5xl font-semibold tracking-tight">
+                  €20
+                </span>
+                <span className="text-muted-foreground text-sm">/month</span>
+              </div>
+              <ul className="text-muted-foreground grid gap-4 text-sm lg:w-[70%]">
+                {[
+                  'Unlimited projects and files per analysis',
+                  '16 detectors with blast radius calculation',
+                  'Patch preview with before/after diffs',
+                  'AI Briefing, Explain, and name suggestions',
+                  'Full Markdown report with Mermaid graph',
+                  'Drift monitoring with auto alerts',
+                ].map((f, i) => (
+                  <li key={i} className="flex items-center gap-3">
+                    <FilledCheck />
+                    <span className="leading-relaxed">{f}</span>
                   </li>
                 ))}
               </ul>
-              <a
-                href="https://refract-dev.vercel.app"
-                className={plan.highlighted ? "btn-primary" : "btn-secondary"}
-                style={{
-                  textAlign: "center",
-                  padding: "12px 24px",
-                  fontSize: 14,
-                  display: "block",
-                }}
-              >
-                {plan.name === "Free" ? "Get Started" : "Subscribe"}
-              </a>
             </div>
-          ))}
+          </div>
+
+          <PricingCard
+            titleBadge="FREE"
+            priceLabel="Free"
+            features={[
+              'Up to 2 projects',
+              'Up to 200 files per analysis',
+              '10 basic detectors',
+              'Health score (0–100)',
+              'Summary by category',
+            ]}
+            cta="Get Started"
+            className="lg:col-span-3"
+          />
+
+          <PricingCard
+            titleBadge="TEAMS"
+            priceLabel="€40"
+            features={[
+              'Everything in Pro',
+              'Unlimited members with roles',
+              'GitHub Action + status checks',
+              'Webhooks and scheduled analysis',
+              'SSO (SAML/OIDC) and audit log',
+              'API access and data export',
+            ]}
+            className="lg:col-span-4"
+          />
+
+          <PricingCard
+            titleBadge="ENTERPRISE"
+            priceLabel="Custom"
+            features={[
+              'Everything in Teams',
+              'Custom rules engine',
+              'Dedicated support and SLA',
+              'On-premise deployment option',
+              'Custom contracting and invoicing',
+            ]}
+            cta="Contact Us"
+            className="lg:col-span-4"
+          />
         </div>
       </div>
     </section>
   );
-};
-
-export default Pricing;
+}
