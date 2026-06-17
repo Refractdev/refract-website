@@ -18,7 +18,7 @@ router.post("/github", express.raw({ type: "application/json" }), async (req, re
     const hash = createHmac("sha256", secret).update(req.body).digest("hex");
     const signatureHash = `sha256=${hash}`;
 
-    if (!timingSafeEqual(Buffer.from(signature as string), Buffer.from(signatureHash))) {
+    if (!crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(signatureHash))) {
       return res.status(401).json({ success: false, error: "Invalid signature" });
     }
 

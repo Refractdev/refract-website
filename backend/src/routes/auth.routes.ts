@@ -196,7 +196,7 @@ async function exchangeGitHubCodeForToken(code: string, redirect_uri: string): P
     }),
   });
 
-  const data = (await response.json()) as any;
+  const data = await response.json();
 
   if (!data.access_token) {
     throw new Error("Failed to exchange GitHub code for access token");

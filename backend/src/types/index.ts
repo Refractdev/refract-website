@@ -117,8 +117,6 @@ export interface CreateRepositoryRequest {
   provider_id: string;
   name: string;
   full_name: string;
-  description?: string;
-  private?: boolean;
   html_url: string;
   clone_url: string;
   default_branch: string;
