@@ -25,7 +25,7 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 // Express middleware for request logging
-logger.expressMiddleware = (req: any, res: any, next: any) => {
+logger.expressMiddleware = (req: unknown, res: unknown, next: any) => {
   const start = Date.now();
 
   res.on("finish", () => {
