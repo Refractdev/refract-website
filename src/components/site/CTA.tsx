@@ -1,41 +1,66 @@
 import { ArrowRight } from "lucide-react";
+import { motion } from "motion/react";
+import { APP_URL } from "@/lib/constants";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+const stagger = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } },
+};
 
 const CTA = () => {
   return (
     <section
       style={{
-        backgroundColor: "var(--surface-base)",
+        background: "#000000",
         paddingTop: 112,
         paddingBottom: 112,
-        borderTop: "1px solid var(--border-subtle)",
+        borderTop: "1px solid var(--color-hairline)",
         textAlign: "center",
         position: "relative",
         overflow: "hidden",
       }}
     >
-      {/* Orange radial glow — stronger than Hero */}
-      <div
+      {/* Orange atmospheric glow — breathing pulse */}
+      <motion.div
         aria-hidden
+        animate={{ opacity: [1, 0.45, 1] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
         style={{
           position: "absolute",
-          inset: 0,
+          top: 0,
+          left: "50%",
+          transform: "translateX(-50%)",
+          width: "100%",
+          height: "70%",
           pointerEvents: "none",
           background:
-            "radial-gradient(ellipse 55% 45% at 50% 50%, rgba(245,78,0,0.10) 0%, transparent 70%)",
+            "radial-gradient(ellipse 60% 55% at 50% 0%, var(--color-accent-orange-glow) 0%, transparent 70%)",
         }}
       />
-      {/* Subtle grid */}
+
+      {/* Subtle hairline grid overlay */}
       <div
         aria-hidden
         style={{
           position: "absolute",
           inset: 0,
           pointerEvents: "none",
-          backgroundImage: `linear-gradient(var(--border-subtle) 1px, transparent 1px), linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(var(--color-hairline) 1px, transparent 1px), linear-gradient(90deg, var(--color-hairline) 1px, transparent 1px)`,
           backgroundSize: "64px 64px",
-          maskImage: "radial-gradient(ellipse 60% 80% at 50% 50%, black 10%, transparent 75%)",
-          WebkitMaskImage: "radial-gradient(ellipse 60% 80% at 50% 50%, black 10%, transparent 75%)",
-          opacity: 0.3,
+          maskImage:
+            "radial-gradient(ellipse 60% 80% at 50% 50%, black 10%, transparent 75%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse 60% 80% at 50% 50%, black 10%, transparent 75%)",
+          opacity: 0.4,
         }}
       />
 
@@ -47,61 +72,86 @@ const CTA = () => {
           position: "relative",
         }}
       >
-        <h2
-          className="text-display-lg animate-fade-up"
-          style={{ color: "var(--text-primary)" }}
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-80px" }}
         >
-          Your Lovable code is done.
-          <br />
-          <span className="text-gradient-orange">Refract makes sure it's ready.</span>
-        </h2>
+          {/* Headline */}
+          <motion.h2
+            variants={fadeUp}
+            className="text-balance"
+            style={{
+              fontFamily: "'Playfair Display', Georgia, serif",
+              fontSize: "clamp(36px, 6vw, 76px)",
+              fontWeight: 400,
+              lineHeight: 1.0,
+              letterSpacing: "-0.02em",
+              color: "var(--color-ink)",
+            }}
+          >
+            Your Lovable code is done.
+            <br />
+            <span style={{ color: "var(--color-accent-orange)" }}>
+              Refract makes sure it's ready.
+            </span>
+          </motion.h2>
 
-        <p
-          className="animate-fade-up"
-          style={{
-            animationDelay: "100ms",
-            marginTop: 24,
-            maxWidth: 480,
-            marginLeft: "auto",
-            marginRight: "auto",
-            fontSize: 16,
-            color: "var(--text-secondary)",
-            lineHeight: 1.75,
-          }}
-        >
-          Stop shipping AI-generated tech debt. Point Refract at your repo and
-          turn your vibe-coded prototype into a maintainable codebase.
-        </p>
+          {/* Subtitle */}
+          <motion.p
+            variants={fadeUp}
+            style={{
+              marginTop: 28,
+              maxWidth: 480,
+              marginLeft: "auto",
+              marginRight: "auto",
+              fontFamily: "'Inter Tight', 'Inter', sans-serif",
+              fontSize: 18,
+              fontWeight: 400,
+              color: "var(--color-body)",
+              lineHeight: 1.6,
+            }}
+          >
+            Stop shipping AI-generated tech debt. Point Refract at your repo and
+            turn your vibe-coded prototype into a maintainable codebase.
+          </motion.p>
 
-        <div
-          className="animate-fade-up"
-          style={{
-            animationDelay: "200ms",
-            marginTop: 44,
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: 12,
-            flexWrap: "wrap",
-          }}
-        >
-          <a href="https://refract-dev.vercel.app" className="btn-primary" style={{ height: 48, fontSize: 15, padding: "0 24px" }}>
-            Get Started <ArrowRight style={{ width: 15, height: 15 }} />
-          </a>
-        </div>
+          {/* CTA Button */}
+          <motion.div
+            variants={fadeUp}
+            style={{
+              marginTop: 44,
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 12,
+              flexWrap: "wrap",
+            }}
+          >
+            <a
+              href={APP_URL}
+              className="btn btn--primary"
+              style={{ height: 44, fontSize: 15, padding: "0 24px" }}
+            >
+              Get Started <ArrowRight style={{ width: 15, height: 15 }} />
+            </a>
+          </motion.div>
 
-        <p
-          className="animate-fade-up"
-          style={{
-            animationDelay: "280ms",
-            marginTop: 28,
-            fontSize: 13,
-            color: "rgba(255,255,255,0.3)",
-          }}
-        >
-          No credit card required · Cancel anytime
-        </p>
+          {/* Fine print */}
+          <motion.p
+            variants={fadeUp}
+            style={{
+              marginTop: 24,
+              fontFamily: "'Inter', sans-serif",
+              fontSize: 13,
+              color: "var(--color-stone)",
+            }}
+          >
+            No credit card required · Cancel anytime
+          </motion.p>
+        </motion.div>
       </div>
     </section>
   );

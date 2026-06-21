@@ -10,6 +10,8 @@ import Contact from "./pages/Contact.tsx";
 import About from "./pages/About.tsx";
 import Roadmap from "./pages/Roadmap.tsx";
 import Status from "./pages/Status.tsx";
+import NotFound from "./pages/NotFound.tsx";
+import ExternalRedirect from "@/components/ExternalRedirect";
 import CookieConsent from "@/components/site/CookieConsent";
 import "./index.css";
 
@@ -37,6 +39,10 @@ const App = () => {
         <Route path="/about" element={<About />} />
         <Route path="/roadmap" element={<Roadmap />} />
         <Route path="/status" element={<Status />} />
+        <Route path="/login" element={<ExternalRedirect />} />
+        <Route path="/signup" element={<ExternalRedirect />} />
+        <Route path="/dashboard" element={<ExternalRedirect />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
