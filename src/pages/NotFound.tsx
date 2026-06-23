@@ -1,6 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 const NotFound = () => {
   const location = useLocation();
@@ -10,40 +11,13 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        minHeight: "100vh",
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: "var(--color-canvas)",
-        flexDirection: "column",
-        textAlign: "center",
-        padding: 24,
-      }}
-    >
-      <p
-        className="text-caption-upper"
-        style={{ color: "var(--color-muted)", marginBottom: 16 }}
-      >
-        404
-      </p>
-      <h1
-        className="text-display-md"
-        style={{ color: "var(--color-ink)", marginBottom: 12 }}
-      >
-        Page not found.
-      </h1>
-      <p style={{ fontSize: 15, color: "var(--color-body)", marginBottom: 40 }}>
-        The page you're looking for doesn't exist or has been moved.
-      </p>
-      <Link
-        to="/"
-        className="btn-primary"
-        style={{ textDecoration: "none" }}
-      >
-        Back to home
-      </Link>
+    <div className="flex min-h-screen flex-col items-center justify-center bg-ld-neutral p-6 text-center">
+      <p className="text-caption mb-4 text-ld-muted">404</p>
+      <h1 className="text-section-title mb-3">Page not found.</h1>
+      <p className="text-body mb-10">The page you're looking for doesn't exist or has been moved.</p>
+      <Button asChild>
+        <Link to="/">Back to home</Link>
+      </Button>
     </div>
   );
 };

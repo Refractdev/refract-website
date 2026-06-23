@@ -15,11 +15,11 @@ const BeforeAfter = () => {
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px", position: "relative" }}>
         {/* Header */}
         <div className="text-center animate-fade-up" style={{ marginBottom: 56 }}>
-          <span className="badge-pill" style={{ marginBottom: 16, display: "inline-block" }}>
+          <span className="section-label" style={{ marginBottom: 16, display: "inline-block" }}>
             Real transformation
           </span>
           <h2
-            className="text-display-lg"
+            className="text-section-title"
             style={{ marginTop: 12, color: "var(--color-ink)" }}
           >
             See what Refract actually does.
@@ -65,7 +65,7 @@ const BeforeAfter = () => {
           {/* Before */}
           <div className="animate-fade-up" style={{ animationDelay: "100ms", display: "flex", flexDirection: "column", gap: 12 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 8, paddingLeft: 4 }}>
-              <span style={{ width: 6, height: 6, borderRadius: "50%", backgroundColor: "var(--color-error)", flexShrink: 0 }} />
+              <span style={{ width: 6, height: 6, borderRadius: "50%", backgroundColor: "var(--color-accent-red)", flexShrink: 0 }} />
               <span className="text-caption-upper" style={{ color: "var(--color-muted)" }}>Legacy Vibe Code</span>
             </div>
             <div
@@ -115,7 +115,7 @@ const BeforeAfter = () => {
           {/* After */}
           <div className="animate-fade-up" style={{ animationDelay: "200ms", display: "flex", flexDirection: "column", gap: 12 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 8, paddingLeft: 4 }}>
-              <span style={{ width: 6, height: 6, borderRadius: "50%", backgroundColor: "var(--color-success)", flexShrink: 0 }} />
+              <span style={{ width: 6, height: 6, borderRadius: "50%", backgroundColor: "var(--color-accent-green)", flexShrink: 0 }} />
               <span className="text-caption-upper" style={{ color: "var(--color-ink)" }}>Refracted Production Code</span>
             </div>
             <div
@@ -186,7 +186,7 @@ const MetricCard = ({ label, before, after, delay = 0 }: MetricCardProps) => (
       {label}
     </p>
     <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-      <span style={{ fontSize: 15, fontWeight: 600, color: "var(--color-muted-soft)" }}>{before}</span>
+      <span style={{ fontSize: 15, fontWeight: 600, color: "var(--color-mute)" }}>{before}</span>
       <ArrowRight style={{ width: 12, height: 12, color: "var(--color-hairline-strong)", flexShrink: 0 }} />
       <span style={{ fontSize: 15, fontWeight: 600, color: "var(--color-ink)" }}>{after}</span>
     </div>

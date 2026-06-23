@@ -35,11 +35,11 @@ const categories = [
 ];
 
 const tiers = [
-  { range: "90–100", label: "Production Ready", color: "#34d89a", desc: "Exceptional quality. Minimal debt. Ready for scale and team collaboration." },
-  { range: "75–89",  label: "Solid",            color: "#5b9cf6", desc: "Good foundation. A few issues to clean up but shippable and maintainable." },
-  { range: "60–74",  label: "Fair",             color: "#f59e0b", desc: "Functional but accumulating debt. Address high-impact issues soon." },
-  { range: "40–59",  label: "Needs Work",       color: "#f97316", desc: "Significant structural or type problems. Schedule a refactor sprint." },
-  { range: "0–39",   label: "Critical",         color: "#f04c67", desc: "High-risk codebase. Deep issues across multiple dimensions." },
+  { range: "90–100", label: "Production Ready", color: "var(--color-success)", desc: "Exceptional quality. Minimal debt. Ready for scale and team collaboration." },
+  { range: "75–89",  label: "Solid",            color: "var(--color-accent)", desc: "Good foundation. A few issues to clean up but shippable and maintainable." },
+  { range: "60–74",  label: "Fair",             color: "var(--color-accent-orange)", desc: "Functional but accumulating debt. Address high-impact issues soon." },
+  { range: "40–59",  label: "Needs Work",       color: "var(--color-accent-orange)", desc: "Significant structural or type problems. Schedule a refactor sprint." },
+  { range: "0–39",   label: "Critical",         color: "var(--color-error)", desc: "High-risk codebase. Deep issues across multiple dimensions." },
 ];
 
 export default function RefractScore() {
@@ -51,8 +51,8 @@ export default function RefractScore() {
 
           {/* Header */}
           <div className="animate-fade-up" style={{ marginBottom: 72 }}>
-            <span className="badge-pill" style={{ marginBottom: 16, display: "inline-block" }}>Refract Score</span>
-            <h1 className="text-display-lg" style={{ marginTop: 12, color: "var(--color-ink)" }}>
+            <span className="section-label" style={{ marginBottom: 16, display: "inline-block" }}>Refract Score</span>
+            <h1 className="text-section-title" style={{ marginTop: 12, color: "var(--color-ink)" }}>
               How we measure code health.
             </h1>
             <p style={{ marginTop: 16, fontSize: 16, color: "var(--color-body)", lineHeight: 1.7 }}>
@@ -65,7 +65,7 @@ export default function RefractScore() {
             <div style={{ position: "relative", display: "inline-flex", alignItems: "center", justifyContent: "center", width: 140, height: 140 }}>
               <svg viewBox="0 0 140 140" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", transform: "rotate(-90deg)" }}>
                 <circle cx="70" cy="70" r="58" fill="none" stroke="var(--color-hairline-strong)" strokeWidth="8" />
-                <circle cx="70" cy="70" r="58" fill="none" stroke="#f54e00" strokeWidth="8"
+                <circle cx="70" cy="70" r="58" fill="none" stroke="var(--color-accent-orange)" strokeWidth="8"
                   strokeDasharray={`${2 * Math.PI * 58 * 0.82} ${2 * Math.PI * 58 * 0.18}`}
                   strokeLinecap="round"
                   style={{ filter: "drop-shadow(0 0 8px rgba(245,78,0,0.5))" }}
@@ -81,7 +81,7 @@ export default function RefractScore() {
 
           {/* Categories */}
           <div className="animate-fade-up" style={{ animationDelay: "120ms", marginBottom: 72 }}>
-            <h2 className="text-display-sm" style={{ color: "var(--color-ink)", marginBottom: 32 }}>Score dimensions</h2>
+            <h2 className="text-section-subtitle" style={{ color: "var(--color-ink)", marginBottom: 32 }}>Score dimensions</h2>
             <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
               {categories.map((cat, i) => (
                 <div key={cat.name} className="animate-fade-up" style={{ animationDelay: `${i * 60}ms`, borderRadius: 12, border: "1px solid var(--color-hairline)", backgroundColor: "var(--color-surface-card)", padding: "24px" }}>
@@ -102,7 +102,7 @@ export default function RefractScore() {
 
           {/* Score tiers */}
           <div className="animate-fade-up" style={{ animationDelay: "200ms" }}>
-            <h2 className="text-display-sm" style={{ color: "var(--color-ink)", marginBottom: 32 }}>Score tiers</h2>
+            <h2 className="text-section-subtitle" style={{ color: "var(--color-ink)", marginBottom: 32 }}>Score tiers</h2>
             <div style={{ borderRadius: 12, border: "1px solid var(--color-hairline)", backgroundColor: "var(--color-surface-card)", overflow: "hidden" }}>
               {tiers.map((t, i) => (
                 <div key={t.range} style={{ display: "flex", alignItems: "flex-start", gap: 20, padding: "20px 24px", borderBottom: i < tiers.length - 1 ? "1px solid var(--color-hairline)" : "none" }}>

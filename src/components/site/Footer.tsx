@@ -1,109 +1,114 @@
+import { Link } from "react-router-dom";
 import { Logo } from "./Logo";
 
-interface FooterLink {
-  label: string;
-  href: string;
-}
-
-interface FooterSection {
-  title: string;
-  links: FooterLink[];
-}
-
-const footerLinks: FooterSection[] = [
+const footerLinks = [
   {
     title: "Product",
     links: [
-      { label: "Features", href: "/#features" },
-      { label: "Roadmap", href: "/roadmap" },
-      { label: "Status", href: "/status" },
+      { label: "Connect", href: "/#connect" },
+      { label: "Triage", href: "/#triage" },
+      { label: "Transform", href: "/#transform" },
+      { label: "Review", href: "/#review" },
+      { label: "Monitor", href: "/#monitor" },
+      { label: "Pricing", href: "/pricing" },
+      { label: "Security", href: "/privacy" },
     ],
   },
   {
-    title: "Documentation",
+    title: "Features",
     links: [
-      { label: "Getting Started", href: "/docs" },
+      { label: "Health Score", href: "/#triage" },
+      { label: "Auto-PR", href: "/#transform" },
+      { label: "Push Delta", href: "/#monitor" },
+      { label: "Cursor MCP", href: "/product#mcp" },
       { label: "Integrations", href: "/integrations" },
-      { label: "FAQ", href: "/#faq" },
+      { label: "Changelog", href: "/changelog" },
     ],
   },
   {
     title: "Company",
     links: [
       { label: "About", href: "/about" },
+      { label: "Customers", href: "/about" },
+      { label: "Careers", href: "/about" },
+      { label: "Blog", href: "/about" },
+      { label: "Brand", href: "/about" },
+    ],
+  },
+  {
+    title: "Resources",
+    links: [
+      { label: "Documentation", href: "/docs" },
+      { label: "Developers", href: "/docs" },
+      { label: "Status", href: "/status" },
+      { label: "Roadmap", href: "/roadmap" },
+      { label: "Help Center", href: "/help" },
+    ],
+  },
+  {
+    title: "Connect",
+    links: [
+      { label: "Contact us", href: "/contact" },
+      { label: "Community", href: "https://discord.gg/dkdEbBSqf5" },
+      { label: "X (Twitter)", href: "https://x.com/refractcode" },
+      { label: "GitHub", href: "https://github.com/refractcode" },
+    ],
+  },
+  {
+    title: "Legal",
+    links: [
       { label: "Privacy", href: "/privacy" },
       { label: "Terms", href: "/terms" },
-    ],
-  },
-  {
-    title: "Community",
-    links: [
-      { label: "GitHub", href: "https://github.com/refractcode" },
-      { label: "Discord", href: "https://discord.gg/dkdEbBSqf5" },
-      { label: "Instagram", href: "https://www.instagram.com/refractcode?igsh=MmkwYTV6czV4bm92" },
-    ],
-  },
-  {
-    title: "Support",
-    links: [
-      { label: "Help Center", href: "/help" },
-      { label: "Contact", href: "/contact" },
-      { label: "Bugs", href: "/contact" },
-      { label: "Feature Requests", href: "/contact" },
-      { label: "Security", href: "/contact" },
+      { label: "DPA", href: "/privacy" },
+      { label: "AUP", href: "/terms" },
     ],
   },
 ];
 
 const Footer = () => {
   return (
-    <footer
-      className="section"
-      style={{
-        borderTop: "1px solid var(--color-theme-border)",
-        background: "var(--color-theme-bg)",
-        paddingBottom: 48,
-        paddingTop: 64,
-      }}
-    >
+    <footer className="bg-ld-neutral pb-10 pt-16">
       <div className="mx-auto max-w-[1200px] px-6">
-        <div className="grid gap-10 xl:grid-cols-3 xl:gap-12">
-          <div>
-            <Logo height={18} />
-            <p className="mt-4 text-sm" style={{ color: "var(--color-theme-text-sec)", maxWidth: 240, lineHeight: 1.6 }}>
-              Transform AI-generated code into maintainable, production-ready software.
-            </p>
-            <p className="mt-8 text-xs" style={{ color: "var(--color-theme-text-ter)" }}>
-              &copy; {new Date().getFullYear()} Refract Inc. All rights reserved.
-            </p>
-          </div>
+        <div className="mb-12">
+          <Logo height={16} />
+        </div>
 
-          <div className="grid grid-cols-2 gap-8 md:grid-cols-3 xl:col-span-2">
-            {footerLinks.map((section) => (
-              <div key={section.title}>
-                <h3 className="mb-3 text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--color-theme-text)" }}>
-                  {section.title}
-                </h3>
-                <ul className="space-y-2">
-                  {section.links.map((link) => (
-                    <li key={link.label}>
-                      <a
-                        href={link.href}
-                        target={link.href.startsWith("http") ? "_blank" : undefined}
-                        rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                        className="inline-block text-sm transition-colors"
-                        style={{ color: "var(--color-theme-text-sec)" }}
-                        onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-theme-text)")}
-                        onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-theme-text-sec)")}
-                      >
-                        {link.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+        <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
+          {footerLinks.map((section) => (
+            <div key={section.title}>
+              <h3 className="text-label-sm mb-4 text-ld-on-surface">{section.title}</h3>
+              <ul className="space-y-2.5">
+                {section.links.map((link) => (
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      target={link.href.startsWith("http") ? "_blank" : undefined}
+                      rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                      className="text-body-sm text-ld-muted transition-colors duration-150 hover:text-ld-on-surface"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-16 flex flex-wrap items-center justify-between gap-4 border-t border-ld-border pt-6">
+          <div className="flex flex-wrap gap-4 text-caption text-ld-muted">
+            <Link to="/privacy" className="hover:text-ld-on-surface">Privacy</Link>
+            <Link to="/terms" className="hover:text-ld-on-surface">Terms</Link>
+            <Link to="/privacy" className="hover:text-ld-on-surface">DPA</Link>
+            <Link to="/terms" className="hover:text-ld-on-surface">AUP</Link>
           </div>
+          <Link
+            to="/status"
+            className="flex items-center gap-2 text-caption text-ld-muted transition-colors hover:text-ld-on-surface"
+          >
+            <span className="size-2 rounded-full bg-ld-success" />
+            All systems operational
+          </Link>
         </div>
       </div>
     </footer>

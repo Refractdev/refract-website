@@ -52,8 +52,8 @@ export default function AI() {
 
           {/* Header */}
           <div className="animate-fade-up" style={{ marginBottom: 72 }}>
-            <span className="badge-pill" style={{ marginBottom: 16, display: "inline-block" }}>AI</span>
-            <h1 className="text-display-lg" style={{ marginTop: 12, color: "var(--color-ink)" }}>
+            <span className="section-label" style={{ marginBottom: 16, display: "inline-block" }}>AI</span>
+            <h1 className="text-section-title" style={{ marginTop: 12, color: "var(--color-ink)" }}>
               How AI powers Refract.
             </h1>
             <p style={{ marginTop: 16, fontSize: 16, color: "var(--color-body)", lineHeight: 1.7 }}>
@@ -63,7 +63,7 @@ export default function AI() {
 
           {/* Models */}
           <div className="animate-fade-up" style={{ animationDelay: "80ms", marginBottom: 72 }}>
-            <h2 className="text-display-sm" style={{ color: "var(--color-ink)", marginBottom: 32 }}>The models</h2>
+            <h2 className="text-section-subtitle" style={{ color: "var(--color-ink)", marginBottom: 32 }}>The models</h2>
             <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
               {models.map((m, i) => (
                 <div
@@ -98,7 +98,7 @@ export default function AI() {
 
           {/* Principles */}
           <div className="animate-fade-up" style={{ animationDelay: "160ms" }}>
-            <h2 className="text-display-sm" style={{ color: "var(--color-ink)", marginBottom: 32 }}>Our AI principles</h2>
+            <h2 className="text-section-subtitle" style={{ color: "var(--color-ink)", marginBottom: 32 }}>Our AI principles</h2>
             <div style={{ borderRadius: 12, border: "1px solid var(--color-hairline)", backgroundColor: "var(--color-surface-card)", overflow: "hidden" }}>
               {principles.map((p, i) => (
                 <div key={p.title} style={{ padding: "24px", borderBottom: i < principles.length - 1 ? "1px solid var(--color-hairline)" : "none" }}>

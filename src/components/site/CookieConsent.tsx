@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
 
 const CookieConsent = () => {
   const [visible, setVisible] = useState(false);
@@ -21,34 +22,21 @@ const CookieConsent = () => {
   if (!visible) return null;
 
   return (
-    <div
-      className="fixed bottom-0 left-0 right-0 z-50 border-t p-4 anim-fade-up"
-      style={{
-        background: "var(--color-theme-bg)",
-        borderColor: "var(--color-theme-border)",
-      }}
-    >
+    <div className="anim-fade-up fixed bottom-0 left-0 right-0 z-50 border-t border-ld-border bg-ld-neutral p-4">
       <div className="mx-auto flex max-w-[1200px] items-center justify-between gap-4">
-        <p className="text-sm" style={{ color: "var(--color-theme-text-sec)", lineHeight: 1.5 }}>
+        <p className="text-body-sm text-ld-tertiary">
           This site uses cookies to improve your experience.{" "}
-          <a href="/privacy" className="underline transition-colors" style={{ color: "var(--color-theme-text)" }}>
+          <a href="/privacy" className="text-ld-on-surface underline">
             Learn more
           </a>
         </p>
         <div className="flex shrink-0 gap-2">
-          <button
-            onClick={decline}
-            className="btn btn--ghost btn-sm"
-            style={{ color: "var(--color-theme-text-sec)" }}
-          >
+          <Button variant="secondary" size="sm" onClick={decline}>
             Decline
-          </button>
-          <button
-            onClick={accept}
-            className="btn btn--primary btn-sm"
-          >
+          </Button>
+          <Button size="sm" onClick={accept}>
             Accept
-          </button>
+          </Button>
         </div>
       </div>
     </div>

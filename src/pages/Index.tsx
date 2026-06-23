@@ -1,20 +1,22 @@
-import Navbar from "@/components/site/Navbar";
 import Hero from "@/components/site/Hero";
-import Features from "@/components/site/Features";
-import HowItWorks from "@/components/site/HowItWorks";
-import FAQ from "@/components/site/FAQ";
-import Footer from "@/components/site/Footer";
+import ManifestoSection from "@/components/site/ManifestoSection";
+import FeaturesTabs from "@/components/site/FeaturesTabs";
+import ProductSections from "@/components/site/ProductSections";
+import HomeChangelog from "@/components/site/HomeChangelog";
+import Testimonials from "@/components/site/Testimonials";
+import CTA from "@/components/site/CTA";
 
 const Index = () => {
   return (
-    <div className="page-enter">
-      <Navbar />
+    <>
       <Hero />
-      <Features />
-      <HowItWorks />
-      <FAQ />
-      <Footer />
-    </div>
+      <ManifestoSection />
+      <FeaturesTabs />
+      <ProductSections />
+      <HomeChangelog />
+      <Testimonials />
+      <CTA />
+    </>
   );
 };
 

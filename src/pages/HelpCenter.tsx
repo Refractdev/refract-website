@@ -1,5 +1,5 @@
-import Navbar from "@/components/site/Navbar";
-import Footer from "@/components/site/Footer";
+import { Card } from "@/components/ui/card";
+import PageShell from "@/components/site/PageShell";
 
 const faqs = [
   {
@@ -34,49 +34,20 @@ const faqs = [
 
 const HelpCenter = () => {
   return (
-    <main className="page-enter" style={{ minHeight: "100vh", backgroundColor: "var(--color-theme-bg)", color: "var(--color-theme-text)" }}>
-      <Navbar />
-
-      <div className="section" style={{ paddingTop: 128, paddingBottom: 80 }}>
-        <div className="mx-auto max-w-[720px] px-6">
-          <p className="mb-2 font-serif italic" style={{ fontSize: 15, color: "var(--color-theme-text-sec)" }}>
-            Help Center
-          </p>
-          <h1 className="text-balance" style={{ fontSize: "clamp(28px, 5vw, 38px)", fontWeight: 500, lineHeight: 1.15, letterSpacing: "-0.03em", color: "var(--color-theme-text)" }}>
-            How can we help?
-          </h1>
-          <p className="mt-4" style={{ fontSize: 15, color: "var(--color-theme-text-sec)", lineHeight: 1.6, maxWidth: 560 }}>
-            Find answers to common questions about Refract.
-          </p>
-        </div>
+    <PageShell
+      label="Help Center"
+      title="How can we help?"
+      description="Find answers to common questions about Refract."
+    >
+      <div className="flex flex-col gap-3">
+        {faqs.map((f) => (
+          <Card key={f.q} className="p-5">
+            <h3 className="text-headline-sm mb-1.5">{f.q}</h3>
+            <p className="text-body-sm">{f.a}</p>
+          </Card>
+        ))}
       </div>
-
-      <div className="mx-auto max-w-[720px] px-6 pb-24">
-        <div className="flex flex-col gap-0">
-          {faqs.map((f, i) => (
-            <div
-              key={i}
-              className="anim-fade-up rounded-md p-6"
-              style={{
-                background: "var(--color-theme-card)",
-                border: "1px solid var(--color-theme-border)",
-                animationDelay: `${i * 50}ms`,
-                marginBottom: 8,
-              }}
-            >
-              <h3 style={{ fontSize: 16, fontWeight: 500, color: "var(--color-theme-text)", marginBottom: 6 }}>
-                {f.q}
-              </h3>
-              <p style={{ fontSize: 14, color: "var(--color-theme-text-sec)", lineHeight: 1.6 }}>
-                {f.a}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <Footer />
-    </main>
+    </PageShell>
   );
 };
 
