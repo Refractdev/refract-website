@@ -23,9 +23,8 @@
     "noFallthroughCasesInSwitch": false,
 
     "paths": {
-      "@/*": ["./src/*"],
-      "@embed/*": ["./embed/*"]
+      "@/*": ["./src/*"]
     }
   },
-  "include": ["src", "embed"]
+  "include": ["src"]
 }
