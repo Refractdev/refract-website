@@ -4,6 +4,12 @@ const Privacy = () => {
   return (
     <PageShell label="Legal" title="Privacy Policy" description="Last Updated: June 10, 2026">
       <div className="prose-legal">
+        <div className="mb-12 rounded-lg border border-ld-border bg-ld-surface p-5">
+          <p className="text-body-sm text-ld-tertiary">
+            <strong className="text-ld-on-surface">Summary:</strong> Refract clones your repo to scan it. The clone is temporary. We do not use your code for training. We do not share your code. You control what Refract can access and revoke access at any time.
+          </p>
+        </div>
+
             <section>
               <h2 >1. Introduction</h2>
               <p >

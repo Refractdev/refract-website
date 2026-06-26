@@ -4,6 +4,12 @@ const Terms = () => {
   return (
     <PageShell label="Legal" title="Terms of Service" description="Last Updated: June 10, 2026">
       <div className="prose-legal">
+        <div className="mb-12 rounded-lg border border-ld-border bg-ld-surface p-5">
+          <p className="text-body-sm text-ld-tertiary">
+            <strong className="text-ld-on-surface">Summary:</strong> You own your code. Refract processes it only to provide the service. You control which repos are connected and what Refract can do — scan, propose, open PRs. We don't sell your data. We don't train on your code.
+          </p>
+        </div>
+
             <section>
               <h2 >1. Introduction</h2>
               <p >

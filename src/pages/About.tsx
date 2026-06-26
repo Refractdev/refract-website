@@ -4,31 +4,25 @@ import PageShell from "@/components/site/PageShell";
 const About = () => {
   return (
     <PageShell label="Company" title="About Refract">
-      <div className="flex flex-col gap-10">
+      <div className="flex flex-col gap-8">
         <section>
-          <h2 className="text-headline-sm mb-3">What We Are Building</h2>
+          <h2 className="text-headline-sm mb-3">What Refract Does</h2>
           <p className="text-body">
-            Refract is a desktop application that bridges the gap between AI-generated code and production-ready software. We believe that AI coding tools like Lovable, Bolt, and Cursor have democratized software development, enabling anyone to build applications. But there is a catch: AI-generated code is often messy, unstructured, and difficult to maintain at scale.
-          </p>
-          <p className="text-body mt-3">
-            We are building the missing piece: a tool that takes that raw AI output and transforms it into clean, maintainable, professional-grade code that you can confidently deploy and scale.
+            Refract turns AI-generated code into production-ready codebases. It connects to your repo, scans every push, finds what Cursor, Windsurf, or Lovable left behind — structural debt, security gaps, missing tests — and proposes fixes as diffs. You approve. Refract opens the PR.
           </p>
         </section>
 
         <section>
-          <h2 className="text-headline-sm mb-3">The Problem</h2>
+          <h2 className="text-headline-sm mb-3">Why It Exists</h2>
           <p className="text-body">
-            AI coding assistants have changed everything. A solo founder can now build a complete SaaS product in a weekend. A developer can prototype features in hours instead of days. But this speed comes with hidden costs.
-          </p>
-          <p className="text-body mt-3">
-            AI-generated code tends to be verbose, lacks consistent patterns, and accumulates technical debt rapidly. Types are often loose or missing. Error handling is inconsistent. The architecture that emerges is accidental rather than intentional.
+            AI coding tools changed how fast teams can ship. But speed compounds differently. The features land, the codebase gets harder to change, and nobody refactors. Refract is the part of the workflow nobody built yet — the pipeline that makes AI-generated code shippable.
           </p>
         </section>
 
         <section>
-          <h2 className="text-headline-sm mb-3">The Solution</h2>
+          <h2 className="text-headline-sm mb-3">The Team</h2>
           <p className="text-body">
-            Refract analyzes your codebase, identifies patterns and anti-patterns, and applies intelligent transformations to improve code quality. Everything happens through a review system that keeps you in control.
+            Refract is built by engineers who spent years working on code quality, static analysis, and developer tools. We use AI coding tools every day. We felt the problem ourselves.
           </p>
         </section>
 

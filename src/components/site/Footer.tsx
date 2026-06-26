@@ -5,53 +5,41 @@ const footerLinks = [
   {
     title: "Product",
     links: [
-      { label: "Connect", href: "/#connect" },
-      { label: "Triage", href: "/#triage" },
-      { label: "Transform", href: "/#transform" },
-      { label: "Review", href: "/#review" },
-      { label: "Monitor", href: "/#monitor" },
+      { label: "Home", href: "/" },
+      { label: "Product", href: "/product" },
       { label: "Pricing", href: "/pricing" },
-      { label: "Security", href: "/privacy" },
+      { label: "Integrations", href: "/integrations" },
+      { label: "Changelog", href: "/changelog" },
+      { label: "Roadmap", href: "/roadmap" },
     ],
   },
   {
-    title: "Features",
+    title: "Platform",
     links: [
-      { label: "Health Score", href: "/#triage" },
-      { label: "Auto-PR", href: "/#transform" },
-      { label: "Push Delta", href: "/#monitor" },
-      { label: "Cursor MCP", href: "/product#mcp" },
-      { label: "Integrations", href: "/integrations" },
-      { label: "Changelog", href: "/changelog" },
+      { label: "Security", href: "/product#security" },
+      { label: "Activity", href: "/product#activity" },
+      { label: "Guidelines", href: "/product#guidelines" },
+      { label: "CLI", href: "/integrations#cli" },
+      { label: "MCP", href: "/integrations#mcp" },
+      { label: "GitHub Action", href: "/integrations#ci" },
+    ],
+  },
+  {
+    title: "Resources",
+    links: [
+      { label: "Docs", href: "/docs" },
+      { label: "Status", href: "/status" },
+      { label: "Help Center", href: "/help" },
+      { label: "API Reference", href: "/docs" },
     ],
   },
   {
     title: "Company",
     links: [
       { label: "About", href: "/about" },
-      { label: "Customers", href: "/about" },
-      { label: "Careers", href: "/about" },
       { label: "Blog", href: "/about" },
-      { label: "Brand", href: "/about" },
-    ],
-  },
-  {
-    title: "Resources",
-    links: [
-      { label: "Documentation", href: "/docs" },
-      { label: "Developers", href: "/docs" },
-      { label: "Status", href: "/status" },
-      { label: "Roadmap", href: "/roadmap" },
-      { label: "Help Center", href: "/help" },
-    ],
-  },
-  {
-    title: "Connect",
-    links: [
-      { label: "Contact us", href: "/contact" },
-      { label: "Community", href: "https://discord.gg/dkdEbBSqf5" },
-      { label: "X (Twitter)", href: "https://x.com/refractcode" },
-      { label: "GitHub", href: "https://github.com/refractcode" },
+      { label: "Careers", href: "/about" },
+      { label: "Contact", href: "/contact" },
     ],
   },
   {
@@ -63,6 +51,14 @@ const footerLinks = [
       { label: "AUP", href: "/terms" },
     ],
   },
+  {
+    title: "Connect",
+    links: [
+      { label: "Discord", href: "https://discord.gg/dkdEbBSqf5" },
+      { label: "X (Twitter)", href: "https://x.com/refractcode" },
+      { label: "GitHub", href: "https://github.com/refractcode" },
+    ],
+  },
 ];
 
 const Footer = () => {
@@ -71,6 +67,9 @@ const Footer = () => {
       <div className="mx-auto max-w-[1200px] px-6">
         <div className="mb-12">
           <Logo height={16} />
+          <p className="text-body-sm mt-3 text-ld-muted">
+            AI writes fast. Refract makes it shippable.
+          </p>
         </div>
 
         <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">

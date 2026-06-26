@@ -5,11 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Logo } from "./Logo";
 
 const navLinks = [
-  { label: "Features", href: "/#features" },
-  { label: "Docs", href: "/docs" },
+  { label: "Product", href: "/product" },
   { label: "Pricing", href: "/pricing" },
-  { label: "Roadmap", href: "/roadmap" },
-  { label: "Contact", href: "/contact" },
+  { label: "Integrations", href: "/integrations" },
+  { label: "Docs", href: "/docs" },
 ];
 
 const Navbar = () => {
@@ -31,14 +30,11 @@ const Navbar = () => {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Button variant="secondary" size="sm" className="hidden lg:inline-flex" asChild>
-            <a href="https://refract-dev.vercel.app">Open app</a>
-          </Button>
           <Button variant="tertiary" size="sm" className="hidden lg:inline-flex" asChild>
-            <a href="/login">Log in</a>
+            <a href="https://refract-dev.vercel.app">Log in</a>
           </Button>
           <Button size="sm" className="hidden lg:inline-flex" asChild>
-            <a href="https://refract-dev.vercel.app">Sign up</a>
+            <a href="https://refract-dev.vercel.app">Start free</a>
           </Button>
 
           <button
@@ -73,19 +69,14 @@ const Navbar = () => {
                 </a>
               ))}
               <hr className="border-ld-border" />
-              <Button variant="secondary" size="sm" className="self-start" asChild>
-                <a href="https://refract-dev.vercel.app" onClick={() => setOpen(false)}>
-                  Open app
-                </a>
-              </Button>
               <Button variant="tertiary" size="sm" className="self-start" asChild>
-                <a href="/login" onClick={() => setOpen(false)}>
+                <a href="https://refract-dev.vercel.app" onClick={() => setOpen(false)}>
                   Log in
                 </a>
               </Button>
               <Button size="sm" className="self-start" asChild>
                 <a href="https://refract-dev.vercel.app" onClick={() => setOpen(false)}>
-                  Sign up
+                  Start free
                 </a>
               </Button>
             </div>

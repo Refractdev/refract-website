@@ -5,6 +5,7 @@ import HeroMock from "./mocks/HeroMock";
 import HeroStage from "./HeroStage";
 import CustomerStrip from "./CustomerStrip";
 import HeroHeadlineRotator from "./HeroHeadlineRotator";
+import { Button } from "@/components/ui/button";
 
 const Hero = () => {
   return (
@@ -15,17 +16,22 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={heroTextTransition}
         >
-          <Link to="/product#mcp" className="hero-badge">
-            New · Cursor MCP →
-          </Link>
-
           <div className="mt-6">
             <HeroHeadlineRotator />
           </div>
 
           <p className="text-body-lg mt-6 max-w-[560px] text-ld-tertiary">
-            Purpose-built for monitoring and improving codebases. Designed for the AI era.
+            Connects to your repo. Scans every push. Finds what AI left behind — structural debt, security gaps, missing tests — and proposes fixes as diffs. You approve. Refract opens the PR.
           </p>
+
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <Button asChild>
+              <a href="https://refract-dev.vercel.app">Start free</a>
+            </Button>
+            <Button variant="secondary" asChild>
+              <Link to="/product">See how it works</Link>
+            </Button>
+          </div>
         </motion.div>
       </div>
 
