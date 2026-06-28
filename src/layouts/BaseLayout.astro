@@ -2,18 +2,20 @@
 import '../styles/global.css';
 
 interface Props {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   canonicalURL?: string;
   ogImage?: string;
 }
 
 const {
-  title,
-  description,
+  title = "Refract — Turn AI-Generated Code Into Production-Ready Codebases",
+  description = "Refract runs on every push, catches structural debt and security issues introduced by AI coding tools, and ships fixes as pull requests — with your approval.",
   canonicalURL = Astro.url.href,
-  ogImage = '/og-image.png',
+  ogImage = "/og-image.png",
 } = Astro.props;
+
+const ogImageURL = new URL(ogImage, Astro.site).toString();
 ---
 
 <!DOCTYPE html>
@@ -26,33 +28,46 @@ const {
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
+    <meta name="robots" content="index, follow" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Refract" />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={new URL(ogImage, Astro.site)} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={new URL(ogImage, Astro.site)} />
+    <meta name="twitter:image" content={ogImageURL} />
 
-    <!-- Structured data (SaaS product) -->
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/logo-icon-white.png" sizes="180x180" />
+
+    <!-- Structured data -->
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
       "name": "Refract",
       "url": "https://devrefract.com",
-      "description": "Refract turns AI-generated code into production-ready codebases by scanning repositories, detecting structural debt and security issues, and shipping fixes as pull requests.",
+      "description": "Refract is the infrastructure layer between AI coding tools and production. It detects structural debt and security issues on every push and ships fixes as pull requests with human approval.",
       "applicationCategory": "DeveloperApplication",
       "operatingSystem": "Web",
       "offers": {
         "@type": "Offer",
         "price": "0",
         "priceCurrency": "USD"
+      },
+      "creator": {
+        "@type": "Organization",
+        "name": "Refract",
+        "url": "https://devrefract.com"
       }
     })} />
 
@@ -63,9 +78,6 @@ const {
       href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Inter:opsz,wght@14..32,400..600&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body>
     <slot />
