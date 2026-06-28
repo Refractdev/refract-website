@@ -1,57 +1,93 @@
-import { useEffect, useRef } from "react";
 import Hero from "@/components/site/Hero";
-import ManifestoSection from "@/components/site/ManifestoSection";
-import ReliefSection from "@/components/site/ReliefSection";
-import ProofSection from "@/components/site/ProofSection";
-import TrustSection from "@/components/site/TrustSection";
-import ProductSections from "@/components/site/ProductSections";
-import LogicFeatures from "@/components/site/LogicFeatures";
+import FeatureBlock from "@/components/site/FeatureBlock";
+import Testimonials from "@/components/site/Testimonials";
+import Pricing from "@/components/site/Pricing";
+import FAQ from "@/components/site/FAQ";
 import CTA from "@/components/site/CTA";
 
-function useScrollReveal() {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.classList.add("tp-reveal--visible");
-          observer.unobserve(el);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  return ref;
-}
-
-function Section({ children }: { children: React.ReactNode }) {
-  const ref = useScrollReveal();
-  return (
-    <div ref={ref} className="tp-reveal">
-      {children}
+const MockFrame = ({ label = "app screenshot" }: { label?: string }) => (
+  <div className="tp-frame">
+    <div className="tp-frame__bar">
+      <div className="tp-frame__dots">
+        <span className="tp-frame__dot" />
+        <span className="tp-frame__dot" />
+        <span className="tp-frame__dot" />
+      </div>
     </div>
-  );
-}
+    <div className="flex aspect-video items-center justify-center bg-[#0d0d0d] text-sm text-[#555555]">
+      {label}
+    </div>
+  </div>
+);
 
 const Index = () => {
   return (
     <>
       <Hero />
-      <Section><ManifestoSection /></Section>
-      <Section><ReliefSection /></Section>
-      <Section><ProofSection /></Section>
-      <Section><TrustSection /></Section>
-      <Section><ProductSections /></Section>
-      <Section><LogicFeatures /></Section>
-      <Section><CTA /></Section>
+
+      <FeatureBlock
+        label="PIPELINE CENTER"
+        title="All your repositories, organised in a single place"
+        description="You can connect your repositories, import your code via GitHub, or create projects manually."
+        imagesCount={3}
+      >
+        <MockFrame label="repo overview" />
+        <MockFrame label="issue list" />
+        <MockFrame label="scan history" />
+      </FeatureBlock>
+
+      <FeatureBlock
+        label="DASHBOARD"
+        title="Seamless dashboard to check your results"
+        description="With Refract dashboard you can check your code quality and recent activity for the month."
+        tabs={[
+          { label: "Push Activity", active: true },
+          { label: "Security Timeline", active: false },
+        ]}
+        imagesCount={2}
+      >
+        <MockFrame label="P&L-style activity chart" />
+        <MockFrame label="security events calendar" />
+      </FeatureBlock>
+
+      <FeatureBlock
+        label="CODE SCANNER"
+        title="A new way to scan your code, simple and clean"
+        description="Press any issue to inspect it, with diffs, notes, AST entry points, structural analysis, and more."
+      >
+        <MockFrame label="code scan detail view" />
+      </FeatureBlock>
+
+      <FeatureBlock
+        label="ANALYTICS"
+        title="Analytics to understand the data behind your code"
+        description="Automatically generated analytics, filtered by category, to surface the data you need to improve your code quality."
+      >
+        <MockFrame label="analytics dashboard" />
+      </FeatureBlock>
+
+      <FeatureBlock
+        label="MCP INTEGRATION"
+        title="Use Refract from your favourite editor"
+        description="Native MCP support for Cursor, Windsurf, Claude Desktop, Cline, and any MCP-compatible agent."
+        soon
+      >
+        <MockFrame label="MCP agent in action" />
+      </FeatureBlock>
+
+      <FeatureBlock
+        label="GOVERN"
+        title="Set team rules. Enforce them automatically."
+        description="Create guidelines and policies as code, stored in .refract/guidelines.json, versioned in Git. Enforced on every scan."
+        soon
+      >
+        <MockFrame label="policies configuration" />
+      </FeatureBlock>
+
+      <Testimonials />
+      <Pricing />
+      <FAQ />
+      <CTA />
     </>
   );
 };

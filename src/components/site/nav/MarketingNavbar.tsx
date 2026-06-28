@@ -6,39 +6,47 @@ import { Logo } from "../Logo";
 
 const APP_URL = "https://refract-dev.vercel.app";
 
+const featureItems = [
+  {
+    icon: Code2,
+    title: "Pipeline",
+    desc: "Detect, propose, approve, execute, test, document, deliver",
+    soon: false,
+  },
+  {
+    icon: ShieldCheck,
+    title: "Security",
+    desc: "Scan secrets, detect injections, audit dependencies",
+    soon: false,
+  },
+  {
+    icon: LineChart,
+    title: "Analytics",
+    desc: "Understand the data behind your code",
+    soon: false,
+  },
+  {
+    icon: Terminal,
+    title: "MCP + CLI",
+    desc: "Native MCP for Cursor, Windsurf, Claude Desktop",
+    soon: false,
+  },
+  {
+    icon: Building2,
+    title: "Govern",
+    desc: "Policies as code, org-wide enforcement",
+    soon: true,
+  },
+];
+
 const navLinks = [
   { label: "Home", href: "/" },
   {
     label: "Features",
     dropdown: true,
-    items: [
-      {
-        icon: Code2,
-        title: "Pipeline",
-        desc: "Detect, propose, approve, execute, test, document, deliver",
-      },
-      {
-        icon: ShieldCheck,
-        title: "Security",
-        desc: "Scan secrets, detect injections, audit dependencies",
-      },
-      {
-        icon: LineChart,
-        title: "Monitor",
-        desc: "Real-time feed of issues per repo, author, AI tool",
-      },
-      {
-        icon: Terminal,
-        title: "MCP + CLI",
-        desc: "Native MCP for Cursor, Windsurf, Claude Desktop",
-      },
-      {
-        icon: Building2,
-        title: "Govern",
-        desc: "Policies as code, org-wide enforcement",
-      },
-    ],
+    items: featureItems,
   },
+  { label: "Integrations", href: "/integrations" },
   { label: "Pricing", href: "/pricing" },
   { label: "Docs", href: "/docs" },
 ];
@@ -89,10 +97,10 @@ const MarketingNavbar = () => {
           href="/"
           className="rounded-sm outline-none transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ld-primary shrink-0"
         >
-          <Logo height={18} variant="icon" />
+          <Logo height={14} variant="full" />
         </a>
 
-        <nav className="hidden items-center gap-5 lg:flex">
+        <nav className="hidden items-center gap-1 lg:flex">
           {navLinks.map((link) => {
             if (link.dropdown) {
               return (
@@ -115,26 +123,31 @@ const MarketingNavbar = () => {
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95, y: -4 }}
                         transition={{ duration: 0.15, ease: "easeOut" }}
-                        className="absolute top-full left-0 mt-2 tp-dropdown"
+                        className="absolute top-full left-0 mt-2 tp-dropdown w-[320px]"
                       >
                         {link.items.map((item) => {
-                          const Icon = item.icon;
+                          const FeatureIcon = item.icon;
                           return (
-                            <a
-                              key={item.title}
-                              href={`/product#${item.title.toLowerCase()}`}
-                              onClick={() => setFeaturesOpen(false)}
-                              className="tp-dropdown-item"
-                            >
-                              <div className="tp-dropdown-icon">
-                                <Icon className="h-4 w-4 text-white" />
-                              </div>
-                              <div>
+                          <a
+                            key={item.title}
+                            href={`/product#${item.title.toLowerCase()}`}
+                            onClick={() => setFeaturesOpen(false)}
+                            className="tp-dropdown-item"
+                          >
+                            <div className="tp-dropdown-icon">
+                              <FeatureIcon className="h-4 w-4 text-white" />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-2">
                                 <p className="tp-dropdown-title">{item.title}</p>
-                                <p className="tp-dropdown-desc">{item.desc}</p>
+                                {item.soon && (
+                                  <span className="tp-badge tp-badge-soon">Soon</span>
+                                )}
                               </div>
-                            </a>
-                          );
+                              <p className="tp-dropdown-desc">{item.desc}</p>
+                            </div>
+                          </a>
+                        );
                         })}
                       </motion.div>
                     )}
@@ -164,7 +177,7 @@ const MarketingNavbar = () => {
             <a href={APP_URL}>Log in</a>
           </Button>
           <Button size="sm" className="hidden lg:inline-flex" asChild>
-            <a href={APP_URL}>Sign up</a>
+            <a href={APP_URL}>Get Started</a>
           </Button>
 
           <button
@@ -191,22 +204,34 @@ const MarketingNavbar = () => {
             <div className="mx-auto flex max-w-[1300px] flex-col gap-1 px-5 py-5 md:px-6">
               {navLinks.map((link) => {
                 if (link.dropdown) {
-                  return link.items.map((item) => {
-                    const Icon = item.icon;
-                    return (
-                      <a
-                        key={item.title}
-                        href={`/product#${item.title.toLowerCase()}`}
-                        onClick={closeMobile}
-                        className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-[#828282] transition-colors hover:text-white"
-                      >
-                        <div className="flex h-8 w-8 items-center justify-center rounded-[6px] border border-[#1a1a1a] bg-[#1a1a1a]">
-                          <Icon className="h-4 w-4 text-white" />
-                        </div>
-                        {item.title}
-                      </a>
-                    );
-                  });
+                  return (
+                    <div key={link.label} className="flex flex-col gap-1">
+                      <p className="px-3 py-2 text-sm font-medium text-[#555555] uppercase tracking-wider">
+                        {link.label}
+                      </p>
+                      {link.items.map((item) => {
+                        const FeatureIcon = item.icon;
+                        return (
+                        <a
+                          key={item.title}
+                          href={`/product#${item.title.toLowerCase()}`}
+                          onClick={closeMobile}
+                          className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-[#828282] transition-colors hover:text-white"
+                        >
+                          <div className="flex h-8 w-8 items-center justify-center rounded-[6px] border border-[#1a1a1a] bg-[#1a1a1a]">
+                            <FeatureIcon className="h-4 w-4 text-white" />
+                          </div>
+                          <div className="flex items-center gap-2">
+                            {item.title}
+                            {item.soon && (
+                              <span className="tp-badge tp-badge-soon">Soon</span>
+                            )}
+                          </div>
+                        </a>
+                      );
+                      })}
+                    </div>
+                  );
                 }
                 return (
                   <a
@@ -227,7 +252,7 @@ const MarketingNavbar = () => {
               </Button>
               <Button size="sm" className="self-start" asChild>
                 <a href={APP_URL} onClick={closeMobile}>
-                  Sign up
+                  Get Started
                 </a>
               </Button>
             </div>

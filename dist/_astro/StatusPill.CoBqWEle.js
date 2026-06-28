@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime.C8BoMr6r.js";var t=e(),n=({variant:e,children:n})=>(0,t.jsx)(`span`,{className:`status-pill status-pill--${e}`,children:n});export{n as t};

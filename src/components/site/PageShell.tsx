@@ -16,16 +16,18 @@ const PageShell = ({
   maxWidth = 720,
 }: PageShellProps) => {
   return (
-    <main className="min-h-screen bg-ld-neutral pt-28 pb-20 text-ld-on-surface">
-      <div className="mx-auto px-6" style={{ maxWidth }}>
+    <main className="min-h-screen bg-black pt-28 pb-20 text-white">
+      <div className="mx-auto px-5 md:px-6" style={{ maxWidth }}>
         <header className="mb-12">
-          {label ? <p className="section-label">{label}</p> : null}
-          <h1 className="text-section-title">{title}</h1>
+          {label ? <p className="tp-section-label">{label}</p> : null}
+          <h1 className="text-tp-heading">{title}</h1>
           {description ? (
-            <div className="text-body mt-3 max-w-[560px]">{description}</div>
+            <div className="text-tp-desc mt-3 max-w-[560px]">{description}</div>
           ) : null}
         </header>
-        {children}
+        <div className="text-body text-[#999999] space-y-6">
+          {children}
+        </div>
       </div>
     </main>
   );

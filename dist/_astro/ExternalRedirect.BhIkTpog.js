@@ -1,0 +1,1 @@
+import{o as e,t}from"./react.BRNZa73l.js";var n=e(t(),1),r=`https://refract-dev.vercel.app`,i=()=>((0,n.useEffect)(()=>{window.location.replace(r)},[]),null);export{i as default};

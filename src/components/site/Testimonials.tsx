@@ -1,58 +1,66 @@
-import SectionBand from "./SectionBand";
-
 const quotes = [
   {
-    text: "You'll probably ship cleaner code, just because of the discipline that using Refract infuses on your workflow.",
-    author: "Gabriel P.",
-    role: "Staff Software Engineer, OpenAI",
+    text: "I truly believe that every team using AI coding tools should use Refract, it's a need if you're shipping code, and this one is perfect",
+    author: "B",
+    name: "Bastien",
+    role: "Refract BETA user",
   },
   {
-    text: "Our velocity is intense and Refract helps us catch structural debt before it compounds.",
-    author: "Nik K.",
-    role: "Head of Engineering, Ramp",
+    text: "I used to manually review every AI-generated PR, but this is genuinely a game changer, definitely recommended",
+    author: "J",
+    name: "Juan D.",
+    role: "Refract BETA user",
   },
   {
-    text: "Refract is excellent, just excellent. It keeps agents and humans aligned on what actually matters in the codebase.",
-    author: "Kaz N.",
-    role: "VP Engineering, Opendoor",
+    text: "My favourite thing about Refract is the design, everything is clear, not confusing like other code review tools",
+    author: "N",
+    name: "Nico R.",
+    role: "Refract BETA user",
+  },
+  {
+    text: "I love that I can keep all my repositories together and check my code quality in a quick view",
+    author: "J",
+    name: "Jonah",
+    role: "Refract BETA user",
+  },
+  {
+    text: "This BETA is literally better than other fully launched tools, I can't imagine when they release the full version",
+    author: "A",
+    name: "Aarav S.",
+    role: "Refract BETA user",
+  },
+  {
+    text: "Keeping my repos, scans, PRs and everything in the same place made my team's workflow clearer",
+    author: "A",
+    name: "Aisha",
+    role: "Refract BETA user",
   },
 ];
 
 const Testimonials = () => {
   return (
-    <SectionBand>
-      <p className="mb-12 text-center text-section-subtitle text-balance">
-        Built for teams shipping code with{" "}
-        <strong className="font-[510] text-ld-on-surface">humans and agents</strong>.
-      </p>
+    <section className="tp-feature-section">
+      <div className="mx-auto max-w-[1300px] px-5 md:px-6">
+        <p className="tp-section-label text-center">Reviews</p>
+        <h2 className="text-tp-heading text-balance mt-1 text-center max-w-[640px] mx-auto">
+          What other developers say about Refract
+        </h2>
+      </div>
 
-      {/* Tradespad-style marquee */}
-      <div className="tp-marquee">
+      <div className="tp-marquee mt-12">
         <div className="tp-marquee__track">
           {[...quotes, ...quotes].map((q, i) => (
-            <figure key={`${q.author}-${i}`} className="tp-review-card">
+            <figure key={`${q.name}-${i}`} className="tp-review-card">
               <p className="tp-review-card__quote">"{q.text}"</p>
               <figcaption>
-                <p className="tp-review-card__name">{q.author}</p>
+                <p className="tp-review-card__name">{q.name}</p>
                 <p className="tp-review-card__role">{q.role}</p>
               </figcaption>
             </figure>
           ))}
         </div>
       </div>
-
-      <div className="mx-auto mt-12 flex max-w-[1200px] flex-col justify-between gap-4 px-6 sm:flex-row sm:items-center">
-        <p className="text-body-md text-ld-tertiary">
-          Early access opening soon.
-        </p>
-        <a
-          href="/contact"
-          className="shrink-0 text-label-sm text-ld-muted transition-colors hover:text-ld-on-surface"
-        >
-          Join the waitlist →
-        </a>
-      </div>
-    </SectionBand>
+    </section>
   );
 };
 

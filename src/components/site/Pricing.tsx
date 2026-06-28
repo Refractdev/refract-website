@@ -1,150 +1,180 @@
-import { FadeIn } from "@/components/ui/fade-in";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import SectionBand from "./SectionBand";
+
+const APP_URL = "https://refract-dev.vercel.app";
 
 const plans = [
   {
     name: "Free",
     price: "€0",
-    headline: "See what AI left behind.",
-    subheadline: "Connect one repo. Scan it. See every structural and security issue Cursor or Windsurf didn't fix.",
+    period: "/mo",
+    sub: "free forever",
+    description: "See what AI left behind. One repo, manual scan, view issues.",
     features: [
-      "1 connected repository",
-      "Sample sandbox (doesn't count toward limit)",
+      "Up to 1 connected repository",
       "Manual scan / rescan",
-      "Transforms — Detect",
-      "Transforms — Propose (diff preview)",
-      "Transforms — Approve (manual)",
-      "Transforms — Bulk approve (preview only)",
-      "Security — Secret scanning",
-      "Security — Vulnerability detection (view findings)",
-      "Security — Dependency audit (view only)",
-      "Security — Security gate on PRs (view status only)",
-      "Activity — Health score",
-      "Activity — Push delta (latest push only)",
-      "Guidelines — View repo guidelines",
-      "MCP — Local scan (refract_scan)",
-      "MCP — Cloud project scan (3/day)",
-      "CLI — Local refract check",
+      "Automatic issue detection",
+      "Up to 1 guideline set",
+      "Automatic Analytics",
+      "Local MCP scan (3/day)",
+      "CLI: local refract check",
       "API keys",
-      "Command palette & keyboard shortcuts",
     ],
-    cta: "Start free",
-    href: "https://refract-dev.vercel.app",
+    cta: "Get Free",
+    href: APP_URL,
+    badge: null,
   },
   {
-    name: "Pro",
+    name: "Early access",
     price: "€20",
     period: "/mo",
-    headline: "Accepted fixes ship as PRs.",
-    subheadline: "The full pipeline. Every push scanned. Every approved proposal becomes a PR.",
-    badge: "Most popular",
+    sub: "10% off with yearly billing",
+    description: "The full pipeline. Every push scanned. Unlimited everything.",
     features: [
       "Unlimited repositories",
-      "Sample sandbox",
-      "Manual scan / rescan",
-      "Scan on every push (GitHub webhook)",
-      "Transforms — Detect",
-      "Transforms — Propose (diff preview)",
-      "Transforms — Approve (manual)",
-      "Transforms — Bulk approve",
-      "Transforms — Hunk-level approval",
-      "Transforms — Auto-approve rules",
-      "Transforms — Execute",
-      "Transforms — Test generation",
-      "Transforms — Document generation",
-      "Transforms — Deliver (Create PR)",
-      "Security — Secret scanning",
-      "Security — Vulnerability detection",
-      "Security — Dependency audit (with CVE detail)",
-      "Security — Security gate on PRs",
-      "Security — Gate modes (Alert / Block)",
-      "Security — GitHub PR status check",
-      "Activity — Health score",
-      "Activity — Push delta (all pushes)",
-      "Activity — Full commit history",
-      "Activity — Drift detection",
-      "Activity — Alerts (webhook / Slack)",
-      "Guidelines — View repo guidelines",
-      "Guidelines — Edit org guidelines",
-      "MCP — Local scan (refract_scan)",
-      "MCP — Cloud project scan (unlimited)",
-      "MCP — refract_prepare_pr",
-      "CLI — Local refract check",
-      "CLI — Cloud PR delivery",
+      "Scan on every push",
+      "Full pipeline: propose, approve, execute, test, document, PR",
+      "Unlimited security scans",
+      "Unlimited MCP cloud scans",
+      "Unlimited guidelines & policies",
+      "Drift detection & alerts",
       "GitHub Action (CI gate)",
-      "Export activity history (CSV/JSON)",
-      "API keys",
-      "Command palette & keyboard shortcuts",
+      "Limited to early access spots, price locked forever",
     ],
-    cta: "Upgrade to Pro",
-    href: "https://refract-dev.vercel.app",
+    cta: "Join early access",
+    href: APP_URL,
+    badge: "EARLY ACCESS OFFER",
   },
+  {
+    name: "Enterprise",
+    price: "Custom",
+    period: "",
+    sub: "tailored to your team",
+    description: "Org-wide deployment, SSO, dedicated support, custom policies.",
+    features: [
+      "Everything in Early access",
+      "Unlimited workspaces",
+      "SSO / SAML",
+      "Dedicated support",
+      "Custom policy engine",
+      "On-premise option",
+      "SLA guarantee",
+      "Team onboarding & training",
+    ],
+    cta: "Contact sales",
+    href: "/contact",
+    badge: null,
+  },
+];
+
+const comparisonRows = [
+  { feature: "Repositories", free: "1", pro: "Unlimited", enterprise: "Unlimited" },
+  { feature: "Auto-scan on push", free: "—", pro: "✓", enterprise: "✓" },
+  { feature: "Automatic Analytics", free: "Limited", pro: "✓", enterprise: "✓" },
+  { feature: "Detect issues", free: "✓", pro: "✓", enterprise: "✓" },
+  { feature: "Propose fixes (diff)", free: "✓", pro: "✓", enterprise: "✓" },
+  { feature: "Approve & execute", free: "—", pro: "✓", enterprise: "✓" },
+  { feature: "Test generation", free: "—", pro: "✓", enterprise: "✓" },
+  { feature: "Auto PR delivery", free: "—", pro: "✓", enterprise: "✓" },
+  { feature: "Secret scanning", free: "✓", pro: "✓", enterprise: "✓" },
+  { feature: "Vulnerability detection", free: "View only", pro: "✓", enterprise: "✓" },
+  { feature: "Dependency audit", free: "View only", pro: "Full", enterprise: "Full" },
+  { feature: "Security gate on PRs", free: "View status", pro: "Alert / Block", enterprise: "Full" },
+  { feature: "MCP cloud scan", free: "3/day", pro: "Unlimited", enterprise: "Unlimited" },
+  { feature: "CLI PR delivery", free: "—", pro: "✓", enterprise: "✓" },
+  { feature: "Guidelines & policies", free: "1 set", pro: "Unlimited", enterprise: "Unlimited" },
+  { feature: "Drift detection", free: "—", pro: "✓", enterprise: "✓" },
+  { feature: "Alerts (Slack/webhook)", free: "—", pro: "✓", enterprise: "✓" },
+  { feature: "Team management", free: "—", pro: "—", enterprise: "✓" },
+  { feature: "SSO / SAML", free: "—", pro: "—", enterprise: "✓" },
+  { feature: "Dedicated support", free: "—", pro: "—", enterprise: "✓" },
 ];
 
 const Pricing = () => {
   return (
-    <SectionBand id="pricing" wide>
-      <div className="mb-16 max-w-[640px]">
-        <p className="section-label">Pricing</p>
-        <h2 className="text-section-title text-balance">Two plans. One pipeline.</h2>
-        <p className="text-body mt-4">
-          Free: see every issue. Pro: fixes ship as PRs.
-        </p>
-      </div>
+    <section id="pricing" className="tp-feature-section">
+      <div className="mx-auto max-w-[1300px] px-5 md:px-6">
+        <div className="mx-auto max-w-[720px] text-center">
+          <p className="tp-section-label">Pricing</p>
+          <h2 className="text-tp-heading text-balance mt-1 max-w-[640px] mx-auto">
+            Simple and fair pricing for every need
+          </h2>
+          <p className="text-tp-desc mt-4 max-w-[560px] mx-auto">
+            Cheapest prices in the space
+          </p>
+        </div>
 
-      <div className="grid gap-8 md:grid-cols-2">
-        {plans.map((plan) => (
-          <FadeIn key={plan.name}>
-            <Card
-              className={`flex flex-col overflow-hidden p-0 ${
-                plan.badge === "Most popular" ? "border-ld-border-strong" : ""
-              }`}
+        <div className="mt-12 grid gap-6 md:grid-cols-3">
+          {plans.map((plan) => (
+            <div
+              key={plan.name}
+              className={`flex flex-col rounded-xl border ${
+                plan.badge ? "border-[#2f2f2f]" : "border-[#1a1a1a]"
+              } bg-[#0d0d0d] p-6`}
             >
-              <div className="flex flex-1 flex-col p-8">
-                {plan.badge && (
-                  <div className="mb-4">
-                    <span className="status-pill status-pill--neutral">{plan.badge}</span>
-                  </div>
-                )}
-
-                <h3 className="text-headline-md mb-1">{plan.name}</h3>
-                <p className="text-headline-sm text-ld-tertiary mb-1">{plan.headline}</p>
-                <p className="text-body-sm text-ld-muted mb-5">{plan.subheadline}</p>
-
-                <div className="mb-7">
-                  <span className="text-headline-lg text-ld-on-surface">{plan.price}</span>
-                  {plan.period && (
-                    <span className="text-body-sm ml-1.5 text-ld-muted">{plan.period}</span>
-                  )}
+              {plan.badge && (
+                <div className="mb-3">
+                  <span className="tp-badge tp-badge-soon">{plan.badge}</span>
                 </div>
-
-                <ul className="m-0 flex-1 list-none p-0">
-                  {plan.features.map((text) => (
-                    <li
-                      key={text}
-                      className="flex items-start gap-2 py-1 text-body-sm text-ld-tertiary"
-                    >
-                      <span className="shrink-0 text-caption text-ld-muted">✓</span>
-                      <span>{text}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <Button
-                  variant={plan.badge === "Most popular" ? "default" : "secondary"}
-                  className="mt-8 w-full"
-                  asChild
-                >
-                  <a href={plan.href}>{plan.cta}</a>
-                </Button>
+              )}
+              <h3 className="text-lg font-medium text-white">{plan.name}</h3>
+              <div className="mt-3">
+                <span className="text-3xl font-medium text-white">{plan.price}</span>
+                {plan.period && (
+                  <span className="text-sm text-[#888888] ml-1">{plan.period}</span>
+                )}
               </div>
-            </Card>
-          </FadeIn>
-        ))}
+              <p className="text-sm text-[#888888] mt-1">{plan.sub}</p>
+              <p className="text-sm text-[#999999] mt-4 leading-relaxed">{plan.description}</p>
+
+              <ul className="mt-6 flex-1 space-y-3">
+                {plan.features.map((feat) => (
+                  <li key={feat} className="text-sm text-[#d2d2d2] flex items-start gap-2">
+                    <span className="text-[#555555] mt-0.5">✓</span>
+                    {feat}
+                  </li>
+                ))}
+              </ul>
+
+              <Button
+                variant={plan.badge ? "default" : "secondary"}
+                className="mt-8 w-full"
+                asChild
+              >
+                <a href={plan.href}>{plan.cta}</a>
+              </Button>
+            </div>
+          ))}
+        </div>
+
+        <p className="text-center text-sm text-[#888888] mt-8 max-w-[640px] mx-auto">
+          Unlock the full Refract experience with our Early access plan, access every advanced feature, and become an early Refract user at a discounted €20/mo price for life.{" "}
+          <a href={APP_URL} className="text-white underline">See full comparison</a>
+        </p>
+
+        <div className="mt-16 overflow-x-auto">
+          <table className="w-full min-w-[640px] border-collapse text-left text-sm">
+            <thead>
+              <tr className="border-b border-[#1f1f1f]">
+                <th className="py-3 pr-6 text-[13px] font-medium text-[#888888]">Feature</th>
+                <th className="py-3 px-4 text-[13px] font-medium text-white">Free</th>
+                <th className="py-3 px-4 text-[13px] font-medium text-white">Early access</th>
+                <th className="py-3 pl-4 text-[13px] font-medium text-white">Enterprise</th>
+              </tr>
+            </thead>
+            <tbody>
+              {comparisonRows.map((row) => (
+                <tr key={row.feature} className="border-b border-[#1f1f1f]/60">
+                  <td className="py-3 pr-6 text-[14px] text-white">{row.feature}</td>
+                  <td className="py-3 px-4 text-[14px] text-[#888888]">{row.free}</td>
+                  <td className="py-3 px-4 text-[14px] text-[#d2d2d2]">{row.pro}</td>
+                  <td className="py-3 pl-4 text-[14px] text-[#d2d2d2]">{row.enterprise}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </SectionBand>
+    </section>
   );
 };
 

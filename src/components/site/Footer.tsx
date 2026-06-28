@@ -1,7 +1,16 @@
-
 import { Logo } from "./Logo";
 
-const footerLinks = [
+const footerSections = [
+  {
+    title: "Integrations",
+    links: [
+      { label: "GitHub", href: "/integrations#github" },
+      { label: "MCP Protocol", href: "/integrations#mcp" },
+      { label: "CLI", href: "/integrations#cli" },
+      { label: "CI/CD", href: "/integrations#ci" },
+      { label: "See all", href: "/integrations" },
+    ],
+  },
   {
     title: "Product",
     links: [
@@ -14,41 +23,12 @@ const footerLinks = [
     ],
   },
   {
-    title: "Platform",
-    links: [
-      { label: "Security", href: "/product#security" },
-      { label: "Activity", href: "/product#activity" },
-      { label: "Guidelines", href: "/product#guidelines" },
-      { label: "CLI", href: "/integrations#cli" },
-      { label: "MCP", href: "/integrations#mcp" },
-      { label: "GitHub Action", href: "/integrations#ci" },
-    ],
-  },
-  {
     title: "Resources",
     links: [
       { label: "Docs", href: "/docs" },
-      { label: "Status", href: "/status" },
       { label: "Help Center", href: "/help" },
+      { label: "Status", href: "/status" },
       { label: "API Reference", href: "/docs" },
-    ],
-  },
-  {
-    title: "Company",
-    links: [
-      { label: "About", href: "/about" },
-      { label: "Blog", href: "/about" },
-      { label: "Careers", href: "/about" },
-      { label: "Contact", href: "/contact" },
-    ],
-  },
-  {
-    title: "Legal",
-    links: [
-      { label: "Privacy", href: "/privacy" },
-      { label: "Terms", href: "/terms" },
-      { label: "DPA", href: "/privacy" },
-      { label: "AUP", href: "/terms" },
     ],
   },
   {
@@ -58,6 +38,17 @@ const footerLinks = [
       { label: "X (Twitter)", href: "https://x.com/devRefracta" },
       { label: "Instagram", href: "https://www.instagram.com/refractcode/" },
       { label: "GitHub", href: "https://github.com/refractcode" },
+    ],
+  },
+  {
+    title: "Tutorials",
+    links: [
+      { label: "Quick Start", href: "/docs" },
+      { label: "Connect a Repo", href: "/docs" },
+      { label: "Create Your First PR", href: "/docs" },
+      { label: "MCP Setup", href: "/integrations#mcp" },
+      { label: "CLI Guide", href: "/integrations#cli" },
+      { label: "Security Scan", href: "/product#security" },
     ],
   },
 ];
@@ -73,8 +64,8 @@ const Footer = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 gap-x-4 gap-y-8 lg:grid-cols-6 lg:gap-x-1.5">
-          {footerLinks.map((section) => (
+        <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 lg:grid-cols-5 lg:gap-x-6">
+          {footerSections.map((section) => (
             <div key={section.title}>
               <h3 className="tp-footer-heading">{section.title}</h3>
               <ul className="flex flex-col gap-2.5">

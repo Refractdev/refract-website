@@ -1,29 +1,30 @@
 import Changelog from "@/components/site/Changelog";
-import SectionBand from "@/components/site/SectionBand";
 
 const ChangelogPage = () => {
   return (
     <>
-      <SectionBand className="!border-t-0 pb-16 pt-36">
-        <div className="grid gap-8 md:grid-cols-[1fr_320px] md:items-end">
-        <div className="max-w-[680px]">
-          <p className="section-label">Changelog</p>
-          <h1 className="text-hero max-w-[720px] text-balance">What shipped this week.</h1>
-          <p className="text-body mt-4">
-            Proposals, fixes, security improvements — every change logged, dated, and explained. No fluff. See what's next on the{" "}
-            <a href="/roadmap" className="link-accent">
-              roadmap
-            </a>
-            .
-          </p>
-        </div>
-          <div className="rounded-lg border border-ld-border bg-ld-surface p-4">
-            <p className="text-mono-label mb-3">LATEST RELEASE</p>
-            <p className="text-headline-sm">Auto-PR generation</p>
-            <p className="text-body-sm mt-2">Safety gates, documented changes, and review-ready pull requests.</p>
+      <section className="pt-32 pb-16">
+        <div className="mx-auto max-w-[1300px] px-5 md:px-6">
+          <div className="grid gap-8 md:grid-cols-[1fr_320px] md:items-end">
+            <div className="max-w-[680px]">
+              <p className="tp-section-label">Changelog</p>
+              <h1 className="text-tp-heading text-balance max-w-[720px]">What shipped this week.</h1>
+              <p className="text-tp-desc mt-4">
+                Proposals, fixes, security improvements — every change logged, dated, and explained. No fluff. See what's next on the{" "}
+                <a href="/roadmap" className="text-white underline">
+                  roadmap
+                </a>
+                .
+              </p>
+            </div>
+            <div className="rounded-lg border border-[#1a1a1a] bg-[#0d0d0d] p-4">
+              <p className="font-mono text-xs font-medium text-[#888888] mb-3">LATEST RELEASE</p>
+              <p className="text-base font-medium text-white">Auto-PR generation</p>
+              <p className="text-sm text-[#999999] mt-2">Safety gates, documented changes, and review-ready pull requests.</p>
+            </div>
           </div>
         </div>
-      </SectionBand>
+      </section>
       <Changelog />
     </>
   );

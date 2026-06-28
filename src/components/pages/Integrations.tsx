@@ -1,110 +1,107 @@
-import PageShell from "@/components/site/PageShell";
-import { Card } from "@/components/ui/card";
+interface IntegrationCard {
+  name: string;
+  category: string;
+  logo: string;
+  status: "Auto Sync" | "File Import" | "Coming Soon";
+  href: string;
+}
+
+const integrations: IntegrationCard[] = [
+  { name: "GitHub", category: "Git", logo: "GH", status: "Auto Sync", href: "/integrations#github" },
+  { name: "GitLab", category: "Git", logo: "GL", status: "Auto Sync", href: "/integrations#github" },
+  { name: "Bitbucket", category: "Git", logo: "BB", status: "Coming Soon", href: "#" },
+  { name: "Cursor", category: "MCP", logo: "CU", status: "Auto Sync", href: "/integrations#mcp" },
+  { name: "Windsurf", category: "MCP", logo: "WS", status: "Auto Sync", href: "/integrations#mcp" },
+  { name: "Claude Desktop", category: "MCP", logo: "CL", status: "Auto Sync", href: "/integrations#mcp" },
+  { name: "Cline", category: "MCP", logo: "CE", status: "Auto Sync", href: "/integrations#mcp" },
+  { name: "Continue", category: "MCP", logo: "CO", status: "Auto Sync", href: "/integrations#mcp" },
+  { name: "Lovable", category: "MCP", logo: "LO", status: "Coming Soon", href: "#" },
+  { name: "VS Code", category: "MCP", logo: "VS", status: "Auto Sync", href: "/integrations#mcp" },
+  { name: "refract check", category: "CLI", logo: "~", status: "Auto Sync", href: "/integrations#cli" },
+  { name: "refract scan", category: "CLI", logo: "~", status: "Auto Sync", href: "/integrations#cli" },
+  { name: "refract pr", category: "CLI", logo: "~", status: "Auto Sync", href: "/integrations#cli" },
+  { name: "GitHub Action", category: "CI", logo: "GA", status: "Auto Sync", href: "/integrations#ci" },
+  { name: "Manual API", category: "CI", logo: "API", status: "File Import", href: "/docs" },
+];
+
+const categories = ["All", "Git", "MCP", "CLI", "CI"];
+
+const statusColors: Record<string, string> = {
+  "Auto Sync": "text-[#11ff99]",
+  "File Import": "text-[#ffc53d]",
+  "Coming Soon": "text-[#888888]",
+};
 
 const Integrations = () => {
   return (
     <>
-      <PageShell
-        label="Integrations"
-        title="Works where you ship."
-        description="GitHub, MCP, CLI, CI. One connection, every surface."
-        maxWidth={1200}
-      >
-        <section id="github" className="mb-16">
-          <h2 className="text-headline-lg mb-6">GitHub</h2>
-          <div className="grid gap-6 md:grid-cols-2">
-            <Card className="p-6">
-              <h3 className="text-headline-md mb-2">OAuth</h3>
-              <p className="text-body-sm text-ld-tertiary">
-                Connects Refract to your GitHub account. Read-only access to clone repos. Write access limited to opening PRs you've approved. You control what Refract can see and do.
-              </p>
-            </Card>
-            <Card className="p-6">
-              <h3 className="text-headline-md mb-2">Push webhook (Pro)</h3>
-              <p className="text-body-sm text-ld-tertiary">
-                Every push to a connected repo triggers an automatic scan. No manual rescanning. No polling. Push → scan → review → approve → PR.
-              </p>
-            </Card>
+      <section className="pt-32 pb-16">
+        <div className="mx-auto max-w-[1300px] px-5 md:px-6">
+          <div className="mx-auto max-w-[720px] text-center">
+            <p className="tp-section-label">Integrations</p>
+            <h1 className="text-tp-heading text-balance mt-1">
+              Can you auto-connect your tools to Refract?
+            </h1>
+            <p className="text-tp-desc mt-4 max-w-[560px] mx-auto">
+              Connect your git provider, editor, or CI pipeline to Refract and scan your code automatically.
+            </p>
+            <a
+              href="#"
+              className="mt-6 inline-block text-sm font-medium text-[#888888] transition-colors hover:text-white"
+            >
+              Can't find your platform? Request it
+            </a>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section id="mcp" className="mb-16">
-          <h2 className="text-headline-lg mb-6">MCP (Model Context Protocol)</h2>
-          <p className="text-body text-ld-tertiary mb-6 max-w-[640px]">
-            Refract works inside Cursor, Windsurf, Claude, Cline, Continue, and any MCP client. Your agent can scan and propose. Executing and opening PRs require human approval — unless you've configured auto-approve rules.
-          </p>
-
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {[
-              { name: "refract_scan", desc: "Run Detect + Propose locally" },
-              { name: "refract_issues", desc: "List open issues for a project" },
-              { name: "refract_apply", desc: "Preview or execute a proposal" },
-              { name: "refract_prepare_pr", desc: "Open PR for accepted proposals (Pro)" },
-              { name: "refract_explain", desc: "Explain an issue" },
-              { name: "refract_security", desc: "Security report for a project" },
-            ].map((tool) => (
-              <Card key={tool.name} className="p-5">
-                <p className="font-mono text-label-md mb-1">{tool.name}</p>
-                <p className="text-body-sm text-ld-tertiary">{tool.desc}</p>
-              </Card>
+      <section className="pb-24">
+        <div className="mx-auto max-w-[1300px] px-5 md:px-6">
+          <div className="mb-8 flex flex-wrap gap-2">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
+                  cat === "All"
+                    ? "bg-white text-black"
+                    : "bg-[#1a1a1a] text-[#888888] hover:text-white"
+                }`}
+              >
+                {cat}
+              </button>
             ))}
           </div>
 
-          <div className="mt-8 rounded-lg border border-ld-border bg-ld-surface p-4">
-            <p className="text-label-sm mb-2">Setup</p>
-            <pre className="text-body-sm text-ld-tertiary overflow-x-auto">
-{`{
-  "mcpServers": {
-    "refract": {
-      "command": "npx",
-      "args": ["@refract/mcp"]
-    }
-  }
-}`}
-            </pre>
-          </div>
-        </section>
-
-        <section id="cli" className="mb-16">
-          <h2 className="text-headline-lg mb-6">CLI</h2>
-          <div className="rounded-lg border border-ld-border bg-ld-surface p-4 mb-6">
-            <pre className="text-body-sm text-ld-tertiary">npm install -g @refract/cli</pre>
-          </div>
-
-          <div className="grid gap-3 md:grid-cols-2">
-            {[
-              { cmd: "refract auth login / refract auth status", desc: "Authenticate and check connection" },
-              { cmd: "refract check <path>", desc: "Run detection on a local path" },
-              { cmd: "refract issues --project <id>", desc: "List issues for a project" },
-              { cmd: "refract security --project <id>", desc: "Security report for a project" },
-              { cmd: "refract apply <id> --project <id>", desc: "Apply a specific proposal" },
-              { cmd: "refract pr --project <id>", desc: "Open a PR for accepted proposals (Pro)" },
-            ].map((item) => (
-              <div key={item.cmd} className="border-t border-ld-border pt-3">
-                <p className="font-mono text-body-sm">{item.cmd}</p>
-                <p className="text-body-sm text-ld-tertiary mt-1">{item.desc}</p>
-              </div>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {integrations.map((item) => (
+              <a
+                key={item.name}
+                href={item.href}
+                className="group flex items-center gap-4 rounded-xl border border-[#1a1a1a] bg-[#0d0d0d] p-5 transition-colors hover:border-[#2f2f2f]"
+              >
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg border border-[#1a1a1a] bg-[#121212] text-sm font-medium text-white">
+                  {item.logo}
+                </div>
+                <div className="min-w-0">
+                  <p className="text-sm font-medium text-white">{item.name}</p>
+                  <p className={`text-xs mt-0.5 ${statusColors[item.status] || "text-[#888888]"}`}>
+                    {item.status}
+                  </p>
+                </div>
+              </a>
             ))}
           </div>
-        </section>
 
-        <section id="ci">
-          <h2 className="text-headline-lg mb-6">CI/CD</h2>
-          <p className="text-body text-ld-tertiary mb-6 max-w-[640px]">
-            GitHub Action for security gate and scan in your pipeline. Configurable fail threshold (e.g. fail on High+ findings).
-          </p>
-
-          <div className="rounded-lg border border-ld-border bg-ld-surface p-4">
-            <pre className="text-body-sm text-ld-tertiary overflow-x-auto">
-{`steps:
-  - uses: refract-hq/action@v1
-    with:
-      mode: security-gate
-      fail-on: high`}
-            </pre>
+          <div className="mt-12 text-center">
+            <p className="text-sm text-[#888888]">
+              Can't find your platform?{" "}
+              <a href="/contact" className="text-white underline transition-colors hover:text-white/80">
+                Request integration
+              </a>
+            </p>
           </div>
-        </section>
-      </PageShell>
+        </div>
+      </section>
     </>
   );
 };

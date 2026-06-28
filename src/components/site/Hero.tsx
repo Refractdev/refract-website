@@ -2,8 +2,9 @@ import { motion } from "motion/react";
 import { heroMockTransition, heroTextTransition } from "@/lib/motion";
 import HeroMock from "./mocks/HeroMock";
 import CustomerStrip from "./CustomerStrip";
-import HeroHeadlineRotator from "./HeroHeadlineRotator";
 import { Button } from "@/components/ui/button";
+
+const APP_URL = "https://refract-dev.vercel.app";
 
 const Hero = () => {
   return (
@@ -14,20 +15,23 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={heroTextTransition}
         >
-          <div className="mb-4 sm:mb-5">
-            <HeroHeadlineRotator />
-          </div>
+          <h1 className="text-tp-heading max-w-[720px] mx-auto text-balance">
+            Your code has something to say,<br />
+            <span className="text-[#888888]">Refract will reveal it</span>
+          </h1>
 
           <p className="text-tp-desc mx-auto mt-5 max-w-[620px]">
-            Runs on every push. Catches what the AI missed. Ships fixes as pull requests — with your approval.
+            Detect, review and ship in a single pipeline.
+            <br />
+            The code quality layer AI coding tools don't have.
           </p>
 
           <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
             <Button asChild>
-              <a href="https://refract-dev.vercel.app">Start for free</a>
+              <a href={APP_URL}>Get Started</a>
             </Button>
             <Button variant="secondary" asChild>
-              <a href="https://refract-dev.vercel.app">Free plan · No credit card</a>
+              <a href={APP_URL}>Free plan · No credit card</a>
             </Button>
           </div>
         </motion.div>
