@@ -3,82 +3,57 @@
 @tailwind utilities;
 
 :root {
-    /* ── Resend Dark canonical tokens (fonts: Inter, JetBrains Mono, Geist) ── */
-    --ld-primary:         #fcfdff;
+    --ld-primary:         #ffffff;
     --ld-primary-on:      #000000;
-    --ld-secondary:       #fcfdff;
-    --ld-tertiary:        rgba(252,253,255,0.86);
-    --ld-charcoal:        rgba(252,253,255,0.7);
+    --ld-secondary:       #ffffff;
+    --ld-tertiary:        #999999;
+    --ld-charcoal:        #888888;
     --ld-neutral:         #000000;
-    --ld-surface:         #0a0a0c;
-    --ld-on-surface:      #fcfdff;
-    --ld-muted:           #a1a4a5;
-    --ld-ash:             #888e90;
-    --ld-stone:           #464a4d;
-    --ld-border:          rgba(255,255,255,0.06);
-    --ld-border-strong:   rgba(255,255,255,0.14);
-    --ld-divider-soft:    rgba(255,255,255,0.04);
-    --ld-overlay:         #101012;
-    --ld-panel:           #0a0a0c;
-    --ld-surface-deep:    #06060a;
-    --ld-surface-elevated:#101012;
+    --ld-surface:         #0d0d0d;
+    --ld-on-surface:      #ffffff;
+    --ld-muted:           #999999;
+    --ld-ash:             #888888;
+    --ld-stone:           #555555;
+    --ld-border:          #1a1a1a;
+    --ld-border-strong:   #272727;
+    --ld-divider-soft:    #1f1f1f;
+    --ld-overlay:         #121212;
+    --ld-panel:           #0d0d0d;
+    --ld-surface-deep:    #000000;
+    --ld-surface-elevated:#121212;
     --ld-chip:            rgba(255,255,255,0.08);
     --ld-surface-light:   #f1f7fe;
     --ld-success:         #11ff99;
     --ld-warning:         #ffc53d;
     --ld-error:           #ff2047;
-    --ld-accent-orange:       #ff801f;
-    --ld-accent-orange-glow:  rgba(255,89,0,0.22);
-    --ld-accent-blue:         #3b9eff;
-    --ld-accent-blue-glow:    rgba(0,117,255,0.34);
-    --ld-accent-green:        #11ff99;
-    --ld-accent-green-glow:   rgba(34,255,153,0.18);
-    --ld-accent-red:          #ff2047;
-    --ld-accent-red-glow:     rgba(255,32,71,0.34);
-    --ld-accent-yellow:       #ffc53d;
-    --ld-link:                #3b9eff;
-    --ld-button-hover:    #f1f7fe;
 
-    /* ── Canvas & Surface (compat aliases) ── */
     --color-canvas:           var(--ld-neutral);
     --color-surface-card:     var(--ld-surface);
     --color-surface-elevated: var(--ld-overlay);
     --color-surface-deep:     var(--ld-neutral);
 
-    /* ── Text (compat aliases) ── */
     --color-ink:              var(--ld-secondary);
     --color-body:             var(--ld-tertiary);
-    --color-charcoal:         var(--ld-tertiary);
+    --color-charcoal:         var(--ld-charcoal);
     --color-mute:             var(--ld-muted);
     --color-ash:              var(--ld-muted);
-    --color-stone:            var(--ld-muted);
+    --color-stone:            var(--ld-stone);
     --color-on-light:         var(--ld-neutral);
     --color-on-light-mute:    rgba(8, 9, 10, 0.70);
 
-    /* ── Borders (compat aliases) ── */
     --color-hairline:         var(--ld-border);
     --color-hairline-strong:  var(--ld-border-strong);
-    --color-divider-soft:     var(--ld-border);
+    --color-divider-soft:     var(--ld-divider-soft);
 
-    /* ── Primary button (compat aliases) ── */
     --color-primary:          var(--ld-secondary);
     --color-primary-on:       var(--ld-neutral);
-    --color-surface-light:    var(--ld-button-hover);
+    --color-surface-light:    var(--ld-surface-light);
 
-    /* ── Accent (compat aliases) ── */
     --color-accent:           var(--ld-primary);
     --color-accent-hover:     var(--ld-primary);
     --color-link:             var(--ld-primary);
 
-    /* ── Semantic accents (compat aliases) ── */
-    --color-accent-orange:    var(--ld-warning);
-    --color-accent-yellow:    var(--ld-warning);
-    --color-accent-blue:      var(--ld-primary);
-    --color-accent-green:     var(--ld-success);
-    --color-accent-red:       var(--ld-error);
-
-    /* ── Extended aliases (shadcn) ── */
-    --color-primary-active:   var(--ld-button-hover);
+    --color-primary-active:   var(--ld-surface-light);
     --color-on-primary:       var(--ld-neutral);
     --color-error:            var(--ld-error);
     --color-success:          var(--ld-success);
@@ -89,7 +64,6 @@
     --color-muted-soft:       var(--ld-muted);
     --color-muted:            var(--ld-muted);
 
-    /* ── Backward-compat aliases ── */
     --color-theme-bg:          var(--ld-neutral);
     --color-theme-card:        var(--ld-surface);
     --color-theme-card-hover:  var(--ld-overlay);
@@ -104,15 +78,6 @@
     --surface-app:             var(--ld-neutral);
     --code-green:              var(--ld-success);
     --code-red:                var(--ld-error);
-
-    /* ── Spacing (Linear Dark rhythm) ── */
-    --space-xs:   6px;
-    --space-sm:   16px;
-    --space-md:   24px;
-    --space-lg:   32px;
-    --space-xl:   64px;
-    --space-2xl:  96px;
-    --grid-gap:   24px;
 }
 
 * {
@@ -129,7 +94,14 @@ html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: #2b2b2b #0a0a0a;
 }
+
+html ::-webkit-scrollbar { width: 7px; }
+html ::-webkit-scrollbar-track { background: #0a0a0a; }
+html ::-webkit-scrollbar-thumb { background: #2b2b2b; border-radius: 999px; }
+html ::-webkit-scrollbar-thumb:hover { background: #333333; }
 
 body {
     background-color: var(--ld-neutral);
@@ -152,29 +124,117 @@ a {
 
 /* ─── Container ─── */
 .container {
-    max-width: 1200px;
+    max-width: 1300px;
     margin: 0 auto;
-    padding: 0 var(--space-sm);
+    padding: 0 20px;
 }
 
-/* ─── Section ─── */
-.section {
-    padding: var(--space-xl) 0;
+@media (min-width: 768px) {
+    .container { padding: 0 24px; }
 }
 
-/* ─── Typography (Linear Dark) ─── */
-.text-hero {
-    font-size: clamp(32px, 4vw, 56px);
+/* ─── Typography ─── */
+
+/* Tradespad-style hero heading */
+.text-tp-hero {
+    font-size: clamp(1.5rem, 7vw, 1.9375rem);
     font-weight: 500;
-    line-height: 1.0;
-    letter-spacing: -0.96px;
+    line-height: 1.08;
+    letter-spacing: -0.06em;
     color: var(--ld-secondary);
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
+    .text-tp-hero {
+        font-size: 48px;
+        line-height: 1.1;
+    }
+}
+
+/* Tradespad-style section heading (h2) */
+.text-tp-heading {
+    font-size: clamp(1.5rem, 7vw, 1.9375rem);
+    font-weight: 500;
+    line-height: 1.08;
+    letter-spacing: -0.06em;
+    color: var(--ld-secondary);
+}
+
+@media (min-width: 640px) {
+    .text-tp-heading {
+        line-height: 1.06;
+    }
+}
+
+@media (min-width: 768px) {
+    .text-tp-heading {
+        font-size: 48px;
+        line-height: 1.1;
+    }
+}
+
+/* Tradespad-style section label (eyebrow, mono) */
+.text-tp-label {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: #9a9a9a;
+}
+
+@media (min-width: 640px) {
+    .text-tp-label {
+        font-size: 0.9375rem;
+    }
+}
+
+/* Tradespad-style feature description */
+.text-tp-desc {
+    font-size: clamp(0.8125rem, 2.85vw, 0.9375rem);
+    font-weight: 400;
+    line-height: 1.375;
+    letter-spacing: -0.01em;
+    color: #999999;
+}
+
+@media (min-width: 640px) {
+    .text-tp-desc {
+        font-size: 0.9375rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .text-tp-desc {
+        font-size: 18px;
+    }
+}
+
+/* Tradespad-style body small */
+.text-tp-body-sm {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: -0.01em;
+    color: #999999;
+}
+
+.text-tp-mono {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* legacy aliases - kept for backward compat */
+.text-hero {
+    font-size: clamp(1.5rem, 7vw, 1.9375rem);
+    font-weight: 500;
+    line-height: 1.08;
+    letter-spacing: -0.06em;
+    color: var(--ld-secondary);
+}
+
+@media (min-width: 768px) {
     .text-hero {
-        letter-spacing: -0.96px;
-        line-height: 1.0;
+        font-size: 48px;
+        line-height: 1.1;
     }
 }
 
@@ -182,72 +242,63 @@ a {
     font-size: clamp(28px, 4vw, 40px);
     font-weight: 510;
     line-height: 1.1;
-    letter-spacing: -0.022em;
+    letter-spacing: -0.06em;
     color: var(--ld-secondary);
 }
 
 .text-section-title {
-    font-size: clamp(28px, 3.5vw, 40px);
+    font-size: clamp(1.5rem, 7vw, 1.9375rem);
     font-weight: 500;
-    line-height: 1.2;
-    letter-spacing: -0.4px;
+    line-height: 1.08;
+    letter-spacing: -0.06em;
     color: var(--ld-secondary);
 }
 
-.text-section-subtitle {
-    font-size: 20px;
-    font-weight: 510;
-    line-height: 26.6px;
-    letter-spacing: -0.24px;
-    color: var(--ld-secondary);
-}
-
-.text-headline-md {
-    font-size: 20px;
-    font-weight: 500;
-    line-height: 1.3;
-    letter-spacing: -0.3px;
-    color: var(--ld-secondary);
-}
-
-.text-headline-sm {
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 1.4;
-    letter-spacing: -0.2px;
-    color: var(--ld-secondary);
+@media (min-width: 768px) {
+    .text-section-title {
+        font-size: 48px;
+        line-height: 1.1;
+    }
 }
 
 .text-body {
     font-size: 15px;
     font-weight: 400;
     line-height: 24px;
-    letter-spacing: 0;
-    color: var(--ld-tertiary);
+    letter-spacing: -0.01em;
+    color: #999999;
 }
 
 .text-body-lg {
     font-size: 18px;
     font-weight: 400;
     line-height: 1.5;
-    letter-spacing: 0;
-    color: var(--ld-tertiary);
+    letter-spacing: -0.01em;
+    color: #999999;
+}
+
+.text-body-sm {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: -0.01em;
+    color: #999999;
 }
 
 .text-muted {
     font-size: 13px;
     font-weight: 400;
     line-height: 20px;
-    letter-spacing: -0.08px;
-    color: var(--ld-muted);
+    letter-spacing: -0.01em;
+    color: #888888;
 }
 
 .text-mono-label {
     font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 12px;
-    font-weight: 400;
-    color: var(--ld-muted);
-    letter-spacing: 0;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: #9a9a9a;
 }
 
 .text-caption-upper {
@@ -256,62 +307,105 @@ a {
     font-weight: 400;
     line-height: 16px;
     letter-spacing: 0;
-    color: var(--ld-muted);
+    color: #888888;
 }
 
-/* ─── Linear section labels ─── */
+/* ─── Section labels ─── */
 .section-label {
-    font-family: 'Inter', sans-serif;
-    font-size: 12px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 14px;
     font-weight: 500;
-    line-height: 16px;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-    color: var(--ld-muted);
+    letter-spacing: -0.01em;
+    color: #9a9a9a;
     margin-bottom: 12px;
 }
 
-/* Resend-style section label */
+@media (min-width: 640px) {
+    .section-label {
+        font-size: 0.9375rem;
+    }
+}
+
+/* Tradespad-style section label */
 .tp-section-label {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: #9a9a9a;
+    margin-bottom: 8px;
+}
+
+@media (min-width: 640px) {
+    .tp-section-label {
+        font-size: 0.9375rem;
+    }
+}
+
+/* Tradespad-style badge */
+.tp-badge {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 6px;
+    border: 1px solid #2f2f2f;
+    background: #121212;
+    padding: 2px 8px;
     font-size: 11px;
     font-weight: 500;
+    letter-spacing: -0.01em;
+    color: #d2d2d2;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
     text-transform: uppercase;
-    letter-spacing: 0.35px;
-    color: var(--ld-charcoal);
-    margin-bottom: 12px;
 }
 
-/* Resend-style badge pill */
-.tp-badge {
-    display: inline-block;
-    background: var(--ld-surface-elevated);
-    color: var(--ld-tertiary);
-    border-radius: 9999px;
-    padding: 4px 10px;
-    font-size: 12px;
-    font-weight: 400;
+/* Tradespad-style "Soon" badge */
+.tp-badge-soon {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 6px;
+    border: 1px solid #2f2f2f;
+    background: #121212;
+    padding: 2px 8px;
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: #d2d2d2;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
     text-transform: uppercase;
-    letter-spacing: 0.35px;
+}
+
+@media (min-width: 640px) {
+    .tp-badge-soon {
+        font-size: 11px;
+    }
 }
 
 .section-number {
     font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 12px;
-    font-weight: 400;
-    color: var(--ld-tertiary);
-    letter-spacing: 0;
-    margin-bottom: 16px;
-}
-
-.section-number span {
-    color: var(--ld-muted);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: #9a9a9a;
+    margin-bottom: 12px;
 }
 
 /* ─── Section bands ─── */
 .section-band {
     position: relative;
-    padding: 96px 0;
+    padding: 64px 0;
     background: transparent;
+}
+
+@media (min-width: 768px) {
+    .section-band {
+        padding: 96px 0;
+    }
+}
+
+@media (min-width: 1280px) {
+    .section-band {
+        padding: 112px 0;
+    }
 }
 
 .section-band--elevated {
@@ -319,26 +413,47 @@ a {
 }
 
 .section-band__inner {
-    max-width: 1100px;
+    max-width: 1300px;
     margin: 0 auto;
-    padding: 0 var(--space-sm);
+    padding: 0 20px;
 }
 
-.section-band__inner--wide {
-    max-width: 1200px;
+@media (min-width: 768px) {
+    .section-band__inner {
+        padding: 0 24px;
+    }
+}
+
+/* ─── Tradespad Cards ─── */
+.tp-card {
+    border: 1px solid #1a1b1c;
+    border-radius: 16px;
+    padding: 24px;
+    background: transparent;
+    transition: border-color 0.18s ease, background-color 0.18s ease;
+}
+
+.tp-card:hover {
+    border-color: #2a2a2a;
+}
+
+a.tp-card {
+    display: block;
+    color: inherit;
+    text-decoration: none;
 }
 
 /* ─── Surfaces & UI ─── */
 .surface-card {
     background: var(--ld-surface);
     border: 1px solid var(--ld-border);
-    border-radius: 4px;
+    border-radius: 8px;
 }
 
 .panel {
     background: var(--ld-panel);
     border: 1px solid var(--ld-border);
-    border-radius: 4px;
+    border-radius: 8px;
     color: var(--ld-on-surface);
 }
 
@@ -362,24 +477,22 @@ a {
     font-size: 15px;
     font-weight: 400;
     line-height: 24px;
-    letter-spacing: -0.165px;
+    letter-spacing: -0.01em;
     border: 1px solid var(--ld-border);
-    border-radius: 4px;
+    border-radius: 8px;
     padding: 12px 14px;
 }
 
 .nav-link {
     font-family: 'Inter', sans-serif;
-    font-size: 12px;
+    font-size: 13.5px;
     font-weight: 500;
-    line-height: 16px;
-    letter-spacing: 0.02em;
-    color: var(--ld-muted);
-    transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+    color: #828282;
+    transition: color 0.15s ease;
 }
 
 .nav-link:hover {
-    color: var(--ld-on-surface);
+    color: #ffffff;
 }
 
 .link-accent {
@@ -392,7 +505,7 @@ a {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    color: var(--ld-muted);
+    color: #888888;
     font-size: 14px;
     font-weight: 500;
     line-height: 20px;
@@ -401,7 +514,7 @@ a {
 
 .premium-link::after {
     content: "→";
-    color: var(--ld-muted);
+    color: #888888;
     transition: transform 0.15s ease, color 0.15s ease;
 }
 
@@ -478,18 +591,6 @@ a {
     overflow: hidden;
 }
 
-.hero-floor {
-    pointer-events: none;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 45%;
-    background:
-        radial-gradient(ellipse 90% 60% at 50% 100%, rgba(255, 255, 255, 0.04), transparent 70%),
-        linear-gradient(180deg, transparent 0%, rgba(15, 16, 17, 0.6) 40%, rgba(15, 16, 17, 0.95) 100%);
-}
-
 .hero-stage__perspective {
     position: relative;
     perspective: 1200px;
@@ -509,12 +610,12 @@ a {
 }
 
 .mock-window {
-    box-shadow: none;
+    box-shadow: 0 12px 48px -16px rgba(0, 0, 0, 0.6);
 }
 
 .nav-scrolled {
     background: var(--ld-neutral);
-    border-bottom: 1px solid var(--ld-border);
+    border-bottom: 1px solid #1a1a1a;
 }
 
 .hero-badge {
@@ -525,7 +626,7 @@ a {
     font-weight: 500;
     line-height: 16px;
     letter-spacing: 0.02em;
-    color: var(--ld-muted);
+    color: #888888;
     border: 1px solid var(--ld-border);
     border-radius: 9999px;
     background: var(--ld-overlay);
@@ -544,6 +645,66 @@ a {
     box-shadow: none;
 }
 
+/* ─── Tradespad-style nav dropdown ─── */
+.tp-dropdown {
+    width: 380px;
+    border-radius: 14px;
+    border: 1px solid #1f2022;
+    background: #070707;
+    padding: 3.5px;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.55);
+}
+
+.tp-dropdown-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    border-radius: 9px;
+    padding: 11px 12px;
+    transition: background-color 0.15s ease;
+    cursor: pointer;
+}
+
+.tp-dropdown-item:hover {
+    background: #141414;
+}
+
+.tp-dropdown-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    border: 1px solid #1a1a1a;
+    background: #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.tp-dropdown-item:hover .tp-dropdown-icon {
+    border-color: #2a2a2a;
+    background: #2a2a2a;
+}
+
+.tp-dropdown-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: #ffffff;
+    margin-bottom: 2px;
+}
+
+.tp-dropdown-desc {
+    font-size: 12.5px;
+    color: #999999;
+    line-height: 1.4;
+    transition: color 0.15s ease;
+}
+
+.tp-dropdown-item:hover .tp-dropdown-desc {
+    color: #b6bbc5;
+}
+
 .features-tab {
     display: inline-flex;
     align-items: center;
@@ -551,7 +712,7 @@ a {
     font-size: 13px;
     font-weight: 500;
     line-height: 20px;
-    color: var(--ld-muted);
+    color: #888888;
     border: 1px solid transparent;
     border-radius: 9999px;
     background: transparent;
@@ -638,7 +799,7 @@ a {
     transform: none;
 }
 
-/* ─── Testimonial cards (Linear marketing) ─── */
+/* ─── Testimonial cards ─── */
 .testimonial-card {
     position: relative;
     display: flex;
@@ -686,7 +847,7 @@ a {
     color: rgba(10, 10, 10, 0.65);
 }
 
-/* ─── Changelog timeline (homepage) ─── */
+/* ─── Changelog ─── */
 .changelog-timeline {
     position: relative;
     padding-top: 24px;
@@ -715,11 +876,11 @@ a {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: var(--ld-muted);
+    background: #888888;
     border: 2px solid var(--ld-neutral);
 }
 
-/* ─── Mock UI primitives ─── */
+/* ─── Mock UI ─── */
 .mock-pill {
     display: inline-flex;
     align-items: center;
@@ -735,8 +896,8 @@ a {
 
 .mock-pill--active {
     color: var(--ld-on-surface);
-    border-color: rgba(113, 112, 255, 0.4);
-    background: rgba(113, 112, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.08);
 }
 
 .mock-priority-high { color: var(--ld-error); }
@@ -749,7 +910,7 @@ a {
     align-items: center;
     font-family: 'JetBrains Mono', ui-monospace, monospace;
     font-size: 12px;
-    color: var(--ld-muted);
+    color: #888888;
     padding: 6px 0;
     margin-right: 16px;
     border: none;
@@ -759,7 +920,7 @@ a {
 }
 
 .sub-feature-pill:hover {
-    color: var(--ld-tertiary);
+    color: #999999;
 }
 
 .sub-feature-pill--active {
@@ -770,7 +931,7 @@ a {
 .app-mockup {
     background: var(--ld-surface);
     border: 1px solid var(--ld-border);
-    border-radius: 4px;
+    border-radius: 8px;
     overflow: hidden;
     width: 100%;
 }
@@ -803,6 +964,159 @@ a {
 .anim-fade-up   { animation: fadeSlideUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both; }
 .anim-fade-right { animation: fadeSlideRight 0.6s cubic-bezier(0.22, 1, 0.36, 1) both; }
 
+/* ─── Tradespad Design Language ─── */
+
+/* Gradient canvas */
+.tp-canvas {
+    background: linear-gradient(180deg, #121212 0%, #090909 100%);
+}
+
+/* Tradespad-style framed app window */
+.tp-frame {
+    overflow: hidden;
+    border-radius: 12px;
+    border: 1px solid #272727;
+    background: #000000;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+}
+
+.tp-frame__bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border-bottom: 1px solid #121212;
+    background: #121212;
+}
+
+.tp-frame__dots {
+    display: flex;
+    gap: 6px;
+}
+
+.tp-frame__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 9999px;
+    background: #2a2b2e;
+}
+
+/* Platform logo strip */
+.tp-logos {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 32px 48px;
+}
+
+.tp-logo-chip {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: #888888;
+    opacity: 0.6;
+    transition: opacity 0.2s ease, color 0.2s ease;
+    letter-spacing: 0;
+}
+
+.tp-logo-chip:hover {
+    opacity: 1;
+    color: #ffffff;
+}
+
+/* Testimonial marquee */
+.tp-marquee {
+    position: relative;
+    overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent, black 6%, black 94%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, black 6%, black 94%, transparent);
+}
+
+.tp-marquee__track {
+    display: flex;
+    gap: 24px;
+    width: max-content;
+    animation: marquee 40s linear infinite;
+}
+
+.tp-marquee:hover .tp-marquee__track {
+    animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .tp-marquee__track {
+        animation: none;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+    }
+    .tp-marquee .tp-review-card {
+        flex: 0 0 340px;
+    }
+}
+
+/* Tradespad-style testimonial card */
+.tp-review-card {
+    flex: 0 0 380px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 220px;
+    border-radius: 16px;
+    border: 1px solid #1a1a1a;
+    background: linear-gradient(180deg, #121212 0%, #090909 100%);
+    padding: 28px;
+}
+
+.tp-review-card__quote {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 26px;
+    letter-spacing: -0.06em;
+    color: #ffffff;
+    font-style: normal;
+}
+
+.tp-review-card__name {
+    margin-top: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    color: #ffffff;
+}
+
+.tp-review-card__role {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #777777;
+}
+
+/* Section eyebrow / number */
+.tp-eyebrow {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: #9a9a9a;
+    margin-bottom: 8px;
+}
+
+/* Alternating feature section */
+.tp-feature-section {
+    padding: 64px 0;
+}
+
+@media (min-width: 1024px) {
+    .tp-feature-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 64px;
+        align-items: center;
+    }
+}
+
 /* ─── Prose (legal & docs content) ─── */
 .prose-legal {
     display: flex;
@@ -831,8 +1145,8 @@ a {
     font-size: 15px;
     font-weight: 400;
     line-height: 24px;
-    letter-spacing: -0.165px;
-    color: var(--ld-tertiary);
+    letter-spacing: -0.01em;
+    color: #999999;
 }
 
 .prose-legal p + p {
@@ -842,7 +1156,7 @@ a {
 .prose-legal ul {
     list-style: disc;
     padding-left: 20px;
-    color: var(--ld-tertiary);
+    color: #999999;
     display: flex;
     flex-direction: column;
     gap: 6px;
@@ -881,7 +1195,7 @@ a {
     font-size: 40px;
     font-weight: 510;
     line-height: 44px;
-    letter-spacing: -0.88px;
+    letter-spacing: -0.06em;
     color: var(--ld-secondary);
 }
 
@@ -900,8 +1214,8 @@ a {
 .prose-docs li {
     font-size: 15px;
     line-height: 24px;
-    letter-spacing: -0.165px;
-    color: var(--ld-tertiary);
+    letter-spacing: -0.01em;
+    color: #999999;
 }
 
 .prose-docs strong {
@@ -924,189 +1238,212 @@ a {
     padding-left: 20px;
 }
 
-/* ─── Resend design language ─── */
-
-/* Gradient canvas (applied to MarketingLayout) */
-.tp-canvas {
-    background: linear-gradient(180deg, #121212 0%, #090909 100%);
+/* ─── Marquee (tradespad style) ─── */
+@keyframes marquee {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
 }
-
-/* Framed app window (Tradespad style) */
-.tp-frame {
-    overflow: hidden;
-    border-radius: 12px;
-    border: 1px solid var(--ld-border-strong);
-    background: var(--ld-surface-deep);
-    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
-}
-.tp-frame__bar {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--ld-border-strong);
-    background: var(--ld-panel);
-}
-.tp-frame__dots {
-    display: flex;
-    gap: 6px;
-}
-.tp-frame__dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 9999px;
-    background: #2a2b2e;
-}
-.tp-frame__dot:nth-child(1) { background: var(--ld-accent-red); }
-.tp-frame__dot:nth-child(2) { background: var(--ld-accent-yellow); }
-.tp-frame__dot:nth-child(3) { background: var(--ld-accent-green); }
-
-/* Alternating feature section */
-.tp-feature-section {
-    padding: 64px 0;
-}
-@media (min-width: 1024px) {
-    .tp-feature-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 64px;
-        align-items: center;
-    }
-}
-
-/* Rounded card — Resend */
-.tp-card {
-    border: 1px solid var(--ld-border-strong);
-    border-radius: 12px;
-    background: var(--ld-surface);
-    padding: 32px;
-    transition: border-color 0.18s ease, background-color 0.18s ease;
-}
-.tp-card:hover {
-    border-color: var(--ld-border-strong);
-}
-a.tp-card {
-    display: block;
-    color: inherit;
-    text-decoration: none;
-}
-
-/* Platform logo strip */
-.tp-logos {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 32px 48px;
-}
-.tp-logo-chip {
-    font-family: 'Inter', sans-serif;
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--ld-muted);
-    opacity: 0.6;
-    transition: opacity 0.2s ease, color 0.2s ease;
-    letter-spacing: 0;
-}
-.tp-logo-chip:hover {
-    opacity: 1;
-    color: var(--ld-on-surface);
-}
-
-/* Testimonial marquee */
-.tp-marquee {
-    position: relative;
-    overflow: hidden;
-    -webkit-mask-image: linear-gradient(90deg, transparent, black 6%, black 94%, transparent);
-    mask-image: linear-gradient(90deg, transparent, black 6%, black 94%, transparent);
-}
-.tp-marquee__track {
-    display: flex;
-    gap: 24px;
-    width: max-content;
-    animation: marquee 40s linear infinite;
-}
-.tp-marquee:hover .tp-marquee__track {
-    animation-play-state: paused;
-}
-@media (prefers-reduced-motion: reduce) {
-    .tp-marquee__track {
-        animation: none;
-        flex-wrap: wrap;
-        justify-content: center;
-        width: 100%;
-    }
-    .tp-marquee .tp-review-card {
-        flex: 0 0 340px;
-    }
-}
-
-/* Resend-style testimonial card (dark) */
-.tp-review-card {
-    flex: 0 0 380px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: 220px;
-    border-radius: 16px;
-    border: 1px solid var(--ld-border);
-    background: var(--ld-surface);
-    padding: 28px;
-}
-.tp-review-card__quote {
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 26px;
-    letter-spacing: 0;
-    color: var(--ld-on-surface);
-    font-style: normal;
-}
-.tp-review-card__name {
-    margin-top: 20px;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 20px;
-    color: var(--ld-on-surface);
-}
-.tp-review-card__role {
-    font-size: 13px;
-    font-weight: 400;
-    line-height: 20px;
-    color: var(--ld-muted);
-}
-
-/* Section eyebrow / number */
-.tp-eyebrow {
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 12px;
-    font-weight: 400;
-    color: var(--ld-muted);
-    margin-bottom: 12px;
-}
-
-/* Override mock-window shadow for Resend style */
-.mock-window {
-    box-shadow: 0 12px 48px -16px rgba(0, 0, 0, 0.6);
-}
-
-/* CTA section — Resend band spacing 128px */
-.tp-cta-glow {
-    position: absolute;
-    top: -20%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 600px;
-    height: 100%;
-    background: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(0,117,255,0.34), transparent 70%);
-    pointer-events: none;
-    z-index: 0;
-}
-
 
 /* ─── Mock syntax tokens ─── */
 .tok-keyword { color: #c792ea; }
 .tok-plain { color: var(--ld-tertiary); }
 .tok-string { color: #c3e88d; }
-.tok-comment { color: var(--ld-muted); }
+.tok-comment { color: #888888; }
 
+/* ─── Tradespad toggle ─── */
+.tp-toggle {
+    display: inline-flex;
+    align-items: center;
+    height: 40px;
+    width: 176px;
+    border-radius: 9999px;
+    border: 1px solid #181818;
+    background: #121212;
+    padding: 3px;
+    position: relative;
+}
+
+@media (min-width: 768px) {
+    .tp-toggle {
+        height: 44px;
+        width: 190px;
+    }
+}
+
+.tp-toggle__pill {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    height: calc(100% - 6px);
+    width: calc(50% - 3px);
+    border-radius: 9999px;
+    border: 1px solid #272727;
+    background: #212121;
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.tp-toggle__pill--right {
+    transform: translateX(100%);
+}
+
+.tp-toggle__btn {
+    position: relative;
+    z-index: 1;
+    width: 50%;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.15s ease;
+    border: none;
+    background: none;
+    padding: 0;
+    color: #777777;
+}
+
+@media (min-width: 768px) {
+    .tp-toggle__btn {
+        font-size: 15px;
+    }
+}
+
+.tp-toggle__btn:hover {
+    color: #cfcfcf;
+}
+
+.tp-toggle__btn--active {
+    color: #ffffff;
+}
+
+/* Tradespad Tabs (Calendar tabs) */
+.tp-tab {
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.15s ease;
+    border: none;
+    background: none;
+    padding: 0;
+    color: #616161;
+}
+
+@media (min-width: 768px) {
+    .tp-tab {
+        font-size: 14px;
+    }
+}
+
+.tp-tab:hover {
+    color: #cfcfcf;
+}
+
+.tp-tab--active {
+    color: #ffffff;
+}
+
+/* Tradespad dividers */
+.tp-divider {
+    height: 1px;
+    width: 100%;
+    background: #1f1f1f;
+}
+
+/* Tradespad footer columns */
+.tp-footer-heading {
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    color: #ffffff;
+    margin-bottom: 12px;
+}
+
+@media (min-width: 768px) {
+    .tp-footer-heading {
+        font-size: 14px;
+    }
+}
+
+.tp-footer-link {
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    color: #888888;
+    transition: color 0.15s ease;
+}
+
+@media (min-width: 768px) {
+    .tp-footer-link {
+        font-size: 14px;
+    }
+}
+
+.tp-footer-link:hover {
+    color: #ffffff;
+}
+
+/* Tradespad social icon */
+.tp-social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 9999px;
+    border: 1px solid #1a1a1a;
+    background: transparent;
+    color: #888888;
+    transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.tp-social-icon:hover {
+    color: #ffffff;
+    border-color: #ffffff;
+}
+
+/* Tradespad hero skeleton */
+.tp-hero-skeleton {
+    padding-top: 144px;
+    padding-bottom: 32px;
+}
+
+@media (min-width: 768px) {
+    .tp-hero-skeleton {
+        padding-top: 160px;
+        padding-bottom: 48px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .tp-hero-skeleton {
+        padding-top: 176px;
+        padding-bottom: 56px;
+    }
+}
+
+/* Scroll reveal */
+.tp-reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.tp-reveal--visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Status indicator */
+.tp-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #888888;
+}
+
+.tp-status__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 9999px;
+    background: var(--ld-success);
+}

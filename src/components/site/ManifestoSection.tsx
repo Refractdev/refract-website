@@ -4,33 +4,33 @@ const ManifestoSection = () => {
   return (
     <SectionBand>
       <div className="mx-auto max-w-[720px]">
-        <div className="space-y-8">
-          <div className="border-t border-ld-border pt-6">
-            <p className="text-body-lg text-ld-on-surface">
+        <div className="divide-y divide-[#1f1f1f]">
+          <div className="py-6 first:pt-0">
+            <p className="text-lg text-white">
               You know this pattern.
             </p>
           </div>
 
-          <div className="border-t border-ld-border pt-6">
-            <p className="text-body text-ld-tertiary">
+          <div className="py-6">
+            <p className="text-tp-body-sm">
               Month 1: Features ship in hours.
             </p>
           </div>
 
-          <div className="border-t border-ld-border pt-6">
-            <p className="text-body text-ld-tertiary">
+          <div className="py-6">
+            <p className="text-tp-body-sm">
               Month 3: Every change breaks something.
             </p>
           </div>
 
-          <div className="border-t border-ld-border pt-6">
-            <p className="text-body text-ld-tertiary">
+          <div className="py-6">
+            <p className="text-tp-body-sm">
               Month 6: The team is slower than before AI. Nobody knows why.
             </p>
           </div>
 
-          <div className="border-t border-ld-border pt-6">
-            <p className="text-body text-ld-tertiary">
+          <div className="py-6">
+            <p className="text-tp-body-sm text-white">
               This is the vibe coding hangover.
             </p>
           </div>

@@ -1,21 +1,54 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown, Code2, ShieldCheck, LineChart, Terminal, Building2 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { Logo } from "../Logo";
 
 const APP_URL = "https://refract-dev.vercel.app";
 
-const flatNavLinks = [
+const navLinks = [
+  { label: "Home", href: "/" },
+  {
+    label: "Features",
+    dropdown: true,
+    items: [
+      {
+        icon: Code2,
+        title: "Pipeline",
+        desc: "Detect, propose, approve, execute, test, document, deliver",
+      },
+      {
+        icon: ShieldCheck,
+        title: "Security",
+        desc: "Scan secrets, detect injections, audit dependencies",
+      },
+      {
+        icon: LineChart,
+        title: "Monitor",
+        desc: "Real-time feed of issues per repo, author, AI tool",
+      },
+      {
+        icon: Terminal,
+        title: "MCP + CLI",
+        desc: "Native MCP for Cursor, Windsurf, Claude Desktop",
+      },
+      {
+        icon: Building2,
+        title: "Govern",
+        desc: "Policies as code, org-wide enforcement",
+      },
+    ],
+  },
   { label: "Pricing", href: "/pricing" },
-  { label: "Contact", href: "/contact" },
   { label: "Docs", href: "/docs" },
 ];
 
 const MarketingNavbar = () => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [featuresOpen, setFeaturesOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -32,32 +65,94 @@ const MarketingNavbar = () => {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [open]);
 
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setFeaturesOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   const closeMobile = () => setOpen(false);
 
   return (
     <header
       className={`fixed top-0 left-0 z-50 w-full transition-[background,border-color] duration-300 ${
-        scrolled || open ? "nav-scrolled" : "border-b border-transparent bg-transparent"
+        scrolled || open
+          ? "bg-black border-b border-[#1a1a1a]"
+          : "bg-black border-b border-transparent"
       }`}
     >
-      <div className="mx-auto flex h-[52px] max-w-[1200px] items-center justify-between px-6">
+      <div className="mx-auto flex h-[60px] max-w-[1300px] items-center justify-between px-5 md:px-6">
         <Link
           to="/"
-          className="rounded-sm outline-none transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ld-primary"
+          className="rounded-sm outline-none transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ld-primary shrink-0"
         >
-          <Logo height={16} variant="icon" />
+          <Logo height={18} variant="icon" />
         </Link>
 
-        <nav className="hidden items-center gap-6 lg:flex">
-          {flatNavLinks.map((link) => {
+        <nav className="hidden items-center gap-5 lg:flex">
+          {navLinks.map((link) => {
+            if (link.dropdown) {
+              return (
+                <div ref={dropdownRef} key={link.label} className="relative">
+                  <button
+                    onClick={() => setFeaturesOpen(!featuresOpen)}
+                    className="nav-link inline-flex items-center gap-1"
+                  >
+                    {link.label}
+                    <ChevronDown
+                      className={`h-3 w-3 transition-transform duration-200 ${
+                        featuresOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+                  <AnimatePresence>
+                    {featuresOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.95, y: -4 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.95, y: -4 }}
+                        transition={{ duration: 0.15, ease: "easeOut" }}
+                        className="absolute top-full left-0 mt-2 tp-dropdown"
+                      >
+                        {link.items.map((item) => {
+                          const Icon = item.icon;
+                          return (
+                            <Link
+                              key={item.title}
+                              to={`/product#${item.title.toLowerCase()}`}
+                              onClick={() => setFeaturesOpen(false)}
+                              className="tp-dropdown-item"
+                            >
+                              <div className="tp-dropdown-icon">
+                                <Icon className="h-4 w-4 text-white" />
+                              </div>
+                              <div>
+                                <p className="tp-dropdown-title">{item.title}</p>
+                                <p className="tp-dropdown-desc">{item.desc}</p>
+                              </div>
+                            </Link>
+                          );
+                        })}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            }
+
             const active =
               pathname === link.href ||
               (link.href !== "/" && pathname.startsWith(link.href));
+
             return (
               <Link
                 key={link.label}
-                to={link.href}
-                className={`nav-link ${active ? "text-ld-on-surface" : ""}`}
+                to={link.href!}
+                className={`nav-link ${active ? "text-white" : ""}`}
               >
                 {link.label}
               </Link>
@@ -65,12 +160,9 @@ const MarketingNavbar = () => {
           })}
         </nav>
 
-        <div className="flex items-center gap-3 lg:gap-4">
-          <Button variant="tertiary" size="sm" className="hidden lg:inline-flex" asChild>
-            <a href={APP_URL}>Open app</a>
-          </Button>
-          <Button variant="tertiary" size="sm" className="hidden lg:inline-flex" asChild>
-            <a href="/login">Log in</a>
+        <div className="flex items-center gap-2 md:gap-3">
+          <Button variant="secondary" size="sm" className="hidden lg:inline-flex" asChild>
+            <a href={APP_URL}>Log in</a>
           </Button>
           <Button size="sm" className="hidden lg:inline-flex" asChild>
             <a href={APP_URL}>Sign up</a>
@@ -78,7 +170,7 @@ const MarketingNavbar = () => {
 
           <button
             onClick={() => setOpen(!open)}
-            className="flex size-9 items-center justify-center text-ld-on-surface transition-colors hover:text-ld-secondary lg:hidden"
+            className="flex size-9 items-center justify-center text-white transition-colors hover:text-white/70 lg:hidden"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
           >
@@ -95,27 +187,42 @@ const MarketingNavbar = () => {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="overflow-hidden border-t border-ld-border bg-ld-surface lg:hidden"
+            className="overflow-hidden border-t border-[#1a1a1a] bg-black lg:hidden"
           >
-            <div className="mx-auto flex max-w-[1200px] flex-col gap-1 px-6 py-5">
-              {flatNavLinks.map((link) => (
-                <Link
-                  key={link.label}
-                  to={link.href}
-                  onClick={closeMobile}
-                  className="rounded-sm px-3 py-2.5 text-label-md text-ld-tertiary transition-colors hover:text-ld-on-surface"
-                >
-                  {link.label}
-                </Link>
-              ))}
-              <hr className="my-3 border-ld-border" />
-              <Button variant="tertiary" size="sm" className="self-start px-3" asChild>
+            <div className="mx-auto flex max-w-[1300px] flex-col gap-1 px-5 py-5 md:px-6">
+              {navLinks.map((link) => {
+                if (link.dropdown) {
+                  return link.items.map((item) => {
+                    const Icon = item.icon;
+                    return (
+                      <Link
+                        key={item.title}
+                        to={`/product#${item.title.toLowerCase()}`}
+                        onClick={closeMobile}
+                        className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-[#828282] transition-colors hover:text-white"
+                      >
+                        <div className="flex h-8 w-8 items-center justify-center rounded-[6px] border border-[#1a1a1a] bg-[#1a1a1a]">
+                          <Icon className="h-4 w-4 text-white" />
+                        </div>
+                        {item.title}
+                      </Link>
+                    );
+                  });
+                }
+                return (
+                  <Link
+                    key={link.label}
+                    to={link.href!}
+                    onClick={closeMobile}
+                    className="rounded-lg px-3 py-2.5 text-sm font-medium text-[#828282] transition-colors hover:text-white"
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
+              <hr className="my-3 border-[#1a1a1a]" />
+              <Button variant="secondary" size="sm" className="self-start px-3" asChild>
                 <a href={APP_URL} onClick={closeMobile}>
-                  Open app
-                </a>
-              </Button>
-              <Button variant="tertiary" size="sm" className="self-start px-3" asChild>
-                <a href="/login" onClick={closeMobile}>
                   Log in
                 </a>
               </Button>

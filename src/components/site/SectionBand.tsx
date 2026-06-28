@@ -20,7 +20,7 @@ const SectionBand = ({
   const widthClass = narrow
     ? "max-w-[900px]"
     : wide
-      ? "section-band__inner--wide"
+      ? "max-w-[1300px]"
       : "";
 
   return (

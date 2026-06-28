@@ -26,19 +26,19 @@ const ProofSection = () => {
     <SectionBand>
       <div className="mx-auto max-w-[1100px]">
         <p className="tp-section-label">Demo</p>
-        <h2 className="text-section-title text-balance max-w-[640px]">
+        <h2 className="text-tp-heading text-balance max-w-[640px] mt-1">
           See Refract in action.
         </h2>
 
-        <div className="mt-12 grid gap-8 md:grid-cols-3">
+        <div className="mt-12 grid gap-6 md:grid-cols-3">
           {screenshots.map((s) => (
             <div key={s.title} className="tp-card">
               <div className="mb-4">
                 <span className="tp-badge">{s.badge}</span>
               </div>
               <p className="tp-eyebrow">{s.label}</p>
-              <h3 className="text-headline-md mt-1">{s.title}</h3>
-              <p className="text-body-sm mt-2 text-ld-tertiary">{s.desc}</p>
+              <h3 className="text-xl font-medium text-white mt-1">{s.title}</h3>
+              <p className="text-body-sm mt-2 text-[#999999]">{s.desc}</p>
             </div>
           ))}
         </div>

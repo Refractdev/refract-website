@@ -10,12 +10,12 @@ export default {
       center: true,
       padding: "2rem",
       screens: {
-        "2xl": "1400px",
+        "2xl": "1300px",
       },
     },
     extend: {
       colors: {
-        // ── Linear Dark canonical ──
+        // ── Tradespad palette ──
         ld: {
           primary:        "var(--ld-primary)",
           secondary:      "var(--ld-secondary)",
@@ -37,7 +37,7 @@ export default {
         primary: {
           DEFAULT:    "var(--ld-primary)",
           on:         "var(--ld-neutral)",
-          light:      "var(--ld-button-hover)",
+          light:      "var(--ld-surface-light)",
           foreground: "var(--ld-neutral)",
         },
         // ── Text (compat) ──
@@ -67,12 +67,8 @@ export default {
         accent: {
           DEFAULT: "var(--color-accent)",
           hover:   "var(--color-accent-hover)",
-          indigo:  "var(--color-accent)",
-          orange:  "var(--color-accent-orange)",
-          yellow:  "var(--color-accent-yellow)",
-          blue:    "var(--color-accent-blue)",
-          green:   "var(--color-accent-green)",
-          red:     "var(--color-accent-red)",
+          green:   "var(--ld-success)",
+          red:     "var(--ld-error)",
         },
         // ── shadcn overrides ──
         background: "var(--ld-neutral)",
@@ -102,9 +98,9 @@ export default {
         },
       },
       fontFamily: {
-        sans:    ["'Inter'", "system-ui", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
-        body:    ["'Inter'", "system-ui", "sans-serif"],
-        display: ["'Inter'", "system-ui", "sans-serif"],
+        sans:    ["'Geist'", "'Inter'", "system-ui", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
+        body:    ["'Geist'", "'Inter'", "system-ui", "sans-serif"],
+        display: ["'Geist'", "'Inter'", "system-ui", "sans-serif"],
         mono:    ["'JetBrains Mono'", "ui-monospace", "monospace"],
         serif:   ["'Inter'", "system-ui", "sans-serif"],
       },
@@ -120,8 +116,13 @@ export default {
         "label-md":         ["14px",  { lineHeight: "20px",   letterSpacing: "0",         fontWeight: "500" }],
         "label-sm":         ["12px",  { lineHeight: "16px",   letterSpacing: "0.02em",    fontWeight: "500" }],
         "caption":          ["12px",  { lineHeight: "16px",   letterSpacing: "0",         fontWeight: "400" }],
+        // Tradespad scale
+        "tp-hero":          ["clamp(1.5rem,7vw,1.9375rem)", { lineHeight: "1.08", letterSpacing: "-0.06em", fontWeight: "500" }],
+        "tp-heading":       ["clamp(1.5rem,7vw,1.9375rem)", { lineHeight: "1.08", letterSpacing: "-0.06em", fontWeight: "500" }],
+        "tp-label":         ["14px",  { letterSpacing: "-0.01em", fontWeight: "500" }],
+        "tp-desc":          ["clamp(0.8125rem,2.85vw,0.9375rem)", { lineHeight: "1.375", letterSpacing: "-0.01em", fontWeight: "400" }],
         // legacy aliases
-        "display-xxl": ["64px",  { lineHeight: "1.05", letterSpacing: "-0.03em", fontWeight: "510" }],
+        "display-xxl": ["64px",  { lineHeight: "1.05", letterSpacing: "-0.06em", fontWeight: "510" }],
         "display-xl":  ["56px",  { lineHeight: "61.6px", letterSpacing: "-1.232px", fontWeight: "510" }],
         "display-lg":  ["40px",  { lineHeight: "44px", letterSpacing: "-0.88px", fontWeight: "510" }],
         "display-sm":  ["28px",  { lineHeight: "1.2",  letterSpacing: "-0.02em", fontWeight: "510" }],
@@ -136,23 +137,17 @@ export default {
         none: "0px",
         sm:   "4px",
         md:   "8px",
-        lg:   "12px",
+        lg:   "8px",
         xl:   "16px",
         full: "9999px",
-        // legacy aliases
-        xs:   "4px",
-        base: "4px",
-        pill: "9999px",
         "2xl": "16px",
       },
       spacing: {
-        // Linear Dark rhythm
         xs:      "6px",
         sm:      "16px",
         md:      "24px",
         lg:      "32px",
         xl:      "64px",
-        // legacy / component aliases
         xxs:     "2px",
         xxl:     "32px",
         xxxl:    "48px",
@@ -191,21 +186,21 @@ export default {
           "0%":   { opacity: "0", transform: "translateY(22px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
-        "pulse-dot": {
-          "0%, 100%": { transform: "scale(1)", opacity: "0.6" },
-          "50%":      { transform: "scale(2.2)", opacity: "0" },
-        },
         marquee: {
           "0%":   { transform: "translateX(0)" },
           "100%": { transform: "translateX(-50%)" },
+        },
+        "scroll-reveal": {
+          "0%":   { opacity: "0", transform: "translateY(24px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.25s cubic-bezier(0.22, 1, 0.36, 1)",
         "accordion-up":   "accordion-up 0.25s cubic-bezier(0.22, 1, 0.36, 1)",
         "fade-up":        "fade-up 0.65s cubic-bezier(0.22, 1, 0.36, 1) both",
-        "pulse-dot":      "pulse-dot 2.2s ease-in-out infinite",
-        marquee:          "marquee 30s linear infinite",
+        marquee:          "marquee 40s linear infinite",
+        "scroll-reveal":  "scroll-reveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards",
       },
     },
   },

@@ -10,18 +10,24 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "rounded-md bg-[#fcfdff] text-black hover:bg-[#f1f7fe] text-[14px] font-medium px-4 h-9",
+          "rounded-lg bg-white text-black text-[13px] md:text-sm font-semibold px-3 py-1.5 md:px-3.5 md:py-2 hover:bg-gray-200 active:bg-gray-300",
         secondary:
-          "rounded-md bg-[#101012] text-[#fcfdff] text-[14px] font-medium border border-[rgba(255,255,255,0.14)] hover:bg-white/5 px-4 h-9",
+          "rounded-lg bg-[#1a1a1a] text-white text-[13px] md:text-sm font-semibold px-3 py-1.5 md:px-3.5 md:py-2 hover:bg-[#141414] hover:text-[#d4d4d4] active:bg-[#101010]",
         tertiary:
           "rounded-none bg-transparent p-0 h-auto text-body-md text-ld-muted hover:text-ld-on-surface",
         ghost:
           "rounded-none bg-transparent p-0 h-auto text-body-md text-ld-muted hover:text-ld-on-surface",
         destructive:
-          "rounded-md bg-ld-error text-[#fcfdff] text-[14px] font-medium hover:bg-ld-error/90 px-4 h-9",
+          "rounded-lg bg-ld-error text-white text-[14px] font-medium hover:bg-ld-error/90 px-4 h-9",
         outline:
-          "rounded-md border border-[rgba(255,255,255,0.14)] bg-transparent text-[#fcfdff] text-[14px] font-medium hover:bg-white/5 px-4 h-9",
+          "rounded-lg border border-[#2a2a2a] bg-transparent text-white text-[14px] font-medium hover:bg-white/5 px-4 h-9",
         link: "rounded-none p-0 h-auto text-ld-primary underline-offset-4 hover:underline",
+        pricing:
+          "rounded-full bg-[#121212] border border-[#2a2a2a] text-white text-[13px] md:text-[13.5px] tracking-[-0.02em] font-semibold px-2.5 py-1.5 hover:bg-[#2a2a2a] active:bg-[#232323] transition-colors",
+        pricingPrimary:
+          "rounded-full bg-white text-black text-[13px] md:text-sm font-semibold px-3 py-1.5 md:px-3.5 md:py-2 w-full hover:bg-gray-200 active:bg-gray-300",
+        pricingCta:
+          "rounded-full bg-[#1a1a1a] text-white font-medium py-2.5 w-full hover:bg-[#141414] active:bg-[#0a0a0a] transition-colors duration-300",
       },
       size: {
         default: "",
