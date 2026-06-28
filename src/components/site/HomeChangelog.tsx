@@ -30,23 +30,21 @@ const entries = [
 
 const HomeChangelog = () => {
   return (
-    <SectionBand className="!pt-28">
+    <SectionBand>
       <h2 className="text-section-title mb-12">Changelog</h2>
 
-      <div className="changelog-timeline">
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {entries.map((entry) => (
-            <Link
-              key={entry.title}
-              to="/changelog"
-              className="changelog-entry group block transition-opacity hover:opacity-90"
-            >
-              <h3 className="text-headline-sm mb-2 group-hover:text-ld-on-surface">{entry.title}</h3>
-              <p className="text-body-sm text-ld-tertiary">{entry.description}</p>
-              <time className="text-mono-label mt-4 block text-[11px]">{entry.date}</time>
-            </Link>
-          ))}
-        </div>
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {entries.map((entry) => (
+          <Link
+            key={entry.title}
+            to="/changelog"
+            className="tp-card group"
+          >
+            <h3 className="text-headline-sm mb-2 group-hover:text-ld-on-surface">{entry.title}</h3>
+            <p className="text-body-sm text-ld-tertiary">{entry.description}</p>
+            <time className="text-mono-label mt-4 block text-[11px]">{entry.date}</time>
+          </Link>
+        ))}
       </div>
 
       <Link

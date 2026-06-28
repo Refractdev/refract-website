@@ -3,23 +3,41 @@
 @tailwind utilities;
 
 :root {
-    /* ── Linear Dark canonical tokens ── */
-    --ld-primary:         #7170ff;
-    --ld-secondary:       #f7f8f8;
-    --ld-tertiary:        #a0a4ad;
-    --ld-neutral:         #08090a;
-    --ld-surface:         #0f1011;
-    --ld-on-surface:      #f7f8f8;
-    --ld-muted:           #858b95;
-    --ld-border:          #ffffff0d;
-    --ld-border-strong:   #ffffff1a;
-    --ld-overlay:         #141516;
-    --ld-panel:           #111214;
-    --ld-chip:            #1b1c1d;
-    --ld-success:         #2ecc71;
-    --ld-warning:         #f5c400;
-    --ld-error:           #ff5d5d;
-    --ld-button-hover:    #ddddde;
+    /* ── Resend Dark canonical tokens (fonts: Inter, JetBrains Mono, Geist) ── */
+    --ld-primary:         #fcfdff;
+    --ld-primary-on:      #000000;
+    --ld-secondary:       #fcfdff;
+    --ld-tertiary:        rgba(252,253,255,0.86);
+    --ld-charcoal:        rgba(252,253,255,0.7);
+    --ld-neutral:         #000000;
+    --ld-surface:         #0a0a0c;
+    --ld-on-surface:      #fcfdff;
+    --ld-muted:           #a1a4a5;
+    --ld-ash:             #888e90;
+    --ld-stone:           #464a4d;
+    --ld-border:          rgba(255,255,255,0.06);
+    --ld-border-strong:   rgba(255,255,255,0.14);
+    --ld-divider-soft:    rgba(255,255,255,0.04);
+    --ld-overlay:         #101012;
+    --ld-panel:           #0a0a0c;
+    --ld-surface-deep:    #06060a;
+    --ld-surface-elevated:#101012;
+    --ld-chip:            rgba(255,255,255,0.08);
+    --ld-surface-light:   #f1f7fe;
+    --ld-success:         #11ff99;
+    --ld-warning:         #ffc53d;
+    --ld-error:           #ff2047;
+    --ld-accent-orange:       #ff801f;
+    --ld-accent-orange-glow:  rgba(255,89,0,0.22);
+    --ld-accent-blue:         #3b9eff;
+    --ld-accent-blue-glow:    rgba(0,117,255,0.34);
+    --ld-accent-green:        #11ff99;
+    --ld-accent-green-glow:   rgba(34,255,153,0.18);
+    --ld-accent-red:          #ff2047;
+    --ld-accent-red-glow:     rgba(255,32,71,0.34);
+    --ld-accent-yellow:       #ffc53d;
+    --ld-link:                #3b9eff;
+    --ld-button-hover:    #f1f7fe;
 
     /* ── Canvas & Surface (compat aliases) ── */
     --color-canvas:           var(--ld-neutral);
@@ -146,17 +164,17 @@ a {
 
 /* ─── Typography (Linear Dark) ─── */
 .text-hero {
-    font-size: clamp(40px, 5vw, 72px);
-    font-weight: 510;
-    line-height: 1.1;
-    letter-spacing: -0.022em;
+    font-size: clamp(32px, 4vw, 56px);
+    font-weight: 500;
+    line-height: 1.0;
+    letter-spacing: -0.96px;
     color: var(--ld-secondary);
 }
 
 @media (min-width: 1024px) {
     .text-hero {
-        letter-spacing: -1.232px;
-        line-height: 61.6px;
+        letter-spacing: -0.96px;
+        line-height: 1.0;
     }
 }
 
@@ -169,10 +187,10 @@ a {
 }
 
 .text-section-title {
-    font-size: clamp(32px, 4vw, 40px);
-    font-weight: 510;
-    line-height: 1.1;
-    letter-spacing: -0.022em;
+    font-size: clamp(28px, 3.5vw, 40px);
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.4px;
     color: var(--ld-secondary);
 }
 
@@ -186,17 +204,17 @@ a {
 
 .text-headline-md {
     font-size: 20px;
-    font-weight: 510;
-    line-height: 26.6px;
-    letter-spacing: -0.24px;
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: -0.3px;
     color: var(--ld-secondary);
 }
 
 .text-headline-sm {
-    font-size: 16px;
-    font-weight: 510;
-    line-height: 24px;
-    letter-spacing: 0;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: -0.2px;
     color: var(--ld-secondary);
 }
 
@@ -209,9 +227,9 @@ a {
 }
 
 .text-body-lg {
-    font-size: 17px;
+    font-size: 18px;
     font-weight: 400;
-    line-height: 28px;
+    line-height: 1.5;
     letter-spacing: 0;
     color: var(--ld-tertiary);
 }
@@ -253,6 +271,29 @@ a {
     margin-bottom: 12px;
 }
 
+/* Resend-style section label */
+.tp-section-label {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.35px;
+    color: var(--ld-charcoal);
+    margin-bottom: 12px;
+}
+
+/* Resend-style badge pill */
+.tp-badge {
+    display: inline-block;
+    background: var(--ld-surface-elevated);
+    color: var(--ld-tertiary);
+    border-radius: 9999px;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.35px;
+}
+
 .section-number {
     font-family: 'JetBrains Mono', ui-monospace, monospace;
     font-size: 12px;
@@ -269,12 +310,12 @@ a {
 /* ─── Section bands ─── */
 .section-band {
     position: relative;
-    padding: 80px 0;
-    background: var(--ld-neutral);
+    padding: 96px 0;
+    background: transparent;
 }
 
 .section-band--elevated {
-    background: var(--ld-neutral);
+    background: transparent;
 }
 
 .section-band__inner {
@@ -472,7 +513,7 @@ a {
 }
 
 .nav-scrolled {
-    background: var(--ld-surface);
+    background: var(--ld-neutral);
     border-bottom: 1px solid var(--ld-border);
 }
 
@@ -883,8 +924,189 @@ a {
     padding-left: 20px;
 }
 
+/* ─── Resend design language ─── */
+
+/* Gradient canvas (applied to MarketingLayout) */
+.tp-canvas {
+    background: linear-gradient(180deg, #121212 0%, #090909 100%);
+}
+
+/* Framed app window (Tradespad style) */
+.tp-frame {
+    overflow: hidden;
+    border-radius: 12px;
+    border: 1px solid var(--ld-border-strong);
+    background: var(--ld-surface-deep);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+}
+.tp-frame__bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--ld-border-strong);
+    background: var(--ld-panel);
+}
+.tp-frame__dots {
+    display: flex;
+    gap: 6px;
+}
+.tp-frame__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 9999px;
+    background: #2a2b2e;
+}
+.tp-frame__dot:nth-child(1) { background: var(--ld-accent-red); }
+.tp-frame__dot:nth-child(2) { background: var(--ld-accent-yellow); }
+.tp-frame__dot:nth-child(3) { background: var(--ld-accent-green); }
+
+/* Alternating feature section */
+.tp-feature-section {
+    padding: 64px 0;
+}
+@media (min-width: 1024px) {
+    .tp-feature-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 64px;
+        align-items: center;
+    }
+}
+
+/* Rounded card — Resend */
+.tp-card {
+    border: 1px solid var(--ld-border-strong);
+    border-radius: 12px;
+    background: var(--ld-surface);
+    padding: 32px;
+    transition: border-color 0.18s ease, background-color 0.18s ease;
+}
+.tp-card:hover {
+    border-color: var(--ld-border-strong);
+}
+a.tp-card {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Platform logo strip */
+.tp-logos {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 32px 48px;
+}
+.tp-logo-chip {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ld-muted);
+    opacity: 0.6;
+    transition: opacity 0.2s ease, color 0.2s ease;
+    letter-spacing: 0;
+}
+.tp-logo-chip:hover {
+    opacity: 1;
+    color: var(--ld-on-surface);
+}
+
+/* Testimonial marquee */
+.tp-marquee {
+    position: relative;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, black 6%, black 94%, transparent);
+    mask-image: linear-gradient(90deg, transparent, black 6%, black 94%, transparent);
+}
+.tp-marquee__track {
+    display: flex;
+    gap: 24px;
+    width: max-content;
+    animation: marquee 40s linear infinite;
+}
+.tp-marquee:hover .tp-marquee__track {
+    animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+    .tp-marquee__track {
+        animation: none;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+    }
+    .tp-marquee .tp-review-card {
+        flex: 0 0 340px;
+    }
+}
+
+/* Resend-style testimonial card (dark) */
+.tp-review-card {
+    flex: 0 0 380px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 220px;
+    border-radius: 16px;
+    border: 1px solid var(--ld-border);
+    background: var(--ld-surface);
+    padding: 28px;
+}
+.tp-review-card__quote {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 26px;
+    letter-spacing: 0;
+    color: var(--ld-on-surface);
+    font-style: normal;
+}
+.tp-review-card__name {
+    margin-top: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    color: var(--ld-on-surface);
+}
+.tp-review-card__role {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 20px;
+    color: var(--ld-muted);
+}
+
+/* Section eyebrow / number */
+.tp-eyebrow {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--ld-muted);
+    margin-bottom: 12px;
+}
+
+/* Override mock-window shadow for Resend style */
+.mock-window {
+    box-shadow: 0 12px 48px -16px rgba(0, 0, 0, 0.6);
+}
+
+/* CTA section — Resend band spacing 128px */
+.tp-cta-glow {
+    position: absolute;
+    top: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 600px;
+    height: 100%;
+    background: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(0,117,255,0.34), transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+
 /* ─── Mock syntax tokens ─── */
 .tok-keyword { color: #c792ea; }
 .tok-plain { color: var(--ld-tertiary); }
 .tok-string { color: #c3e88d; }
 .tok-comment { color: var(--ld-muted); }
+

@@ -1,17 +1,14 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { Logo } from "../Logo";
-import NavMegaMenu, { productMegaMenu, resourcesMegaMenu } from "./NavMegaMenu";
 
 const APP_URL = "https://refract-dev.vercel.app";
 
 const flatNavLinks = [
-  { label: "Customers", href: "/about" },
   { label: "Pricing", href: "/pricing" },
-  { label: "Now", href: "/changelog" },
   { label: "Contact", href: "/contact" },
   { label: "Docs", href: "/docs" },
 ];
@@ -19,8 +16,6 @@ const flatNavLinks = [
 const MarketingNavbar = () => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [mobileProductOpen, setMobileProductOpen] = useState(false);
-  const [mobileResourcesOpen, setMobileResourcesOpen] = useState(false);
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -28,13 +23,6 @@ const MarketingNavbar = () => {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  useEffect(() => {
-    if (!open) {
-      setMobileProductOpen(false);
-      setMobileResourcesOpen(false);
-    }
-  }, [open]);
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -61,8 +49,6 @@ const MarketingNavbar = () => {
         </Link>
 
         <nav className="hidden items-center gap-6 lg:flex">
-          <NavMegaMenu label="Product" columns={productMegaMenu} />
-          <NavMegaMenu label="Resources" columns={resourcesMegaMenu} />
           {flatNavLinks.map((link) => {
             const active =
               pathname === link.href ||
@@ -112,20 +98,6 @@ const MarketingNavbar = () => {
             className="overflow-hidden border-t border-ld-border bg-ld-surface lg:hidden"
           >
             <div className="mx-auto flex max-w-[1200px] flex-col gap-1 px-6 py-5">
-              <MobileAccordion
-                label="Product"
-                open={mobileProductOpen}
-                onToggle={() => setMobileProductOpen((v) => !v)}
-                columns={productMegaMenu}
-                onNavigate={closeMobile}
-              />
-              <MobileAccordion
-                label="Resources"
-                open={mobileResourcesOpen}
-                onToggle={() => setMobileResourcesOpen((v) => !v)}
-                columns={resourcesMegaMenu}
-                onNavigate={closeMobile}
-              />
               {flatNavLinks.map((link) => (
                 <Link
                   key={link.label}
@@ -159,52 +131,5 @@ const MarketingNavbar = () => {
     </header>
   );
 };
-
-function MobileAccordion({
-  label,
-  open,
-  onToggle,
-  columns,
-  onNavigate,
-}: {
-  label: string;
-  open: boolean;
-  onToggle: () => void;
-  columns: { title: string; links: { label: string; href: string }[] }[];
-  onNavigate: () => void;
-}) {
-  return (
-    <div>
-      <button
-        type="button"
-        onClick={onToggle}
-        className="flex w-full items-center justify-between rounded-sm px-3 py-2.5 text-label-md text-ld-tertiary transition-colors hover:text-ld-on-surface"
-        aria-expanded={open}
-      >
-        {label}
-        <ChevronDown className={`size-4 transition-transform ${open ? "rotate-180" : ""}`} />
-      </button>
-      {open && (
-        <div className="ml-3 space-y-4 border-l border-ld-border py-2 pl-4">
-          {columns.map((col) => (
-            <div key={col.title}>
-              <p className="text-label-sm mb-2 text-ld-muted">{col.title}</p>
-              {col.links.map((link) => (
-                <Link
-                  key={link.label}
-                  to={link.href}
-                  onClick={onNavigate}
-                  className="block py-1.5 text-body-sm text-ld-tertiary hover:text-ld-on-surface"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
 
 export default MarketingNavbar;

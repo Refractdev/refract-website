@@ -4,7 +4,7 @@ import Footer from "./Footer";
 
 const MarketingLayout = () => {
   return (
-    <div className="min-h-screen bg-ld-neutral">
+    <div className="min-h-screen tp-canvas">
       <MarketingNavbar />
       <Outlet />
       <Footer />

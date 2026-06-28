@@ -1,9 +1,10 @@
 import Hero from "@/components/site/Hero";
 import ManifestoSection from "@/components/site/ManifestoSection";
-import FeaturesTabs from "@/components/site/FeaturesTabs";
+import ReliefSection from "@/components/site/ReliefSection";
+import ProofSection from "@/components/site/ProofSection";
+import TrustSection from "@/components/site/TrustSection";
 import ProductSections from "@/components/site/ProductSections";
-import HomeChangelog from "@/components/site/HomeChangelog";
-import Testimonials from "@/components/site/Testimonials";
+import LogicFeatures from "@/components/site/LogicFeatures";
 import CTA from "@/components/site/CTA";
 
 const Index = () => {
@@ -11,10 +12,11 @@ const Index = () => {
     <>
       <Hero />
       <ManifestoSection />
-      <FeaturesTabs />
+      <ReliefSection />
+      <ProofSection />
+      <TrustSection />
       <ProductSections />
-      <HomeChangelog />
-      <Testimonials />
+      <LogicFeatures />
       <CTA />
     </>
   );

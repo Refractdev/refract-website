@@ -55,7 +55,8 @@ const footerLinks = [
     title: "Connect",
     links: [
       { label: "Discord", href: "https://discord.gg/dkdEbBSqf5" },
-      { label: "X (Twitter)", href: "https://x.com/refractcode" },
+      { label: "X (Twitter)", href: "https://x.com/devRefracta" },
+      { label: "Instagram", href: "https://www.instagram.com/refractcode/" },
       { label: "GitHub", href: "https://github.com/refractcode" },
     ],
   },

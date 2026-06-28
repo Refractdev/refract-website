@@ -1,10 +1,6 @@
-import { useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
-import { tabContentTransition } from "@/lib/motion";
 import IntakeMock from "./mocks/IntakeMock";
 import BuildMock from "./mocks/BuildMock";
 import HealthScoreMock from "./mocks/HealthScoreMock";
-import MockChrome from "./MockChrome";
 import SectionBand from "./SectionBand";
 
 const sections = [
@@ -47,48 +43,55 @@ const notAnother = [
 ];
 
 const FeaturesTabs = () => {
-  const [active, setActive] = useState(0);
-  const current = sections[active];
-
   return (
     <>
-      <SectionBand id="features" elevated>
-        <div className="max-w-[720px]">
-          <h2 className="text-section-title text-balance">Every push scanned. Every fix reviewable.</h2>
+      {/* Alternating feature sections (Tradespad style) */}
+      <section>
+        <div className="mx-auto max-w-[1200px] px-6 py-20">
+          <div className="mb-16 max-w-[680px]">
+            <h2 className="text-section-title text-balance">Every push scanned. Every fix reviewable.</h2>
+          </div>
+
+          <div className="space-y-24">
+            {sections.map((s, i) => {
+              const Mock = s.Mock;
+              const reversed = i % 2 === 1;
+              return (
+                <div
+                  key={s.title}
+                  className="tp-feature-section"
+                >
+                  <div className={`flex flex-col items-center gap-12 lg:flex-row ${reversed ? "lg:flex-row-reverse" : ""}`}>
+                    {/* Mockup side */}
+                    <div className="w-full lg:w-1/2">
+                      <div className="tp-frame">
+                        <div className="tp-frame__bar">
+                          <div className="tp-frame__dots">
+                            <span className="tp-frame__dot" />
+                            <span className="tp-frame__dot" />
+                            <span className="tp-frame__dot" />
+                          </div>
+                          <span className="ml-3 font-mono text-[11px] text-ld-muted">{s.mockPath}</span>
+                        </div>
+                        <Mock activePanel={0} />
+                      </div>
+                    </div>
+
+                    {/* Text side */}
+                    <div className="w-full lg:w-1/2">
+                      <p className="tp-eyebrow">{`0${i + 1}`}</p>
+                      <h3 className="text-manifesto mt-1">{s.title}</h3>
+                      <p className="text-body-lg mt-4 max-w-[460px] text-ld-tertiary">{s.description}</p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
+      </section>
 
-        <div className="mt-10 flex flex-wrap gap-2">
-          {sections.map((s, i) => (
-            <button
-              key={s.title}
-              type="button"
-              onClick={() => setActive(i)}
-              className={`features-tab ${i === active ? "features-tab--active" : ""}`}
-            >
-              {s.title}
-            </button>
-          ))}
-        </div>
-
-        <p className="text-body-sm mt-4 max-w-[560px] text-ld-tertiary">{current.description}</p>
-
-        <div className="mt-10">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={active}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={tabContentTransition}
-            >
-              <MockChrome path={current.mockPath} className="rounded-lg">
-                <current.Mock activePanel={0} />
-              </MockChrome>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-      </SectionBand>
-
+      {/* "Not another…" section */}
       <SectionBand>
         <div className="mx-auto max-w-[720px]">
           <p className="section-label">Not another…</p>
