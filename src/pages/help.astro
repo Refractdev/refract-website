@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import DocsLayout from '../components/site/DocsLayout';
+import HelpCenter from '../components/pages/HelpCenter';
+---
+
+<BaseLayout
+  title="Help Center — Refract"
+  description="Frequently asked questions and help resources for Refract."
+>
+  <DocsLayout>
+    <HelpCenter client:visible />
+  </DocsLayout>
+</BaseLayout>

@@ -1,12 +1,12 @@
-import { Outlet } from "react-router-dom";
 import DocsNavbar from "./nav/DocsNavbar";
 import Footer from "./Footer";
+import { ReactNode } from "react";
 
-const DocsLayout = () => {
+const DocsLayout = ({ children }: { children: ReactNode }) => {
   return (
     <div className="min-h-screen bg-ld-neutral">
       <DocsNavbar />
-      <Outlet />
+      {children}
       <Footer />
     </div>
   );

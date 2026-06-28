@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import SectionBand from "./SectionBand";
 
 const quotes = [
@@ -46,12 +45,12 @@ const Testimonials = () => {
         <p className="text-body-md text-ld-tertiary">
           Early access opening soon.
         </p>
-        <Link
-          to="/contact"
+        <a
+          href="/contact"
           className="shrink-0 text-label-sm text-ld-muted transition-colors hover:text-ld-on-surface"
         >
           Join the waitlist →
-        </Link>
+        </a>
       </div>
     </SectionBand>
   );

@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MinimalLayout from '../components/site/MinimalLayout';
+import About from '../components/pages/About';
+---
+
+<BaseLayout
+  title="About — Refract"
+  description="Learn about Refract and the team behind it."
+>
+  <MinimalLayout>
+    <About client:visible />
+  </MinimalLayout>
+</BaseLayout>

@@ -1,12 +1,12 @@
-import { Outlet } from "react-router-dom";
 import MinimalNavbar from "./nav/MinimalNavbar";
 import Footer from "./Footer";
+import { ReactNode } from "react";
 
-const MinimalLayout = () => {
+const MinimalLayout = ({ children }: { children: ReactNode }) => {
   return (
     <div className="min-h-screen bg-ld-neutral">
       <MinimalNavbar />
-      <Outlet />
+      {children}
       <Footer />
     </div>
   );

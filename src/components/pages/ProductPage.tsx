@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import SectionBand from "@/components/site/SectionBand";
 import ProductSections from "@/components/site/ProductSections";
 import MCPSection from "@/components/site/MCPSection";
@@ -16,12 +15,12 @@ const ProductPage = () => {
           <p className="text-body mt-4 text-ld-tertiary">
             Refract connects to your repo. Every push triggers a scan. Every fix is reviewable. Every approved proposal becomes a PR.
           </p>
-          <Link
-            to="/#features"
+          <a
+            href="/#features"
             className="mt-6 inline-block text-label-sm text-ld-muted transition-colors hover:text-ld-on-surface"
           >
             View features →
-          </Link>
+          </a>
         </div>
       </SectionBand>
 

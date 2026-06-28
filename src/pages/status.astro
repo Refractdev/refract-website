@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MarketingLayout from '../components/site/MarketingLayout';
+import Status from '../components/pages/Status';
+---
+
+<BaseLayout
+  title="Status — Refract"
+  description="Current system status and incident history for Refract."
+>
+  <MarketingLayout>
+    <Status client:visible />
+  </MarketingLayout>
+</BaseLayout>

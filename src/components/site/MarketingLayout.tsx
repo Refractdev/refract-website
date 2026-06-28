@@ -1,12 +1,12 @@
-import { Outlet } from "react-router-dom";
 import MarketingNavbar from "./nav/MarketingNavbar";
 import Footer from "./Footer";
+import { ReactNode } from "react";
 
-const MarketingLayout = () => {
+const MarketingLayout = ({ children }: { children: ReactNode }) => {
   return (
     <div className="min-h-screen tp-canvas">
       <MarketingNavbar />
-      <Outlet />
+      {children}
       <Footer />
     </div>
   );

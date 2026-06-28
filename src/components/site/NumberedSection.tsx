@@ -1,5 +1,5 @@
 import { ComponentType, useState } from "react";
-import { Link } from "react-router-dom";
+
 import { AnimatePresence, motion } from "motion/react";
 import { tabContentTransition } from "@/lib/motion";
 import MockChrome from "./MockChrome";
@@ -42,12 +42,12 @@ const NumberedSection = ({
         <h2 className="text-headline-lg text-balance">{sectionTitle}</h2>
         <div>
           <p className="text-body text-ld-tertiary">{description}</p>
-          <Link
-            to={sectionLink}
+          <a
+            href={sectionLink}
             className="mt-5 inline-block text-label-sm text-ld-muted transition-colors hover:text-ld-on-surface"
           >
             {number} {label} →
-          </Link>
+          </a>
         </div>
       </div>
 

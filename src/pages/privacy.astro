@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MinimalLayout from '../components/site/MinimalLayout';
+import Privacy from '../components/pages/Privacy';
+---
+
+<BaseLayout
+  title="Privacy Policy — Refract"
+  description="Refract Privacy Policy — how we collect, use, and protect your information."
+>
+  <MinimalLayout>
+    <Privacy client:visible />
+  </MinimalLayout>
+</BaseLayout>

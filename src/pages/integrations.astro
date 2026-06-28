@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MarketingLayout from '../components/site/MarketingLayout';
+import Integrations from '../components/pages/Integrations';
+---
+
+<BaseLayout
+  title="Integrations — Refract"
+  description="Connect Refract to your development workflow. GitHub, MCP, CLI, and more."
+>
+  <MarketingLayout>
+    <Integrations client:visible />
+  </MarketingLayout>
+</BaseLayout>

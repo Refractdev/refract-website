@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MarketingLayout from '../components/site/MarketingLayout';
+import ChangelogPage from '../components/pages/ChangelogPage';
+---
+
+<BaseLayout
+  title="Changelog — Refract"
+  description="Latest updates, features, and improvements to Refract."
+>
+  <MarketingLayout>
+    <ChangelogPage client:visible />
+  </MarketingLayout>
+</BaseLayout>

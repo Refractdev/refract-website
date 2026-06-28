@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MinimalLayout from '../components/site/MinimalLayout';
+import Terms from '../components/pages/Terms';
+---
+
+<BaseLayout
+  title="Terms of Service — Refract"
+  description="Refract Terms of Service — terms and conditions for using Refract."
+>
+  <MinimalLayout>
+    <Terms client:visible />
+  </MinimalLayout>
+</BaseLayout>

@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+
 import { ChevronDown } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 
@@ -113,8 +113,8 @@ const NavMegaMenu = ({ label, columns, onNavigate }: NavMegaMenuProps) => {
                   <ul className="space-y-2">
                     {col.links.map((link) => (
                       <li key={link.label}>
-                        <Link
-                          to={link.href}
+                        <a
+                          href={link.href}
                           className="block text-body-sm text-ld-muted transition-colors hover:text-ld-on-surface"
                           onClick={() => {
                             setOpen(false);
@@ -122,7 +122,7 @@ const NavMegaMenu = ({ label, columns, onNavigate }: NavMegaMenuProps) => {
                           }}
                         >
                           {link.label}
-                        </Link>
+                        </a>
                       </li>
                     ))}
                   </ul>

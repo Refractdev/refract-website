@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import DocsLayout from '../components/site/DocsLayout';
+import Documentation from '../components/pages/Documentation';
+---
+
+<BaseLayout
+  title="Documentation — Refract"
+  description="Everything you need to connect, scan, and ship with Refract."
+>
+  <DocsLayout>
+    <Documentation client:visible />
+  </DocsLayout>
+</BaseLayout>

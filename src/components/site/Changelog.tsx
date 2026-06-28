@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import SectionBand from "./SectionBand";
 
 const entries = [
@@ -44,18 +43,18 @@ const Changelog = () => {
           <p className="section-label">Latest changes</p>
           <h2 className="text-section-title max-w-[620px] text-balance">Shipped work, tied to product surface.</h2>
         </div>
-        <Link to="/roadmap" className="premium-link">
+        <a href="/roadmap" className="premium-link">
           View roadmap
-        </Link>
+        </a>
       </div>
 
       <div className="relative">
         <div className="absolute bottom-6 left-4 top-6 hidden w-px bg-ld-border md:block" />
         <div className="grid gap-3">
           {entries.map((entry) => (
-            <Link
+            <a
               key={entry.title}
-              to="/roadmap"
+              href="/roadmap"
               className="timeline-card group grid gap-4 p-4 no-underline md:grid-cols-[160px_1fr_auto] md:items-center md:pl-12"
             >
               <span className="absolute left-4 top-6 hidden size-2 -translate-x-1/2 rounded-full border-2 border-ld-neutral bg-ld-muted transition-colors group-hover:bg-ld-primary md:block" />
@@ -75,7 +74,7 @@ const Changelog = () => {
               <span className="text-label-md text-ld-muted transition-transform group-hover:translate-x-1 group-hover:text-ld-on-surface">
                 →
               </span>
-            </Link>
+            </a>
           ))}
         </div>
       </div>

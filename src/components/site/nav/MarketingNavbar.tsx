@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown, Code2, ShieldCheck, LineChart, Terminal, Building2 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { Button } from "@/components/ui/button";
@@ -49,7 +48,7 @@ const MarketingNavbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [featuresOpen, setFeaturesOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const { pathname } = useLocation();
+  const pathname = typeof window !== "undefined" ? window.location.pathname : "";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -86,12 +85,12 @@ const MarketingNavbar = () => {
       }`}
     >
       <div className="mx-auto flex h-[60px] max-w-[1300px] items-center justify-between px-5 md:px-6">
-        <Link
-          to="/"
+        <a
+          href="/"
           className="rounded-sm outline-none transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ld-primary shrink-0"
         >
           <Logo height={18} variant="icon" />
-        </Link>
+        </a>
 
         <nav className="hidden items-center gap-5 lg:flex">
           {navLinks.map((link) => {
@@ -121,9 +120,9 @@ const MarketingNavbar = () => {
                         {link.items.map((item) => {
                           const Icon = item.icon;
                           return (
-                            <Link
+                            <a
                               key={item.title}
-                              to={`/product#${item.title.toLowerCase()}`}
+                              href={`/product#${item.title.toLowerCase()}`}
                               onClick={() => setFeaturesOpen(false)}
                               className="tp-dropdown-item"
                             >
@@ -134,7 +133,7 @@ const MarketingNavbar = () => {
                                 <p className="tp-dropdown-title">{item.title}</p>
                                 <p className="tp-dropdown-desc">{item.desc}</p>
                               </div>
-                            </Link>
+                            </a>
                           );
                         })}
                       </motion.div>
@@ -149,13 +148,13 @@ const MarketingNavbar = () => {
               (link.href !== "/" && pathname.startsWith(link.href));
 
             return (
-              <Link
+              <a
                 key={link.label}
-                to={link.href!}
+                href={link.href!}
                 className={`nav-link ${active ? "text-white" : ""}`}
               >
                 {link.label}
-              </Link>
+              </a>
             );
           })}
         </nav>
@@ -195,9 +194,9 @@ const MarketingNavbar = () => {
                   return link.items.map((item) => {
                     const Icon = item.icon;
                     return (
-                      <Link
+                      <a
                         key={item.title}
-                        to={`/product#${item.title.toLowerCase()}`}
+                        href={`/product#${item.title.toLowerCase()}`}
                         onClick={closeMobile}
                         className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-[#828282] transition-colors hover:text-white"
                       >
@@ -205,19 +204,19 @@ const MarketingNavbar = () => {
                           <Icon className="h-4 w-4 text-white" />
                         </div>
                         {item.title}
-                      </Link>
+                      </a>
                     );
                   });
                 }
                 return (
-                  <Link
+                  <a
                     key={link.label}
-                    to={link.href!}
+                    href={link.href!}
                     onClick={closeMobile}
                     className="rounded-lg px-3 py-2.5 text-sm font-medium text-[#828282] transition-colors hover:text-white"
                   >
                     {link.label}
-                  </Link>
+                  </a>
                 );
               })}
               <hr className="my-3 border-[#1a1a1a]" />

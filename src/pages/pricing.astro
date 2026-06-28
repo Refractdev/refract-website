@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MarketingLayout from '../components/site/MarketingLayout';
+import PricingPage from '../components/pages/PricingPage';
+---
+
+<BaseLayout
+  title="Pricing — Refract"
+  description="Simple, transparent pricing for teams shipping code with humans and agents."
+>
+  <MarketingLayout>
+    <PricingPage client:visible />
+  </MarketingLayout>
+</BaseLayout>

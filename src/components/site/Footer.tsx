@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+
 import { Logo } from "./Logo";
 
 const footerLinks = [
@@ -172,18 +172,18 @@ const Footer = () => {
 
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="flex flex-wrap gap-4 text-[13px] text-[#888888]">
-            <Link to="/privacy" className="hover:text-white transition-colors">Privacy</Link>
-            <Link to="/terms" className="hover:text-white transition-colors">Terms</Link>
-            <Link to="/privacy" className="hover:text-white transition-colors">DPA</Link>
-            <Link to="/terms" className="hover:text-white transition-colors">AUP</Link>
+            <a href="/privacy" className="hover:text-white transition-colors">Privacy</a>
+            <a href="/terms" className="hover:text-white transition-colors">Terms</a>
+            <a href="/privacy" className="hover:text-white transition-colors">DPA</a>
+            <a href="/terms" className="hover:text-white transition-colors">AUP</a>
           </div>
-          <Link
-            to="/status"
+          <a
+            href="/status"
             className="tp-status hover:text-white transition-colors"
           >
             <span className="tp-status__dot" />
             All systems operational
-          </Link>
+          </a>
         </div>
       </div>
     </footer>

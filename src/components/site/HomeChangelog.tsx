@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import SectionBand from "./SectionBand";
 
 const entries = [
@@ -35,24 +34,24 @@ const HomeChangelog = () => {
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {entries.map((entry) => (
-          <Link
+          <a
             key={entry.title}
-            to="/changelog"
+            href="/changelog"
             className="tp-card group"
           >
             <h3 className="text-headline-sm mb-2 group-hover:text-ld-on-surface">{entry.title}</h3>
             <p className="text-body-sm text-ld-tertiary">{entry.description}</p>
             <time className="text-mono-label mt-4 block text-[11px]">{entry.date}</time>
-          </Link>
+          </a>
         ))}
       </div>
 
-      <Link
-        to="/changelog"
+      <a
+        href="/changelog"
         className="mt-10 inline-block text-label-sm text-ld-muted transition-colors hover:text-ld-on-surface"
       >
         View all →
-      </Link>
+      </a>
     </SectionBand>
   );
 };
