@@ -1,23 +1,26 @@
-import { Button } from "@/components/ui/button";
+import { useState } from "react";
 
 const APP_URL = "https://refract-dev.vercel.app";
 
 const plans = [
   {
     name: "Free",
-    price: "€0",
+    monthlyPrice: "€0",
+    yearlyPrice: "€0",
     period: "/mo",
     sub: "free forever",
+    yearlySub: "free forever",
     description: "See what AI left behind. One repo, manual scan, view issues.",
     features: [
-      "Up to 1 connected repository",
-      "Manual scan / rescan",
-      "Automatic issue detection",
-      "Up to 1 guideline set",
-      "Automatic Analytics",
-      "Local MCP scan (3/day)",
-      "CLI: local refract check",
-      "API keys",
+      { label: "Connected repositories", included: "1" },
+      { label: "Auto-scan on push", included: false },
+      { label: "Automatic issue detection", included: true },
+      { label: "Guideline sets", included: "1" },
+      { label: "Automatic Analytics", included: true },
+      { label: "MCP cloud scan", included: "3/day" },
+      { label: "CLI: local refract check", included: true },
+      { label: "Security scanning", included: true },
+      { label: "API keys", included: true },
     ],
     cta: "Get Free",
     href: APP_URL,
@@ -25,40 +28,44 @@ const plans = [
   },
   {
     name: "Early access",
-    price: "€20",
+    monthlyPrice: "€29",
+    yearlyPrice: "€20",
     period: "/mo",
-    sub: "10% off with yearly billing",
+    sub: "billed monthly",
+    yearlySub: "billed yearly (10% off)",
     description: "The full pipeline. Every push scanned. Unlimited everything.",
     features: [
-      "Unlimited repositories",
-      "Scan on every push",
-      "Full pipeline: propose, approve, execute, test, document, PR",
-      "Unlimited security scans",
-      "Unlimited MCP cloud scans",
-      "Unlimited guidelines & policies",
-      "Drift detection & alerts",
-      "GitHub Action (CI gate)",
-      "Limited to early access spots, price locked forever",
+      { label: "Repositories", included: "Unlimited" },
+      { label: "Scan on every push", included: true },
+      { label: "Full pipeline: propose, approve, execute, test, document, PR", included: true },
+      { label: "Unlimited security scans", included: true },
+      { label: "Unlimited MCP cloud scans", included: true },
+      { label: "Unlimited guidelines & policies", included: true },
+      { label: "Drift detection & alerts", included: true },
+      { label: "GitHub Action (CI gate)", included: true },
+      { label: "Early access price locked forever", included: true },
     ],
-    cta: "Join early access",
+    cta: "Get started",
     href: APP_URL,
     badge: "EARLY ACCESS OFFER",
   },
   {
     name: "Enterprise",
-    price: "Custom",
+    monthlyPrice: "",
+    yearlyPrice: "",
     period: "",
-    sub: "tailored to your team",
+    sub: "",
+    yearlySub: "tailored to your team",
     description: "Org-wide deployment, SSO, dedicated support, custom policies.",
     features: [
-      "Everything in Early access",
-      "Unlimited workspaces",
-      "SSO / SAML",
-      "Dedicated support",
-      "Custom policy engine",
-      "On-premise option",
-      "SLA guarantee",
-      "Team onboarding & training",
+      { label: "Everything in Early access", included: true },
+      { label: "Unlimited workspaces", included: true },
+      { label: "SSO / SAML", included: true },
+      { label: "Dedicated support", included: true },
+      { label: "Custom policy engine", included: true },
+      { label: "On-premise option", included: true },
+      { label: "SLA guarantee", included: true },
+      { label: "Team onboarding & training", included: true },
     ],
     cta: "Contact sales",
     href: "/contact",
@@ -66,30 +73,9 @@ const plans = [
   },
 ];
 
-const comparisonRows = [
-  { feature: "Repositories", free: "1", pro: "Unlimited", enterprise: "Unlimited" },
-  { feature: "Auto-scan on push", free: "—", pro: "✓", enterprise: "✓" },
-  { feature: "Automatic Analytics", free: "Limited", pro: "✓", enterprise: "✓" },
-  { feature: "Detect issues", free: "✓", pro: "✓", enterprise: "✓" },
-  { feature: "Propose fixes (diff)", free: "✓", pro: "✓", enterprise: "✓" },
-  { feature: "Approve & execute", free: "—", pro: "✓", enterprise: "✓" },
-  { feature: "Test generation", free: "—", pro: "✓", enterprise: "✓" },
-  { feature: "Auto PR delivery", free: "—", pro: "✓", enterprise: "✓" },
-  { feature: "Secret scanning", free: "✓", pro: "✓", enterprise: "✓" },
-  { feature: "Vulnerability detection", free: "View only", pro: "✓", enterprise: "✓" },
-  { feature: "Dependency audit", free: "View only", pro: "Full", enterprise: "Full" },
-  { feature: "Security gate on PRs", free: "View status", pro: "Alert / Block", enterprise: "Full" },
-  { feature: "MCP cloud scan", free: "3/day", pro: "Unlimited", enterprise: "Unlimited" },
-  { feature: "CLI PR delivery", free: "—", pro: "✓", enterprise: "✓" },
-  { feature: "Guidelines & policies", free: "1 set", pro: "Unlimited", enterprise: "Unlimited" },
-  { feature: "Drift detection", free: "—", pro: "✓", enterprise: "✓" },
-  { feature: "Alerts (Slack/webhook)", free: "—", pro: "✓", enterprise: "✓" },
-  { feature: "Team management", free: "—", pro: "—", enterprise: "✓" },
-  { feature: "SSO / SAML", free: "—", pro: "—", enterprise: "✓" },
-  { feature: "Dedicated support", free: "—", pro: "—", enterprise: "✓" },
-];
-
 const Pricing = () => {
+  const [yearly, setYearly] = useState(false);
+
   return (
     <section id="pricing" className="tp-feature-section">
       <div className="mx-auto max-w-[1300px] px-5 md:px-6">
@@ -103,76 +89,94 @@ const Pricing = () => {
           </p>
         </div>
 
+        {/* Toggle */}
+        <div className="mt-8 flex items-center justify-center gap-3 text-sm">
+          <span className={yearly ? "text-[#555555]" : "text-white"}>Monthly</span>
+          <button
+            onClick={() => setYearly(!yearly)}
+            className={`relative inline-flex h-6 w-11 cursor-pointer items-center rounded-full transition-colors ${
+              yearly ? "bg-white" : "bg-[#2a2a2a]"
+            }`}
+          >
+            <span
+              className={`inline-block h-4 w-4 rounded-full bg-black transition-transform ${
+                yearly ? "translate-x-6" : "translate-x-1"
+              }`}
+            />
+          </button>
+          <span className={yearly ? "text-white" : "text-[#555555]"}>
+            Yearly <span className="text-[11px] text-[#888888]">(save 10%)</span>
+          </span>
+        </div>
+
         <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {plans.map((plan) => (
-            <div
-              key={plan.name}
-              className={`flex flex-col rounded-xl border ${
-                plan.badge ? "border-[#2f2f2f]" : "border-[#1a1a1a]"
-              } bg-[#0d0d0d] p-6`}
-            >
-              {plan.badge && (
-                <div className="mb-3">
-                  <span className="tp-badge tp-badge-soon">{plan.badge}</span>
-                </div>
-              )}
-              <h3 className="text-lg font-medium text-white">{plan.name}</h3>
-              <div className="mt-3">
-                <span className="text-3xl font-medium text-white">{plan.price}</span>
-                {plan.period && (
-                  <span className="text-sm text-[#888888] ml-1">{plan.period}</span>
-                )}
-              </div>
-              <p className="text-sm text-[#888888] mt-1">{plan.sub}</p>
-              <p className="text-sm text-[#999999] mt-4 leading-relaxed">{plan.description}</p>
+          {plans.map((plan) => {
+            const price = yearly ? plan.yearlyPrice : plan.monthlyPrice;
+            const sub = yearly ? plan.yearlySub : plan.sub;
+            const hasStrikethrough = yearly && plan.monthlyPrice !== plan.yearlyPrice;
 
-              <ul className="mt-6 flex-1 space-y-3">
-                {plan.features.map((feat) => (
-                  <li key={feat} className="text-sm text-[#d2d2d2] flex items-start gap-2">
-                    <span className="text-[#555555] mt-0.5">✓</span>
-                    {feat}
-                  </li>
-                ))}
-              </ul>
-
-              <Button
-                variant={plan.badge ? "default" : "secondary"}
-                className="mt-8 w-full"
-                asChild
+            return (
+              <div
+                key={plan.name}
+                className={`flex flex-col rounded-xl border ${
+                  plan.badge ? "border-[#2f2f2f]" : "border-[#1a1a1a]"
+                } bg-[#0d0d0d] p-6`}
               >
-                <a href={plan.href}>{plan.cta}</a>
-              </Button>
-            </div>
-          ))}
+                {plan.badge && (
+                  <div className="mb-3">
+                    <span className="tp-badge tp-badge-soon">{plan.badge}</span>
+                  </div>
+                )}
+                <h3 className="text-lg font-medium text-white">{plan.name}</h3>
+                <div className="mt-3 flex items-baseline gap-2">
+                  {hasStrikethrough && (
+                    <span className="text-lg text-[#555555] line-through">
+                      {plan.monthlyPrice}
+                    </span>
+                  )}
+                  <span className="text-3xl font-medium text-white">{price}</span>
+                  {plan.period && (
+                    <span className="text-sm text-[#888888]">{plan.period}</span>
+                  )}
+                </div>
+                <p className="text-sm text-[#888888] mt-1">{sub}</p>
+                <p className="text-sm text-[#999999] mt-4 leading-relaxed">{plan.description}</p>
+
+                <ul className="mt-6 flex-1 space-y-3">
+                  {plan.features.map((feat) => (
+                    <li key={feat.label} className="text-sm flex items-start gap-2">
+                      {typeof feat.included === "boolean" ? (
+                        feat.included ? (
+                          <span className="text-white mt-0.5 shrink-0">✓</span>
+                        ) : (
+                          <span className="text-[#555555] mt-0.5 shrink-0">—</span>
+                        )
+                      ) : (
+                        <span className="text-[#555555] mt-0.5 shrink-0 text-xs">{feat.included}</span>
+                      )}
+                      <span className={typeof feat.included === "boolean" && !feat.included ? "text-[#555555]" : "text-[#d2d2d2]"}>
+                        {feat.label}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+
+                <a
+                  href={plan.href}
+                  className={`mt-8 inline-flex w-full items-center justify-center rounded-full px-4 py-2.5 text-sm font-semibold transition-colors ${
+                    plan.badge
+                      ? "bg-white text-black hover:bg-gray-200"
+                      : "bg-[#1a1a1a] text-white hover:bg-[#2a2a2a]"
+                  }`}
+                >
+                  {plan.cta}
+                </a>
+              </div>
+            );
+          })}
         </div>
 
-        <p className="text-center text-sm text-[#888888] mt-8 max-w-[640px] mx-auto">
-          Unlock the full Refract experience with our Early access plan, access every advanced feature, and become an early Refract user at a discounted €20/mo price for life.{" "}
-          <a href={APP_URL} className="text-white underline">See full comparison</a>
-        </p>
 
-        <div className="mt-16 overflow-x-auto">
-          <table className="w-full min-w-[640px] border-collapse text-left text-sm">
-            <thead>
-              <tr className="border-b border-[#1f1f1f]">
-                <th className="py-3 pr-6 text-[13px] font-medium text-[#888888]">Feature</th>
-                <th className="py-3 px-4 text-[13px] font-medium text-white">Free</th>
-                <th className="py-3 px-4 text-[13px] font-medium text-white">Early access</th>
-                <th className="py-3 pl-4 text-[13px] font-medium text-white">Enterprise</th>
-              </tr>
-            </thead>
-            <tbody>
-              {comparisonRows.map((row) => (
-                <tr key={row.feature} className="border-b border-[#1f1f1f]/60">
-                  <td className="py-3 pr-6 text-[14px] text-white">{row.feature}</td>
-                  <td className="py-3 px-4 text-[14px] text-[#888888]">{row.free}</td>
-                  <td className="py-3 px-4 text-[14px] text-[#d2d2d2]">{row.pro}</td>
-                  <td className="py-3 pl-4 text-[14px] text-[#d2d2d2]">{row.enterprise}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
       </div>
     </section>
   );

@@ -28,78 +28,84 @@ const ProductPage = () => {
         label="TRANSFORM"
         title="Detect debt. Ship the fix."
         description="Scans for 7 structural issue types and turns accepted proposals into PRs automatically."
-      >
-        <div className="tp-frame">
-          <div className="tp-frame__bar">
-            <div className="tp-frame__dots">
-              <span className="tp-frame__dot" />
-              <span className="tp-frame__dot" />
-              <span className="tp-frame__dot" />
+        image={(
+          <div className="tp-frame">
+            <div className="tp-frame__bar">
+              <div className="tp-frame__dots">
+                <span className="tp-frame__dot" />
+                <span className="tp-frame__dot" />
+                <span className="tp-frame__dot" />
+              </div>
+            </div>
+            <div className="flex aspect-video items-center justify-center bg-[#0d0d0d] text-sm text-[#555555]">
+              transform pipeline screenshot
             </div>
           </div>
-          <div className="flex aspect-video items-center justify-center bg-[#0d0d0d] text-sm text-[#555555]">
-            transform pipeline screenshot
-          </div>
-        </div>
-      </FeatureBlock>
+        )}
+      />
 
       <FeatureBlock
         label="SECURITY"
         title="Nothing ships with a secret in it"
         description="Secret scanning, injection detection, dependency audits, and a configurable gate on every PR."
-      >
-        <div className="tp-frame">
-          <div className="tp-frame__bar">
-            <div className="tp-frame__dots">
-              <span className="tp-frame__dot" />
-              <span className="tp-frame__dot" />
-              <span className="tp-frame__dot" />
+        imagePosition="left"
+        image={(
+          <div className="tp-frame">
+            <div className="tp-frame__bar">
+              <div className="tp-frame__dots">
+                <span className="tp-frame__dot" />
+                <span className="tp-frame__dot" />
+                <span className="tp-frame__dot" />
+              </div>
+            </div>
+            <div className="flex aspect-video items-center justify-center bg-[#0d0d0d] text-sm text-[#555555]">
+              security scan screenshot
             </div>
           </div>
-          <div className="flex aspect-video items-center justify-center bg-[#0d0d0d] text-sm text-[#555555]">
-            security scan screenshot
-          </div>
-        </div>
-      </FeatureBlock>
+        )}
+      />
 
       <FeatureBlock
         label="ANALYTICS"
         title="Know what every push costs you"
         description="A real-time feed of issues introduced, resolved, and trending — per repo, per author, per AI tool."
-      >
-        <div className="tp-frame">
-          <div className="tp-frame__bar">
-            <div className="tp-frame__dots">
-              <span className="tp-frame__dot" />
-              <span className="tp-frame__dot" />
-              <span className="tp-frame__dot" />
+        image={(
+          <div className="tp-frame">
+            <div className="tp-frame__bar">
+              <div className="tp-frame__dots">
+                <span className="tp-frame__dot" />
+                <span className="tp-frame__dot" />
+                <span className="tp-frame__dot" />
+              </div>
+            </div>
+            <div className="flex aspect-video items-center justify-center bg-[#0d0d0d] text-sm text-[#555555]">
+              analytics dashboard screenshot
             </div>
           </div>
-          <div className="flex aspect-video items-center justify-center bg-[#0d0d0d] text-sm text-[#555555]">
-            analytics dashboard screenshot
-          </div>
-        </div>
-      </FeatureBlock>
+        )}
+      />
 
       <FeatureBlock
         label="GUIDELINES"
         title="Set the rules. Enforce them automatically."
         description="Guidelines as code, org-wide policies, and team analytics for teams shipping AI at scale."
         soon
-      >
-        <div className="tp-frame">
-          <div className="tp-frame__bar">
-            <div className="tp-frame__dots">
-              <span className="tp-frame__dot" />
-              <span className="tp-frame__dot" />
-              <span className="tp-frame__dot" />
+        imagePosition="left"
+        image={(
+          <div className="tp-frame">
+            <div className="tp-frame__bar">
+              <div className="tp-frame__dots">
+                <span className="tp-frame__dot" />
+                <span className="tp-frame__dot" />
+                <span className="tp-frame__dot" />
+              </div>
+            </div>
+            <div className="flex aspect-video items-center justify-center bg-[#0d0d0d] text-sm text-[#555555]">
+              guidelines configuration screenshot
             </div>
           </div>
-          <div className="flex aspect-video items-center justify-center bg-[#0d0d0d] text-sm text-[#555555]">
-            guidelines configuration screenshot
-          </div>
-        </div>
-      </FeatureBlock>
+        )}
+      />
 
       <CTA />
     </>

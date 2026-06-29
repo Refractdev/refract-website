@@ -175,8 +175,8 @@ const Privacy = () => {
               <h2 >11. Contact</h2>
               <p >
                 For privacy-related inquiries, requests, or concerns, contact:{" "}
-                <a href="mailto:privacy@refract.dev" className="link-accent">
-                  privacy@refract.dev
+                <a href="mailto:refractcode@gmail.com" className="link-accent">
+                  refractcode@gmail.com
                 </a>
               </p>
             </section>

@@ -2,22 +2,11 @@ import { Logo } from "./Logo";
 
 const footerSections = [
   {
-    title: "Integrations",
-    links: [
-      { label: "GitHub", href: "/integrations#github" },
-      { label: "MCP Protocol", href: "/integrations#mcp" },
-      { label: "CLI", href: "/integrations#cli" },
-      { label: "CI/CD", href: "/integrations#ci" },
-      { label: "See all", href: "/integrations" },
-    ],
-  },
-  {
     title: "Product",
     links: [
       { label: "Home", href: "/" },
       { label: "Product", href: "/product" },
       { label: "Pricing", href: "/pricing" },
-      { label: "Integrations", href: "/integrations" },
       { label: "Changelog", href: "/changelog" },
       { label: "Roadmap", href: "/roadmap" },
     ],
@@ -46,8 +35,8 @@ const footerSections = [
       { label: "Quick Start", href: "/docs" },
       { label: "Connect a Repo", href: "/docs" },
       { label: "Create Your First PR", href: "/docs" },
-      { label: "MCP Setup", href: "/integrations#mcp" },
-      { label: "CLI Guide", href: "/integrations#cli" },
+      { label: "MCP Setup", href: "/product#mcp+cli" },
+      { label: "CLI Guide", href: "/product#mcp+cli" },
       { label: "Security Scan", href: "/product#security" },
     ],
   },
@@ -64,10 +53,10 @@ const Footer = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 lg:grid-cols-5 lg:gap-x-6">
+        <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 lg:grid-cols-4 lg:gap-x-6">
           {footerSections.map((section) => (
             <div key={section.title}>
-              <h3 className="tp-footer-heading">{section.title}</h3>
+              <h3 className="mb-3 text-[15px] font-normal tracking-[0.01em] text-white md:text-[14px]">{section.title}</h3>
               <ul className="flex flex-col gap-2.5">
                 {section.links.map((link) => (
                   <li key={link.label}>
@@ -75,7 +64,7 @@ const Footer = () => {
                       href={link.href}
                       target={link.href.startsWith("http") ? "_blank" : undefined}
                       rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                      className="tp-footer-link"
+                      className="text-[15px] font-normal tracking-[0.01em] text-[#888888] transition-colors hover:text-white md:text-[14px]"
                     >
                       {link.label}
                     </a>

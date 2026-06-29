@@ -1,7 +1,6 @@
 import { motion } from "motion/react";
 import { heroMockTransition, heroTextTransition } from "@/lib/motion";
 import HeroMock from "./mocks/HeroMock";
-import CustomerStrip from "./CustomerStrip";
 import { Button } from "@/components/ui/button";
 
 const APP_URL = "https://refract-dev.vercel.app";
@@ -9,24 +8,24 @@ const APP_URL = "https://refract-dev.vercel.app";
 const Hero = () => {
   return (
     <section className="hero-section relative overflow-hidden pt-36 pb-8 md:pt-40 md:pb-12 lg:pt-44 lg:pb-14">
-      <div className="hero-content relative z-10 mx-auto max-w-[1300px] px-5 md:px-6 text-center">
+      <div className="hero-content relative z-10 mx-auto max-w-[1300px] px-5 md:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={heroTextTransition}
+          className="max-w-[720px]"
         >
-          <h1 className="text-tp-heading max-w-[720px] mx-auto text-balance">
-            Your code has something to say,<br />
-            <span className="text-[#888888]">Refract will reveal it</span>
+          <h1 className="text-tp-heading text-balance">
+            Refract turns AI generated code into production ready codebases
           </h1>
 
-          <p className="text-tp-desc mx-auto mt-5 max-w-[620px]">
+          <p className="text-tp-desc mt-5 max-w-[620px]">
             Detect, review and ship in a single pipeline.
             <br />
             The code quality layer AI coding tools don't have.
           </p>
 
-          <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
+          <div className="mt-5 flex flex-wrap items-center gap-3">
             <Button asChild>
               <a href={APP_URL}>Get Started</a>
             </Button>
@@ -54,8 +53,6 @@ const Hero = () => {
           <HeroMock />
         </div>
       </motion.div>
-
-      <CustomerStrip className="relative z-10 pt-8" />
     </section>
   );
 };

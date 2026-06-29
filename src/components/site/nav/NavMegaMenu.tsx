@@ -30,7 +30,6 @@ export const productMegaMenu: MegaMenuColumn[] = [
     links: [
       { label: "Pricing", href: "/pricing" },
       { label: "Security", href: "/privacy" },
-      { label: "Integrations", href: "/integrations" },
       { label: "Cursor MCP", href: "/product#mcp" },
     ],
   },

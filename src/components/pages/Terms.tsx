@@ -152,8 +152,8 @@ const Terms = () => {
               <h2 >9. Contact</h2>
               <p >
                 Questions regarding these Terms may be directed to:{" "}
-                <a href="mailto:legal@refract.dev" className="link-accent">
-                  legal@refract.dev
+                <a href="mailto:refractcode@gmail.com" className="link-accent">
+                  refractcode@gmail.com
                 </a>
               </p>
             </section>

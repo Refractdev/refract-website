@@ -1,6 +1,5 @@
 import Hero from "@/components/site/Hero";
 import FeatureBlock from "@/components/site/FeatureBlock";
-import Testimonials from "@/components/site/Testimonials";
 import Pricing from "@/components/site/Pricing";
 import FAQ from "@/components/site/FAQ";
 import CTA from "@/components/site/CTA";
@@ -29,62 +28,49 @@ const Index = () => {
         label="PIPELINE CENTER"
         title="All your repositories, organised in a single place"
         description="You can connect your repositories, import your code via GitHub, or create projects manually."
-        imagesCount={3}
-      >
-        <MockFrame label="repo overview" />
-        <MockFrame label="issue list" />
-        <MockFrame label="scan history" />
-      </FeatureBlock>
+        image={<MockFrame label="repo overview" />}
+      />
 
       <FeatureBlock
         label="DASHBOARD"
         title="Seamless dashboard to check your results"
         description="With Refract dashboard you can check your code quality and recent activity for the month."
-        tabs={[
-          { label: "Push Activity", active: true },
-          { label: "Security Timeline", active: false },
-        ]}
-        imagesCount={2}
-      >
-        <MockFrame label="P&L-style activity chart" />
-        <MockFrame label="security events calendar" />
-      </FeatureBlock>
+        imagePosition="left"
+        image={<MockFrame label="P&L-style activity chart" />}
+      />
 
       <FeatureBlock
         label="CODE SCANNER"
         title="A new way to scan your code, simple and clean"
         description="Press any issue to inspect it, with diffs, notes, AST entry points, structural analysis, and more."
-      >
-        <MockFrame label="code scan detail view" />
-      </FeatureBlock>
+        image={<MockFrame label="code scan detail view" />}
+      />
 
       <FeatureBlock
         label="ANALYTICS"
         title="Analytics to understand the data behind your code"
         description="Automatically generated analytics, filtered by category, to surface the data you need to improve your code quality."
-      >
-        <MockFrame label="analytics dashboard" />
-      </FeatureBlock>
+        imagePosition="left"
+        image={<MockFrame label="analytics dashboard" />}
+      />
 
       <FeatureBlock
         label="MCP INTEGRATION"
         title="Use Refract from your favourite editor"
         description="Native MCP support for Cursor, Windsurf, Claude Desktop, Cline, and any MCP-compatible agent."
         soon
-      >
-        <MockFrame label="MCP agent in action" />
-      </FeatureBlock>
+        image={<MockFrame label="MCP agent in action" />}
+      />
 
       <FeatureBlock
         label="GOVERN"
         title="Set team rules. Enforce them automatically."
         description="Create guidelines and policies as code, stored in .refract/guidelines.json, versioned in Git. Enforced on every scan."
         soon
-      >
-        <MockFrame label="policies configuration" />
-      </FeatureBlock>
+        imagePosition="left"
+        image={<MockFrame label="policies configuration" />}
+      />
 
-      <Testimonials />
       <Pricing />
       <FAQ />
       <CTA />

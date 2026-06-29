@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 
 const DocsLayout = ({ children }: { children: ReactNode }) => {
   return (
-    <div className="min-h-screen bg-ld-neutral">
+    <div className="min-h-screen bg-black">
       <DocsNavbar />
       {children}
       <Footer />
