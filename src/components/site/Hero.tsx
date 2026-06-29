@@ -1,6 +1,5 @@
 import { motion } from "motion/react";
 import { heroMockTransition, heroTextTransition } from "@/lib/motion";
-import HeroMock from "./mocks/HeroMock";
 import { Button } from "@/components/ui/button";
 
 const APP_URL = "https://refract-dev.vercel.app";
@@ -50,7 +49,11 @@ const Hero = () => {
               <span className="tp-frame__dot" />
             </div>
           </div>
-          <HeroMock />
+          <img
+            src="/diff view.png"
+            alt="Refract diff view"
+            style={{ display: "block", width: "100%", borderRadius: "0 0 8px 8px" }}
+          />
         </div>
       </motion.div>
     </section>

@@ -1,6 +1,3 @@
-import IntakeMock from "./mocks/IntakeMock";
-import BuildMock from "./mocks/BuildMock";
-import HealthScoreMock from "./mocks/HealthScoreMock";
 import SectionBand from "./SectionBand";
 
 const sections = [
@@ -8,28 +5,32 @@ const sections = [
     title: "Transforms",
     description:
       "Detect → Propose → Approve → Execute → Test → Document → Deliver. Refract parses the AST, finds issues, generates diffs, and opens a PR. Every step reviewable. Every change atomic.",
-    Mock: IntakeMock,
+    imgSrc: "/health.png",
+    imgAlt: "Refract transforms — health overview",
     mockPath: "refract — transforms",
   },
   {
     title: "Security",
     description:
       "Hardcoded secrets, missing auth, no rate limiting, no RLS. Refract catches what AI introduced that Snyk and Dependabot weren't built to find. Configurable gate: alert on PR or block the merge.",
-    Mock: HealthScoreMock,
+    imgSrc: "/commit history.png",
+    imgAlt: "Refract security — commit history",
     mockPath: "refract — security",
   },
   {
     title: "Activity",
     description:
       "Not a dashboard of vanity metrics. A per-commit record: what got better, what got worse. Push delta, health score trends, drift detection across architecture, quality, security, and dependencies.",
-    Mock: BuildMock,
+    imgSrc: "/dashboard-screenshot.png",
+    imgAlt: "Refract activity dashboard",
     mockPath: "refract — activity",
   },
   {
     title: "Guidelines",
     description:
       "Rules your team agreed on — max component size, strict TypeScript, auth on all routes. Stored in .refract/guidelines.json, versioned in Git. Enforced on every scan.",
-    Mock: HealthScoreMock,
+    imgSrc: "/health.png",
+    imgAlt: "Refract guidelines — health score",
     mockPath: "refract — guidelines",
   },
 ];
@@ -54,7 +55,6 @@ const FeaturesTabs = () => {
 
           <div className="space-y-24">
             {sections.map((s, i) => {
-              const Mock = s.Mock;
               const reversed = i % 2 === 1;
               return (
                 <div
@@ -62,7 +62,7 @@ const FeaturesTabs = () => {
                   className="tp-feature-section"
                 >
                   <div className={`flex flex-col items-center gap-12 lg:flex-row ${reversed ? "lg:flex-row-reverse" : ""}`}>
-                    {/* Mockup side */}
+                    {/* Screenshot side */}
                     <div className="w-full lg:w-1/2">
                       <div className="tp-frame">
                         <div className="tp-frame__bar">
@@ -73,7 +73,11 @@ const FeaturesTabs = () => {
                           </div>
                           <span className="ml-3 font-mono text-[11px] text-ld-muted">{s.mockPath}</span>
                         </div>
-                        <Mock activePanel={0} />
+                        <img
+                          src={s.imgSrc}
+                          alt={s.imgAlt}
+                          style={{ display: "block", width: "100%", borderRadius: "0 0 8px 8px" }}
+                        />
                       </div>
                     </div>
 
