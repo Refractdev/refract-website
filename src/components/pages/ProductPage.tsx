@@ -1,10 +1,12 @@
 import FeatureBlock from "@/components/site/FeatureBlock";
+import Atmosphere from "@/components/site/Atmosphere";
 import CTA from "@/components/site/CTA";
 
 const ProductPage = () => {
   return (
     <>
-      <section className="pt-32 pb-16">
+      <section className="relative overflow-hidden pt-32 pb-16">
+        <Atmosphere variant="primary" />
         <div className="mx-auto max-w-[1300px] px-5 md:px-6">
           <div className="mx-auto max-w-[720px] text-center">
             <p className="tp-section-label">Product</p>

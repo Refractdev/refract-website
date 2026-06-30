@@ -78,6 +78,25 @@
     --surface-app:             var(--ld-neutral);
     --code-green:              var(--ld-success);
     --code-red:                var(--ld-error);
+
+    /* ─── Atmospheric glow tokens ─── */
+    --glow-primary: radial-gradient(
+        ellipse 60% 50% at 50% 0%,
+        rgba(99, 102, 241, 0.18),
+        rgba(99, 102, 241, 0) 70%
+    );
+    --glow-secondary: radial-gradient(
+        ellipse 50% 40% at 50% 0%,
+        rgba(255, 255, 255, 0.06),
+        rgba(255, 255, 255, 0) 70%
+    );
+    --glow-accent: radial-gradient(
+        circle at 50% 50%,
+        rgba(16, 185, 129, 0.15),
+        rgba(16, 185, 129, 0) 70%
+    );
+    --glow-blur: 80px;
+    --grain-opacity: 0.025;
 }
 
 * {
@@ -618,6 +637,71 @@ a.tp-card {
     border-bottom: 1px solid #1a1a1a;
 }
 
+/* ─── Atmosphere (glow layer) ─── */
+.atmosphere {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    filter: blur(var(--glow-blur));
+    mask-image: linear-gradient(to bottom, black 0%, transparent 60%);
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 60%);
+}
+
+.atmosphere--primary {
+    background-image: var(--glow-primary);
+}
+
+.atmosphere--secondary {
+    background-image: var(--glow-secondary);
+}
+
+.atmosphere--accent {
+    background-image: var(--glow-accent);
+}
+
+/* ─── Grain overlay ─── */
+.grain-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: var(--grain-opacity);
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 128 128' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 128px 128px;
+}
+
+/* ─── Image blending (fade edges) ─── */
+.image-blended {
+    -webkit-mask-image: linear-gradient(
+        to bottom,
+        black 0%,
+        black 70%,
+        transparent 100%
+    );
+    mask-image: linear-gradient(
+        to bottom,
+        black 0%,
+        black 70%,
+        transparent 100%
+    );
+}
+
+.image-blended--radial {
+    -webkit-mask-image: radial-gradient(
+        ellipse 80% 80% at 50% 50%,
+        black 60%,
+        transparent 100%
+    );
+    mask-image: radial-gradient(
+        ellipse 80% 80% at 50% 50%,
+        black 60%,
+        transparent 100%
+    );
+}
+
 .hero-badge {
     display: inline-flex;
     align-items: center;
@@ -1053,6 +1137,22 @@ a.tp-card {
     }
     .tp-marquee .tp-review-card {
         flex: 0 0 340px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .atmosphere {
+        filter: none;
+    }
+}
+
+@media (prefers-contrast: more) {
+    .atmosphere,
+    .atmosphere--primary,
+    .atmosphere--secondary,
+    .atmosphere--accent,
+    .grain-overlay {
+        opacity: 0;
     }
 }
 

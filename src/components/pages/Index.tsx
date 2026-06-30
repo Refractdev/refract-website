@@ -29,6 +29,7 @@ const Index = () => {
         label="PIPELINE CENTER"
         title="All your repositories, organised in a single place"
         description="You can connect your repositories, import your code via GitHub, or create projects manually."
+        atmosphere="secondary"
         image={
           <div className="tp-frame">
             <div className="tp-frame__bar">
@@ -60,12 +61,12 @@ const Index = () => {
             <img
               src="/dashboard-screenshot.png"
               alt="Refract dashboard — code quality and activity"
+              className="image-blended"
               style={{ display: "block", width: "100%", borderRadius: "0 0 8px 8px" }}
             />
           </div>
         }
       />
-
 
       <FeatureBlock
         label="ANALYTICS"
@@ -83,12 +84,12 @@ const Index = () => {
             <img
               src="/health.png"
               alt="Refract analytics — health score overview"
+              className="image-blended"
               style={{ display: "block", width: "100%", borderRadius: "0 0 8px 8px" }}
             />
           </div>
         }
       />
-
 
       <Pricing />
       <FAQ />

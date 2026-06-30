@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import Atmosphere from "./Atmosphere";
 
 interface FeatureBlockProps {
   label: string;
@@ -10,6 +11,7 @@ interface FeatureBlockProps {
   children?: ReactNode;
   className?: string;
   wide?: boolean;
+  atmosphere?: "primary" | "secondary" | "accent";
 }
 
 const FeatureBlock = ({
@@ -22,6 +24,7 @@ const FeatureBlock = ({
   children,
   className = "",
   wide = false,
+  atmosphere,
 }: FeatureBlockProps) => {
   const content = (
     <div>
@@ -41,8 +44,9 @@ const FeatureBlock = ({
   const media = image || (children ? <div>{children}</div> : null);
 
   return (
-    <section className={`tp-feature-section ${className}`}>
-      <div className={`mx-auto px-5 md:px-6 ${wide ? "max-w-[1500px]" : "max-w-[1300px]"}`}>
+    <section className={`relative overflow-hidden tp-feature-section ${className}`}>
+      {atmosphere && <Atmosphere variant={atmosphere} />}
+      <div className={`relative z-10 mx-auto px-5 md:px-6 ${wide ? "max-w-[1500px]" : "max-w-[1300px]"}`}>
         <div className="tp-feature-grid">
           {imagePosition === "left" ? (
             <>

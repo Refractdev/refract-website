@@ -1,12 +1,17 @@
 import { motion } from "motion/react";
 import { heroMockTransition, heroTextTransition } from "@/lib/motion";
 import { Button } from "@/components/ui/button";
+import Atmosphere from "./Atmosphere";
+import GrainOverlay from "./GrainOverlay";
 
 const APP_URL = "https://refract-dev.vercel.app";
 
 const Hero = () => {
   return (
     <section className="hero-section relative overflow-hidden pt-36 pb-8 md:pt-40 md:pb-12 lg:pt-44 lg:pb-14">
+      <Atmosphere variant="primary" />
+      <GrainOverlay />
+
       <div className="hero-content relative z-10 mx-auto max-w-[1300px] px-5 md:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -52,6 +57,7 @@ const Hero = () => {
           <img
             src="/diff view.png"
             alt="Refract diff view"
+            className="image-blended"
             style={{ display: "block", width: "100%", borderRadius: "0 0 8px 8px" }}
           />
         </div>
