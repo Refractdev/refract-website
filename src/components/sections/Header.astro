@@ -1,0 +1,90 @@
+---
+import Logo from '@/components/ui/Logo.astro';
+import { chrome, marketingLinks } from '@/content/nav';
+
+interface Props {
+  variant?: 'marketing' | 'minimal';
+}
+
+const { variant = 'marketing' } = Astro.props;
+const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
+
+function isCurrent(href: string) {
+  if (href === '/docs') return pathname === '/docs' || pathname.startsWith('/docs/');
+  return pathname === href;
+}
+---
+
+<header class:list={[variant === 'minimal' ? 'fixed top-0 left-0 z-50 w-full border-b border-ld-border bg-ld-surface' : 'site-header']}>
+  {
+    variant === 'minimal' ? (
+      <div class="site-header__inner mx-auto flex max-w-site items-center justify-between px-5 md:px-8">
+        <a href="/" class="nav-link inline-flex items-center gap-2">
+          <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+          Back to home
+        </a>
+        <a href="/" aria-label="Refract home">
+          <Logo height={14} />
+        </a>
+        <div class="w-24" />
+      </div>
+    ) : (
+      <div class="relative">
+        <div class="site-header__inner relative z-10 mx-auto flex max-w-site items-center justify-between px-5 md:px-8">
+          <a href="/" class="shrink-0" aria-label="Refract home">
+            <Logo height={14} />
+          </a>
+
+          <nav class="absolute left-1/2 top-1/2 z-20 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-6 lg:flex" aria-label="Primary">
+            {marketingLinks.map((link) => (
+              <a href={link.href} class="nav-link" aria-current={isCurrent(link.href) ? 'page' : undefined}>
+                {link.label}
+              </a>
+            ))}
+          </nav>
+
+          <div class="relative z-10 flex items-center gap-3">
+            <a class="nav-link hidden sm:inline" href={chrome.signIn.href}>
+              {chrome.signIn.label}
+            </a>
+            <a class="btn btn-primary btn-sm" href={chrome.getStarted.href}>
+              {chrome.getStarted.label}
+            </a>
+
+            <details class="nav-mobile lg:hidden">
+              <summary
+                class="flex size-8 cursor-pointer items-center justify-center text-ld-secondary"
+                aria-label="Open menu"
+              >
+                <svg class="icon-menu h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+                <svg class="icon-close h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+              </summary>
+              <div class="absolute left-0 right-0 top-[var(--header-height)] border-t border-ld-border bg-ld-surface">
+                <div class="mx-auto flex max-w-site flex-col gap-1 px-5 py-5 md:px-8">
+                  {marketingLinks.map((link) => (
+                    <a href={link.href} class="nav-link rounded-md px-3 py-2.5" aria-current={isCurrent(link.href) ? 'page' : undefined}>
+                      {link.label}
+                    </a>
+                  ))}
+                  <hr class="my-3 border-ld-border" />
+                  <a href={chrome.signIn.href} class="nav-link rounded-md px-3 py-2.5">
+                    {chrome.signIn.label}
+                  </a>
+                  <a class="btn btn-primary btn-sm mt-2 self-start" href={chrome.getStarted.href}>
+                    {chrome.getStarted.label}
+                  </a>
+                </div>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    )
+  }
+</header>

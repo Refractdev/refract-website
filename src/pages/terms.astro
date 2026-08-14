@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AppShell from '../layouts/AppShell.astro';
+import PageShell from '@/components/sections/PageShell.astro';
+import { terms } from '@/content/legal';
+---
+
+<BaseLayout title={terms.title} description={terms.description}>
+  <AppShell variant="minimal">
+    <PageShell label="Legal" title={terms.headline}>
+      <div class="prose-copy">
+        <p>{terms.body}</p>
+        <p set:html={terms.contactHtml} />
+      </div>
+    </PageShell>
+  </AppShell>
+</BaseLayout>

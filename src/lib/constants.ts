@@ -1,0 +1,9 @@
+export const APP_URL = "https://refract-dev.vercel.app";
+export const SITE_URL = "https://devrefract.com";
+export const SITE_NAME = "Refract";
+export const TWITTER_HANDLE = "@devRefracta";
+export const CONTACT_EMAIL = "refractcode@gmail.com";
+export const SIGNUP_PATH = "/signup";
+export const LOGIN_PATH = "/login";
+export const GITHUB_APP_URL = "https://github.com/apps/devrefract";
+export const GITHUB_APP_INSTALL_URL = "https://github.com/apps/devrefract/installations/new";

@@ -1,0 +1,18 @@
+---
+interface Props {
+  height?: number;
+  variant?: 'full' | 'icon';
+}
+
+const { height = 22, variant = 'full' } = Astro.props;
+const src = variant === 'icon' ? '/icon-white.svg' : '/logofull-white.svg';
+const width = variant === 'icon' ? height * (166 / 170) : height * (780 / 212);
+---
+
+<img
+  src={src}
+  alt="Refract"
+  width={width}
+  height={height}
+  style={`height:${height}px;width:auto;display:block`}
+/>

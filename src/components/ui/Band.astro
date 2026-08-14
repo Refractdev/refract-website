@@ -1,0 +1,36 @@
+---
+interface Props {
+  headline: string;
+  lede?: string;
+  after?: string;
+  aside?: string;
+}
+
+const { headline, lede, after, aside } = Astro.props;
+---
+
+<section class="band-section">
+  <div class="mx-auto max-w-site px-5 md:px-8">
+    <header class="band">
+      <h2 class="text-tp-heading mx-auto max-w-[720px] text-balance reveal">{headline}</h2>
+      {lede ? <p class="text-tp-desc mx-auto mt-5 max-w-[560px] reveal" style="--i:1">{lede}</p> : null}
+    </header>
+    <div class="mt-10">
+      <slot />
+    </div>
+    {
+      after ? (
+        <p class="band__after reveal" style="--i:1">
+          {after}
+        </p>
+      ) : null
+    }
+    {
+      aside ? (
+        <p class="band__aside reveal" style="--i:2">
+          {aside}
+        </p>
+      ) : null
+    }
+  </div>
+</section>

@@ -1,0 +1,48 @@
+---
+import type { Plan } from '@/content/pricing';
+
+interface Props {
+  plans: Plan[];
+}
+
+const { plans } = Astro.props;
+---
+
+<div class="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+  {
+    plans.map((plan, i) => (
+      <div
+        class:list={[
+          'plan-card reveal flex flex-col rounded-lg border bg-ld-canvas p-6',
+          plan.highlight ? 'plan-card--highlight border-ld-border' : 'border-ld-border',
+        ]}
+        style={`--i:${i}`}
+      >
+        {plan.badge && (
+          <div class="mb-3">
+            <span class="tp-badge">{plan.badge}</span>
+          </div>
+        )}
+        <h3 class="text-lg font-medium text-white">{plan.name}</h3>
+        <div class="mt-3 flex items-baseline gap-1">
+          <span class="price-monthly text-3xl font-medium text-white">{plan.monthlyPrice}</span>
+          <span class="price-yearly text-3xl font-medium text-white">{plan.yearlyPrice}</span>
+          <span class="sub-monthly text-sm text-ld-muted">{plan.period}</span>
+          <span class="sub-yearly text-sm text-ld-muted">{plan.yearlyPeriod}</span>
+        </div>
+        <p class="mt-4 text-sm leading-relaxed text-ld-tertiary">{plan.description}</p>
+        {plan.features.length > 0 && (
+          <ul class="mt-6 flex-1 space-y-3">
+            {plan.features.map((feat) => (
+              <li class="text-sm leading-relaxed text-[#d2d2d2]">{feat}</li>
+            ))}
+          </ul>
+        )}
+        <p class="mt-6 text-[12px] text-ld-muted">Best for: {plan.bestFor}</p>
+        <a href={plan.href} class:list={['btn mt-6 w-full', plan.highlight ? 'btn-primary' : 'btn-secondary']}>
+          {plan.cta}
+        </a>
+      </div>
+    ))
+  }
+</div>

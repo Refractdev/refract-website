@@ -1,0 +1,42 @@
+---
+interface State {
+  title: string;
+  body: string;
+  action?: string;
+}
+
+interface Props {
+  states: State[] | readonly State[];
+  caption?: string;
+  primaryIndex?: number;
+}
+
+const { states, caption, primaryIndex = 0 } = Astro.props;
+---
+
+<figure>
+  <div class="code-surface">
+    <div class="code-surface__bar">
+      <p class="code-surface__path">pull request</p>
+    </div>
+    <div class="result-note state-stack">
+      {
+        states.map((state, i) => (
+          <div class:list={['state-card', `state-card--${i + 1}`, i === primaryIndex && 'state-card--primary']}>
+            <p class="tp-mono">Refract</p>
+            <p class="result-note__title">{state.title}</p>
+            <p class="result-note__body">{state.body}</p>
+            {state.action ? (
+              <button type="button" class="result-note__action">
+                {state.action}
+              </button>
+            ) : (
+              <span class="result-note__meta" aria-hidden="true" />
+            )}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+  {caption ? <p class="shot-caption">{caption}</p> : null}
+</figure>

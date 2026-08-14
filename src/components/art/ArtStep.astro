@@ -1,0 +1,63 @@
+---
+interface Props {
+  kind: 'account' | 'connect' | 'ship';
+}
+
+const { kind } = Astro.props;
+---
+
+<div class="art" aria-hidden="true">
+  {
+    kind === 'account' ? (
+      <svg viewBox="0 0 220 150" fill="none">
+        <rect class="d-panel" x="24" y="18" width="172" height="114" rx="10" />
+        <rect class="d-panel" x="42" y="42" width="136" height="22" rx="6" />
+        <rect class="d-bar--soft" x="54" y="51" width="52" height="4" rx="2" />
+        <rect class="d-panel" x="42" y="74" width="136" height="22" rx="6" />
+        <circle class="d-dot" cx="58" cy="85" r="2" />
+        <circle class="d-dot" cx="66" cy="85" r="2" />
+        <circle class="d-dot" cx="74" cy="85" r="2" />
+        <circle class="d-dot" cx="82" cy="85" r="2" />
+        <g class="d-press">
+          <rect class="d-btn" x="42" y="104" width="136" height="20" rx="6" />
+        </g>
+      </svg>
+    ) : kind === 'connect' ? (
+      <svg viewBox="0 0 240 150" fill="none">
+        <rect class="d-panel" x="12" y="56" width="66" height="38" rx="8" />
+        <rect class="d-bar" x="26" y="73" width="38" height="4" rx="2" />
+
+        <path pathLength="1" class="d-link d-draw" style="--d:0" d="M78 75 C 108 75, 112 32, 144 32" />
+        <path pathLength="1" class="d-link d-draw" style="--d:1" d="M78 75 L 144 75" />
+        <path class="d-link d-link--dash" d="M78 75 C 108 75, 112 118, 144 118" />
+
+        <rect class="d-panel" x="144" y="18" width="84" height="28" rx="6" />
+        <rect class="d-add" x="156" y="30" width="6" height="6" rx="1" />
+        <rect class="d-bar--soft" x="170" y="30" width="42" height="4" rx="2" />
+
+        <rect class="d-panel" x="144" y="61" width="84" height="28" rx="6" />
+        <rect class="d-add" x="156" y="73" width="6" height="6" rx="1" />
+        <rect class="d-bar--soft" x="170" y="73" width="34" height="4" rx="2" />
+
+        <rect class="d-panel d-panel--ghost" x="144" y="104" width="84" height="28" rx="6" />
+        <rect class="d-bar--soft" x="170" y="116" width="46" height="4" rx="2" opacity="0.5" />
+      </svg>
+    ) : (
+      <svg viewBox="0 0 240 150" fill="none">
+        <line class="d-link" x1="20" y1="104" x2="220" y2="104" />
+        <path pathLength="1" class="d-link d-draw" d="M62 104 C 84 104, 84 52, 108 52 L 150 52 C 174 52, 174 104, 196 104" />
+
+        <circle class="d-panel" cx="40" cy="104" r="7" />
+        <circle class="d-panel" cx="108" cy="52" r="7" />
+        <circle class="d-panel" cx="150" cy="52" r="7" />
+
+        <g class="d-in">
+          <circle cx="196" cy="104" r="9" class="d-add-bg" />
+          <path pathLength="1" class="d-stroke-add d-draw" d="M191 104 l4 4 l8 -9" />
+        </g>
+
+        <text class="d-label" x="20" y="130">main</text>
+      </svg>
+    )
+  }
+</div>

@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AppShell from '../../layouts/AppShell.astro';
+import PageShell from '@/components/sections/PageShell.astro';
+import { faqGroups, faqSeo } from '@/content/faq';
+import { breadcrumbSchema, faqPageSchema } from '@/lib/schema';
+
+const allQuestions = faqGroups.flatMap((group) => group.items);
+const schema = [
+  faqPageSchema(allQuestions),
+  breadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'Docs', path: '/docs/' },
+    { name: 'FAQ', path: '/docs/faq/' },
+  ]),
+];
+---
+
+<BaseLayout title={faqSeo.title} description={faqSeo.description} schema={schema}>
+  <AppShell>
+    <PageShell label="Documentation" title="FAQ" maxWidth={720}>
+      <p class="mb-8">
+        <a href="/docs" class="text-[13px] text-ld-muted underline underline-offset-2 hover:text-white">All docs</a>
+      </p>
+      {
+        faqGroups.map((group) => (
+          <section class="mb-12">
+            <h2 class="text-lg font-medium text-white">{group.title}</h2>
+            <div class="mt-4 border-y border-ld-border">
+              {group.items.map((item) => (
+                <details class="faq-item">
+                  <summary>{item.q}</summary>
+                  <p set:html={item.a} />
+                </details>
+              ))}
+            </div>
+          </section>
+        ))
+      }
+    </PageShell>
+  </AppShell>
+</BaseLayout>

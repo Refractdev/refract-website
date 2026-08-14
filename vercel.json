@@ -1,0 +1,22 @@
+{
+  "buildCommand": "pnpm build",
+  "outputDirectory": "dist",
+  "installCommand": "pnpm install",
+  "redirects": [
+    {
+      "source": "/login",
+      "destination": "https://refract-dev.vercel.app",
+      "permanent": false
+    },
+    {
+      "source": "/signup",
+      "destination": "https://refract-dev.vercel.app",
+      "permanent": false
+    },
+    {
+      "source": "/dashboard",
+      "destination": "https://refract-dev.vercel.app",
+      "permanent": false
+    }
+  ]
+}

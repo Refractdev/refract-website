@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AppShell from '../../layouts/AppShell.astro';
+import PageShell from '@/components/sections/PageShell.astro';
+import { docPages, getDocPage } from '@/content/docs';
+import { breadcrumbSchema } from '@/lib/schema';
+
+export function getStaticPaths() {
+  return docPages.map((page) => ({ params: { slug: page.slug } }));
+}
+
+const { slug } = Astro.params;
+const page = getDocPage(slug ?? '');
+if (!page) {
+  throw new Error(`Unknown docs page: ${slug}`);
+}
+
+const schema = [
+  breadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'Docs', path: '/docs/' },
+    { name: page.title, path: `/docs/${page.slug}/` },
+  ]),
+];
+---
+
+<BaseLayout title={`${page.title} — Refract`} description={page.description} schema={schema}>
+  <AppShell>
+    <PageShell label="Documentation" title={page.title}>
+      <p class="mb-8">
+        <a href="/docs" class="text-[13px] text-ld-muted underline underline-offset-2 hover:text-white">All docs</a>
+      </p>
+      <div class="prose-copy docs-prose">
+        {
+          page.blocks.map((block) => {
+            if (block.type === 'lede') return <p class="docs-lede">{block.text}</p>;
+            if (block.type === 'p') return <p>{block.text}</p>;
+            if (block.type === 'h2') return <h2>{block.text}</h2>;
+            if (block.type === 'note') return <p class="text-ld-muted">{block.text}</p>;
+            if (block.type === 'html') return <div set:html={block.html} />;
+            if (block.type === 'ol')
+              return (
+                <ol>
+                  {block.items.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ol>
+              );
+            if (block.type === 'ul')
+              return (
+                <ul>
+                  {block.items.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              );
+            return null;
+          })
+        }
+      </div>
+    </PageShell>
+  </AppShell>
+</BaseLayout>

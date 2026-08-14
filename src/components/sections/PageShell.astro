@@ -1,0 +1,23 @@
+---
+interface Props {
+  label?: string;
+  title: string;
+  description?: string;
+  maxWidth?: number;
+}
+
+const { label, title, description, maxWidth = 720 } = Astro.props;
+---
+
+<main id="main" class="min-h-screen bg-ld-canvas pt-28 pb-20 text-ld-secondary">
+  <div class="mx-auto px-5 md:px-8" style={`max-width:${maxWidth}px`}>
+    <header class="anim-hero mb-12">
+      {label ? <p class="tp-mono">{label}</p> : null}
+      <h1 class="text-tp-heading mt-3">{title}</h1>
+      {description ? <div class="text-tp-desc mt-3 max-w-[560px]">{description}</div> : null}
+    </header>
+    <div class="space-y-6 text-[15px] font-normal text-ld-tertiary">
+      <slot />
+    </div>
+  </div>
+</main>

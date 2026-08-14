@@ -1,0 +1,44 @@
+---
+interface Props {
+  title?: string;
+  /** Accepts inline markup so the key phrase can be emphasised. */
+  body?: string;
+  kicker?: string;
+  span?: 3 | 4 | 5 | 6 | 7 | 8 | 9 | 12;
+  rows?: 1 | 2;
+  size?: 'default' | 'tall' | 'short';
+  index?: number;
+}
+
+const { title, body, kicker, span = 6, rows = 1, size = 'default', index = 0 } = Astro.props;
+const hasArt = Astro.slots.has('art');
+---
+
+<article
+  class:list={[
+    'tile',
+    `tile--${span}`,
+    rows === 2 && 'tile--rows2',
+    size !== 'default' && `tile--${size}`,
+    !hasArt && 'tile--text',
+    'reveal',
+  ]}
+  style={`--i:${index}`}
+>
+  {
+    title || body || kicker ? (
+      <div class="tile__copy">
+        {kicker ? <p class="tile__kicker">{kicker}</p> : null}
+        {title ? <h3 class="tile__title">{title}</h3> : null}
+        {body ? <p class="tile__body" set:html={body} /> : null}
+      </div>
+    ) : null
+  }
+  {
+    hasArt ? (
+      <div class="tile__art">
+        <slot name="art" />
+      </div>
+    ) : null
+  }
+</article>

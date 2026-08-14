@@ -1,0 +1,180 @@
+---
+import '../styles/global.css';
+import { GITHUB_APP_URL, SITE_NAME, SITE_URL, TWITTER_HANDLE } from '@/lib/constants';
+import { defaultSeo, jsonLdDescription } from '@/content/seo';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  canonicalURL?: string;
+  ogImage?: string;
+  noindex?: boolean;
+  /** Homepage only — repeating SoftwareApplication on every URL confuses rich results. */
+  includeProduct?: boolean;
+  /** Extra schema.org nodes for this page, merged into the sitewide graph. */
+  schema?: Record<string, unknown>[];
+}
+
+const {
+  title = defaultSeo.title,
+  description = defaultSeo.description,
+  ogImage = '/og-image.png',
+  noindex = false,
+  includeProduct = false,
+  schema = [],
+} = Astro.props;
+
+// Social cards default to the page's own title and description, so a shared
+// docs or legal link never advertises the homepage message.
+const { ogTitle = title, ogDescription = description } = Astro.props;
+
+const canonicalURL = normalizeCanonical(Astro.props.canonicalURL ?? Astro.url.href, noindex);
+const ogImageURL = new URL(ogImage, Astro.site).toString();
+const logoURL = new URL('/logo.png', Astro.site).toString();
+const organizationId = `${SITE_URL}/#organization`;
+const websiteId = `${SITE_URL}/#website`;
+const softwareId = `${SITE_URL}/#software`;
+
+function normalizeCanonical(href: string, skipSlash: boolean) {
+  const url = new URL(href);
+  url.search = '';
+  url.hash = '';
+  const isFile = /\.[a-z0-9]+$/i.test(url.pathname);
+  if (!skipSlash && !isFile && !url.pathname.endsWith('/')) url.pathname += '/';
+  return url.toString();
+}
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': organizationId,
+      name: SITE_NAME,
+      url: SITE_URL,
+      logo: {
+        '@type': 'ImageObject',
+        url: logoURL,
+        width: 512,
+        height: 512,
+      },
+      image: ogImageURL,
+      sameAs: [`https://twitter.com/${TWITTER_HANDLE.replace('@', '')}`, GITHUB_APP_URL],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': websiteId,
+      name: SITE_NAME,
+      url: SITE_URL,
+      description: jsonLdDescription,
+      publisher: { '@id': organizationId },
+      inLanguage: 'en',
+    },
+    {
+      '@type': 'WebPage',
+      '@id': `${canonicalURL}#webpage`,
+      url: canonicalURL,
+      name: title,
+      description,
+      isPartOf: { '@id': websiteId },
+      about: includeProduct ? { '@id': softwareId } : undefined,
+      primaryImageOfPage: {
+        '@type': 'ImageObject',
+        url: ogImageURL,
+        width: 1200,
+        height: 630,
+        caption: defaultSeo.ogImageAlt,
+      },
+      inLanguage: 'en',
+    },
+    ...(includeProduct
+      ? [
+          {
+            '@type': 'SoftwareApplication',
+            '@id': softwareId,
+            name: SITE_NAME,
+            url: SITE_URL,
+            description: jsonLdDescription,
+            applicationCategory: 'DeveloperApplication',
+            operatingSystem: 'Web',
+            publisher: { '@id': organizationId },
+            offers: [
+              {
+                '@type': 'Offer',
+                name: 'Free',
+                price: '0',
+                priceCurrency: 'USD',
+                url: `${SITE_URL}/pricing/`,
+              },
+              {
+                '@type': 'Offer',
+                name: 'Starter',
+                price: '12',
+                priceCurrency: 'USD',
+                url: `${SITE_URL}/pricing/`,
+              },
+              {
+                '@type': 'Offer',
+                name: 'Pro',
+                price: '24',
+                priceCurrency: 'USD',
+                url: `${SITE_URL}/pricing/`,
+              },
+            ],
+          },
+        ]
+      : []),
+    ...schema,
+  ],
+};
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a0a0b" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={ogDescription} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={defaultSeo.ogImageAlt} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content={TWITTER_HANDLE} />
+    <meta name="twitter:creator" content={TWITTER_HANDLE} />
+    <meta name="twitter:title" content={ogTitle} />
+    <meta name="twitter:description" content={ogDescription} />
+    <meta name="twitter:image" content={ogImageURL} />
+    <meta name="twitter:image:alt" content={defaultSeo.ogImageAlt} />
+
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" type="image/svg+xml" href="/appicon-black.svg" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="mask-icon" href="/icon-white.svg" color="#0a0a0b" />
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <slot />
+  </body>
+</html>

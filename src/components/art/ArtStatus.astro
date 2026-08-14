@@ -1,0 +1,35 @@
+---
+interface Props {
+  kind: 'working' | 'clear' | 'ready' | 'look' | 'wrong';
+}
+
+const { kind } = Astro.props;
+---
+
+<div class="art art--icon" aria-hidden="true">
+  <svg viewBox="0 0 96 96" fill="none">
+    <circle class="d-panel" cx="48" cy="48" r="30" />
+    {
+      kind === 'working' ? (
+        <circle pathLength="1" class="d-spin" cx="48" cy="48" r="20" />
+      ) : kind === 'clear' ? (
+        <path pathLength="1" class="d-stroke-add d-draw" style="stroke-width:2.5" d="M37 49 l8 8 l16 -18" />
+      ) : kind === 'ready' ? (
+        <g>
+          <rect class="d-add" x="34" y="40" width="28" height="4" rx="2" />
+          <rect class="d-rm" x="34" y="52" width="20" height="4" rx="2" />
+        </g>
+      ) : kind === 'look' ? (
+        <g class="d-blink">
+          <rect class="d-warn" x="46" y="34" width="4" height="20" rx="2" />
+          <circle class="d-warn" cx="48" cy="60" r="2.5" />
+        </g>
+      ) : (
+        <g>
+          <path pathLength="1" class="d-stroke-rm d-draw" style="stroke-width:2.5" d="M40 40 l16 16" />
+          <path pathLength="1" class="d-stroke-rm d-draw" style="--d:1;stroke-width:2.5" d="M56 40 l-16 16" />
+        </g>
+      )
+    }
+  </svg>
+</div>

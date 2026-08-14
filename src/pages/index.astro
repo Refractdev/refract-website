@@ -1,0 +1,213 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AppShell from '../layouts/AppShell.astro';
+import Hero from '@/components/sections/Hero.astro';
+import CopyBlock from '@/components/sections/CopyBlock.astro';
+import CTA from '@/components/sections/CTA.astro';
+import ResultNote from '@/components/sections/ResultNote.astro';
+import Transform from '@/components/code/Transform.astro';
+import Band from '@/components/ui/Band.astro';
+import Bento from '@/components/ui/Bento.astro';
+import Tile from '@/components/ui/Tile.astro';
+import ArtDuplicate from '@/components/art/ArtDuplicate.astro';
+import ArtFetch from '@/components/art/ArtFetch.astro';
+import ArtLeftover from '@/components/art/ArtLeftover.astro';
+import ArtStructure from '@/components/art/ArtStructure.astro';
+import ArtApprove from '@/components/art/ArtApprove.astro';
+import ArtOrder from '@/components/art/ArtOrder.astro';
+import ArtCheck from '@/components/art/ArtCheck.astro';
+import ArtProject from '@/components/art/ArtProject.astro';
+import ArtQuiet from '@/components/art/ArtQuiet.astro';
+import ArtDiff from '@/components/art/ArtDiff.astro';
+import ArtMess from '@/components/art/ArtMess.astro';
+import ArtCleanup from '@/components/art/ArtCleanup.astro';
+import ArtConnect from '@/components/art/ArtConnect.astro';
+import ArtRefuse from '@/components/art/ArtRefuse.astro';
+import ArtScope from '@/components/art/ArtScope.astro';
+import ArtStep from '@/components/art/ArtStep.astro';
+import ArtAudience from '@/components/art/ArtAudience.astro';
+import {
+  heroFilm,
+  homeAudience,
+  homeCta,
+  homeDoes,
+  homeHonesty,
+  homeProblem,
+  homeResult,
+  homeSeo,
+  homeSocial,
+  homeSteps,
+  homeTrust,
+  homeTurn,
+  homeWorld,
+  homeHero,
+} from '@/content/home';
+import { productResults } from '@/content/product';
+
+const stepKinds = ['account', 'connect', 'ship'] as const;
+const audienceKinds = ['individual', 'team', 'stack'] as const;
+
+const worldStates = [
+  { title: productResults.items[1].title, body: productResults.items[1].body },
+  { title: productResults.items[2].title, body: productResults.items[2].body, action: 'Approve' },
+  { title: productResults.items[3].title, body: productResults.items[3].body },
+];
+---
+
+<BaseLayout
+  title={homeSeo.title}
+  description={homeSeo.description}
+  ogTitle={homeSeo.ogTitle}
+  ogDescription={homeSeo.ogDescription}
+  includeProduct
+>
+  <AppShell>
+    <main id="main">
+      <Hero />
+
+      {/* The grid is the hero's visual, so it carries no heading of its own. */}
+      <section class="pb-4 md:pb-6">
+        <div class="mx-auto max-w-site px-5 md:px-8">
+          <Bento>
+            <Tile title={homeProblem.bullets[0]} span={6} rows={2} index={0}>
+              <ArtDuplicate slot="art" />
+            </Tile>
+            <Tile title={homeProblem.bullets[1]} span={6} index={1}>
+              <ArtFetch slot="art" />
+            </Tile>
+            <Tile title={homeProblem.bullets[2]} span={3} index={2}>
+              <ArtLeftover slot="art" />
+            </Tile>
+            <Tile title={homeProblem.bullets[3]} span={3} index={3}>
+              <ArtStructure slot="art" />
+            </Tile>
+          </Bento>
+          <p class="band__after reveal" style="--i:1">
+            {homeProblem.headline} {homeProblem.close}
+          </p>
+        </div>
+      </section>
+
+      <Band headline={homeTurn.headline} lede={homeTurn.paragraphs[2]}>
+        <Bento>
+          <Tile span={12} index={0}>
+            <Transform slot="art" file={heroFilm.file} lines={heroFilm.lines} caption={homeHero.caption} />
+          </Tile>
+        </Bento>
+      </Band>
+
+      <Band headline={homeResult.headline}>
+        <Bento>
+          <Tile title={homeResult.points[0].title} body={homeResult.points[0].body} span={8} index={0}>
+            <ArtDiff slot="art" kind="remove" />
+          </Tile>
+          <Tile title={homeResult.points[1].title} body={homeResult.points[1].body} span={4} index={1}>
+            <ArtDiff slot="art" kind="merge" />
+          </Tile>
+          <Tile title={homeResult.points[2].title} body={homeResult.points[2].body} span={4} index={2}>
+            <ArtDiff slot="art" kind="add" />
+          </Tile>
+          <Tile title={homeResult.points[3].title} body={homeResult.points[3].body} span={8} index={3}>
+            <ArtDiff slot="art" kind="lock" />
+          </Tile>
+        </Bento>
+      </Band>
+
+      <Band headline={homeDoes.headline}>
+        <Bento>
+          <Tile kicker={homeDoes.points[0].number} title={homeDoes.points[0].title} body={homeDoes.points[0].body} span={5} index={0}>
+            <ArtProject slot="art" />
+          </Tile>
+          <Tile kicker={homeDoes.points[1].number} title={homeDoes.points[1].title} body={homeDoes.points[1].body} span={7} index={1}>
+            <ArtMess slot="art" />
+          </Tile>
+          <Tile kicker={homeDoes.points[2].number} title={homeDoes.points[2].title} body={homeDoes.points[2].body} span={7} index={2}>
+            <ArtOrder slot="art" />
+          </Tile>
+          <Tile kicker={homeDoes.points[3].number} title={homeDoes.points[3].title} body={homeDoes.points[3].body} span={5} index={3}>
+            <ArtCleanup slot="art" />
+          </Tile>
+        </Bento>
+      </Band>
+
+      <Band headline={homeWorld.headline} lede={homeWorld.paragraphs[0]} after={homeWorld.close}>
+        <Bento>
+          <Tile span={8} body={homeWorld.caption} index={0}>
+            <ResultNote slot="art" states={worldStates} primaryIndex={1} />
+          </Tile>
+          <Tile body={homeWorld.paragraphs[1]} span={4} index={1}>
+            <ArtConnect slot="art" />
+          </Tile>
+        </Bento>
+      </Band>
+
+      <Band headline={homeTrust.headline}>
+        <Bento>
+          <Tile title={homeTrust.points[0].title} body={homeTrust.points[0].body} span={7} size="tall" index={0}>
+            <ArtApprove slot="art" />
+          </Tile>
+          <Tile title={homeTrust.points[1].title} body={homeTrust.points[1].body} span={5} size="tall" index={1}>
+            <ArtQuiet slot="art" />
+          </Tile>
+          <Tile title={homeTrust.points[2].title} body={homeTrust.points[2].body} span={4} index={2}>
+            <ArtRefuse slot="art" />
+          </Tile>
+          <Tile title={homeTrust.points[3].title} body={homeTrust.points[3].body} span={4} index={3}>
+            <ArtCheck slot="art" />
+          </Tile>
+          <Tile title={homeTrust.points[4].title} body={homeTrust.points[4].body} span={4} index={4}>
+            <ArtScope slot="art" />
+          </Tile>
+        </Bento>
+      </Band>
+
+      <Band headline={homeSteps.headline} aside={homeSteps.note}>
+        <Bento>
+          {
+            homeSteps.steps.map((step, i) => (
+              <Tile kicker={step.number} title={step.title} body={step.body} span={4} index={i}>
+                <ArtStep slot="art" kind={stepKinds[i]} />
+              </Tile>
+            ))
+          }
+        </Bento>
+        <p class="mt-8 text-center reveal" style="--i:2">
+          <a class="btn btn-primary" href={homeSteps.cta.href}>{homeSteps.cta.label}</a>
+        </p>
+      </Band>
+
+      <Band headline={homeAudience.headline}>
+        <Bento>
+          {
+            homeAudience.points.map((point, i) => (
+              <Tile title={point.title} body={point.body} span={4} index={i}>
+                <ArtAudience slot="art" kind={audienceKinds[i]} />
+              </Tile>
+            ))
+          }
+        </Bento>
+      </Band>
+
+      <section class="section-default">
+        <div class="mx-auto max-w-site px-5 text-center md:px-8">
+          <h2 class="text-tp-heading mx-auto max-w-[720px] text-balance reveal">{homeSocial.headline}</h2>
+          <p class="mx-auto mt-6 max-w-[560px] text-[15px] leading-relaxed text-ld-tertiary reveal" style="--i:1">
+            {homeSocial.line} {homeSocial.invite}{' '}
+            <a href={homeSocial.inviteHref} class="text-white underline underline-offset-2">{homeSocial.inviteLabel}</a>
+          </p>
+        </div>
+      </section>
+
+      <CopyBlock headline={homeHonesty.headline}>
+        {homeHonesty.paragraphs.map((p) => <p>{p}</p>)}
+      </CopyBlock>
+
+      <CTA
+        headline={homeCta.headline}
+        body={homeCta.body}
+        primary={homeCta.primary}
+        secondary={homeCta.secondary}
+      />
+    </main>
+  </AppShell>
+</BaseLayout>
