@@ -1,8 +1,19 @@
 {
-  "framework": "astro",
-  "buildCommand": "pnpm build",
-  "outputDirectory": "dist",
-  "installCommand": "pnpm install",
+  "services": {
+    "web": {
+      "root": ".",
+      "framework": "astro",
+      "installCommand": "pnpm install",
+      "buildCommand": "pnpm build",
+      "outputDirectory": "dist"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": { "service": "web" }
+    }
+  ],
   "redirects": [
     {
       "source": "/login",
