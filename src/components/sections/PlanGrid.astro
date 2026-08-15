@@ -1,11 +1,13 @@
 ---
 import type { Plan } from '@/content/pricing';
+import { usePack } from '@/i18n/usePack';
 
 interface Props {
   plans: Plan[];
 }
 
 const { plans } = Astro.props;
+const { pack, href } = usePack(Astro.url.pathname);
 ---
 
 <div class="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -38,8 +40,8 @@ const { plans } = Astro.props;
             ))}
           </ul>
         )}
-        <p class="mt-6 text-[12px] text-ld-muted">Best for: {plan.bestFor}</p>
-        <a href={plan.href} class:list={['btn mt-6 w-full', plan.highlight ? 'btn-primary' : 'btn-secondary']}>
+        <p class="mt-6 text-[12px] text-ld-muted">{pack.ui.bestFor} {plan.bestFor}</p>
+        <a href={href(plan.href)} class:list={['btn mt-6 w-full', plan.highlight ? 'btn-primary' : 'btn-secondary']}>
           {plan.cta}
         </a>
       </div>

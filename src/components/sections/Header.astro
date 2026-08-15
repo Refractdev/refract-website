@@ -1,17 +1,21 @@
 ---
 import Logo from '@/components/ui/Logo.astro';
-import { chrome, marketingLinks } from '@/content/nav';
+import LanguageSwitcher from '@/components/ui/LanguageSwitcher.astro';
+import { LOGIN_PATH, SIGNUP_PATH } from '@/lib/constants';
+import { stripLocalePrefix } from '@/i18n/href';
+import { usePack } from '@/i18n/usePack';
 
 interface Props {
   variant?: 'marketing' | 'minimal';
 }
 
 const { variant = 'marketing' } = Astro.props;
-const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
+const { pack, href } = usePack(Astro.url.pathname);
+const pathname = stripLocalePrefix(Astro.url.pathname.replace(/\/$/, '') || '/');
 
-function isCurrent(href: string) {
-  if (href === '/docs') return pathname === '/docs' || pathname.startsWith('/docs/');
-  return pathname === href;
+function isCurrent(target: string) {
+  if (target === '/docs') return pathname === '/docs' || pathname.startsWith('/docs/');
+  return pathname === target;
 }
 ---
 
@@ -19,38 +23,41 @@ function isCurrent(href: string) {
   {
     variant === 'minimal' ? (
       <div class="site-header__inner mx-auto flex max-w-site items-center justify-between px-5 md:px-8">
-        <a href="/" class="nav-link inline-flex items-center gap-2">
+        <a href={href('/')} class="nav-link inline-flex items-center gap-2">
           <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <path d="M19 12H5M12 19l-7-7 7-7" />
           </svg>
-          Back to home
+          {pack.ui.backToHome}
         </a>
-        <a href="/" aria-label="Refract home">
+        <a href={href('/')} aria-label="Refract home">
           <Logo height={14} />
         </a>
-        <div class="w-24" />
+        <LanguageSwitcher />
       </div>
     ) : (
       <div class="relative">
-        <div class="site-header__inner relative z-10 mx-auto flex max-w-site items-center justify-between px-5 md:px-8">
-          <a href="/" class="shrink-0" aria-label="Refract home">
+        <div class="site-header__glass" aria-hidden="true"></div>
+        <div class="site-header__shade" aria-hidden="true"></div>
+        <div class="site-header__inner mx-auto flex max-w-site items-center justify-between px-5 md:px-8">
+          <a href={href('/')} class="shrink-0" aria-label="Refract home">
             <Logo height={14} />
           </a>
 
           <nav class="absolute left-1/2 top-1/2 z-20 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-6 lg:flex" aria-label="Primary">
-            {marketingLinks.map((link) => (
-              <a href={link.href} class="nav-link" aria-current={isCurrent(link.href) ? 'page' : undefined}>
+            {pack.nav.marketingLinks.map((link) => (
+              <a href={href(link.href)} class="nav-link" aria-current={isCurrent(link.href) ? 'page' : undefined}>
                 {link.label}
               </a>
             ))}
           </nav>
 
           <div class="relative z-10 flex items-center gap-3">
-            <a class="nav-link hidden sm:inline" href={chrome.signIn.href}>
-              {chrome.signIn.label}
+            <LanguageSwitcher />
+            <a class="nav-link hidden sm:inline" href={LOGIN_PATH}>
+              {pack.nav.signIn}
             </a>
-            <a class="btn btn-primary btn-sm" href={chrome.getStarted.href}>
-              {chrome.getStarted.label}
+            <a class="btn btn-primary btn-sm" href={SIGNUP_PATH}>
+              {pack.nav.getStarted}
             </a>
 
             <details class="nav-mobile lg:hidden">
@@ -65,19 +72,19 @@ function isCurrent(href: string) {
                   <path d="M18 6L6 18M6 6l12 12" />
                 </svg>
               </summary>
-              <div class="absolute left-0 right-0 top-[var(--header-height)] border-t border-ld-border bg-ld-surface">
+              <div class="nav-mobile__panel absolute left-0 right-0 top-[var(--header-height)] border-t border-ld-border">
                 <div class="mx-auto flex max-w-site flex-col gap-1 px-5 py-5 md:px-8">
-                  {marketingLinks.map((link) => (
-                    <a href={link.href} class="nav-link rounded-md px-3 py-2.5" aria-current={isCurrent(link.href) ? 'page' : undefined}>
+                  {pack.nav.marketingLinks.map((link) => (
+                    <a href={href(link.href)} class="nav-link rounded-md px-3 py-2.5" aria-current={isCurrent(link.href) ? 'page' : undefined}>
                       {link.label}
                     </a>
                   ))}
                   <hr class="my-3 border-ld-border" />
-                  <a href={chrome.signIn.href} class="nav-link rounded-md px-3 py-2.5">
-                    {chrome.signIn.label}
+                  <a href={LOGIN_PATH} class="nav-link rounded-md px-3 py-2.5">
+                    {pack.nav.signIn}
                   </a>
-                  <a class="btn btn-primary btn-sm mt-2 self-start" href={chrome.getStarted.href}>
-                    {chrome.getStarted.label}
+                  <a class="btn btn-primary btn-sm mt-2 self-start" href={SIGNUP_PATH}>
+                    {pack.nav.getStarted}
                   </a>
                 </div>
               </div>

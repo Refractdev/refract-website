@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AppShell from '../layouts/AppShell.astro';
+import PageShell from '@/components/sections/PageShell.astro';
+import { breadcrumbSchema } from '@/lib/schema';
+import { usePack } from '@/i18n/usePack';
+import { localizeHref } from '@/i18n/href';
+
+const { locale, pack, href } = usePack(Astro.url.pathname);
+const { docs, ui } = pack;
+const schema = [
+  breadcrumbSchema([
+    { name: ui.homeCrumb, path: localizeHref('/', locale) },
+    { name: docs.headline, path: localizeHref('/docs/', locale) },
+  ]),
+];
+---
+
+<BaseLayout title={docs.seo.title} description={docs.seo.description} schema={schema}>
+  <AppShell>
+    <PageShell label={ui.documentation} title={docs.headline} description={docs.intro} maxWidth={900}>
+      {
+        docs.groups.map((group, g) => (
+          <section class="reveal" style={`--i:${g}`}>
+            <h2 class="text-lg font-medium text-white">{group.title}</h2>
+            <div class="mt-4">
+              {group.links.map((link, i) => (
+                <a href={href(link.href)} class="docs-link">
+                  {group.numbered ? <span class="tp-mono w-5 shrink-0">{i + 1}.</span> : null}
+                  <span>{link.label}</span>
+                </a>
+              ))}
+            </div>
+          </section>
+        ))
+      }
+    </PageShell>
+  </AppShell>
+</BaseLayout>

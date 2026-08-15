@@ -1,16 +1,18 @@
 import { SIGNUP_PATH } from "@/lib/constants";
 
 export const pricingSeo = {
-  title: "Pricing — Refract",
+  title: "Pricing — Refract | Free, $12 Starter, $24 Pro",
   description:
-    "Start free. Paid plans for people and teams who generate software with AI and need that code to stay maintainable.",
-  ogTitle: "Pricing — Refract",
-  ogDescription: "Start free. Pro is the plan for people shipping real product with AI.",
+    "Free $0. Starter $12. Pro $24/month. Ultimate $49. Team plans from $149. Start free — you won’t be charged at signup.",
+  ogTitle: "Refract pricing — Free to Pro $24/month",
+  ogDescription:
+    "Free $0. Starter $12. Pro $24/month. Teams from $149. Checkout is coming; you won’t be charged at signup.",
 };
 
 export const pricingHero = {
   headline: "Pay for cleaner software — not for more noise.",
   subhead: "Start on a real repository. Upgrade when the project — or the team — needs more room.",
+  priceLine: "Free $0. Starter $12. Pro $24/month. Ultimate $49. Teams from $149.",
   banner:
     "Start free today. Paid plans are listed so you know where this goes. Checkout is coming; you won’t be charged at signup.",
 };

@@ -1,6 +1,12 @@
 export const APP_URL = "https://refract-dev.vercel.app";
 export const SITE_URL = "https://devrefract.com";
+/** Public product name. Titles, og:site_name, and product SEO stay product-led. */
 export const SITE_NAME = "Refract";
+export const PRODUCT_NAME = SITE_NAME;
+/** Public-facing developer technology brand / organization. */
+export const BRAND_NAME = "Devrefract";
+/** Parent technology company. Not a competing product. */
+export const COMPANY_NAME = "Lintel";
 export const TWITTER_HANDLE = "@devRefracta";
 export const CONTACT_EMAIL = "refractcode@gmail.com";
 export const SIGNUP_PATH = "/signup";

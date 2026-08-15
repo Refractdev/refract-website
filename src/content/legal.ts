@@ -1,4 +1,5 @@
 import { CONTACT_EMAIL } from "@/lib/constants";
+import { operatorSentence } from "@/content/brand";
 
 export const security = {
   title: "Security — Refract",
@@ -16,6 +17,7 @@ export const security = {
     "If we see credentials in a pull request, we tell you. Rotate anything that was exposed.",
     "You can uninstall the GitHub App and narrow which repositories we see.",
   ],
+  operator: operatorSentence,
   reportLabel: "Report a problem",
   reportHtml: `Use <a href="/contact">Contact</a> and choose Security. We treat that as priority.`,
 };
@@ -57,6 +59,7 @@ export const privacy = {
   collectHeadline: "What we collect",
   collect:
     "Account email and name. GitHub installation and repository selection. Review results and the history the product needs.",
+  operator: operatorSentence,
   contactHtml: `Privacy questions go through <a href="/contact">Contact</a>.`,
   changes: "When this policy changes, we update this page and the date.",
 };
@@ -67,6 +70,7 @@ export const terms = {
     "Using Refract means you connect only repositories you are allowed to connect, and use the product as offered.",
   headline: "Terms",
   body: "The full terms will live here. Until they do, using Refract means you agree to connect only repositories you are allowed to connect, and to use the product as offered.",
+  operator: operatorSentence,
   contactHtml: `For now, <a href="/contact">Contact</a> with legal questions.`,
 };
 

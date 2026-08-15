@@ -1,22 +1,25 @@
 ---
-import { homeHero } from '@/content/home';
+import { usePack } from '@/i18n/usePack';
+
+const { pack, href } = usePack(Astro.url.pathname);
+const { hero } = pack.home;
 ---
 
 <section class="relative overflow-hidden pb-10 pt-[120px] md:pb-14 md:pt-[152px]">
   <div class="atmosphere" aria-hidden="true"></div>
   <div class="relative z-10 mx-auto max-w-site px-5 md:px-8">
     <div class="anim-hero mx-auto max-w-[800px] text-center">
-      <a class="hero-pill" href={homeHero.secondary.href}>
-        {homeHero.eyebrow}
+      <a class="hero-pill" href={href(hero.secondary.href)}>
+        {hero.eyebrow}
         <span class="hero-pill__arrow" aria-hidden="true">&rarr;</span>
       </a>
-      <h1 class="text-display mt-6 text-balance">{homeHero.headline}</h1>
-      <p class="text-hero-lede mx-auto mt-6 max-w-[640px]">{homeHero.subhead}</p>
+      <h1 class="text-display mt-6 text-balance">{hero.headline}</h1>
+      <p class="text-hero-lede mx-auto mt-6 max-w-[640px]">{hero.subhead}</p>
       <div class="mt-9 flex flex-wrap items-center justify-center gap-3">
-        <a class="btn btn-primary btn-lg" href={homeHero.primary.href}>{homeHero.primary.label}</a>
-        <a class="btn btn-secondary btn-lg" href={homeHero.secondary.href}>{homeHero.secondary.label}</a>
+        <a class="btn btn-primary btn-lg" href={href(hero.primary.href)}>{hero.primary.label}</a>
+        <a class="btn btn-secondary btn-lg" href={href(hero.secondary.href)}>{hero.secondary.label}</a>
       </div>
-      <p class="mx-auto mt-6 max-w-[480px] text-[13px] leading-relaxed text-ld-muted">{homeHero.trust}</p>
+      <p class="mx-auto mt-6 max-w-[480px] text-[13px] leading-relaxed text-ld-muted">{hero.trust}</p>
     </div>
   </div>
 </section>

@@ -28,19 +28,23 @@
   --ld-diff-remove: rgba(229, 72, 77, 0.09);
   --ld-diff-remove-text: #e5484d;
 
-  --ease-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-reveal: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-premium: var(--ease-reveal);
-  --ease-strong: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-strong: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-loop: cubic-bezier(0.45, 0.05, 0.55, 0.95);
 
-  --dur-fast: 140ms;
-  --dur-mid: 420ms;
-  --dur-slow: 760ms;
-  --dur-film: 1100ms;
-  --stagger: 60ms;
+  --dur-fast: 200ms;
+  --dur-mid: 560ms;
+  --dur-slow: 900ms;
+  --dur-film: 1200ms;
+  --dur-loop: 5.6s;
+  --stagger: 70ms;
 
   --radius: 8px;
   --header-height: 52px;
+  --blur-header: 20px;
+  --blur-glow: 80px;
 
   --space-tight: 64px;
   --space-default: 96px;

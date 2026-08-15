@@ -38,6 +38,7 @@
 html {
   background-color: var(--ld-canvas);
   color: var(--ld-secondary);
+  color-scheme: dark;
   font-family: Inter, system-ui, -apple-system, sans-serif;
   font-optical-sizing: auto;
   -webkit-font-smoothing: antialiased;
@@ -48,7 +49,6 @@ html {
 
 @media (prefers-reduced-motion: no-preference) {
   html {
-    scroll-behavior: smooth;
     interpolate-size: allow-keywords;
   }
 }
@@ -61,6 +61,7 @@ body {
   line-height: 1.6;
   letter-spacing: -0.008em;
   margin: 0;
+  overscroll-behavior-y: contain;
 }
 
 code,
@@ -201,12 +202,26 @@ a {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background-image: radial-gradient(
-    ellipse 70% 45% at 50% 0%,
-    rgba(255, 255, 255, 0.06),
+  overflow: hidden;
+  mask-image: linear-gradient(to bottom, black 0%, transparent 70%);
+}
+
+/* Soft light behind the hero — the blur is what makes it feel like depth, not a flat wash. */
+.atmosphere::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -18%;
+  width: min(920px, 90vw);
+  height: 420px;
+  transform: translateX(-50%);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 255, 255, 0.14),
+    rgba(255, 255, 255, 0.04) 42%,
     transparent 70%
   );
-  mask-image: linear-gradient(to bottom, black 0%, transparent 55%);
+  filter: blur(var(--blur-glow));
 }
 
 /* The same grid texture as the tiles, so hero and cards share a surface. */
@@ -232,13 +247,16 @@ a {
   font-family: "JetBrains Mono", ui-monospace, monospace;
   font-size: 12px;
   color: var(--ld-muted);
+  background: rgba(16, 17, 19, 0.45);
+  backdrop-filter: blur(12px) saturate(1.2);
+  -webkit-backdrop-filter: blur(12px) saturate(1.2);
   transition:
-    border-color 160ms var(--ease-out),
-    color 160ms var(--ease-out);
+    border-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out);
 }
 
 .hero-pill__arrow {
-  transition: transform 160ms var(--ease-out);
+  transition: transform var(--dur-fast) var(--ease-out);
 }
 
 @media (any-hover: hover) {
@@ -264,35 +282,61 @@ a {
   border-bottom: 1px solid transparent;
 }
 
+/* Blur lives on a layer that is never animated — scroll-driven
+   animation on the same node drops backdrop-filter in Chromium. */
+.site-header__glass {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 11, 0.55);
+  backdrop-filter: blur(var(--blur-header)) saturate(1.35);
+  -webkit-backdrop-filter: blur(var(--blur-header)) saturate(1.35);
+  pointer-events: none;
+}
+
+.site-header__shade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: rgba(10, 10, 11, 0.28);
+  border-bottom: 1px solid var(--ld-border);
+  opacity: 0;
+}
+
 .site-header__inner {
+  position: relative;
   height: var(--header-height);
 }
 
 @supports (animation-timeline: scroll()) {
-  .site-header {
-    animation: header-solid linear both;
+  .site-header__shade {
+    animation: header-shade linear both;
     animation-timeline: scroll();
-    animation-range: 0px 64px;
+    animation-range: 0px 140px;
   }
 }
 
 @supports not (animation-timeline: scroll()) {
-  .site-header {
-    background: var(--ld-surface);
-    border-bottom-color: var(--ld-border);
+  .site-header__glass {
+    background: rgba(10, 10, 11, 0.72);
+  }
+
+  .site-header__shade {
+    opacity: 1;
   }
 }
 
-@keyframes header-solid {
+@keyframes header-shade {
   to {
-    background: var(--ld-surface);
-    border-bottom-color: var(--ld-border);
+    opacity: 1;
   }
 }
 
-.site-header:has(.nav-mobile[open]) {
-  background: var(--ld-surface);
-  border-bottom-color: var(--ld-border);
+.site-header:has(.nav-mobile[open]) .site-header__glass {
+  background: rgba(10, 10, 11, 0.88);
+}
+
+.site-header:has(.nav-mobile[open]) .site-header__shade {
+  opacity: 1;
 }
 
 .nav-link {
@@ -303,11 +347,60 @@ a {
   background: transparent;
   border: 0;
   padding: 0;
-  transition: color 140ms var(--ease-out);
+  transition: color var(--dur-fast) var(--ease-out);
 }
 
 .nav-link[aria-current="page"] {
   color: var(--ld-secondary);
+}
+
+.lang-switch {
+  position: relative;
+}
+
+.lang-switch__summary {
+  list-style: none;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--ld-muted);
+  padding: 4px 0;
+}
+
+.lang-switch__summary::-webkit-details-marker {
+  display: none;
+}
+
+.lang-switch[open] .lang-switch__summary,
+.lang-switch__summary:hover {
+  color: var(--ld-secondary);
+}
+
+.lang-switch__menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  min-width: 148px;
+  padding: 6px;
+  border: 1px solid var(--ld-border);
+  border-radius: var(--radius);
+  background: rgba(16, 17, 19, 0.96);
+  z-index: 60;
+}
+
+.lang-switch__item {
+  display: block;
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  color: var(--ld-muted);
+}
+
+.lang-switch__item.is-current,
+.lang-switch__item:hover {
+  color: var(--ld-secondary);
+  background: rgba(255, 255, 255, 0.04);
 }
 
 @media (any-hover: hover) {
@@ -336,9 +429,9 @@ a {
   line-height: 1;
   white-space: nowrap;
   transition:
-    background-color 140ms var(--ease-out),
-    color 140ms var(--ease-out),
-    border-color 140ms var(--ease-out);
+    background-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out);
 }
 
 .btn-sm {
@@ -369,9 +462,11 @@ a {
 }
 
 .btn-secondary {
-  background: transparent;
+  background: rgba(255, 255, 255, 0.03);
   color: var(--ld-secondary);
   border: 1px solid var(--ld-border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 @media (any-hover: hover) {
@@ -401,7 +496,7 @@ a {
   border: 1px solid var(--ld-border);
   border-radius: 8px;
   background: var(--ld-surface);
-  transition: border-color 140ms var(--ease-out);
+  transition: border-color var(--dur-fast) var(--ease-out);
 }
 
 @media (any-hover: hover) {
@@ -716,11 +811,14 @@ a {
 }
 
 .tile {
-  transition: border-color 180ms var(--ease-out);
+  transition:
+    border-color 320ms var(--ease-out),
+    background-color 320ms var(--ease-out);
 }
 
 .tile:hover {
   border-color: var(--ld-border-strong);
+  background: #0e0e10;
 }
 
 .tile__copy {
@@ -1022,12 +1120,12 @@ a {
 
 /* The drawing lifts a little on hover, the way the cards invite a look. */
 .art > svg {
-  transition: transform 260ms var(--ease-out);
+  transition: transform 480ms var(--ease-reveal);
 }
 
 @media (any-hover: hover) {
   .tile:hover .art > svg {
-    transform: translateY(-5px);
+    transform: translateY(-3px);
   }
 }
 
@@ -1159,11 +1257,11 @@ a {
 }
 
 .tile.is-in .d-out {
-  animation: d-out 4.4s var(--ease-strong) infinite;
+  animation: d-out var(--dur-loop) var(--ease-loop) infinite;
 }
 
 .tile.is-in .d-in {
-  animation: d-in 4.4s var(--ease-strong) infinite;
+  animation: d-in var(--dur-loop) var(--ease-loop) infinite;
 }
 
 /* d-out and d-in share a stage, so the "before" clears out completely. */
@@ -1176,7 +1274,7 @@ a {
   36%,
   86% {
     opacity: 0;
-    transform: translateX(-6px);
+    transform: translateX(-3px);
   }
   100% {
     opacity: 1;
@@ -1188,7 +1286,7 @@ a {
   0%,
   32% {
     opacity: 0;
-    transform: translateY(5px);
+    transform: translateY(3px);
   }
   52%,
   86% {
@@ -1197,7 +1295,7 @@ a {
   }
   100% {
     opacity: 0;
-    transform: translateY(5px);
+    transform: translateY(3px);
   }
 }
 
@@ -1210,7 +1308,7 @@ a {
 }
 
 .tile.is-in .d-draw {
-  animation: d-draw 4.4s var(--ease-strong) infinite;
+  animation: d-draw var(--dur-loop) var(--ease-loop) infinite;
   animation-delay: calc(var(--d, 0) * 120ms);
 }
 
@@ -1234,7 +1332,7 @@ a {
 }
 
 .tile.is-in .d-sweep {
-  animation: d-sweep 4.4s var(--ease-out) infinite;
+  animation: d-sweep var(--dur-loop) var(--ease-loop) infinite;
 }
 
 @keyframes d-sweep {
@@ -1277,7 +1375,7 @@ a {
 }
 
 .tile.is-in .d-blink {
-  animation: d-blink 4.4s var(--ease-out) infinite;
+  animation: d-blink var(--dur-loop) var(--ease-loop) infinite;
 }
 
 @keyframes d-blink {
@@ -1295,11 +1393,11 @@ a {
 /* Duplicate: two copies slide together and become one */
 
 .tile.is-in .d-dup-a {
-  animation: d-dup-a 4.4s var(--ease-strong) infinite;
+  animation: d-dup-a var(--dur-loop) var(--ease-loop) infinite;
 }
 
 .tile.is-in .d-dup-b {
-  animation: d-dup-b 4.4s var(--ease-strong) infinite;
+  animation: d-dup-b var(--dur-loop) var(--ease-loop) infinite;
 }
 
 @keyframes d-dup-a {
@@ -1339,7 +1437,7 @@ a {
 /* Fetch: the block leaves the screen and becomes its own node */
 
 .tile.is-in .d-eject {
-  animation: d-eject 4.4s var(--ease-strong) infinite;
+  animation: d-eject var(--dur-loop) var(--ease-loop) infinite;
 }
 
 @keyframes d-eject {
@@ -1362,15 +1460,15 @@ a {
 /* Order: three rows sort themselves */
 
 .tile.is-in .d-sort-1 {
-  animation: d-sort-1 4.4s var(--ease-strong) infinite;
+  animation: d-sort-1 var(--dur-loop) var(--ease-loop) infinite;
 }
 
 .tile.is-in .d-sort-2 {
-  animation: d-sort-2 4.4s var(--ease-strong) infinite;
+  animation: d-sort-2 var(--dur-loop) var(--ease-loop) infinite;
 }
 
 .tile.is-in .d-sort-3 {
-  animation: d-sort-3 4.4s var(--ease-strong) infinite;
+  animation: d-sort-3 var(--dur-loop) var(--ease-loop) infinite;
 }
 
 @keyframes d-sort-1 {
@@ -1418,11 +1516,11 @@ a {
 /* Approve: a cursor arrives and presses */
 
 .tile.is-in .d-hand {
-  animation: d-hand 4.4s var(--ease-strong) infinite;
+  animation: d-hand var(--dur-loop) var(--ease-loop) infinite;
 }
 
 .tile.is-in .d-press {
-  animation: d-press 4.4s var(--ease-out) infinite;
+  animation: d-press var(--dur-loop) var(--ease-loop) infinite;
 }
 
 @keyframes d-hand {
@@ -1463,7 +1561,7 @@ a {
 /* Pulse travelling through the graph */
 
 .tile.is-in .d-travel {
-  animation: d-travel 4.4s var(--ease-strong) infinite;
+  animation: d-travel var(--dur-loop) var(--ease-loop) infinite;
 }
 
 @keyframes d-travel {
@@ -1489,11 +1587,11 @@ a {
 /* Tangle relaxing into order */
 
 .tile.is-in .d-tangle {
-  animation: d-out 4.4s var(--ease-strong) infinite;
+  animation: d-out var(--dur-loop) var(--ease-loop) infinite;
 }
 
 .tile.is-in .d-tidy {
-  animation: d-in 4.4s var(--ease-strong) infinite;
+  animation: d-in var(--dur-loop) var(--ease-loop) infinite;
 }
 
 .art-approve {
@@ -1826,7 +1924,7 @@ a {
   font-size: 15px;
   color: var(--ld-secondary);
   border-bottom: 1px solid var(--ld-border);
-  transition: color 140ms var(--ease-out);
+  transition: color var(--dur-fast) var(--ease-out);
 }
 
 @media (any-hover: hover) {
@@ -2018,8 +2116,8 @@ a {
   line-height: 1;
   color: var(--ld-muted);
   transition:
-    color 140ms var(--ease-out),
-    background-color 140ms var(--ease-out);
+    color var(--dur-fast) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out);
 }
 
 .billing-switch .save {
@@ -2051,7 +2149,7 @@ a {
 @keyframes fade-up {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
@@ -2070,9 +2168,9 @@ a {
 
 /* Everything else is tied to the scroll position, not to page load. */
 .reveal {
-  animation: fade-up var(--dur-mid) var(--ease-strong) both;
+  animation: fade-up var(--dur-slow) var(--ease-strong) both;
   animation-timeline: view();
-  animation-range: entry calc(4% + var(--i, 0) * 3%) cover calc(28% + var(--i, 0) * 3%);
+  animation-range: entry 0% cover 42%;
 }
 
 @supports not (animation-timeline: view()) {
@@ -2083,7 +2181,7 @@ a {
 
   .reveal.is-in {
     opacity: 1;
-    animation: fade-up var(--dur-mid) var(--ease-strong) both;
+    animation: fade-up var(--dur-slow) var(--ease-strong) both;
     animation-delay: calc(var(--i, 0) * var(--stagger));
   }
 }
@@ -2108,6 +2206,51 @@ a {
   display: block;
 }
 
+.nav-mobile__panel {
+  background: rgba(10, 10, 11, 0.88);
+  backdrop-filter: blur(var(--blur-header)) saturate(1.35);
+  -webkit-backdrop-filter: blur(var(--blur-header)) saturate(1.35);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .site-header__glass,
+  .nav-mobile__panel {
+    background: var(--ld-surface);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .hero-pill,
+  .btn-secondary {
+    background: var(--ld-chip);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .site-header__glass,
+  .nav-mobile__panel {
+    background: var(--ld-surface);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .site-header__shade {
+    opacity: 1;
+  }
+
+  .hero-pill,
+  .btn-secondary {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .atmosphere::after {
+    filter: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .anim-hero,
   .anim-hero-delay,
@@ -2115,6 +2258,7 @@ a {
   .reveal.is-in,
   .atmosphere,
   .site-header,
+  .site-header__shade,
   .film__line,
   .film__row,
   .film__caption,
@@ -2128,12 +2272,13 @@ a {
     transform: none;
   }
 
-  .site-header {
-    background: var(--ld-surface);
-    border-bottom-color: var(--ld-border);
+  .atmosphere::after {
+    filter: none;
   }
 
-  /* Reduced motion still gets the end state: the cleaned file, in full. */
+  .site-header__shade {
+    opacity: 1;
+  }
   .film__row[data-state="removed"] {
     display: none;
   }

@@ -1,13 +1,4 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { notFound } from '@/content/legal';
+import NotFoundView from '@/views/NotFoundView.astro';
 ---
-
-<BaseLayout title={notFound.title} description={notFound.description} noindex>
-  <main id="main" class="flex min-h-screen flex-col items-center justify-center bg-ld-canvas p-6 text-center">
-    <p class="tp-mono mb-4">404</p>
-    <h1 class="mb-3 text-tp-heading">{notFound.headline}</h1>
-    <p class="mb-10 text-ld-tertiary">{notFound.body}</p>
-    <a class="btn btn-primary" href="/">{notFound.cta}</a>
-  </main>
-</BaseLayout>
+<NotFoundView />

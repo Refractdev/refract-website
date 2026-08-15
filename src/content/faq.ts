@@ -81,4 +81,13 @@ export const faqGroups = [
       },
     ],
   },
+  {
+    title: "Company",
+    items: [
+      {
+        q: "Who makes Refract?",
+        a: "Refract is built by Devrefract, a Lintel company. Lintel is the parent technology company. Devrefract builds developer technology. Refract is its current product.",
+      },
+    ],
+  },
 ] as const;

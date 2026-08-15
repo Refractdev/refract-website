@@ -1,26 +1,30 @@
 ---
 import Logo from '@/components/ui/Logo.astro';
-import { footerBrandLine, footerFinePrint, footerSections, githubAppLink } from '@/content/nav';
+import LanguageSwitcher from '@/components/ui/LanguageSwitcher.astro';
+import { GITHUB_APP_URL } from '@/lib/constants';
+import { usePack } from '@/i18n/usePack';
 
 const year = new Date().getFullYear();
+const { pack, href } = usePack(Astro.url.pathname);
 ---
 
 <footer class="pt-16 pb-14 md:pt-11 md:pb-10">
   <div class="mx-auto max-w-site px-5 md:px-6">
     <div class="mb-12">
       <Logo height={16} />
-      <p class="mt-3 text-[13px] text-ld-muted">{footerBrandLine}</p>
+      <p class="mt-3 text-[13px] text-ld-muted">{pack.nav.footerBrandLine}</p>
+      <p class="mt-1.5 text-[13px] text-ld-muted">{pack.brand.attribution}</p>
     </div>
 
     <div class="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3">
       {
-        footerSections.map((section) => (
+        pack.nav.footerSections.map((section) => (
           <div>
             <h3 class="mb-3 text-[14px] font-normal tracking-[0.01em] text-white">{section.title}</h3>
             <ul class="flex flex-col gap-2.5">
               {section.links.map((link) => (
                 <li>
-                  <a href={link.href} class="text-[14px] font-normal tracking-[0.01em] text-ld-muted transition-colors hover:text-ld-secondary">
+                  <a href={href(link.href)} class="text-[14px] font-normal tracking-[0.01em] text-ld-muted transition-colors hover:text-ld-secondary">
                     {link.label}
                   </a>
                 </li>
@@ -32,12 +36,12 @@ const year = new Date().getFullYear();
       <div>
         <h3 class="mb-3 text-[14px] font-normal tracking-[0.01em] text-white">GitHub</h3>
         <a
-          href={githubAppLink.href}
+          href={GITHUB_APP_URL}
           target="_blank"
           rel="noopener noreferrer"
           class="text-[14px] font-normal tracking-[0.01em] text-ld-muted transition-colors hover:text-ld-secondary"
         >
-          {githubAppLink.label}
+          {pack.nav.githubAppLabel}
         </a>
       </div>
     </div>
@@ -45,11 +49,15 @@ const year = new Date().getFullYear();
     <div class="tp-divider my-8 md:my-10"></div>
 
     <div class="flex flex-col gap-3 text-[13px] text-ld-muted md:flex-row md:items-center md:justify-between">
-      <p>&copy; {year} Refract. All rights reserved.</p>
-      <p>{footerFinePrint}</p>
+      <p>&copy; {year} {pack.brand.copyrightLine}</p>
+      <div class="flex items-center gap-4">
+        <p>{pack.nav.footerFinePrint}</p>
+        <LanguageSwitcher />
+      </div>
     </div>
     <p class="mt-3 text-[13px] text-ld-muted">
-      We use what we need to run the product. See <a href="/privacy" class="text-ld-secondary underline underline-offset-2">Privacy</a>.
+      {pack.ui.privacyFooterBefore}{' '}
+      <a href={href('/privacy')} class="text-ld-secondary underline underline-offset-2">{pack.ui.privacyFooterLink}</a>.
     </p>
   </div>
 </footer>

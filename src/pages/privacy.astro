@@ -1,24 +1,4 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import AppShell from '../layouts/AppShell.astro';
-import PageShell from '@/components/sections/PageShell.astro';
-import { privacy } from '@/content/legal';
+import PrivacyView from '@/views/PrivacyView.astro';
 ---
-
-<BaseLayout title={privacy.title} description={privacy.description}>
-  <AppShell variant="minimal">
-    <PageShell label="Legal" title={privacy.headline}>
-      <div class="prose-copy">
-        <p class="docs-lede">{privacy.status}</p>
-        <h2>Short version</h2>
-        {privacy.short.map((p) => <p>{p}</p>)}
-        <h2>{privacy.collectHeadline}</h2>
-        <p>{privacy.collect}</p>
-        <h2>Contact</h2>
-        <p set:html={privacy.contactHtml} />
-        <h2>Changes</h2>
-        <p>{privacy.changes}</p>
-      </div>
-    </PageShell>
-  </AppShell>
-</BaseLayout>
+<PrivacyView />

@@ -8,6 +8,5 @@ Disallow: /help
 Disallow: /changelog
 Disallow: /roadmap
 Disallow: /status
-Disallow: /about
 
 Sitemap: https://devrefract.com/sitemap-index.xml

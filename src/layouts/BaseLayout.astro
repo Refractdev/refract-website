@@ -1,7 +1,10 @@
 ---
 import '../styles/global.css';
-import { GITHUB_APP_URL, SITE_NAME, SITE_URL, TWITTER_HANDLE } from '@/lib/constants';
-import { defaultSeo, jsonLdDescription } from '@/content/seo';
+import { BRAND_NAME, COMPANY_NAME, GITHUB_APP_URL, SITE_NAME, SITE_URL, TWITTER_HANDLE } from '@/lib/constants';
+import { allPlanOffers } from '@/lib/schema';
+import { localeMeta, locales } from '@/i18n/config';
+import { absoluteUrl, localizeHref, stripLocalePrefix } from '@/i18n/href';
+import { usePack } from '@/i18n/usePack';
 
 interface Props {
   title?: string;
@@ -16,6 +19,17 @@ interface Props {
   /** Extra schema.org nodes for this page, merged into the sitewide graph. */
   schema?: Record<string, unknown>[];
 }
+
+const { locale, pack } = usePack(Astro.url.pathname);
+const meta = localeMeta[locale];
+const defaultSeo = {
+  title: pack.seo.defaultTitle,
+  description: pack.seo.defaultDescription,
+  ogTitle: pack.seo.ogTitle,
+  ogDescription: pack.seo.ogDescription,
+  ogImageAlt: pack.seo.ogImageAlt,
+};
+const jsonLdDescription = pack.seo.jsonLdDescription;
 
 const {
   title = defaultSeo.title,
@@ -33,6 +47,7 @@ const { ogTitle = title, ogDescription = description } = Astro.props;
 const canonicalURL = normalizeCanonical(Astro.props.canonicalURL ?? Astro.url.href, noindex);
 const ogImageURL = new URL(ogImage, Astro.site).toString();
 const logoURL = new URL('/logo.png', Astro.site).toString();
+const lintelId = `${SITE_URL}/#lintel`;
 const organizationId = `${SITE_URL}/#organization`;
 const websiteId = `${SITE_URL}/#website`;
 const softwareId = `${SITE_URL}/#software`;
@@ -51,9 +66,17 @@ const jsonLd = {
   '@graph': [
     {
       '@type': 'Organization',
+      '@id': lintelId,
+      name: COMPANY_NAME,
+      description: 'Parent technology company. Builds and operates its products and future technology ventures.',
+    },
+    {
+      '@type': 'Organization',
       '@id': organizationId,
-      name: SITE_NAME,
+      name: BRAND_NAME,
       url: SITE_URL,
+      description: 'Developer technology brand. Builds software development infrastructure and tools.',
+      parentOrganization: { '@id': lintelId },
       logo: {
         '@type': 'ImageObject',
         url: logoURL,
@@ -70,7 +93,7 @@ const jsonLd = {
       url: SITE_URL,
       description: jsonLdDescription,
       publisher: { '@id': organizationId },
-      inLanguage: 'en',
+      inLanguage: meta.htmlLang,
     },
     {
       '@type': 'WebPage',
@@ -87,7 +110,7 @@ const jsonLd = {
         height: 630,
         caption: defaultSeo.ogImageAlt,
       },
-      inLanguage: 'en',
+      inLanguage: meta.htmlLang,
     },
     ...(includeProduct
       ? [
@@ -100,39 +123,25 @@ const jsonLd = {
             applicationCategory: 'DeveloperApplication',
             operatingSystem: 'Web',
             publisher: { '@id': organizationId },
-            offers: [
-              {
-                '@type': 'Offer',
-                name: 'Free',
-                price: '0',
-                priceCurrency: 'USD',
-                url: `${SITE_URL}/pricing/`,
-              },
-              {
-                '@type': 'Offer',
-                name: 'Starter',
-                price: '12',
-                priceCurrency: 'USD',
-                url: `${SITE_URL}/pricing/`,
-              },
-              {
-                '@type': 'Offer',
-                name: 'Pro',
-                price: '24',
-                priceCurrency: 'USD',
-                url: `${SITE_URL}/pricing/`,
-              },
-            ],
+            brand: { '@id': organizationId },
+            offers: allPlanOffers(),
           },
         ]
       : []),
     ...schema,
   ],
 };
+
+const barePath = stripLocalePrefix(new URL(canonicalURL).pathname);
+const alternateUrls = locales.map((code) => ({
+  code,
+  href: absoluteUrl(localizeHref(barePath, code)),
+  hreflang: localeMeta[code].hreflang,
+}));
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang={meta.htmlLang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -142,10 +151,19 @@ const jsonLd = {
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
     <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
+    {
+      alternateUrls.map((alt) => (
+        <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />
+      ))
+    }
+    <link rel="alternate" hreflang="x-default" href={absoluteUrl(barePath)} />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={SITE_NAME} />
-    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale" content={meta.og} />
+    {locales.filter((code) => code !== locale).map((code) => (
+      <meta property="og:locale:alternate" content={localeMeta[code].og} />
+    ))}
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={ogTitle} />
     <meta property="og:description" content={ogDescription} />
@@ -174,7 +192,7 @@ const jsonLd = {
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body>
-    <a class="skip-link" href="#main">Skip to content</a>
+    <a class="skip-link" href="#main">{pack.ui.skipToContent}</a>
     <slot />
   </body>
 </html>

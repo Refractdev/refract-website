@@ -1,18 +1,4 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import AppShell from '../layouts/AppShell.astro';
-import PageShell from '@/components/sections/PageShell.astro';
-import { security } from '@/content/legal';
+import SecurityView from '@/views/SecurityView.astro';
 ---
-
-<BaseLayout title={security.title} description={security.description}>
-  <AppShell>
-    <PageShell title={security.headline}>
-      <div class="prose-copy">
-        {security.paragraphs.map((p) => <p>{p}</p>)}
-        <h2>{security.reportLabel}</h2>
-        <p set:html={security.reportHtml} />
-      </div>
-    </PageShell>
-  </AppShell>
-</BaseLayout>
+<SecurityView />

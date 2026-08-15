@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AppShell from '../layouts/AppShell.astro';
+import PageShell from '@/components/sections/PageShell.astro';
+import { breadcrumbSchema } from '@/lib/schema';
+import { usePack } from '@/i18n/usePack';
+import { localizeHref } from '@/i18n/href';
+
+interface Props {
+  slug: string;
+}
+
+const { slug } = Astro.props;
+const { locale, pack, href, html } = usePack(Astro.url.pathname);
+const page = pack.docs.pages.find((entry) => entry.slug === slug);
+if (!page) throw new Error(`Unknown docs page: ${slug}`);
+
+const schema = [
+  breadcrumbSchema([
+    { name: pack.ui.homeCrumb, path: localizeHref('/', locale) },
+    { name: pack.docs.headline, path: localizeHref('/docs/', locale) },
+    { name: page.title, path: localizeHref(`/docs/${page.slug}/`, locale) },
+  ]),
+];
+---
+
+<BaseLayout title={`${page.title} — Refract`} description={page.description} schema={schema}>
+  <AppShell>
+    <PageShell label={pack.ui.documentation} title={page.title}>
+      <p class="mb-8">
+        <a href={href('/docs')} class="text-[13px] text-ld-muted underline underline-offset-2 hover:text-white">{pack.ui.allDocs}</a>
+      </p>
+      <div class="prose-copy docs-prose">
+        {
+          page.blocks.map((block) => {
+            if (block.type === 'lede') return <p class="docs-lede">{block.text}</p>;
+            if (block.type === 'p') return <p>{block.text}</p>;
+            if (block.type === 'h2') return <h2>{block.text}</h2>;
+            if (block.type === 'note') return <p class="text-ld-muted">{block.text}</p>;
+            if (block.type === 'html') return <div set:html={html(block.html)} />;
+            if (block.type === 'ol')
+              return (
+                <ol>
+                  {block.items.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ol>
+              );
+            if (block.type === 'ul')
+              return (
+                <ul>
+                  {block.items.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              );
+            return null;
+          })
+        }
+      </div>
+    </PageShell>
+  </AppShell>
+</BaseLayout>

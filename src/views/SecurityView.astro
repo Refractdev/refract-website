@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AppShell from '../layouts/AppShell.astro';
+import PageShell from '@/components/sections/PageShell.astro';
+import { usePack } from '@/i18n/usePack';
+
+const { pack, html } = usePack(Astro.url.pathname);
+const { security } = pack.legal;
+---
+
+<BaseLayout title={security.title} description={security.description}>
+  <AppShell>
+    <PageShell title={security.headline}>
+      <div class="prose-copy">
+        <p>{security.operator}</p>
+        {security.paragraphs.map((p) => <p>{p}</p>)}
+        <h2>{security.reportLabel}</h2>
+        <p set:html={html(security.reportHtml)} />
+      </div>
+    </PageShell>
+  </AppShell>
+</BaseLayout>
