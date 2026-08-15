@@ -1073,11 +1073,102 @@ export const pt: ContentPack = {
     terms: {
       title: "Termos — Refract",
       description:
-        "Usar o Refract significa que ligas só repositórios que tens autorização para ligar, e usas o produto como é oferecido.",
+        "Os termos de uso do Refract: contas, acesso ao GitHub, aprovação, planos, e o que fazemos e não fazemos com o teu código.",
       headline: "Termos",
-      body: "Os termos completos vão ficar aqui. Até lá, usar o Refract significa que concordas em ligar só repositórios que tens autorização para ligar, e em usar o produto como é oferecido.",
+      status:
+        "Esta é uma descrição provisória de usar o Refract. Um acordo final vai substituí-la depois da revisão jurídica.",
+      updated: "Última atualização: 15 de agosto de 2026",
       operator: `${PRODUCT_NAME} é um produto da ${BRAND_NAME}, uma empresa da ${COMPANY_NAME}.`,
-      contactHtml: `Para já, <a href="/contact">Contacto</a> com perguntas jurídicas.`,
+      short: [
+        "Liga só repositórios que tens autorização para ligar.",
+        "Aprovas cada limpeza. O Refract não faz merge por ti, e não reescreve um projeto sozinho.",
+        "O acesso ao código é só através da GitHub App, nos repositórios que autorizas.",
+        "O código continua a ser teu. Não vendemos o conteúdo dos repositórios.",
+        "Começa grátis. O checkout está a chegar; não serás cobrado no registo.",
+      ],
+      sections: [
+        {
+          title: "Estes termos",
+          paragraphs: [
+            "Estes termos aplicam-se quando usas o Refract: o site, o produto e a GitHub App. Se não concordas, não uses o produto.",
+            "Os termos do GitHub continuam a aplicar-se ao GitHub. Estes termos cobrem o Refract.",
+          ],
+        },
+        {
+          title: "O produto",
+          paragraphs: [
+            "O Refract revê pull requests em busca de padrões que tornam o código gerado por IA difícil de manter. Quando uma limpeza é segura, prepara uma alteração para aprovares no GitHub. Quando não é, explica. Não finge que uma revisão correu bem quando falhou.",
+            "O Refract não substitui a revisão humana, o teu editor, nem o GitHub. Não faz merge por ti.",
+          ],
+        },
+        {
+          title: "A tua conta",
+          paragraphs: [
+            "Crias uma conta com e-mail e palavra-passe. És responsável por essa conta. Guarda a palavra-passe para ti.",
+            "Se usas o Refract por uma organização, confirmas que tens o direito de ligar os repositórios dela e de aceitar estes termos em nome dessa organização.",
+          ],
+        },
+        {
+          title: "GitHub e os teus repositórios",
+          paragraphs: [
+            "O acesso ao GitHub é só a App que instalas, nos repositórios que autorizas. Não iniciamos sessão com GitHub só para abrires o site.",
+            "Declaras que tens autorização para ligar esses repositórios. Se não tens, não os ligues.",
+            "Podes desinstalar a GitHub App ou restringir os repositórios que vemos a qualquer momento.",
+          ],
+        },
+        {
+          title: "Aprovação",
+          paragraphs: [
+            "Processamos o conteúdo dos pull requests para o rever, para aplicar limpezas que aprovas, e para te mostrar o histórico no produto.",
+            "Uma limpeza só entra depois de a aprovares no GitHub. A decisão fica ao lado do código. Continuas responsável pelo que fazes merge.",
+          ],
+        },
+        {
+          title: "Uso aceite",
+          paragraphs: [
+            "Não ligues código que não tens o direito de ligar. Não tentes partir, fazer scrape ou sobrecarregar o serviço. Não uses o Refract para esconder malware ou para ignorar credenciais expostas.",
+            "Se virmos credenciais num pull request, dizemos-te. Rodar o que foi exposto é contigo.",
+          ],
+        },
+        {
+          title: "Planos e faturação",
+          paragraphs: [
+            "Planos e limites estão descritos em Preços. O plano gratuito existe para experimentares o Refract num repositório real.",
+            "Os planos pagos estão listados para saberes para onde isto vai. O checkout está a chegar; não serás cobrado no registo. Quando a faturação começar, o site e o checkout dizem-no antes de pagares.",
+          ],
+        },
+        {
+          title: "O teu código",
+          paragraphs: [
+            "O código continua a ser teu. Ligar um repositório não nos transfere a propriedade.",
+            "Não vendemos o conteúdo dos teus repositórios. Não os usamos como produto.",
+            "O nome Refract, o site e o produto pertencem à Devrefract, uma empresa da Lintel.",
+          ],
+        },
+        {
+          title: "Disponibilidade",
+          paragraphs: [
+            "Trabalhamos para manter o Refract a funcionar. Não prometemos que esteja sempre no ar, nem que cada revisão seja completa ou correta.",
+            "Trata um resultado como algo que ainda tens de julgar. O Refract é uma ferramenta, não uma garantia.",
+          ],
+        },
+        {
+          title: "Se algo correr mal",
+          paragraphs: [
+            "O Refract é oferecido como está. Na medida em que a lei o permite, não somos responsáveis por lucros perdidos, código perdido, atraso, ou outros danos indiretos por usar — ou não usar — o produto.",
+          ],
+        },
+        {
+          title: "Parar",
+          paragraphs: [
+            "Podes deixar de usar o Refract a qualquer momento. Desinstala a GitHub App para cortar o acesso aos teus repositórios.",
+            "Podemos suspender ou terminar o acesso se quebrares estes termos ou se abusares do serviço. Para perguntas de conta, usa Contacto.",
+          ],
+        },
+      ],
+      contactHtml: `Perguntas jurídicas passam por <a href="/contact">Contacto</a>.`,
+      changes:
+        "Quando estes termos mudarem, atualizamos esta página e a data. Se continuares a usar o Refract depois de uma alteração, aceitas os termos atualizados.",
     },
     notFound: {
       title: "Página não encontrada — Refract",

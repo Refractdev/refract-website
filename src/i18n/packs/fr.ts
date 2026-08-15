@@ -1072,11 +1072,102 @@ export const fr: ContentPack = {
     terms: {
       title: "Conditions — Refract",
       description:
-        "Utiliser Refract signifie que vous ne connectez que des dépôts que vous avez le droit de connecter, et que vous utilisez le produit tel qu'il est proposé.",
+        "Les conditions d'utilisation de Refract : comptes, accès GitHub, approbation, offres, et ce que nous faisons et ne faisons pas de votre code.",
       headline: "Conditions",
-      body: "Les conditions complètes vivront ici. En attendant, utiliser Refract signifie que vous acceptez de ne connecter que des dépôts que vous avez le droit de connecter, et d'utiliser le produit tel qu'il est proposé.",
+      status:
+        "Ceci est une description provisoire de l'utilisation de Refract. Un accord définitif la remplacera après relecture juridique.",
+      updated: "Dernière mise à jour : 15 août 2026",
       operator: `${PRODUCT_NAME} est un produit de ${BRAND_NAME}, une entreprise ${COMPANY_NAME}.`,
-      contactHtml: `Pour l'instant, <a href="/contact">Contact</a> pour les questions juridiques.`,
+      short: [
+        "Ne connectez que des dépôts que vous avez le droit de connecter.",
+        "Vous approuvez chaque nettoyage. Refract ne fusionne pas à votre place, et ne réécrit pas un projet tout seul.",
+        "L'accès au code passe uniquement par la GitHub App, sur les dépôts que vous autorisez.",
+        "Le code reste le vôtre. Nous ne vendons pas le contenu des dépôts.",
+        "Commencez gratuitement. Le paiement arrive ; vous ne serez pas facturé à l'inscription.",
+      ],
+      sections: [
+        {
+          title: "Ces conditions",
+          paragraphs: [
+            "Ces conditions s'appliquent lorsque vous utilisez Refract : le site, le produit et la GitHub App. Si vous n'êtes pas d'accord, n'utilisez pas le produit.",
+            "Les conditions de GitHub s'appliquent toujours à GitHub. Ces conditions concernent Refract.",
+          ],
+        },
+        {
+          title: "Le produit",
+          paragraphs: [
+            "Refract examine les pull requests pour trouver les schémas qui rendent le code généré par l'IA difficile à vivre. Quand un nettoyage est sûr, il prépare un changement à approuver sur GitHub. Quand il ne l'est pas, il explique. Il ne fait pas semblant qu'une revue a réussi quand elle a échoué.",
+            "Refract ne remplace pas la revue humaine, votre éditeur, ni GitHub. Il ne fusionne pas à votre place.",
+          ],
+        },
+        {
+          title: "Votre compte",
+          paragraphs: [
+            "Vous créez un compte avec e-mail et mot de passe. Vous êtes responsable de ce compte. Gardez le mot de passe pour vous.",
+            "Si vous utilisez Refract pour une organisation, vous confirmez que vous avez le droit de connecter ses dépôts et d'accepter ces conditions pour cette organisation.",
+          ],
+        },
+        {
+          title: "GitHub et vos dépôts",
+          paragraphs: [
+            "L'accès GitHub est uniquement l'App que vous installez, sur les dépôts que vous autorisez. Nous ne vous connectons pas avec GitHub juste pour ouvrir le site.",
+            "Vous déclarez que vous avez le droit de connecter ces dépôts. Sinon, ne les connectez pas.",
+            "Vous pouvez désinstaller la GitHub App ou restreindre les dépôts que nous voyons à tout moment.",
+          ],
+        },
+        {
+          title: "Approbation",
+          paragraphs: [
+            "Nous traitons le contenu des pull requests pour le relire, appliquer les nettoyages que vous approuvez, et vous montrer l'historique dans le produit.",
+            "Un nettoyage n'est appliqué qu'après votre approbation sur GitHub. La décision reste à côté du code. Vous restez responsable de ce que vous fusionnez.",
+          ],
+        },
+        {
+          title: "Usage acceptable",
+          paragraphs: [
+            "Ne connectez pas de code que vous n'avez pas le droit de connecter. N'essayez pas de casser, scraper ou surcharger le service. N'utilisez pas Refract pour cacher des malwares ou ignorer des identifiants exposés.",
+            "Si nous voyons des identifiants dans une pull request, nous vous le disons. Les faire tourner est de votre ressort.",
+          ],
+        },
+        {
+          title: "Offres et facturation",
+          paragraphs: [
+            "Les offres et limites sont décrites dans Tarifs. L'offre gratuite existe pour essayer Refract sur un vrai dépôt.",
+            "Les offres payantes sont listées pour que vous sachiez où cela va. Le paiement arrive ; vous ne serez pas facturé à l'inscription. Quand la facturation commencera, le site et le paiement le diront avant que vous payiez.",
+          ],
+        },
+        {
+          title: "Votre code",
+          paragraphs: [
+            "Le code reste le vôtre. Connecter un dépôt ne nous transfère pas la propriété.",
+            "Nous ne vendons pas le contenu de vos dépôts. Nous ne les utilisons pas comme produit.",
+            "Le nom Refract, le site et le produit appartiennent à Devrefract, une entreprise Lintel.",
+          ],
+        },
+        {
+          title: "Disponibilité",
+          paragraphs: [
+            "Nous travaillons à maintenir Refract en service. Nous ne promettons pas qu'il sera toujours disponible, ni que chaque revue sera complète ou correcte.",
+            "Traitez un résultat comme quelque chose que vous devez encore juger. Refract est un outil, pas une garantie.",
+          ],
+        },
+        {
+          title: "Si quelque chose tourne mal",
+          paragraphs: [
+            "Refract est fourni en l'état. Dans la mesure permise par la loi, nous ne sommes pas responsables des profits perdus, du code perdu, d'un retard, ou d'autres dommages indirects liés à l'utilisation — ou à la non-utilisation — du produit.",
+          ],
+        },
+        {
+          title: "Arrêter",
+          paragraphs: [
+            "Vous pouvez arrêter d'utiliser Refract à tout moment. Désinstallez la GitHub App pour couper l'accès à vos dépôts.",
+            "Nous pouvons suspendre ou mettre fin à l'accès si vous enfreignez ces conditions ou abusez du service. Pour les questions de compte, utilisez Contact.",
+          ],
+        },
+      ],
+      contactHtml: `Les questions juridiques passent par <a href="/contact">Contact</a>.`,
+      changes:
+        "Quand ces conditions changent, nous mettons à jour cette page et la date. Si vous continuez à utiliser Refract après un changement, vous acceptez les conditions mises à jour.",
     },
     notFound: {
       title: "Page introuvable — Refract",

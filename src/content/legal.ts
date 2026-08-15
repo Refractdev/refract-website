@@ -67,11 +67,102 @@ export const privacy = {
 export const terms = {
   title: "Terms — Refract",
   description:
-    "Using Refract means you connect only repositories you are allowed to connect, and use the product as offered.",
+    "The terms for using Refract: accounts, GitHub access, approval, plans, and what we will and will not do with your code.",
   headline: "Terms",
-  body: "The full terms will live here. Until they do, using Refract means you agree to connect only repositories you are allowed to connect, and to use the product as offered.",
+  status:
+    "This is a working description of using Refract. A final agreement will replace it after legal review.",
+  updated: "Last updated: 15 August 2026",
   operator: operatorSentence,
-  contactHtml: `For now, <a href="/contact">Contact</a> with legal questions.`,
+  short: [
+    "Connect only repositories you are allowed to connect.",
+    "You approve every cleanup. Refract does not merge for you, and it does not rewrite a project on its own.",
+    "Code access is only through the GitHub App, on repositories you allow.",
+    "You keep your code. We do not sell repository contents.",
+    "Start free. Checkout is coming; you will not be charged at signup.",
+  ],
+  sections: [
+    {
+      title: "These terms",
+      paragraphs: [
+        "These terms apply when you use Refract: the website, the product, and the GitHub App. If you do not agree, do not use the product.",
+        "GitHub’s terms still apply to GitHub. These terms cover Refract.",
+      ],
+    },
+    {
+      title: "The product",
+      paragraphs: [
+        "Refract reviews pull requests for patterns that make AI-generated code hard to keep. When a cleanup is safe, it prepares a change for you to approve on GitHub. When it is not safe, it explains. It does not pretend a review succeeded when it failed.",
+        "Refract is not a replacement for human review, your editor, or GitHub. It does not merge for you.",
+      ],
+    },
+    {
+      title: "Your account",
+      paragraphs: [
+        "You create an account with email and password. You are responsible for that account. Keep the password to yourself.",
+        "If you use Refract for an organization, you confirm you have the right to connect its repositories and to accept these terms for that organization.",
+      ],
+    },
+    {
+      title: "GitHub and your repositories",
+      paragraphs: [
+        "GitHub access is only the App you install, on the repositories you allow. We do not sign you in with GitHub just to open the website.",
+        "You represent that you are allowed to connect those repositories. If you are not, do not connect them.",
+        "You can uninstall the GitHub App or narrow which repositories we see at any time.",
+      ],
+    },
+    {
+      title: "Approval",
+      paragraphs: [
+        "We process pull request content to review it, to apply cleanups you approve, and to show you history in the product.",
+        "A cleanup lands only after you approve it on GitHub. The decision stays next to the code. You remain responsible for what you merge.",
+      ],
+    },
+    {
+      title: "Acceptable use",
+      paragraphs: [
+        "Do not connect code you do not have the right to connect. Do not try to break, scrape, or overload the service. Do not use Refract to hide malware or to ignore exposed credentials.",
+        "If we see credentials in a pull request, we tell you. Rotating anything that was exposed is on you.",
+      ],
+    },
+    {
+      title: "Plans and billing",
+      paragraphs: [
+        "Plans and limits are described on Pricing. Free exists so you can try Refract on a real repository.",
+        "Paid plans are listed so you know where this goes. Checkout is coming; you will not be charged at signup. When billing starts, the site and checkout will say so before you pay.",
+      ],
+    },
+    {
+      title: "Your code",
+      paragraphs: [
+        "You keep your code. Connecting a repository does not transfer ownership to us.",
+        "We do not sell your repository contents. We do not use them as a product.",
+        "The Refract name, website, and product belong to Devrefract, a Lintel company.",
+      ],
+    },
+    {
+      title: "Availability",
+      paragraphs: [
+        "We work to keep Refract running. We do not promise it will always be up, or that every review will be complete or correct.",
+        "Treat a result as something you still have to judge. Refract is a tool, not a guarantee.",
+      ],
+    },
+    {
+      title: "If something goes wrong",
+      paragraphs: [
+        "Refract is provided as it is. To the extent the law allows, we are not liable for lost profits, lost code, delay, or other indirect damage from using — or not using — the product.",
+      ],
+    },
+    {
+      title: "Stopping",
+      paragraphs: [
+        "You can stop using Refract at any time. Uninstall the GitHub App to cut access to your repositories.",
+        "We can suspend or end access if you break these terms or abuse the service. For account questions, use Contact.",
+      ],
+    },
+  ],
+  contactHtml: `Legal questions go through <a href="/contact">Contact</a>.`,
+  changes:
+    "When these terms change, we update this page and the date. If you keep using Refract after a change, you accept the updated terms.",
 };
 
 export const notFound = {

@@ -226,9 +226,13 @@ export type ContentPack = {
       title: string;
       description: string;
       headline: string;
-      body: string;
+      status: string;
+      updated: string;
+      short: string[];
+      sections: { title: string; paragraphs: string[] }[];
       operator: string;
       contactHtml: string;
+      changes: string;
     };
     notFound: {
       title: string;

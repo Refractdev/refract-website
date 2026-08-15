@@ -1072,11 +1072,102 @@ export const de: ContentPack = {
     terms: {
       title: "Nutzungsbedingungen — Refract",
       description:
-        "Refract zu nutzen heißt, dass du nur Repositories verbindest, die du verbinden darfst, und das Produkt so nutzt, wie es angeboten wird.",
+        "Die Nutzungsbedingungen für Refract: Konten, GitHub-Zugriff, Freigabe, Pläne und was wir mit deinem Code tun und nicht tun.",
       headline: "Nutzungsbedingungen",
-      body: "Die vollständigen Bedingungen stehen hier. Bis dahin heißt Refract zu nutzen, dass du nur Repositories verbindest, die du verbinden darfst, und das Produkt so nutzt, wie es angeboten wird.",
+      status:
+        "Das ist eine vorläufige Beschreibung der Nutzung von Refract. Eine endgültige Vereinbarung ersetzt sie nach rechtlicher Prüfung.",
+      updated: "Zuletzt aktualisiert: 15. August 2026",
       operator: `${PRODUCT_NAME} ist ein Produkt von ${BRAND_NAME}, einem Unternehmen von ${COMPANY_NAME}.`,
-      contactHtml: `Bis dahin <a href="/contact">Kontakt</a> bei rechtlichen Fragen.`,
+      short: [
+        "Verbinde nur Repositories, die du verbinden darfst.",
+        "Du genehmigst jede Bereinigung. Refract merged nicht für dich und schreibt ein Projekt nicht von allein um.",
+        "Codezugriff nur über die GitHub App, auf Repositories, die du erlaubst.",
+        "Der Code bleibt deiner. Wir verkaufen keine Repository-Inhalte.",
+        "Starte kostenlos. Checkout kommt; bei der Anmeldung wirst du nicht belastet.",
+      ],
+      sections: [
+        {
+          title: "Diese Bedingungen",
+          paragraphs: [
+            "Diese Bedingungen gelten, wenn du Refract nutzt: die Website, das Produkt und die GitHub App. Wenn du nicht einverstanden bist, nutze das Produkt nicht.",
+            "Die Bedingungen von GitHub gelten weiter für GitHub. Diese Bedingungen gelten für Refract.",
+          ],
+        },
+        {
+          title: "Das Produkt",
+          paragraphs: [
+            "Refract prüft Pull Requests auf Muster, die KI-generierten Code schwer haltbar machen. Wenn eine Bereinigung sicher ist, bereitet es eine Änderung vor, die du auf GitHub genehmigst. Wenn nicht, erklärt es. Es täuscht keinen erfolgreichen Review vor, wenn einer fehlgeschlagen ist.",
+            "Refract ersetzt kein menschliches Review, deinen Editor oder GitHub. Es merged nicht für dich.",
+          ],
+        },
+        {
+          title: "Dein Konto",
+          paragraphs: [
+            "Du erstellst ein Konto mit E-Mail und Passwort. Du bist für dieses Konto verantwortlich. Behalte das Passwort für dich.",
+            "Wenn du Refract für eine Organisation nutzt, bestätigst du, dass du ihre Repositories verbinden und diese Bedingungen für diese Organisation annehmen darfst.",
+          ],
+        },
+        {
+          title: "GitHub und deine Repositories",
+          paragraphs: [
+            "GitHub-Zugriff ist nur die App, die du installierst, auf den Repositories, die du erlaubst. Wir melden dich nicht mit GitHub an, nur um die Website zu öffnen.",
+            "Du erklärst, dass du diese Repositories verbinden darfst. Wenn nicht, verbinde sie nicht.",
+            "Du kannst die GitHub App jederzeit deinstallieren oder einschränken, welche Repositories wir sehen.",
+          ],
+        },
+        {
+          title: "Freigabe",
+          paragraphs: [
+            "Wir verarbeiten Pull-Request-Inhalte, um sie zu prüfen, von dir genehmigte Bereinigungen anzuwenden und dir den Verlauf im Produkt zu zeigen.",
+            "Eine Bereinigung landet erst, nachdem du sie auf GitHub genehmigt hast. Die Entscheidung bleibt neben dem Code. Du bleibst verantwortlich für das, was du mergen.",
+          ],
+        },
+        {
+          title: "Zulässige Nutzung",
+          paragraphs: [
+            "Verbinde keinen Code, den du nicht verbinden darfst. Versuche nicht, den Dienst zu knacken, zu scrapen oder zu überlasten. Nutze Refract nicht, um Malware zu verbergen oder offengelegte Zugangsdaten zu ignorieren.",
+            "Wenn wir Zugangsdaten in einem Pull Request sehen, sagen wir es dir. Das Rotieren des Exponierten liegt bei dir.",
+          ],
+        },
+        {
+          title: "Pläne und Abrechnung",
+          paragraphs: [
+            "Pläne und Limits stehen unter Preise. Der kostenlose Plan existiert, damit du Refract an einem echten Repository ausprobieren kannst.",
+            "Bezahlte Pläne sind aufgeführt, damit du weißt, wohin das geht. Checkout kommt; bei der Anmeldung wirst du nicht belastet. Wenn die Abrechnung startet, sagen Website und Checkout das, bevor du zahlst.",
+          ],
+        },
+        {
+          title: "Dein Code",
+          paragraphs: [
+            "Der Code bleibt deiner. Ein Repository zu verbinden überträgt uns kein Eigentum.",
+            "Wir verkaufen deine Repository-Inhalte nicht. Wir nutzen sie nicht als Produkt.",
+            "Name, Website und Produkt von Refract gehören Devrefract, einem Unternehmen von Lintel.",
+          ],
+        },
+        {
+          title: "Verfügbarkeit",
+          paragraphs: [
+            "Wir arbeiten daran, Refract am Laufen zu halten. Wir versprechen nicht, dass es immer erreichbar ist oder jeder Review vollständig oder korrekt ist.",
+            "Behandle ein Ergebnis als etwas, das du noch beurteilen musst. Refract ist ein Werkzeug, keine Garantie.",
+          ],
+        },
+        {
+          title: "Wenn etwas schiefläuft",
+          paragraphs: [
+            "Refract wird bereitgestellt, wie es ist. Soweit gesetzlich zulässig haften wir nicht für entgangenen Gewinn, verlorenen Code, Verzögerung oder andere indirekte Schäden durch die Nutzung — oder Nichtnutzung — des Produkts.",
+          ],
+        },
+        {
+          title: "Aufhören",
+          paragraphs: [
+            "Du kannst Refract jederzeit nicht mehr nutzen. Deinstalliere die GitHub App, um den Zugriff auf deine Repositories zu kappen.",
+            "Wir können den Zugang sperren oder beenden, wenn du diese Bedingungen brichst oder den Dienst missbrauchst. Für Kontofragen nutze Kontakt.",
+          ],
+        },
+      ],
+      contactHtml: `Rechtliche Fragen gehen über <a href="/contact">Kontakt</a>.`,
+      changes:
+        "Wenn sich diese Bedingungen ändern, aktualisieren wir diese Seite und das Datum. Wenn du Refract nach einer Änderung weiter nutzt, akzeptierst du die aktualisierten Bedingungen.",
     },
     notFound: {
       title: "Seite nicht gefunden — Refract",

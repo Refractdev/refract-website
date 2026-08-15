@@ -1072,11 +1072,102 @@ export const es: ContentPack = {
     terms: {
       title: "Términos — Refract",
       description:
-        "Usar Refract significa que solo conectas repositorios que tienes permiso para conectar, y usas el producto tal como se ofrece.",
+        "Los términos de uso de Refract: cuentas, acceso a GitHub, aprobación, planes, y qué hacemos y no hacemos con tu código.",
       headline: "Términos",
-      body: "Los términos completos vivirán aquí. Hasta entonces, usar Refract significa que aceptas conectar solo repositorios que tienes permiso para conectar, y usar el producto tal como se ofrece.",
+      status:
+        "Esta es una descripción provisional de usar Refract. Un acuerdo final la sustituirá después de la revisión jurídica.",
+      updated: "Última actualización: 15 de agosto de 2026",
       operator: `${PRODUCT_NAME} es un producto de ${BRAND_NAME}, una empresa de ${COMPANY_NAME}.`,
-      contactHtml: `Por ahora, <a href="/contact">Contacto</a> con preguntas legales.`,
+      short: [
+        "Conecta solo repositorios que tienes permiso para conectar.",
+        "Apruebas cada limpieza. Refract no hace merge por ti, y no reescribe un proyecto por su cuenta.",
+        "El acceso al código es solo a través de la GitHub App, en los repositorios que autorizas.",
+        "El código sigue siendo tuyo. No vendemos el contenido de los repositorios.",
+        "Empieza gratis. El checkout está en camino; no se te cobrará al registrarte.",
+      ],
+      sections: [
+        {
+          title: "Estos términos",
+          paragraphs: [
+            "Estos términos se aplican cuando usas Refract: el sitio, el producto y la GitHub App. Si no estás de acuerdo, no uses el producto.",
+            "Los términos de GitHub siguen aplicándose a GitHub. Estos términos cubren Refract.",
+          ],
+        },
+        {
+          title: "El producto",
+          paragraphs: [
+            "Refract revisa pull requests en busca de patrones que hacen que el código generado por IA sea difícil de mantener. Cuando una limpieza es segura, prepara un cambio para que lo apruebes en GitHub. Cuando no lo es, explica. No finge que una revisión tuvo éxito cuando falló.",
+            "Refract no sustituye la revisión humana, tu editor ni GitHub. No hace merge por ti.",
+          ],
+        },
+        {
+          title: "Tu cuenta",
+          paragraphs: [
+            "Creas una cuenta con correo y contraseña. Eres responsable de esa cuenta. Guarda la contraseña para ti.",
+            "Si usas Refract para una organización, confirmas que tienes derecho a conectar sus repositorios y a aceptar estos términos en nombre de esa organización.",
+          ],
+        },
+        {
+          title: "GitHub y tus repositorios",
+          paragraphs: [
+            "El acceso a GitHub es solo la App que instalas, en los repositorios que autorizas. No iniciamos sesión con GitHub solo para abrir el sitio.",
+            "Declaras que tienes permiso para conectar esos repositorios. Si no lo tienes, no los conectes.",
+            "Puedes desinstalar la GitHub App o limitar los repositorios que vemos en cualquier momento.",
+          ],
+        },
+        {
+          title: "Aprobación",
+          paragraphs: [
+            "Procesamos el contenido de los pull requests para revisarlo, para aplicar limpiezas que apruebas, y para mostrarte el historial en el producto.",
+            "Una limpieza solo entra después de que la apruebes en GitHub. La decisión se queda junto al código. Sigues siendo responsable de lo que haces merge.",
+          ],
+        },
+        {
+          title: "Uso aceptable",
+          paragraphs: [
+            "No conectes código que no tienes derecho a conectar. No intentes romper, hacer scraping ni saturar el servicio. No uses Refract para ocultar malware ni para ignorar credenciales expuestas.",
+            "Si vemos credenciales en un pull request, te lo decimos. Rotar lo que se expuso es cosa tuya.",
+          ],
+        },
+        {
+          title: "Planes y facturación",
+          paragraphs: [
+            "Los planes y límites están descritos en Precios. El plan gratuito existe para que pruebes Refract en un repositorio real.",
+            "Los planes de pago están listados para que sepas hacia dónde va esto. El checkout está en camino; no se te cobrará al registrarte. Cuando empiece la facturación, el sitio y el checkout lo dirán antes de que pagues.",
+          ],
+        },
+        {
+          title: "Tu código",
+          paragraphs: [
+            "El código sigue siendo tuyo. Conectar un repositorio no nos transfiere la propiedad.",
+            "No vendemos el contenido de tus repositorios. No los usamos como producto.",
+            "El nombre Refract, el sitio y el producto pertenecen a Devrefract, una empresa de Lintel.",
+          ],
+        },
+        {
+          title: "Disponibilidad",
+          paragraphs: [
+            "Trabajamos para mantener Refract en marcha. No prometemos que esté siempre activo, ni que cada revisión sea completa o correcta.",
+            "Trata un resultado como algo que aún tienes que juzgar. Refract es una herramienta, no una garantía.",
+          ],
+        },
+        {
+          title: "Si algo sale mal",
+          paragraphs: [
+            "Refract se ofrece tal cual. En la medida en que la ley lo permita, no somos responsables de beneficios perdidos, código perdido, retraso u otros daños indirectos por usar — o no usar — el producto.",
+          ],
+        },
+        {
+          title: "Dejar de usarlo",
+          paragraphs: [
+            "Puedes dejar de usar Refract en cualquier momento. Desinstala la GitHub App para cortar el acceso a tus repositorios.",
+            "Podemos suspender o terminar el acceso si incumples estos términos o abusas del servicio. Para preguntas de cuenta, usa Contacto.",
+          ],
+        },
+      ],
+      contactHtml: `Las preguntas legales van por <a href="/contact">Contacto</a>.`,
+      changes:
+        "Cuando cambien estos términos, actualizamos esta página y la fecha. Si sigues usando Refract después de un cambio, aceptas los términos actualizados.",
     },
     notFound: {
       title: "Página no encontrada — Refract",

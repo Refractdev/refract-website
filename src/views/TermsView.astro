@@ -12,9 +12,21 @@ const { terms } = pack.legal;
   <AppShell variant="minimal">
     <PageShell label={pack.ui.legalLabel} title={terms.headline}>
       <div class="prose-copy">
-        <p>{terms.body}</p>
+        <p class="docs-lede">{terms.status}</p>
+        <p>{terms.updated}</p>
         <p>{terms.operator}</p>
+        <h2>{pack.ui.shortVersion}</h2>
+        {terms.short.map((p) => <p>{p}</p>)}
+        {terms.sections.map((section) => (
+          <>
+            <h2>{section.title}</h2>
+            {section.paragraphs.map((p) => <p>{p}</p>)}
+          </>
+        ))}
+        <h2>{pack.ui.contactHeading}</h2>
         <p set:html={html(terms.contactHtml)} />
+        <h2>{pack.ui.changesHeading}</h2>
+        <p>{terms.changes}</p>
       </div>
     </PageShell>
   </AppShell>
