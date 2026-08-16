@@ -1,6 +1,5 @@
 ---
 import Logo from '@/components/ui/Logo.astro';
-import LanguageSwitcher from '@/components/ui/LanguageSwitcher.astro';
 import { LOGIN_PATH, SIGNUP_PATH } from '@/lib/constants';
 import { stripLocalePrefix } from '@/i18n/href';
 import { usePack } from '@/i18n/usePack';
@@ -19,77 +18,72 @@ function isCurrent(target: string) {
 }
 ---
 
-<header class:list={[variant === 'minimal' ? 'fixed top-0 left-0 z-50 w-full border-b border-ld-border bg-ld-surface' : 'site-header']}>
+<header class="site-header">
   {
     variant === 'minimal' ? (
-      <div class="site-header__inner mx-auto flex max-w-site items-center justify-between px-5 md:px-8">
-        <a href={href('/')} class="nav-link inline-flex items-center gap-2">
+      <div class="site-header__inner site-header__inner--minimal">
+        <a href={href('/')} class="nav-link site-header__back">
           <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <path d="M19 12H5M12 19l-7-7 7-7" />
           </svg>
           {pack.ui.backToHome}
         </a>
-        <a href={href('/')} aria-label="Refract home">
-          <Logo height={14} />
+        <a href={href('/')} class="site-header__brand" aria-label={pack.ui.homeAria}>
+          <Logo height={26} />
         </a>
-        <LanguageSwitcher />
+        <span class="site-header__actions" aria-hidden="true"></span>
       </div>
     ) : (
-      <div class="relative">
-        <div class="site-header__glass" aria-hidden="true"></div>
-        <div class="site-header__shade" aria-hidden="true"></div>
-        <div class="site-header__inner mx-auto flex max-w-site items-center justify-between px-5 md:px-8">
-          <a href={href('/')} class="shrink-0" aria-label="Refract home">
-            <Logo height={14} />
+      <div class="site-header__inner">
+        <a href={href('/')} class="site-header__brand" aria-label={pack.ui.homeAria}>
+          <Logo height={26} />
+        </a>
+
+        <nav class="site-header__nav" aria-label="Primary">
+          {pack.nav.marketingLinks.map((link) => (
+            <a href={href(link.href)} class="nav-link" aria-current={isCurrent(link.href) ? 'page' : undefined}>
+              {link.label}
+            </a>
+          ))}
+        </nav>
+
+        <div class="site-header__actions">
+          <a class="nav-link site-header__signin" href={LOGIN_PATH}>
+            {pack.nav.signIn}
+          </a>
+          <a class="btn btn-primary btn-sm" href={SIGNUP_PATH}>
+            {pack.nav.getStarted}
           </a>
 
-          <nav class="absolute left-1/2 top-1/2 z-20 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-6 lg:flex" aria-label="Primary">
-            {pack.nav.marketingLinks.map((link) => (
-              <a href={href(link.href)} class="nav-link" aria-current={isCurrent(link.href) ? 'page' : undefined}>
-                {link.label}
-              </a>
-            ))}
-          </nav>
-
-          <div class="relative z-10 flex items-center gap-3">
-            <LanguageSwitcher />
-            <a class="nav-link hidden sm:inline" href={LOGIN_PATH}>
-              {pack.nav.signIn}
-            </a>
-            <a class="btn btn-primary btn-sm" href={SIGNUP_PATH}>
-              {pack.nav.getStarted}
-            </a>
-
-            <details class="nav-mobile lg:hidden">
-              <summary
-                class="flex size-8 cursor-pointer items-center justify-center text-ld-secondary"
-                aria-label="Open menu"
-              >
-                <svg class="icon-menu h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                  <path d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-                <svg class="icon-close h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                  <path d="M18 6L6 18M6 6l12 12" />
-                </svg>
-              </summary>
-              <div class="nav-mobile__panel absolute left-0 right-0 top-[var(--header-height)] border-t border-ld-border">
-                <div class="mx-auto flex max-w-site flex-col gap-1 px-5 py-5 md:px-8">
-                  {pack.nav.marketingLinks.map((link) => (
-                    <a href={href(link.href)} class="nav-link rounded-md px-3 py-2.5" aria-current={isCurrent(link.href) ? 'page' : undefined}>
-                      {link.label}
-                    </a>
-                  ))}
-                  <hr class="my-3 border-ld-border" />
-                  <a href={LOGIN_PATH} class="nav-link rounded-md px-3 py-2.5">
-                    {pack.nav.signIn}
+          <details class="nav-mobile lg:hidden">
+            <summary
+              class="flex size-8 cursor-pointer items-center justify-center text-ld-secondary"
+              aria-label={pack.ui.openMenu}
+            >
+              <svg class="icon-menu h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+              <svg class="icon-close h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M18 6L6 18M6 6l12 12" />
+              </svg>
+            </summary>
+            <div class="nav-mobile__panel">
+              <div class="mx-auto flex max-w-site flex-col gap-1 px-5 py-5">
+                {pack.nav.marketingLinks.map((link) => (
+                  <a href={href(link.href)} class="nav-link nav-link--block" aria-current={isCurrent(link.href) ? 'page' : undefined}>
+                    {link.label}
                   </a>
-                  <a class="btn btn-primary btn-sm mt-2 self-start" href={SIGNUP_PATH}>
-                    {pack.nav.getStarted}
-                  </a>
-                </div>
+                ))}
+                <hr class="my-3 border-ld-border" />
+                <a href={LOGIN_PATH} class="nav-link nav-link--block">
+                  {pack.nav.signIn}
+                </a>
+                <a class="btn btn-primary btn-sm mt-2 self-start" href={SIGNUP_PATH}>
+                  {pack.nav.getStarted}
+                </a>
               </div>
-            </details>
-          </div>
+            </div>
+          </details>
         </div>
       </div>
     )

@@ -1,7 +1,6 @@
 ---
 import '../styles/global.css';
 import { BRAND_NAME, COMPANY_NAME, GITHUB_APP_URL, SITE_NAME, SITE_URL, TWITTER_HANDLE } from '@/lib/constants';
-import { allPlanOffers } from '@/lib/schema';
 import { localeMeta, locales } from '@/i18n/config';
 import { absoluteUrl, localizeHref, stripLocalePrefix } from '@/i18n/href';
 import { usePack } from '@/i18n/usePack';
@@ -68,14 +67,14 @@ const jsonLd = {
       '@type': 'Organization',
       '@id': lintelId,
       name: COMPANY_NAME,
-      description: 'Parent technology company. Builds and operates its products and future technology ventures.',
+      description: 'Parent technology company.',
     },
     {
       '@type': 'Organization',
       '@id': organizationId,
       name: BRAND_NAME,
       url: SITE_URL,
-      description: 'Developer technology brand. Builds software development infrastructure and tools.',
+      description: 'Developer technology brand.',
       parentOrganization: { '@id': lintelId },
       logo: {
         '@type': 'ImageObject',
@@ -124,7 +123,6 @@ const jsonLd = {
             operatingSystem: 'Web',
             publisher: { '@id': organizationId },
             brand: { '@id': organizationId },
-            offers: allPlanOffers(),
           },
         ]
       : []),

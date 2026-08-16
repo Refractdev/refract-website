@@ -32,11 +32,11 @@ export default {
         mono: ["'JetBrains Mono'", "ui-monospace", "monospace"],
       },
       maxWidth: {
-        site: "1200px",
+        site: "1300px",
       },
       borderRadius: {
-        md: "8px",
-        lg: "8px",
+        md: "4px",
+        lg: "4px",
       },
       transitionTimingFunction: {
         premium: "cubic-bezier(0.22, 1, 0.36, 1)",

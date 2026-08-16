@@ -1,0 +1,45 @@
+---
+interface Props {
+  brand: 'discord' | 'github';
+  kicker: string;
+  title: string;
+  body: string;
+  cta: string;
+  href: string;
+  compact?: boolean;
+}
+
+const { brand, kicker, title, body, cta, href, compact = false } = Astro.props;
+const external = href.startsWith('http');
+
+const discordPath =
+  'M19.27 5.33C17.94 4.71 16.5 4.26 15 4a.09.09 0 0 0-.07.03c-.18.33-.39.76-.53 1.09a16.1 16.1 0 0 0-4.8 0c-.14-.34-.36-.76-.54-1.09c-.01-.02-.04-.03-.07-.03c-1.5.26-2.93.71-4.27 1.33c-.01 0-.02.01-.03.02C2.2 9.05 1.4 12.67 1.8 16.23c0 .02.01.04.03.05c1.8 1.32 3.53 2.12 5.24 2.65c.03.01.06 0 .07-.02c.4-.55.76-1.13 1.07-1.74c.02-.04 0-.08-.04-.1c-.57-.22-1.11-.48-1.64-.78c-.04-.02-.04-.08-.01-.11c.11-.08.22-.17.32-.26c.02-.01.05-.01.07 0c3.44 1.57 7.15 1.57 10.55 0c.02-.01.05-.01.07 0c.1.09.21.18.32.26c.04.03.04.09-.01.11c-.52.31-1.07.56-1.64.78c-.04.01-.05.06-.03.1c.32.61.68 1.19 1.07 1.74c.03.01.06.02.09.01c1.72-.53 3.45-1.33 5.25-2.65c.02-.01.03-.03.03-.05c.44-4.07-.73-7.66-3.1-10.88c-.01-.01-.02-.02-.04-.02zM8.52 14.91c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.84 2.12-1.89 2.12zm6.97 0c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.83 2.12-1.89 2.12z';
+
+const githubPath =
+  'M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0 1 12 6.844a9.56 9.56 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48A10.01 10.01 0 0 0 22 12c0-5.523-4.477-10-10-10z';
+---
+
+<a
+  class:list={['community-card', 'reveal', compact && 'community-card--compact', `community-card--${brand}`]}
+  href={href}
+  target={external ? '_blank' : undefined}
+  rel={external ? 'noopener noreferrer' : undefined}
+  aria-label={cta}
+>
+  <div class="community-card__copy">
+    <p class="community-card__kicker">
+      <svg class="community-card__glyph" viewBox="0 0 24 24" aria-hidden="true">
+        <path fill="currentColor" d={brand === 'github' ? githubPath : discordPath} />
+      </svg>
+      {kicker}
+    </p>
+    <h3 class="community-card__title">{title}</h3>
+    <p class="community-card__body">{body}</p>
+    <span class="btn btn-primary community-card__cta">{cta}</span>
+  </div>
+  <div class="community-card__art" aria-hidden="true">
+    <svg class="community-card__mark" viewBox="0 0 24 24">
+      <path fill="currentColor" d={brand === 'github' ? githubPath : discordPath} />
+    </svg>
+  </div>
+</a>

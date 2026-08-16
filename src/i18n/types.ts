@@ -30,6 +30,10 @@ export type UiStrings = {
   changesHeading: string;
   legalLabel: string;
   bestFor: string;
+  homeAria: string;
+  openMenu: string;
+  githubHeading: string;
+  connectHeading: string;
 };
 
 export type ContentPack = {
@@ -48,6 +52,7 @@ export type ContentPack = {
     footerBrandLine: string;
     footerFinePrint: string;
     githubAppLabel: string;
+    discordLabel: string;
     signIn: string;
     getStarted: string;
   };
@@ -67,13 +72,14 @@ export type ContentPack = {
   home: {
     seo: SeoBlock;
     hero: {
-      eyebrow: string;
+      pill: Link;
       headline: string;
       subhead: string;
       primary: Link;
       secondary: Link;
       trust: string;
       caption: string;
+      stack: string;
     };
     problem: {
       headline: string;
@@ -83,6 +89,7 @@ export type ContentPack = {
     turn: {
       headline: string;
       lede: string;
+      more: Link;
     };
     result: {
       headline: string;
@@ -90,6 +97,7 @@ export type ContentPack = {
     };
     does: {
       headline: string;
+      more: Link;
       points: { number: string; title: string; body: string }[];
     };
     world: {
@@ -113,12 +121,16 @@ export type ContentPack = {
       headline: string;
       points: { title: string; body: string }[];
     };
+    ships: {
+      headline: string;
+      more: Link;
+      items: { date: string; title: string; href: string }[];
+    };
     social: {
       headline: string;
       line: string;
-      invite: string;
-      inviteHref: string;
-      inviteLabel: string;
+      discord: { kicker: string; title: string; body: string; cta: string };
+      github: { kicker: string; title: string; body: string; cta: string };
     };
     honesty: {
       headline: string;
@@ -214,7 +226,7 @@ export type ContentPack = {
       title: string;
       description: string;
       headline: string;
-      status: string;
+      updated: string;
       short: string[];
       collectHeadline: string;
       collect: string;
@@ -226,7 +238,6 @@ export type ContentPack = {
       title: string;
       description: string;
       headline: string;
-      status: string;
       updated: string;
       short: string[];
       sections: { title: string; paragraphs: string[] }[];

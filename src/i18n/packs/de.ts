@@ -1,7 +1,6 @@
 import {
   BRAND_NAME,
   COMPANY_NAME,
-  GITHUB_APP_INSTALL_URL,
   PRODUCT_NAME,
   SIGNUP_PATH,
 } from "@/lib/constants";
@@ -28,6 +27,10 @@ export const de: ContentPack = {
     changesHeading: "Änderungen",
     legalLabel: "Rechtliches",
     bestFor: "Am besten für:",
+    homeAria: "Refract-Startseite",
+    openMenu: "Menü öffnen",
+    githubHeading: "GitHub",
+    connectHeading: "Verbinden",
   },
   seo: {
     defaultTitle: "Refract — Die KI hat ihn geschrieben. Mach ihn bereit zum Ausliefern.",
@@ -52,8 +55,16 @@ export const de: ContentPack = {
         links: [
           { label: "Produkt", href: "/product" },
           { label: "Preise", href: "/pricing" },
-          { label: "Dokumentation", href: "/docs" },
           { label: "Sicherheit", href: "/security" },
+        ],
+      },
+      {
+        title: "Dokumentation",
+        links: [
+          { label: "Erste Schritte", href: "/docs/getting-started" },
+          { label: "Genehmigen", href: "/docs/approve" },
+          { label: "FAQ", href: "/docs/faq" },
+          { label: "Alle Docs", href: "/docs" },
         ],
       },
       {
@@ -61,6 +72,11 @@ export const de: ContentPack = {
         links: [
           { label: "Über uns", href: "/about" },
           { label: "Kontakt", href: "/contact" },
+        ],
+      },
+      {
+        title: "Rechtliches",
+        links: [
           { label: "Datenschutz", href: "/privacy" },
           { label: "Nutzungsbedingungen", href: "/terms" },
         ],
@@ -68,7 +84,8 @@ export const de: ContentPack = {
     ],
     footerBrandLine: "Refract — der Schritt, nachdem die KI den Code geschrieben hat.",
     footerFinePrint: "Gebaut für React und TypeScript auf GitHub.",
-    githubAppLabel: "Auf GitHub installieren",
+    githubAppLabel: "GitHub verbinden",
+    discordLabel: "Discord",
     signIn: "Anmelden",
     getStarted: "Loslegen",
   },
@@ -77,23 +94,15 @@ export const de: ContentPack = {
     copyrightLine: `${BRAND_NAME}, ein Unternehmen von ${COMPANY_NAME}.`,
     operatorSentence: `${PRODUCT_NAME} ist ein Produkt von ${BRAND_NAME}, einem Unternehmen von ${COMPANY_NAME}.`,
     about: {
-      title: `Über uns — ${BRAND_NAME}`,
-      description: `${PRODUCT_NAME} wird von ${BRAND_NAME} entwickelt, einem Unternehmen von ${COMPANY_NAME} mit Fokus auf Entwicklertechnologie.`,
+      title: `Über uns — ${PRODUCT_NAME}`,
+      description: `${PRODUCT_NAME} ist der Schritt, nachdem die KI den Code geschrieben hat. Ein Produkt von ${BRAND_NAME}, einem Unternehmen von ${COMPANY_NAME}.`,
       label: "Unternehmen",
-      headline: BRAND_NAME,
-      intro: `${PRODUCT_NAME} ist unser aktuelles Produkt. ${BRAND_NAME} ist die Entwicklertechnologie-Marke dahinter. ${COMPANY_NAME} ist das Unternehmen, das ${BRAND_NAME} aufbaut.`,
+      headline: PRODUCT_NAME,
+      intro: `${PRODUCT_NAME} prüft KI-generierten Code auf GitHub-Pull-Requests, bereitet eine Bereinigung vor, wenn sie sicher ist, und wartet auf deine Freigabe.`,
       sections: [
         {
-          title: COMPANY_NAME,
-          body: `${COMPANY_NAME} ist das übergeordnete Technologieunternehmen. Es entwickelt und betreibt seine Produkte und künftige Technologievorhaben. Es ist kein Produkt, das mit ${PRODUCT_NAME} konkurriert.`,
-        },
-        {
-          title: BRAND_NAME,
-          body: `${BRAND_NAME} ist die entwicklerorientierte Technologiemarke von ${COMPANY_NAME}. Sie baut Infrastruktur und Werkzeuge für die Softwareentwicklung, mit denen Teams Software erstellen, pflegen, verstehen und weiterentwickeln.`,
-        },
-        {
-          title: PRODUCT_NAME,
-          body: `${PRODUCT_NAME} ist das aktuelle Flaggschiffprodukt von ${BRAND_NAME}: der Schritt, nachdem die KI den Code geschrieben hat.`,
+          title: "Wer es baut",
+          body: `${PRODUCT_NAME} ist ein Produkt von ${BRAND_NAME}, einem Unternehmen von ${COMPANY_NAME}.`,
         },
       ],
     },
@@ -108,7 +117,7 @@ export const de: ContentPack = {
         "Der Schritt nach dem Generieren. Refract räumt KI-generierten Code auf und zieht ihn fest, damit du weiter ausliefern kannst.",
     },
     hero: {
-      eyebrow: "Der Schritt, nachdem die KI den Code geschrieben hat",
+      pill: { label: "Im GitHub Check genehmigen", href: "/docs/approve" },
       headline: "Die KI hat ihn geschrieben. Mach ihn bereit zum Ausliefern.",
       subhead:
         "Refract nimmt den Code, den deine KI-Werkzeuge erzeugen, und macht daraus etwas Saubereres, Konsistenteres und Leichteres zu behalten — damit das Projekt nicht auseinanderfällt, während es wächst.",
@@ -116,6 +125,7 @@ export const de: ContentPack = {
       secondary: { label: "So funktioniert’s", href: "/product" },
       trust: "Du genehmigst jede Änderung. Refract schreibt dein Projekt nie von allein um.",
       caption: "Bevor es zur Codebasis wird",
+      stack: "React · TypeScript · GitHub",
     },
     problem: {
       headline: "Funktionierender Code kann trotzdem ein Chaos sein.",
@@ -130,6 +140,7 @@ export const de: ContentPack = {
     turn: {
       headline: "Refract ist das, was passiert, nachdem die KI den Code geschrieben hat.",
       lede: "Keine weitere Liste von Beschwerden. Ein saubereres Projekt.",
+      more: { label: "So funktioniert’s", href: "/product" },
     },
     result: {
       headline: "Das Ergebnis ist Code, den du behalten kannst.",
@@ -154,6 +165,7 @@ export const de: ContentPack = {
     },
     does: {
       headline: "Es zeigt nicht nur auf Probleme. Es macht den Code besser.",
+      more: { label: "Zum Produkt", href: "/product" },
       points: [
         {
           number: "1",
@@ -186,7 +198,7 @@ export const de: ContentPack = {
         "Genehmige auf GitHub. Bleib in dem Ablauf, den du schon hast. Refract verlangt nicht, dass du in einem zweiten Posteingang lebst.",
     },
     trust: {
-      headline: "Kontrolliert. Sichtbar. In der Praxis umkehrbar — weil du das Sagen hast.",
+      headline: "Du genehmigst jede Änderung.",
       points: [
         {
           title: "Du genehmigst.",
@@ -249,12 +261,30 @@ export const de: ContentPack = {
         },
       ],
     },
+    ships: {
+      headline: "Neu",
+      more: { label: "Zur Dokumentation", href: "/docs" },
+      items: [
+        { date: "Aug. 2026", title: "Im GitHub Check genehmigen", href: "/docs/approve" },
+        { date: "Aug. 2026", title: "Discord beitreten", href: "https://discord.gg/SH787P4rP4" },
+        { date: "Aug. 2026", title: "GitHub nach der Anmeldung verbinden", href: "/docs/connect-github" },
+      ],
+    },
     social: {
-      headline: "Teams, die Software generieren, brauchen einen Schritt nach dem Generieren.",
-      line: "Genutzt von Entwicklern, die mit KI auf GitHub bauen.",
-      invite: "Willst du ein frühes Team sein?",
-      inviteHref: "/contact",
-      inviteLabel: "Kontaktiere uns",
+      headline: "Tritt der Community bei",
+      line: "Stell Fragen, teile einen Pull Request, häng mit anderen Leuten ab, die Refract nutzen.",
+      discord: {
+        kicker: "Discord",
+        title: "Chatte mit anderen Buildern",
+        body: "Der Raum für frühe Teams, Produktfragen, und was in einem Pull Request kaputtgegangen ist.",
+        cta: "Discord beitreten",
+      },
+      github: {
+        kicker: "GitHub",
+        title: "In Refract verbinden",
+        body: "Zuerst anmelden. Die App wird beim Onboarding installiert, damit sie mit deinem Konto verknüpft bleibt.",
+        cta: "Loslegen",
+      },
     },
     honesty: {
       headline: "Was Refract nicht ist.",
@@ -265,7 +295,7 @@ export const de: ContentPack = {
       ],
     },
     cta: {
-      headline: "Generiere den Code. Erbe nicht das Chaos.",
+      headline: "Die KI hat ihn geschrieben. Mach ihn bereit zum Ausliefern.",
       body: "Erstelle ein Konto, verbinde GitHub, und lass Refract die Erstentwürfe den Rest des Weges bringen.",
       primary: { label: "Loslegen", href: SIGNUP_PATH },
       secondary: { label: "Preise ansehen", href: "/pricing" },
@@ -364,7 +394,7 @@ export const de: ContentPack = {
         "Einiges davon kann es für dich aufräumen. Einiges davon zeigt es nur — absichtlich. Ein schlechter automatischer Umbau ist schlimmer als ein ehrlicher Hinweis.",
     },
     start: {
-      headline: "In Minuten live",
+      headline: "Etwa zehn Minuten bis zum Start",
       steps: [
         "Konto erstellen",
         "Die GitHub App installieren und Repositories wählen",
@@ -676,7 +706,7 @@ export const de: ContentPack = {
         description: "Registriere dich mit Name, E-Mail und Passwort. GitHub ist ein eigener Schritt.",
         blocks: [
           { type: "p", text: "Registriere dich mit Name, E-Mail und Passwort." },
-          { type: "html", html: 'Anmelden unter <a href="/login">/login</a>.' },
+          { type: "html", html: 'Anmelden über <a href="/login">Anmelden</a>.' },
           {
             type: "p",
             text: "Passwort vergessen: Wir schicken einen Link zum Zurücksetzen, wenn diese Adresse ein Konto hat.",
@@ -707,7 +737,7 @@ export const de: ContentPack = {
             html: `<ol>
           <li>Bei Refract anmelden</li>
           <li>GitHub verbinden öffnen</li>
-          <li>Die App installieren: <a href="${GITHUB_APP_INSTALL_URL}">${GITHUB_APP_INSTALL_URL}</a></li>
+          <li>Die App von dort installieren — nicht von dieser Website — damit sie mit deinem Konto verknüpft bleibt</li>
           <li>Bestimmte Repositories wählen (empfohlen)</li>
           <li>Zu Refract zurückkehren und bestätigen, welche beobachtet werden sollen</li>
         </ol>`,
@@ -964,7 +994,7 @@ export const de: ContentPack = {
           },
           {
             q: "Trainiert ihr Modelle mit unserem Code?",
-            a: 'Wir verarbeiten Code, um ihn zu prüfen und die Bereinigungen anzuwenden, die du genehmigst. Wir verkaufen dein Repository nicht als Trainingsdaten. Siehe <a href="/security">Sicherheit</a>.',
+            a: 'Nein. Wir trainieren keine Modelle mit deinem Repository. Pull-Request-Inhalt geht nur an Modellanbieter, um diese Änderung zu prüfen und eine Bereinigung vorzubereiten, die du genehmigst. Wir verkaufen deinen Code nicht. Siehe <a href="/security">Sicherheit</a>.',
           },
           {
             q: "Was, wenn es falsch liegt?",
@@ -1053,8 +1083,7 @@ export const de: ContentPack = {
       description:
         "Was Refract erhebt, wie es über die GitHub App auf Repositories zugreift, und wie du uns bei Datenschutzfragen erreichst.",
       headline: "Datenschutz",
-      status:
-        "Das ist eine Arbeitsbeschreibung, wie Refract Konten und Code behandelt. Eine endgültige Richtlinie ersetzt sie nach rechtlicher Prüfung.",
+      updated: "Zuletzt aktualisiert: 16. August 2026",
       short: [
         "Website-Konto: E-Mail und Passwort.",
         "Code-Zugang: nur über die GitHub App, auf Repositories, die du erlaubst.",
@@ -1074,16 +1103,14 @@ export const de: ContentPack = {
       description:
         "Die Nutzungsbedingungen für Refract: Konten, GitHub-Zugriff, Freigabe, Pläne und was wir mit deinem Code tun und nicht tun.",
       headline: "Nutzungsbedingungen",
-      status:
-        "Das ist eine vorläufige Beschreibung der Nutzung von Refract. Eine endgültige Vereinbarung ersetzt sie nach rechtlicher Prüfung.",
-      updated: "Zuletzt aktualisiert: 15. August 2026",
+      updated: "Zuletzt aktualisiert: 16. August 2026",
       operator: `${PRODUCT_NAME} ist ein Produkt von ${BRAND_NAME}, einem Unternehmen von ${COMPANY_NAME}.`,
       short: [
         "Verbinde nur Repositories, die du verbinden darfst.",
         "Du genehmigst jede Bereinigung. Refract merged nicht für dich und schreibt ein Projekt nicht von allein um.",
         "Codezugriff nur über die GitHub App, auf Repositories, die du erlaubst.",
         "Der Code bleibt deiner. Wir verkaufen keine Repository-Inhalte.",
-        "Starte kostenlos. Checkout kommt; bei der Anmeldung wirst du nicht belastet.",
+        "Starte kostenlos. Kartenzahlung ist noch nicht live; bei der Anmeldung wirst du nicht belastet.",
       ],
       sections: [
         {
@@ -1119,7 +1146,7 @@ export const de: ContentPack = {
           title: "Freigabe",
           paragraphs: [
             "Wir verarbeiten Pull-Request-Inhalte, um sie zu prüfen, von dir genehmigte Bereinigungen anzuwenden und dir den Verlauf im Produkt zu zeigen.",
-            "Eine Bereinigung landet erst, nachdem du sie auf GitHub genehmigt hast. Die Entscheidung bleibt neben dem Code. Du bleibst verantwortlich für das, was du mergen.",
+            "Eine Bereinigung landet erst, nachdem du sie auf GitHub genehmigt hast. Die Entscheidung bleibt neben dem Code. Du bleibst verantwortlich für das, was du zusammenführst.",
           ],
         },
         {
@@ -1133,7 +1160,7 @@ export const de: ContentPack = {
           title: "Pläne und Abrechnung",
           paragraphs: [
             "Pläne und Limits stehen unter Preise. Der kostenlose Plan existiert, damit du Refract an einem echten Repository ausprobieren kannst.",
-            "Bezahlte Pläne sind aufgeführt, damit du weißt, wohin das geht. Checkout kommt; bei der Anmeldung wirst du nicht belastet. Wenn die Abrechnung startet, sagen Website und Checkout das, bevor du zahlst.",
+            "Bezahlte Pläne zeigen, was das kosten wird. Kartenzahlung ist noch nicht live. Bei der Anmeldung wirst du nicht belastet. Wenn die Abrechnung startet, sagt die Website das, bevor du zahlst.",
           ],
         },
         {
@@ -1172,8 +1199,8 @@ export const de: ContentPack = {
     notFound: {
       title: "Seite nicht gefunden — Refract",
       description: "Diese Seite ist nicht hier.",
-      headline: "Diese Seite ist nicht hier.",
-      body: "Der Link kann alt sein. Das Produkt ist es nicht.",
+      headline: "Diese Seite gibt es nicht.",
+      body: "Der Link ist falsch oder die Seite wurde verschoben.",
       cta: "Zurück zur Startseite",
     },
   },

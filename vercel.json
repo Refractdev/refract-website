@@ -29,6 +29,31 @@
       "source": "/dashboard",
       "destination": "https://refract-dev.vercel.app",
       "permanent": false
+    },
+    {
+      "source": "/help",
+      "destination": "/docs/faq",
+      "permanent": false
+    },
+    {
+      "source": "/faq",
+      "destination": "/docs/faq",
+      "permanent": false
+    },
+    {
+      "source": "/changelog",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/roadmap",
+      "destination": "/product",
+      "permanent": false
+    },
+    {
+      "source": "/status",
+      "destination": "/",
+      "permanent": false
     }
   ]
 }

@@ -6,9 +6,10 @@ interface Props {
   lines: FilmLine[] | readonly FilmLine[];
   caption?: string;
   trigger?: 'load' | 'scroll';
+  chrome?: boolean;
 }
 
-const { file, lines, caption, trigger = 'scroll' } = Astro.props;
+const { file, lines, caption, trigger = 'scroll', chrome = false } = Astro.props;
 
 // The "before" state is what reserves the height: everything except the
 // lines that have not been written yet.
@@ -28,6 +29,15 @@ const rows = lines.map((line) => ({ ...line, i: counters[line.state]++ }));
 >
   <figure class="code-surface">
     <div class="code-surface__bar">
+      {
+        chrome ? (
+          <span class="code-surface__dots" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        ) : null
+      }
       <figcaption class="code-surface__path">{file}</figcaption>
     </div>
     <div class="film__body">

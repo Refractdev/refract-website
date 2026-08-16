@@ -7,69 +7,28 @@ import { usePack } from '@/i18n/usePack';
 
 const { pack } = usePack(Astro.url.pathname);
 const { contact } = pack.legal;
+const topicLinks = contact.topics.map((topic) => ({
+  topic,
+  href: `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(`Refract — ${topic}`)}`,
+}));
 ---
 
 <BaseLayout title={contact.title} description={contact.description}>
   <AppShell>
     <PageShell title={contact.headline} description={contact.intro}>
-      <form id="contact-form" class="contact-form" action={`mailto:${CONTACT_EMAIL}`} method="post" enctype="text/plain">
-        <label class="form-field">
-          <span>{contact.fields.name}</span>
-          <input type="text" name="name" autocomplete="name" required />
-        </label>
-        <label class="form-field">
-          <span>{contact.fields.email}</span>
-          <input type="email" name="email" autocomplete="email" required />
-        </label>
-        <label class="form-field">
-          <span>{contact.fields.topic}</span>
-          <select name="topic" required>
-            {contact.topics.map((topic) => <option value={topic}>{topic}</option>)}
-          </select>
-        </label>
-        <label class="form-field">
-          <span>{contact.fields.message}</span>
-          <textarea name="message" rows="6" required></textarea>
-        </label>
-        <label class="form-field">
-          <span>{contact.fields.link}</span>
-          <input type="url" name="link" inputmode="url" placeholder="https://" />
-        </label>
-        <p class="text-[13px] text-ld-muted">{contact.bugs}</p>
-        <button class="btn btn-primary self-start" type="submit">{contact.submit}</button>
-        <p id="contact-success" class="form-status" hidden>{contact.success}</p>
-        <p id="contact-error" class="form-status form-status--error" hidden>{contact.error}</p>
-      </form>
+      <div class="prose-copy">
+        <p>
+          <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+        </p>
+        <p>{contact.bugs}</p>
+        <ul>
+          {topicLinks.map((item) => (
+            <li>
+              <a href={item.href}>{item.topic}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
     </PageShell>
   </AppShell>
 </BaseLayout>
-
-<script is:inline>
-  const form = document.getElementById('contact-form');
-  const success = document.getElementById('contact-success');
-  const error = document.getElementById('contact-error');
-  if (form instanceof HTMLFormElement) {
-    form.addEventListener('submit', function (event) {
-      event.preventDefault();
-      if (success) success.hidden = true;
-      if (error) error.hidden = true;
-      const data = new FormData(form);
-      const name = String(data.get('name') || '');
-      const email = String(data.get('email') || '');
-      const topic = String(data.get('topic') || '');
-      const message = String(data.get('message') || '');
-      const link = String(data.get('link') || '');
-      const body = ['Name: ' + name, 'Email: ' + email, 'Topic: ' + topic, link ? 'Link: ' + link : '', '', message]
-        .filter(function (line, i, arr) { return line !== '' || arr[i - 1] !== ''; })
-        .join('\n');
-      const mailto = form.getAttribute('action') || '';
-      const href = mailto + '?subject=' + encodeURIComponent('Refract — ' + topic) + '&body=' + encodeURIComponent(body);
-      try {
-        window.location.href = href;
-        if (success) success.hidden = false;
-      } catch {
-        if (error) error.hidden = false;
-      }
-    });
-  }
-</script>

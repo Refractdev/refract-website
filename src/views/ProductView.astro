@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import AppShell from '../layouts/AppShell.astro';
+import CopyBlock from '@/components/sections/CopyBlock.astro';
 import FAQ from '@/components/sections/FAQ.astro';
 import Band from '@/components/ui/Band.astro';
 import Bento from '@/components/ui/Bento.astro';
@@ -11,12 +12,14 @@ import ArtCleanup from '@/components/art/ArtCleanup.astro';
 import ArtCheck from '@/components/art/ArtCheck.astro';
 import ArtPlaces from '@/components/art/ArtPlaces.astro';
 import ArtStatus from '@/components/art/ArtStatus.astro';
+import ArtAudience from '@/components/art/ArtAudience.astro';
 import { faqPageSchema } from '@/lib/schema';
 import { usePack } from '@/i18n/usePack';
 
 const { pack, href } = usePack(Astro.url.pathname);
-const { product } = pack;
+const { product, home } = pack;
 const resultKinds = ['working', 'clear', 'ready', 'look', 'wrong'] as const;
+const audienceKinds = ['individual', 'team', 'stack'] as const;
 const schema = [faqPageSchema(product.faqs)];
 ---
 
@@ -29,13 +32,12 @@ const schema = [faqPageSchema(product.faqs)];
 >
   <AppShell>
     <main id="main">
-      <section class="relative overflow-hidden pb-16 pt-[128px] md:pb-24 md:pt-[160px]">
-        <div class="atmosphere" aria-hidden="true"></div>
-        <div class="relative z-10 mx-auto max-w-site px-5 md:px-8">
-          <div class="anim-hero mx-auto max-w-[720px] text-center">
+      <section class="relative overflow-hidden pb-16 pt-[calc(var(--header-height)+var(--space-hero-extra))]">
+        <div class="mx-auto max-w-site px-5">
+          <div class="anim-hero max-w-[720px] text-left">
             <h1 class="text-tp-heading text-balance">{product.hero.headline}</h1>
-            <p class="text-hero-lede mx-auto mt-5 max-w-[600px]">{product.hero.subhead}</p>
-            <a href={href(product.hero.cta.href)} class="btn btn-primary btn-lg mt-8">{product.hero.cta.label}</a>
+            <p class="text-hero-lede mt-5 max-w-[600px]">{product.hero.subhead}</p>
+            <a href={href(product.hero.cta.href)} class="btn btn-primary mt-[22px]">{product.hero.cta.label}</a>
           </div>
         </div>
       </section>
@@ -95,7 +97,23 @@ const schema = [faqPageSchema(product.faqs)];
         </p>
       </Band>
 
-      <FAQ items={product.faqs} title="" />
+      <Band headline={home.audience.headline}>
+        <Bento>
+          {
+            home.audience.points.map((point, i) => (
+              <Tile title={point.title} body={point.body} span={4} index={i}>
+                <ArtAudience slot="art" kind={audienceKinds[i]} />
+              </Tile>
+            ))
+          }
+        </Bento>
+      </Band>
+
+      <CopyBlock headline={home.honesty.headline}>
+        {home.honesty.paragraphs.map((p) => <p>{p}</p>)}
+      </CopyBlock>
+
+      <FAQ items={product.faqs} title={pack.faq.title} />
     </main>
   </AppShell>
 </BaseLayout>

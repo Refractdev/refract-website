@@ -47,7 +47,7 @@ export const faqGroups = [
       },
       {
         q: "Do you train models on our code?",
-        a: 'We process code to review it and to apply the cleanups you approve. We do not sell your repository as training data. See <a href="/security">Security</a>.',
+        a: "No. We do not train models on your repository. We send pull request content to model providers only to review that change and to prepare a cleanup you approve. We do not sell your code. See <a href=\"/security\">Security</a>.",
       },
       {
         q: "What if it’s wrong?",
@@ -77,7 +77,7 @@ export const faqGroups = [
     items: [
       {
         q: "Is pricing live?",
-        a: "The plans are real. Card checkout is rolling out. Start free.",
+        a: "The listed prices are what paid plans will cost. Card payment is not live yet. Start free — you will not be charged at signup.",
       },
     ],
   },
@@ -86,7 +86,7 @@ export const faqGroups = [
     items: [
       {
         q: "Who makes Refract?",
-        a: "Refract is built by Devrefract, a Lintel company. Lintel is the parent technology company. Devrefract builds developer technology. Refract is its current product.",
+        a: "Refract is a product of Devrefract, a Lintel company.",
       },
     ],
   },

@@ -12,7 +12,7 @@ const { privacy } = pack.legal;
   <AppShell variant="minimal">
     <PageShell label={pack.ui.legalLabel} title={privacy.headline}>
       <div class="prose-copy">
-        <p class="docs-lede">{privacy.status}</p>
+        <p>{privacy.updated}</p>
         <p>{privacy.operator}</p>
         <h2>{pack.ui.shortVersion}</h2>
         {privacy.short.map((p) => <p>{p}</p>)}

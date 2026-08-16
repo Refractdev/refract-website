@@ -11,7 +11,7 @@ export const homeSeo = {
 };
 
 export const homeHero = {
-  eyebrow: "The step after AI writes the code",
+  pill: { label: "Approve on the GitHub Check", href: "/docs/approve" },
   headline: "AI wrote it. Make it ready to ship.",
   subhead:
     "Refract takes the code your AI tools produce and turns it into something cleaner, more consistent, and easier to keep — so the project doesn’t fall apart as it grows.",
@@ -19,6 +19,7 @@ export const homeHero = {
   secondary: { label: "See how it works", href: "/product" },
   trust: "You approve every change. Refract never rewrites your project on its own.",
   caption: "Before it becomes the codebase",
+  stack: "React · TypeScript · GitHub",
 };
 
 export const homeShift = {
@@ -64,6 +65,7 @@ export const homeTurn = {
     "Not another list of complaints. A cleaner project.",
   ],
   cta: { label: "Get started", href: SIGNUP_PATH },
+  more: { label: "See how it works", href: "/product" },
 };
 
 export const homeResult = {
@@ -90,6 +92,7 @@ export const homeResult = {
 
 export const homeDoes = {
   headline: "It doesn’t just point at problems. It makes the code better.",
+  more: { label: "See the product", href: "/product" },
   points: [
     {
       number: "1",
@@ -131,7 +134,7 @@ export const homeWorld = {
 };
 
 export const homeTrust = {
-  headline: "Controlled. Visible. Reversible in practice — because you are still in charge.",
+  headline: "You approve every change.",
   points: [
     {
       title: "You approve.",
@@ -197,12 +200,31 @@ export const homeAudience = {
   ],
 };
 
+export const homeShips = {
+  headline: "What’s new",
+  more: { label: "See the docs", href: "/docs" },
+  items: [
+    { date: "Aug 2026", title: "Approve on the GitHub Check", href: "/docs/approve" },
+    { date: "Aug 2026", title: "Join the Discord", href: "https://discord.gg/SH787P4rP4" },
+    { date: "Aug 2026", title: "Connect GitHub after you sign in", href: "/docs/connect-github" },
+  ],
+};
+
 export const homeSocial = {
-  headline: "Teams generating software need a step after generate.",
-  line: "Used by developers who build with AI on GitHub.",
-  invite: "Want to be an early team?",
-  inviteHref: "/contact",
-  inviteLabel: "Contact us",
+  headline: "Join the community",
+  line: "Ask questions, share a pull request, hang out with other people using Refract.",
+  discord: {
+    kicker: "Discord",
+    title: "Chat with other builders",
+    body: "The room for early teams, product questions, and whatever broke on a pull request.",
+    cta: "Join Discord",
+  },
+  github: {
+    kicker: "GitHub",
+    title: "Connect it in Refract",
+    body: "Sign in first. The App is installed during onboarding, so it stays tied to your account.",
+    cta: "Get started",
+  },
 };
 
 export const homeHonesty = {
@@ -215,7 +237,7 @@ export const homeHonesty = {
 };
 
 export const homeCta = {
-  headline: "Generate the code. Don’t inherit the mess.",
+  headline: "AI wrote it. Make it ready to ship.",
   body: "Create an account, connect GitHub, and let Refract take the first drafts the rest of the way.",
   primary: { label: "Get started", href: SIGNUP_PATH },
   secondary: { label: "See pricing", href: "/pricing" },
@@ -224,19 +246,36 @@ export const homeCta = {
 export const heroFilm: { file: string; lines: FilmLine[] } = {
   file: "src/screens/Orders.tsx",
   lines: [
+    { state: "added", text: 'import { useOrders } from "@/hooks/useOrders"' },
+    { state: "added", text: 'import { OrderList } from "./OrderList"' },
+    { state: "removed", text: 'import { useState, useEffect } from "react"' },
+    { state: "kept", text: "" },
     { state: "kept", text: "export function Orders() {" },
     { state: "added", text: "  const { data, loading } = useOrders()" },
     { state: "removed", text: "  const [data, setData] = useState([])" },
     { state: "removed", text: "  const [loading, setLoading] = useState(true)" },
+    { state: "removed", text: "  const [error, setError] = useState(null)" },
     { state: "removed", text: "" },
     { state: "removed", text: "  useEffect(() => {" },
-    { state: "removed", text: "    fetch('/api/orders')" },
+    { state: "removed", text: "    fetch(\"/api/orders\")" },
     { state: "removed", text: "      .then((r) => r.json())" },
     { state: "removed", text: "      .then(setData)" },
+    { state: "removed", text: "      .catch((e) => setError(e))" },
     { state: "removed", text: "      .finally(() => setLoading(false))" },
     { state: "removed", text: "  }, [])" },
     { state: "removed", text: "" },
-    { state: "kept", text: "  return <List items={data} loading={loading} />" },
+    { state: "removed", text: "  if (error) return <p>{error.message}</p>" },
+    { state: "added", text: "  if (loading) return <OrdersSkeleton />" },
+    { state: "removed", text: "  if (loading) return <p>Loading...</p>" },
+    { state: "kept", text: "" },
+    { state: "added", text: "  return <OrderList orders={data} />" },
+    { state: "removed", text: "  return (" },
+    { state: "removed", text: "    <div>" },
+    { state: "removed", text: "      {data.map((row) => (" },
+    { state: "removed", text: "        <div key={row.id}>{row.name}</div>" },
+    { state: "removed", text: "      ))}" },
+    { state: "removed", text: "    </div>" },
+    { state: "removed", text: "  )" },
     { state: "kept", text: "}" },
   ],
 };

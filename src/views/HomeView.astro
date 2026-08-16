@@ -2,10 +2,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import AppShell from '../layouts/AppShell.astro';
 import Hero from '@/components/sections/Hero.astro';
-import CopyBlock from '@/components/sections/CopyBlock.astro';
 import CTA from '@/components/sections/CTA.astro';
 import ResultNote from '@/components/sections/ResultNote.astro';
-import Transform from '@/components/code/Transform.astro';
 import Band from '@/components/ui/Band.astro';
 import Bento from '@/components/ui/Bento.astro';
 import Tile from '@/components/ui/Tile.astro';
@@ -25,19 +23,25 @@ import ArtConnect from '@/components/art/ArtConnect.astro';
 import ArtRefuse from '@/components/art/ArtRefuse.astro';
 import ArtScope from '@/components/art/ArtScope.astro';
 import ArtStep from '@/components/art/ArtStep.astro';
-import ArtAudience from '@/components/art/ArtAudience.astro';
-import { heroFilm } from '@/content/home';
+import CommunityCard from '@/components/sections/CommunityCard.astro';
+import Ships from '@/components/sections/Ships.astro';
+import { DISCORD_URL, SIGNUP_PATH } from '@/lib/constants';
 import { usePack } from '@/i18n/usePack';
 
 const { pack, href } = usePack(Astro.url.pathname);
 const { home, product } = pack;
 const stepKinds = ['account', 'connect', 'ship'] as const;
-const audienceKinds = ['individual', 'team', 'stack'] as const;
+const stepHrefs = ['/docs/account', '/docs/connect-github', '/docs/first-cleanup'] as const;
+const trustHrefs = ['/docs/approve', undefined, undefined, '/docs/on-github', undefined] as const;
 const worldStates = [
   { title: product.results.items[1].title, body: product.results.items[1].body },
   { title: product.results.items[2].title, body: product.results.items[2].body, action: product.results.items[2].title },
   { title: product.results.items[3].title, body: product.results.items[3].body },
 ];
+const shipsItems = home.ships.items.map((item) => ({
+  ...item,
+  href: item.href.startsWith('http') ? item.href : href(item.href),
+}));
 ---
 
 <BaseLayout
@@ -51,8 +55,8 @@ const worldStates = [
     <main id="main">
       <Hero />
 
-      <section class="pb-4 md:pb-6">
-        <div class="mx-auto max-w-site px-5 md:px-8">
+      <section class="band-section">
+        <div class="mx-auto max-w-site px-5">
           <Bento>
             <Tile title={home.problem.bullets[0]} span={6} rows={2} index={0}>
               <ArtDuplicate slot="art" />
@@ -68,48 +72,46 @@ const worldStates = [
             </Tile>
           </Bento>
           <p class="band__after reveal" style="--i:1">
-            {home.problem.headline} {home.problem.close}
+            {home.problem.close}
           </p>
         </div>
       </section>
 
-      <Band headline={home.turn.headline} lede={home.turn.lede}>
-        <Bento>
-          <Tile span={12} index={0}>
-            <Transform slot="art" file={heroFilm.file} lines={heroFilm.lines} caption={home.hero.caption} />
-          </Tile>
-        </Bento>
-      </Band>
+      <Band
+        headline={home.turn.headline}
+        lede={home.turn.lede}
+        more={{ label: home.turn.more.label, href: href(home.turn.more.href) }}
+      />
 
       <Band headline={home.result.headline}>
         <Bento>
-          <Tile title={home.result.points[0].title} body={home.result.points[0].body} span={8} index={0}>
+          <Tile title={home.result.points[0].title} body={home.result.points[0].body} span={8} index={0} href={href('/product')}>
             <ArtDiff slot="art" kind="remove" />
           </Tile>
-          <Tile title={home.result.points[1].title} body={home.result.points[1].body} span={4} index={1}>
+          <Tile title={home.result.points[1].title} body={home.result.points[1].body} span={4} index={1} href={href('/product')}>
             <ArtDiff slot="art" kind="merge" />
           </Tile>
-          <Tile title={home.result.points[2].title} body={home.result.points[2].body} span={4} index={2}>
+          <Tile title={home.result.points[2].title} body={home.result.points[2].body} span={4} index={2} href={href('/product')}>
             <ArtDiff slot="art" kind="add" />
           </Tile>
-          <Tile title={home.result.points[3].title} body={home.result.points[3].body} span={8} index={3}>
+          <Tile title={home.result.points[3].title} body={home.result.points[3].body} span={8} index={3} href={href('/product')}>
             <ArtDiff slot="art" kind="lock" />
           </Tile>
         </Bento>
       </Band>
 
-      <Band headline={home.does.headline}>
+      <Band headline={home.does.headline} more={{ label: home.does.more.label, href: href(home.does.more.href) }}>
         <Bento>
-          <Tile kicker={home.does.points[0].number} title={home.does.points[0].title} body={home.does.points[0].body} span={5} index={0}>
+          <Tile kicker={home.does.points[0].number} title={home.does.points[0].title} body={home.does.points[0].body} span={5} index={0} href={href('/product')}>
             <ArtProject slot="art" />
           </Tile>
-          <Tile kicker={home.does.points[1].number} title={home.does.points[1].title} body={home.does.points[1].body} span={7} index={1}>
+          <Tile kicker={home.does.points[1].number} title={home.does.points[1].title} body={home.does.points[1].body} span={7} index={1} href={href('/product')}>
             <ArtMess slot="art" />
           </Tile>
-          <Tile kicker={home.does.points[2].number} title={home.does.points[2].title} body={home.does.points[2].body} span={7} index={2}>
+          <Tile kicker={home.does.points[2].number} title={home.does.points[2].title} body={home.does.points[2].body} span={7} index={2} href={href('/product')}>
             <ArtOrder slot="art" />
           </Tile>
-          <Tile kicker={home.does.points[3].number} title={home.does.points[3].title} body={home.does.points[3].body} span={5} index={3}>
+          <Tile kicker={home.does.points[3].number} title={home.does.points[3].title} body={home.does.points[3].body} span={5} index={3} href={href('/product')}>
             <ArtCleanup slot="art" />
           </Tile>
         </Bento>
@@ -117,18 +119,18 @@ const worldStates = [
 
       <Band headline={home.world.headline} lede={home.world.lede} after={home.world.close}>
         <Bento>
-          <Tile span={8} body={home.world.caption} index={0}>
+          <Tile span={8} body={home.world.caption} index={0} href={href('/docs/on-github')}>
             <ResultNote slot="art" states={worldStates} primaryIndex={1} />
           </Tile>
-          <Tile body={home.world.decide} span={4} index={1}>
+          <Tile body={home.world.decide} span={4} index={1} href={href('/docs/connect-github')}>
             <ArtConnect slot="art" />
           </Tile>
         </Bento>
       </Band>
 
-      <Band headline={home.trust.headline}>
+      <Band headline={home.trust.headline} more={{ label: home.ships.more.label, href: href('/docs/approve') }}>
         <Bento>
-          <Tile title={home.trust.points[0].title} body={home.trust.points[0].body} span={7} size="tall" index={0}>
+          <Tile title={home.trust.points[0].title} body={home.trust.points[0].body} span={7} size="tall" index={0} href={trustHrefs[0] ? href(trustHrefs[0]) : undefined}>
             <ArtApprove slot="art" />
           </Tile>
           <Tile title={home.trust.points[1].title} body={home.trust.points[1].body} span={5} size="tall" index={1}>
@@ -137,7 +139,7 @@ const worldStates = [
           <Tile title={home.trust.points[2].title} body={home.trust.points[2].body} span={4} index={2}>
             <ArtRefuse slot="art" />
           </Tile>
-          <Tile title={home.trust.points[3].title} body={home.trust.points[3].body} span={4} index={3}>
+          <Tile title={home.trust.points[3].title} body={home.trust.points[3].body} span={4} index={3} href={href('/docs/on-github')}>
             <ArtCheck slot="art" />
           </Tile>
           <Tile title={home.trust.points[4].title} body={home.trust.points[4].body} span={4} index={4}>
@@ -146,46 +148,50 @@ const worldStates = [
         </Bento>
       </Band>
 
-      <Band headline={home.steps.headline} aside={home.steps.note}>
+      <Band
+        headline={home.steps.headline}
+        aside={home.steps.note}
+        more={{ label: home.steps.cta.label, href: href(home.steps.cta.href) }}
+      >
         <Bento>
           {
             home.steps.steps.map((step, i) => (
-              <Tile kicker={step.number} title={step.title} body={step.body} span={4} index={i}>
+              <Tile kicker={step.number} title={step.title} body={step.body} span={4} index={i} href={href(stepHrefs[i])}>
                 <ArtStep slot="art" kind={stepKinds[i]} />
               </Tile>
             ))
           }
         </Bento>
-        <p class="mt-8 text-center reveal" style="--i:2">
-          <a class="btn btn-primary" href={href(home.steps.cta.href)}>{home.steps.cta.label}</a>
-        </p>
       </Band>
 
-      <Band headline={home.audience.headline}>
-        <Bento>
-          {
-            home.audience.points.map((point, i) => (
-              <Tile title={point.title} body={point.body} span={4} index={i}>
-                <ArtAudience slot="art" kind={audienceKinds[i]} />
-              </Tile>
-            ))
-          }
-        </Bento>
-      </Band>
+      <Ships
+        headline={home.ships.headline}
+        more={{ label: home.ships.more.label, href: href(home.ships.more.href) }}
+        items={shipsItems}
+      />
 
-      <section class="section-default">
-        <div class="mx-auto max-w-site px-5 text-center md:px-8">
-          <h2 class="text-tp-heading mx-auto max-w-[720px] text-balance reveal">{home.social.headline}</h2>
-          <p class="mx-auto mt-6 max-w-[560px] text-[15px] leading-relaxed text-ld-tertiary reveal" style="--i:1">
-            {home.social.line} {home.social.invite}{' '}
-            <a href={href(home.social.inviteHref)} class="text-white underline underline-offset-2">{home.social.inviteLabel}</a>
-          </p>
+      <Band headline={home.social.headline} lede={home.social.line}>
+        <div class="community-grid">
+          <CommunityCard
+            compact
+            brand="discord"
+            kicker={home.social.discord.kicker}
+            title={home.social.discord.title}
+            body={home.social.discord.body}
+            cta={home.social.discord.cta}
+            href={DISCORD_URL}
+          />
+          <CommunityCard
+            compact
+            brand="github"
+            kicker={home.social.github.kicker}
+            title={home.social.github.title}
+            body={home.social.github.body}
+            cta={home.social.github.cta}
+            href={href(SIGNUP_PATH)}
+          />
         </div>
-      </section>
-
-      <CopyBlock headline={home.honesty.headline}>
-        {home.honesty.paragraphs.map((p) => <p>{p}</p>)}
-      </CopyBlock>
+      </Band>
 
       <CTA
         headline={home.cta.headline}

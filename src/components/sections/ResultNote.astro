@@ -17,7 +17,7 @@ const { states, caption, primaryIndex = 0 } = Astro.props;
 <figure>
   <div class="code-surface">
     <div class="code-surface__bar">
-      <p class="code-surface__path">pull request</p>
+      <p class="code-surface__path">Pull request</p>
     </div>
     <div class="result-note state-stack">
       {
@@ -27,9 +27,7 @@ const { states, caption, primaryIndex = 0 } = Astro.props;
             <p class="result-note__title">{state.title}</p>
             <p class="result-note__body">{state.body}</p>
             {state.action ? (
-              <button type="button" class="result-note__action">
-                {state.action}
-              </button>
+              <span class="result-note__action">{state.action}</span>
             ) : (
               <span class="result-note__meta" aria-hidden="true" />
             )}

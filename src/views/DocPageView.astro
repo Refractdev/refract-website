@@ -5,6 +5,7 @@ import PageShell from '@/components/sections/PageShell.astro';
 import { breadcrumbSchema } from '@/lib/schema';
 import { usePack } from '@/i18n/usePack';
 import { localizeHref } from '@/i18n/href';
+import { SITE_NAME } from '@/lib/constants';
 
 interface Props {
   slug: string;
@@ -24,7 +25,7 @@ const schema = [
 ];
 ---
 
-<BaseLayout title={`${page.title} — Refract`} description={page.description} schema={schema}>
+<BaseLayout title={`${page.title} — ${SITE_NAME}`} description={page.description} schema={schema}>
   <AppShell>
     <PageShell label={pack.ui.documentation} title={page.title}>
       <p class="mb-8">

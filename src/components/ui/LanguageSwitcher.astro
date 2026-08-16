@@ -3,13 +3,19 @@ import { localeMeta, locales } from '@/i18n/config';
 import { switchLocalePath } from '@/i18n/href';
 import { usePack } from '@/i18n/usePack';
 
+interface Props {
+  placement?: 'down' | 'up';
+}
+
+const { placement = 'down' } = Astro.props;
 const { locale, pack } = usePack(Astro.url.pathname);
 const pathname = Astro.url.pathname;
 ---
 
-<details class="lang-switch">
+<details class:list={['lang-switch', placement === 'up' && 'lang-switch--up']}>
   <summary class="lang-switch__summary" aria-label={pack.ui.language}>
-    {locale.toUpperCase()}
+    {localeMeta[locale].label}
+    <span class="lang-switch__caret" aria-hidden="true">▾</span>
   </summary>
   <div class="lang-switch__menu">
     {

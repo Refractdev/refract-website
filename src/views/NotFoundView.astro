@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import AppShell from '../layouts/AppShell.astro';
 import { usePack } from '@/i18n/usePack';
 
 const { pack, href } = usePack(Astro.url.pathname);
@@ -7,10 +8,15 @@ const { notFound } = pack.legal;
 ---
 
 <BaseLayout title={notFound.title} description={notFound.description} noindex>
-  <main id="main" class="flex min-h-screen flex-col items-center justify-center bg-ld-canvas p-6 text-center">
-    <p class="tp-mono mb-4">404</p>
-    <h1 class="mb-3 text-tp-heading">{notFound.headline}</h1>
-    <p class="mb-10 text-ld-tertiary">{notFound.body}</p>
-    <a class="btn btn-primary" href={href('/')}>{notFound.cta}</a>
-  </main>
+  <AppShell variant="minimal">
+    <main id="main" class="flex min-h-[70vh] flex-col items-center justify-center bg-ld-canvas p-6 text-center">
+      <p class="tp-mono mb-4">404</p>
+      <h1 class="mb-3 text-tp-heading">{notFound.headline}</h1>
+      <p class="mb-10 text-ld-tertiary">{notFound.body}</p>
+      <div class="flex flex-wrap items-center justify-center gap-3">
+        <a class="btn btn-primary" href={href('/')}>{notFound.cta}</a>
+        <a class="btn btn-secondary" href={href('/docs')}>{pack.ui.documentation}</a>
+      </div>
+    </main>
+  </AppShell>
 </BaseLayout>

@@ -12,7 +12,7 @@ export const security = {
     "We read pull requests to review them. We post one result. We apply a cleanup only after you approve.",
     "We do not merge for you.",
     "We do not sign you in with GitHub just to open the website.",
-    "We do not sell your repository as a product.",
+    "We do not sell your repository contents.",
     "We do not pretend a review succeeded when it failed.",
     "If we see credentials in a pull request, we tell you. Rotate anything that was exposed.",
     "You can uninstall the GitHub App and narrow which repositories we see.",
@@ -47,8 +47,7 @@ export const privacy = {
   description:
     "What Refract collects, how it handles repository access through the GitHub App, and how to reach us with privacy questions.",
   headline: "Privacy",
-  status:
-    "This is a working description of how Refract handles accounts and code. A final policy will replace it after legal review.",
+  updated: "Last updated: 16 August 2026",
   short: [
     "Website account: email and password.",
     "Code access: only through the GitHub App, on repositories you allow.",
@@ -69,9 +68,7 @@ export const terms = {
   description:
     "The terms for using Refract: accounts, GitHub access, approval, plans, and what we will and will not do with your code.",
   headline: "Terms",
-  status:
-    "This is a working description of using Refract. A final agreement will replace it after legal review.",
-  updated: "Last updated: 15 August 2026",
+  updated: "Last updated: 16 August 2026",
   operator: operatorSentence,
   short: [
     "Connect only repositories you are allowed to connect.",
@@ -128,7 +125,7 @@ export const terms = {
       title: "Plans and billing",
       paragraphs: [
         "Plans and limits are described on Pricing. Free exists so you can try Refract on a real repository.",
-        "Paid plans are listed so you know where this goes. Checkout is coming; you will not be charged at signup. When billing starts, the site and checkout will say so before you pay.",
+        "Paid plans show what this will cost. Card payment is not live yet. You will not be charged at signup. When billing starts, the site will say so before you pay.",
       ],
     },
     {
@@ -149,7 +146,7 @@ export const terms = {
     {
       title: "If something goes wrong",
       paragraphs: [
-        "Refract is provided as it is. To the extent the law allows, we are not liable for lost profits, lost code, delay, or other indirect damage from using — or not using — the product.",
+        "Refract is provided as is. To the extent the law allows, we are not liable for lost profits, lost code, delay, or other indirect damage from using — or not using — the product.",
       ],
     },
     {
@@ -168,7 +165,7 @@ export const terms = {
 export const notFound = {
   title: "Page Not Found — Refract",
   description: "This page isn’t here.",
-  headline: "This page isn’t here.",
-  body: "The link may be old. The product is not.",
+  headline: "This page doesn’t exist.",
+  body: "The link is wrong or the page moved.",
   cta: "Back to home",
 };

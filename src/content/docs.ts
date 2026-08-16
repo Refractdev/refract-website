@@ -1,5 +1,3 @@
-import { GITHUB_APP_INSTALL_URL } from "@/lib/constants";
-
 export const docsSeo = {
   title: "Documentation — Refract",
   description:
@@ -104,7 +102,7 @@ export const docPages: DocPage[] = [
     description: "Sign up with name, email, and password. GitHub is a separate step.",
     blocks: [
       { type: "p", text: "Sign up with name, email, and password." },
-      { type: "html", html: 'Sign in at <a href="/login">/login</a>.' },
+      { type: "html", html: 'Sign in from <a href="/login">Sign in</a>.' },
       {
         type: "p",
         text: "Forgot password: we’ll email a reset link if that address has an account.",
@@ -134,8 +132,8 @@ export const docPages: DocPage[] = [
         type: "html",
         html: `<ol>
           <li>Sign in to Refract</li>
-          <li>Open Connect GitHub</li>
-          <li>Install the app: <a href="${GITHUB_APP_INSTALL_URL}">${GITHUB_APP_INSTALL_URL}</a></li>
+          <li>Open Connect GitHub in the app</li>
+          <li>Install the GitHub App from there — not from this site — so it stays tied to your account</li>
           <li>Choose specific repositories (recommended)</li>
           <li>Return to Refract and confirm which ones to watch</li>
         </ol>`,
@@ -202,7 +200,7 @@ export const docPages: DocPage[] = [
       },
       {
         type: "p",
-        text: "When a cleanup is ready, Accept (and Dismiss) appear on the check.",
+        text: "When a cleanup is ready, Approve and Dismiss appear on the check.",
       },
       { type: "h2", text: "Required checks" },
       {
@@ -245,7 +243,7 @@ export const docPages: DocPage[] = [
       { type: "p", text: "After setup, you’ll see:" },
       {
         type: "html",
-        html: "<p><strong>Overview</strong> — what’s connected, and later a simple picture of whether the project is getting cleaner. Early accounts often have little history. That’s honest, not broken.</p>",
+        html: "<p><strong>Overview</strong> — what’s connected, and later a simple picture of whether the project is getting cleaner. New accounts often have little history yet.</p>",
       },
       {
         type: "html",

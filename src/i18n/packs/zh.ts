@@ -1,7 +1,6 @@
 import {
   BRAND_NAME,
   COMPANY_NAME,
-  GITHUB_APP_INSTALL_URL,
   PRODUCT_NAME,
   SIGNUP_PATH,
 } from "@/lib/constants";
@@ -28,6 +27,10 @@ export const zh: ContentPack = {
     changesHeading: "变更",
     legalLabel: "法律",
     bestFor: "适合:",
+    homeAria: "Refract 首页",
+    openMenu: "打开菜单",
+    githubHeading: "GitHub",
+    connectHeading: "连接",
   },
   seo: {
     defaultTitle: "Refract — AI 写好了。让它真正能上线。",
@@ -49,8 +52,16 @@ export const zh: ContentPack = {
         links: [
           { label: "产品", href: "/product" },
           { label: "定价", href: "/pricing" },
-          { label: "文档", href: "/docs" },
           { label: "安全", href: "/security" },
+        ],
+      },
+      {
+        title: "文档",
+        links: [
+          { label: "快速开始", href: "/docs/getting-started" },
+          { label: "批准", href: "/docs/approve" },
+          { label: "常见问题", href: "/docs/faq" },
+          { label: "全部文档", href: "/docs" },
         ],
       },
       {
@@ -58,6 +69,11 @@ export const zh: ContentPack = {
         links: [
           { label: "关于", href: "/about" },
           { label: "联系我们", href: "/contact" },
+        ],
+      },
+      {
+        title: "法律",
+        links: [
           { label: "隐私", href: "/privacy" },
           { label: "条款", href: "/terms" },
         ],
@@ -65,7 +81,8 @@ export const zh: ContentPack = {
     ],
     footerBrandLine: "Refract — AI 写完代码之后的那一步。",
     footerFinePrint: "面向 GitHub 上的 React 和 TypeScript。",
-    githubAppLabel: "在 GitHub 上安装",
+    githubAppLabel: "连接 GitHub",
+    discordLabel: "Discord",
     signIn: "登录",
     getStarted: "开始使用",
   },
@@ -74,23 +91,15 @@ export const zh: ContentPack = {
     copyrightLine: `${BRAND_NAME}，${COMPANY_NAME} 旗下公司。`,
     operatorSentence: `${PRODUCT_NAME} 是 ${COMPANY_NAME} 旗下 ${BRAND_NAME} 的产品。`,
     about: {
-      title: `关于 — ${BRAND_NAME}`,
-      description: `${PRODUCT_NAME} 由 ${BRAND_NAME} 打造。${BRAND_NAME} 是 ${COMPANY_NAME} 旗下专注开发者技术的公司。`,
+      title: `关于 — ${PRODUCT_NAME}`,
+      description: `${PRODUCT_NAME} 是 AI 写完代码之后的那一步。它是 ${COMPANY_NAME} 旗下 ${BRAND_NAME} 的产品。`,
       label: "公司",
-      headline: BRAND_NAME,
-      intro: `${PRODUCT_NAME} 是我们当前的产品。${BRAND_NAME} 是其背后的开发者技术品牌。${COMPANY_NAME} 是打造 ${BRAND_NAME} 的公司。`,
+      headline: PRODUCT_NAME,
+      intro: `${PRODUCT_NAME} 在 GitHub 拉取请求上审查 AI 生成的代码，安全时准备清理，并等待你批准。`,
       sections: [
         {
-          title: COMPANY_NAME,
-          body: `${COMPANY_NAME} 是母公司，一家科技公司。它打造并运营自己的产品，以及未来的技术事业。它不是与 ${PRODUCT_NAME} 竞争的产品。`,
-        },
-        {
-          title: BRAND_NAME,
-          body: `${BRAND_NAME} 是 ${COMPANY_NAME} 打造的、面向开发者的技术品牌。它构建软件开发基础设施和工具，帮助团队构建、维护、理解并演进软件。`,
-        },
-        {
-          title: PRODUCT_NAME,
-          body: `${PRODUCT_NAME} 是 ${BRAND_NAME} 当前的旗舰产品：AI 写完代码之后的那一步。`,
+          title: "谁在做",
+          body: `${PRODUCT_NAME} 是 ${COMPANY_NAME} 旗下 ${BRAND_NAME} 的产品。`,
         },
       ],
     },
@@ -103,7 +112,7 @@ export const zh: ContentPack = {
       ogDescription: "生成之后的那一步。Refract 清理并收紧 AI 生成的代码，让你继续上线。",
     },
     hero: {
-      eyebrow: "AI 写完代码之后的那一步",
+      pill: { label: "在 GitHub Check 上批准", href: "/docs/approve" },
       headline: "AI 写好了。让它真正能上线。",
       subhead:
         "Refract 把你的 AI 工具写出的代码，变成更干净、更一致、更好维护的软件——这样项目长大时才不会散架。",
@@ -111,6 +120,7 @@ export const zh: ContentPack = {
       secondary: { label: "了解原理", href: "/product" },
       trust: "每一处改动都由你批准。Refract 绝不会自行改写你的项目。",
       caption: "在它变成代码库之前",
+      stack: "React · TypeScript · GitHub",
     },
     problem: {
       headline: "能跑的代码，仍然可能是一团乱。",
@@ -125,6 +135,7 @@ export const zh: ContentPack = {
     turn: {
       headline: "Refract 就是 AI 写完代码之后发生的事。",
       lede: "不是又一份抱怨清单。而是一个更干净的项目。",
+      more: { label: "了解原理", href: "/product" },
     },
     result: {
       headline: "结果是你能留下来的代码。",
@@ -149,6 +160,7 @@ export const zh: ContentPack = {
     },
     does: {
       headline: "它不只是指出问题。它让代码变得更好。",
+      more: { label: "查看产品", href: "/product" },
       points: [
         {
           number: "1",
@@ -180,7 +192,7 @@ export const zh: ContentPack = {
       close: "在 GitHub 上批准。留在你已有的流程里。Refract 不会让你再住进第二个收件箱。",
     },
     trust: {
-      headline: "可控。可见。实际上可撤回——因为主导权仍在你手里。",
+      headline: "每一次改动都由你批准。",
       points: [
         {
           title: "由你批准。",
@@ -243,12 +255,30 @@ export const zh: ContentPack = {
         },
       ],
     },
+    ships: {
+      headline: "更新",
+      more: { label: "查看文档", href: "/docs" },
+      items: [
+        { date: "2026年8月", title: "在 GitHub Check 上批准", href: "/docs/approve" },
+        { date: "2026年8月", title: "加入 Discord", href: "https://discord.gg/SH787P4rP4" },
+        { date: "2026年8月", title: "登录后连接 GitHub", href: "/docs/connect-github" },
+      ],
+    },
     social: {
-      headline: "正在生成软件的团队，需要生成之后的那一步。",
-      line: "被在 GitHub 上用 AI 构建的开发者使用。",
-      invite: "想成为早期团队吗？",
-      inviteHref: "/contact",
-      inviteLabel: "联系我们",
+      headline: "加入社区",
+      line: "提问、分享 pull request，和其他用 Refract 的人待在一起。",
+      discord: {
+        kicker: "Discord",
+        title: "和其他 builder 聊天",
+        body: "给早期团队、产品问题、以及 pull request 上出问题的地方。",
+        cta: "加入 Discord",
+      },
+      github: {
+        kicker: "GitHub",
+        title: "在 Refract 中连接",
+        body: "先注册登录。App 在引导流程中安装，以便与你的账号关联。",
+        cta: "开始使用",
+      },
     },
     honesty: {
       headline: "Refract 不是什么。",
@@ -259,7 +289,7 @@ export const zh: ContentPack = {
       ],
     },
     cta: {
-      headline: "生成代码。别继承混乱。",
+      headline: "AI 写好了。让它真正能上线。",
       body: "创建账户，连接 GitHub，让 Refract 把初稿带到后半程。",
       primary: { label: "开始使用", href: SIGNUP_PATH },
       secondary: { label: "查看定价", href: "/pricing" },
@@ -344,7 +374,7 @@ export const zh: ContentPack = {
       close: "其中一些，它可以替你清理。其中一些，它只会指出——这是故意的。一次糟糕的自动重写，比一条诚实的说明更糟。",
     },
     start: {
-      headline: "几分钟内上线",
+      headline: "大约十分钟即可开始",
       steps: ["创建账户", "安装 GitHub App 并选择仓库", "打开一个拉取请求"],
       note: "连接 GitHub 不会让你登录 Refract，登录 Refract 也不会安装 GitHub 访问权限。两步，两件事。",
       cta: { label: "创建账户", href: SIGNUP_PATH },
@@ -615,7 +645,7 @@ export const zh: ContentPack = {
         description: "用姓名、邮箱和密码注册。GitHub 是单独的一步。",
         blocks: [
           { type: "p", text: "用姓名、邮箱和密码注册。" },
-          { type: "html", html: '在 <a href="/login">/login</a> 登录。' },
+          { type: "html", html: '从 <a href="/login">登录</a> 进入。' },
           {
             type: "p",
             text: "忘记密码：如果该地址有账户，我们会发送重置链接。",
@@ -645,7 +675,7 @@ export const zh: ContentPack = {
             html: `<ol>
           <li>登录 Refract</li>
           <li>打开“连接 GitHub”</li>
-          <li>安装应用：<a href="${GITHUB_APP_INSTALL_URL}">${GITHUB_APP_INSTALL_URL}</a></li>
+          <li>从应用内安装 GitHub App — 不要从本站安装 — 以便与你的账号关联</li>
           <li>选择特定仓库（推荐）</li>
           <li>返回 Refract，确认要监视哪些</li>
         </ol>`,
@@ -901,7 +931,7 @@ export const zh: ContentPack = {
           },
           {
             q: "你们会用我们的代码训练模型吗？",
-            a: '我们处理代码是为了审查，以及应用你批准的清理。我们不会把你的仓库当作训练数据出售。见 <a href="/security">安全</a>。',
+            a: '不会。我们不会用你的仓库训练模型。拉取请求内容只会发给模型服务商，用于审查该改动并准备你批准的清理。我们不出售你的代码。见 <a href="/security">安全</a>。',
           },
           {
             q: "如果它错了呢？",
@@ -988,7 +1018,7 @@ export const zh: ContentPack = {
       title: "隐私 — Refract",
       description: "Refract 收集什么、如何通过 GitHub App 处理仓库访问，以及如何就隐私问题联系我们。",
       headline: "隐私",
-      status: "这是 Refract 如何处理账户和代码的工作说明。经法律审阅后，最终政策将取代它。",
+      updated: "最近更新：2026 年 8 月 16 日",
       short: [
         "网站账户：邮箱和密码。",
         "代码访问：仅通过 GitHub App，限于你允许的仓库。",
@@ -1006,8 +1036,7 @@ export const zh: ContentPack = {
       title: "条款 — Refract",
       description: "Refract 的使用条款：账户、GitHub 访问、批准、套餐，以及我们对你的代码会做什么、不会做什么。",
       headline: "条款",
-      status: "这是关于使用 Refract 的暂行说明。经法律审阅后，将由最终协议取代。",
-      updated: "最近更新：2026 年 8 月 15 日",
+      updated: "最近更新：2026 年 8 月 16 日",
       operator: `${PRODUCT_NAME} 是 ${COMPANY_NAME} 旗下 ${BRAND_NAME} 的产品。`,
       short: [
         "只连接你有权连接的仓库。",
@@ -1102,8 +1131,8 @@ export const zh: ContentPack = {
     notFound: {
       title: "页面未找到 — Refract",
       description: "这个页面不在这里。",
-      headline: "这个页面不在这里。",
-      body: "链接可能旧了。产品没有。",
+      headline: "这个页面不存在。",
+      body: "链接有误，或页面已移动。",
       cta: "返回首页",
     },
   },

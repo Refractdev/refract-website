@@ -1,7 +1,6 @@
 import {
   BRAND_NAME,
   COMPANY_NAME,
-  GITHUB_APP_INSTALL_URL,
   PRODUCT_NAME,
   SIGNUP_PATH,
 } from "@/lib/constants";
@@ -28,6 +27,10 @@ export const ja: ContentPack = {
     changesHeading: "変更",
     legalLabel: "法務",
     bestFor: "向いている方:",
+    homeAria: "Refract ホーム",
+    openMenu: "メニューを開く",
+    githubHeading: "GitHub",
+    connectHeading: "接続",
   },
   seo: {
     defaultTitle: "Refract — AIが書いた。出荷できる状態にしよう。",
@@ -52,8 +55,16 @@ export const ja: ContentPack = {
         links: [
           { label: "プロダクト", href: "/product" },
           { label: "料金", href: "/pricing" },
-          { label: "ドキュメント", href: "/docs" },
           { label: "セキュリティ", href: "/security" },
+        ],
+      },
+      {
+        title: "ドキュメント",
+        links: [
+          { label: "はじめに", href: "/docs/getting-started" },
+          { label: "承認", href: "/docs/approve" },
+          { label: "FAQ", href: "/docs/faq" },
+          { label: "すべてのドキュメント", href: "/docs" },
         ],
       },
       {
@@ -61,6 +72,11 @@ export const ja: ContentPack = {
         links: [
           { label: "私たちについて", href: "/about" },
           { label: "お問い合わせ", href: "/contact" },
+        ],
+      },
+      {
+        title: "法務",
+        links: [
           { label: "プライバシー", href: "/privacy" },
           { label: "利用規約", href: "/terms" },
         ],
@@ -68,7 +84,8 @@ export const ja: ContentPack = {
     ],
     footerBrandLine: "Refract — AI がコードを書いた、その次のステップ。",
     footerFinePrint: "GitHub 上の React と TypeScript 向け。",
-    githubAppLabel: "GitHub にインストール",
+    githubAppLabel: "GitHub を接続",
+    discordLabel: "Discord",
     signIn: "ログイン",
     getStarted: "始める",
   },
@@ -77,23 +94,15 @@ export const ja: ContentPack = {
     copyrightLine: `${BRAND_NAME}、${COMPANY_NAME} の企業。`,
     operatorSentence: `${PRODUCT_NAME} は、${COMPANY_NAME} の企業である ${BRAND_NAME} のプロダクトです。`,
     about: {
-      title: `私たちについて — ${BRAND_NAME}`,
-      description: `${PRODUCT_NAME} は、開発者向けテクノロジーに取り組む ${COMPANY_NAME} の企業 ${BRAND_NAME} が開発しています。`,
+      title: `私たちについて — ${PRODUCT_NAME}`,
+      description: `${PRODUCT_NAME} は、AI がコードを書いた次のステップです。${COMPANY_NAME} の企業である ${BRAND_NAME} のプロダクトです。`,
       label: "会社",
-      headline: BRAND_NAME,
-      intro: `${PRODUCT_NAME} が現在のプロダクトです。${BRAND_NAME} はその背後にある開発者向けテクノロジーブランドです。${COMPANY_NAME} は ${BRAND_NAME} を築く会社です。`,
+      headline: PRODUCT_NAME,
+      intro: `${PRODUCT_NAME} は GitHub のプルリクエスト上で AI 生成コードを確認し、安全なときはクリーンアップを用意し、あなたの承認を待ちます。`,
       sections: [
         {
-          title: COMPANY_NAME,
-          body: `${COMPANY_NAME} は親会社にあたるテクノロジー企業です。自社のプロダクトと、これから始まる技術事業を作り、運営します。${PRODUCT_NAME} と競合するプロダクトではありません。`,
-        },
-        {
-          title: BRAND_NAME,
-          body: `${BRAND_NAME} は、${COMPANY_NAME} が築く開発者向けテクノロジーブランドです。チームがソフトウェアを作り、保守し、理解し、進化させるための開発基盤とツールを作ります。`,
-        },
-        {
-          title: PRODUCT_NAME,
-          body: `${PRODUCT_NAME} は ${BRAND_NAME} の現在の主力プロダクトです。AI がコードを書いた、その次のステップです。`,
+          title: "誰が作っているか",
+          body: `${PRODUCT_NAME} は、${COMPANY_NAME} の企業である ${BRAND_NAME} のプロダクトです。`,
         },
       ],
     },
@@ -108,7 +117,7 @@ export const ja: ContentPack = {
         "生成の次のステップ。Refract は AI 生成コードを整え、引き締め、出荷を続けられるようにします。",
     },
     hero: {
-      eyebrow: "AI がコードを書いた、その次のステップ",
+      pill: { label: "GitHub Check で承認", href: "/docs/approve" },
       headline: "AIが書いた。出荷できる状態にしよう。",
       subhead:
         "Refract は、AI ツールが生み出したコードを、よりきれいで一貫性があり、保ちやすいものに変えます。プロジェクトが大きくなっても、崩れないように。",
@@ -116,6 +125,7 @@ export const ja: ContentPack = {
       secondary: { label: "仕組みを見る", href: "/product" },
       trust: "変更はすべてあなたが承認します。Refract が勝手にプロジェクトを書き換えることはありません。",
       caption: "コードベースになる前に",
+      stack: "React · TypeScript · GitHub",
     },
     problem: {
       headline: "動くコードでも、散らかっていることがあります。",
@@ -130,6 +140,7 @@ export const ja: ContentPack = {
     turn: {
       headline: "Refract は、AI がコードを書いたあとに起きることです。",
       lede: "不満のリストをもう一つ増やすのではありません。よりきれいなプロジェクトです。",
+      more: { label: "仕組みを見る", href: "/product" },
     },
     result: {
       headline: "残るのは、保ち続けられるコードです。",
@@ -154,6 +165,7 @@ export const ja: ContentPack = {
     },
     does: {
       headline: "問題を指さすだけではありません。コードを良くします。",
+      more: { label: "プロダクトを見る", href: "/product" },
       points: [
         {
           number: "1",
@@ -186,7 +198,7 @@ export const ja: ContentPack = {
         "GitHub 上で承認してください。今ある流れのまま。Refract は、第二の受信箱で暮らすよう求めません。",
     },
     trust: {
-      headline: "制御できる。見える。実質的に戻せる — 主導権はあなたにあるからです。",
+      headline: "変更はすべてあなたが承認します。",
       points: [
         {
           title: "あなたが承認します。",
@@ -249,12 +261,30 @@ export const ja: ContentPack = {
         },
       ],
     },
+    ships: {
+      headline: "新着",
+      more: { label: "ドキュメントを見る", href: "/docs" },
+      items: [
+        { date: "2026年8月", title: "GitHub Check で承認", href: "/docs/approve" },
+        { date: "2026年8月", title: "Discord に参加", href: "https://discord.gg/SH787P4rP4" },
+        { date: "2026年8月", title: "ログイン後に GitHub を接続", href: "/docs/connect-github" },
+      ],
+    },
     social: {
-      headline: "ソフトウェアを生成するチームには、生成の次のステップが必要です。",
-      line: "GitHub 上で AI を使って作る開発者に使われています。",
-      invite: "初期チームになりませんか？",
-      inviteHref: "/contact",
-      inviteLabel: "お問い合わせ",
+      headline: "コミュニティに参加",
+      line: "質問する、プルリクエストを共有する、Refract を使う人と話す。",
+      discord: {
+        kicker: "Discord",
+        title: "他のビルダーと話す",
+        body: "初期チーム、プロダクトの質問、プルリクエストで壊れたものの部屋です。",
+        cta: "Discord に参加",
+      },
+      github: {
+        kicker: "GitHub",
+        title: "Refract で接続",
+        body: "先にサインインしてください。App はオンボーディング中にインストールされ、アカウントに紐づきます。",
+        cta: "始める",
+      },
     },
     honesty: {
       headline: "Refract ではないもの。",
@@ -265,7 +295,7 @@ export const ja: ContentPack = {
       ],
     },
     cta: {
-      headline: "コードは生成していい。散らかりは引き継がなくていい。",
+      headline: "AIが書いた。出荷できる状態にしよう。",
       body: "アカウントを作り、GitHub を接続し、初稿の残りを Refract に任せましょう。",
       primary: { label: "始める", href: SIGNUP_PATH },
       secondary: { label: "料金を見る", href: "/pricing" },
@@ -364,7 +394,7 @@ export const ja: ContentPack = {
         "その一部は、代わりにきれいにできます。一部は、意図して指摘するだけです。悪い自動書き換えは、正直なメモより悪い。",
     },
     start: {
-      headline: "数分で動き出す",
+      headline: "始めるまで約10分",
       steps: [
         "アカウントを作る",
         "GitHub App をインストールし、リポジトリを選ぶ",
@@ -676,7 +706,7 @@ export const ja: ContentPack = {
         description: "名前、メール、パスワードで登録します。GitHub は別のステップです。",
         blocks: [
           { type: "p", text: "名前、メール、パスワードで登録します。" },
-          { type: "html", html: 'ログインは <a href="/login">/login</a> です。' },
+          { type: "html", html: '<a href="/login">ログイン</a>からサインインします。' },
           {
             type: "p",
             text: "パスワードを忘れた場合: そのアドレスにアカウントがあれば、リセット用のリンクをメールします。",
@@ -707,7 +737,7 @@ export const ja: ContentPack = {
             html: `<ol>
           <li>Refract にログインする</li>
           <li>「GitHub を接続」を開く</li>
-          <li>アプリをインストールする: <a href="${GITHUB_APP_INSTALL_URL}">${GITHUB_APP_INSTALL_URL}</a></li>
+          <li>そこから GitHub App をインストールする — このサイトからではなく — アカウントに紐づくようにする</li>
           <li>特定のリポジトリを選ぶ（推奨）</li>
           <li>Refract に戻り、見守るものを確認する</li>
         </ol>`,
@@ -964,7 +994,7 @@ export const ja: ContentPack = {
           },
           {
             q: "私たちのコードでモデルを訓練しますか？",
-            a: 'コードはレビューのため、そして承認したクリーンアップを適用するために処理します。リポジトリを学習データとして販売しません。詳しくは <a href="/security">セキュリティ</a>。',
+            a: 'いいえ。リポジトリでモデルを訓練しません。プルリクエストの内容は、その変更のレビューと、あなたが承認するクリーンアップの準備のためにだけモデル提供者へ送ります。コードは販売しません。詳しくは <a href="/security">セキュリティ</a>。',
           },
           {
             q: "間違っていたら？",
@@ -1053,8 +1083,7 @@ export const ja: ContentPack = {
       description:
         "Refract が集めるもの、GitHub App を通じたリポジトリアクセスの扱い、プライバシーの質問の送り方。",
       headline: "プライバシー",
-      status:
-        "これは、Refract がアカウントとコードをどう扱うかの作業中の説明です。法務確認のあと、最終方針に置き換わります。",
+      updated: "最終更新：2026年8月16日",
       short: [
         "ウェブサイトのアカウント: メールとパスワード。",
         "コードへのアクセス: GitHub App 経由のみ。許可したリポジトリに限る。",
@@ -1074,9 +1103,7 @@ export const ja: ContentPack = {
       description:
         "Refract の利用条件：アカウント、GitHub アクセス、承認、プラン、そしてコードに対して行うこと・行わないこと。",
       headline: "利用規約",
-      status:
-        "これは Refract の利用についての暫定的な説明です。法務レビュー後に最終的な契約に置き換わります。",
-      updated: "最終更新：2026年8月15日",
+      updated: "最終更新：2026年8月16日",
       operator: `${PRODUCT_NAME} は、${COMPANY_NAME} の企業である ${BRAND_NAME} のプロダクトです。`,
       short: [
         "接続してよいリポジトリだけを接続してください。",
@@ -1173,7 +1200,7 @@ export const ja: ContentPack = {
       title: "ページが見つかりません — Refract",
       description: "このページはありません。",
       headline: "このページはありません。",
-      body: "リンクが古いのかもしれません。プロダクトは古くありません。",
+      body: "リンクが違うか、ページが移動しました。",
       cta: "ホームに戻る",
     },
   },

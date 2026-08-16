@@ -24,17 +24,16 @@ const schema = [
   description={pricing.seo.description}
   ogTitle={pricing.seo.ogTitle}
   ogDescription={pricing.seo.ogDescription}
-  includeProduct
   schema={schema}
 >
   <AppShell>
     <main id="main">
       <section class="pt-32 pb-8">
         <div class="mx-auto max-w-site px-5 md:px-6">
-          <div class="anim-hero mx-auto max-w-[720px] text-center">
+          <div class="anim-hero max-w-[720px] text-left">
             <h1 class="text-tp-heading text-balance">{pricing.hero.headline}</h1>
-            <p class="text-tp-desc mx-auto mt-4 max-w-[560px]">{pricing.hero.subhead}</p>
-            <p class="mx-auto mt-3 max-w-[560px] text-[13px] leading-relaxed text-ld-muted">{pricing.hero.priceLine}</p>
+            <p class="text-tp-desc mt-4 max-w-[560px]">{pricing.hero.subhead}</p>
+            <p class="mt-3 max-w-[560px] text-[13px] leading-relaxed text-ld-muted">{pricing.hero.priceLine}</p>
           </div>
         </div>
       </section>
@@ -42,7 +41,7 @@ const schema = [
       <CopyBlock headline={pricing.value.headline}>
         {pricing.value.paragraphs.map((p) => <p>{p}</p>)}
       </CopyBlock>
-      <FAQ items={pricing.faqs} title="" />
+      <FAQ items={pricing.faqs} title={pack.faq.title} />
     </main>
   </AppShell>
 </BaseLayout>

@@ -100,7 +100,7 @@ export const productCleans = {
 };
 
 export const productStart = {
-  headline: "Live in minutes",
+  headline: "About ten minutes to start",
   steps: [
     "Create an account",
     "Install the GitHub App and pick repositories",

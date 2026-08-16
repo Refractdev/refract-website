@@ -3,10 +3,10 @@ import { SIGNUP_PATH } from "@/lib/constants";
 export const pricingSeo = {
   title: "Pricing — Refract | Free, $12 Starter, $24 Pro",
   description:
-    "Free $0. Starter $12. Pro $24/month. Ultimate $49. Team plans from $149. Start free — you won’t be charged at signup.",
+    "Free $0. Starter $12. Pro $24/month. Ultimate $49. Team plans from $149. Start free. Card payment is not live yet.",
   ogTitle: "Refract pricing — Free to Pro $24/month",
   ogDescription:
-    "Free $0. Starter $12. Pro $24/month. Teams from $149. Checkout is coming; you won’t be charged at signup.",
+    "Free $0. Starter $12. Pro $24/month. Ultimate $49. Teams from $149. Start free. You will not be charged at signup.",
 };
 
 export const pricingHero = {
@@ -14,7 +14,7 @@ export const pricingHero = {
   subhead: "Start on a real repository. Upgrade when the project — or the team — needs more room.",
   priceLine: "Free $0. Starter $12. Pro $24/month. Ultimate $49. Teams from $149.",
   banner:
-    "Start free today. Paid plans are listed so you know where this goes. Checkout is coming; you won’t be charged at signup.",
+    "Start free. Paid plans show what this will cost. Card payment is not live yet — you will not be charged at signup.",
 };
 
 export type Plan = {
@@ -65,7 +65,7 @@ export const individualPlans: Plan[] = [
       "Unlimited cleanups within that review limit",
       "Required check on up to 2 repositories",
     ],
-    cta: "Get started",
+    cta: "Start free",
     href: SIGNUP_PATH,
     badge: null,
     bestFor: "One person, a few active repos",
@@ -84,10 +84,10 @@ export const individualPlans: Plan[] = [
       "Required check on every connected repository",
       "Full history of what got cleaner over time",
     ],
-    cta: "Get started",
+    cta: "Start free",
     href: SIGNUP_PATH,
     badge: "Most popular",
-    bestFor: "The default plan",
+    bestFor: "Most people shipping a product",
     highlight: true,
   },
   {
@@ -101,10 +101,10 @@ export const individualPlans: Plan[] = [
       "40 repositories",
       "1,000 reviews / month",
       "Unlimited cleanups within that review limit",
-      "Priority review",
-      "Full protection options",
+      "Faster review queue",
+      "Required check and full history on every connected repository",
     ],
-    cta: "Get started",
+    cta: "Start free",
     href: SIGNUP_PATH,
     badge: null,
     bestFor: "Many projects, one operator",
@@ -171,9 +171,9 @@ export const teamPlans: Plan[] = [
   {
     name: "Enterprise",
     monthlyPrice: "From $2,500",
-    yearlyPrice: "From $2,500",
+    yearlyPrice: "From $25,000",
     period: "/ month",
-    yearlyPeriod: "/ month",
+    yearlyPeriod: "/ year",
     description: "When you need a contract, custom limits, or a security review.",
     features: [],
     cta: "Talk to us",
@@ -192,18 +192,14 @@ export const pricingValue = {
   paragraphs: [
     "You’re paying for a project that stays maintainable while you keep generating.",
     "Free is how you feel a real cleanup on a real repository. Pro is how that becomes normal. Teams is how a group of people generating at once doesn’t turn the repo into twelve styles of first draft.",
-    "We don’t charge you extra because a change was healthy. Silence is part of the product.",
+    "We don’t charge extra when a change is already clean.",
   ],
 };
 
 export const pricingFaqs = [
   {
     q: "Can I pay today?",
-    a: "Create an account and start. Card checkout is rolling out. You will not be surprised by a charge at signup.",
-  },
-  {
-    q: "Is GitHub included?",
-    a: "No. GitHub is separate. Refract is ours.",
+    a: "Create a free account and start. Card payment is not live yet. You will not be charged at signup.",
   },
   {
     q: "What happens if I hit a limit?",
@@ -218,7 +214,7 @@ export const pricingFaqs = [
     a: "Yes, if you can install GitHub Apps there. For shared billing and seats, use Team or talk to us.",
   },
   {
-    q: "Is Accept / cleanup locked on Free?",
+    q: "Is Approve / cleanup locked on Free?",
     a: "Free includes a small number of cleanups each month so you can feel the real product — not a demo that never changes code.",
   },
 ] as const;

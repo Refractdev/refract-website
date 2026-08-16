@@ -1,4 +1,4 @@
-import { GITHUB_APP_URL, LOGIN_PATH, SIGNUP_PATH } from "@/lib/constants";
+import { LOGIN_PATH, SIGNUP_PATH } from "@/lib/constants";
 
 export const marketingLinks = [
   { label: "Product", href: "/product" },
@@ -12,8 +12,16 @@ export const footerSections = [
     links: [
       { label: "Product", href: "/product" },
       { label: "Pricing", href: "/pricing" },
-      { label: "Docs", href: "/docs" },
       { label: "Security", href: "/security" },
+    ],
+  },
+  {
+    title: "Docs",
+    links: [
+      { label: "Getting started", href: "/docs/getting-started" },
+      { label: "Approve", href: "/docs/approve" },
+      { label: "FAQ", href: "/docs/faq" },
+      { label: "All docs", href: "/docs" },
     ],
   },
   {
@@ -21,6 +29,11 @@ export const footerSections = [
     links: [
       { label: "About", href: "/about" },
       { label: "Contact", href: "/contact" },
+    ],
+  },
+  {
+    title: "Legal",
+    links: [
       { label: "Privacy", href: "/privacy" },
       { label: "Terms", href: "/terms" },
     ],
@@ -30,8 +43,8 @@ export const footerSections = [
 export const footerBrandLine = "Refract — the step after AI writes the code.";
 export const footerFinePrint = "Built for React and TypeScript on GitHub.";
 export const githubAppLink = {
-  label: "Install on GitHub",
-  href: GITHUB_APP_URL,
+  label: "Connect GitHub",
+  href: "/docs/connect-github",
 } as const;
 
 export const chrome = {
