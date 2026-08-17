@@ -21,3 +21,13 @@ export const about = {
     },
   ],
 } as const;
+
+export const founder = {
+  label: "The person behind it",
+  name: "Adilson Lopes",
+  role: "Founder of Lintel · Creator of Refract",
+  story:
+    "Refract is built by Adilson Lopes, founder of Lintel. Originally from Angola and now based in Portugal, he is building it around a simple conviction: as AI changes how software is written, the tools developers use to keep that software — to review it, clean it, and let it grow — have to change too.",
+  company: "Lintel is the company behind Refract.",
+  linkedinLabel: "LinkedIn",
+} as const;

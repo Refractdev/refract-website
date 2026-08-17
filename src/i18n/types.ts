@@ -67,6 +67,14 @@ export type ContentPack = {
       headline: string;
       intro: string;
       sections: { title: string; body: string }[];
+      founder: {
+        label: string;
+        name: string;
+        role: string;
+        story: string;
+        company: string;
+        linkedinLabel: string;
+      };
     };
   };
   home: {

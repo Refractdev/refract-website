@@ -19,3 +19,7 @@ export const GITHUB_URL = "https://github.com/Refractdev";
 export const GITHUB_APP_URL = "https://github.com/apps/devrefract";
 export const GITHUB_APP_INSTALL_URL = "https://github.com/apps/devrefract/installations/new";
 export const DISCORD_URL = "https://discord.gg/SH787P4rP4";
+export const LINKEDIN_URL = "https://www.linkedin.com/in/adilson-lopes-b3031b423";
+export const FOUNDER_NAME = "Adilson Lopes";
+/** Set to `/founder.jpg` (or similar) once a real portrait is in `public/`. */
+export const FOUNDER_PHOTO = "";

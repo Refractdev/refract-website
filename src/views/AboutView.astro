@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import AppShell from '../layouts/AppShell.astro';
 import PageShell from '@/components/sections/PageShell.astro';
+import Founder from '@/components/sections/Founder.astro';
 import { breadcrumbSchema } from '@/lib/schema';
 import { usePack } from '@/i18n/usePack';
 import { localizeHref } from '@/i18n/href';
@@ -29,6 +30,7 @@ const schema = [
           ))
         }
       </div>
+      <Founder {...about.founder} />
     </PageShell>
   </AppShell>
 </BaseLayout>

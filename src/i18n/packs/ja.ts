@@ -105,6 +105,15 @@ export const ja: ContentPack = {
           body: `${PRODUCT_NAME} は、${COMPANY_NAME} の企業である ${BRAND_NAME} のプロダクトです。`,
         },
       ],
+      founder: {
+        label: "つくっている人",
+        name: "Adilson Lopes",
+        role: "Lintel 創業者 · Refract の作り手",
+        story:
+          "Refract は、Lintel の創業者 Adilson Lopes がひとりでつくっています。アンゴラ出身、いまはポルトガル在住。考えは単純です。AI がソフトウェアの書き方を変えるなら、それを保つ道具 — 見直し、整え、育てること — も変わらなければならない。",
+        company: "Lintel は Refract の運営会社です。",
+        linkedinLabel: "LinkedIn",
+      },
     },
   },
   home: {

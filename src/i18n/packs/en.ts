@@ -1,4 +1,4 @@
-import { about, attribution, copyrightLine, operatorSentence } from "@/content/brand";
+import { about, attribution, copyrightLine, founder, operatorSentence } from "@/content/brand";
 import { docPages, docsHome, docsSeo } from "@/content/docs";
 import { faqGroups, faqSeo } from "@/content/faq";
 import {
@@ -99,6 +99,7 @@ export const en: ContentPack = {
       headline: about.headline,
       intro: about.intro,
       sections: about.sections.map((section) => ({ title: section.title, body: section.body })),
+      founder,
     },
   },
   home: {

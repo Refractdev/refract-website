@@ -102,6 +102,15 @@ export const zh: ContentPack = {
           body: `${PRODUCT_NAME} 是 ${COMPANY_NAME} 旗下 ${BRAND_NAME} 的产品。`,
         },
       ],
+      founder: {
+        label: "背后的人",
+        name: "Adilson Lopes",
+        role: "Lintel 创始人 · Refract 的创造者",
+        story:
+          "Refract 由 Adilson Lopes 打造，他也是 Lintel 的创始人。他来自安哥拉，现居葡萄牙。他围绕一个简单的判断在做这件事：AI 改变了软件的写法，用来保住这份软件的工具——审阅、清理、让它继续长——也必须跟着变。",
+        company: "Lintel 是 Refract 背后的公司。",
+        linkedinLabel: "LinkedIn",
+      },
     },
   },
   home: {

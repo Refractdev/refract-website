@@ -105,6 +105,15 @@ export const de: ContentPack = {
           body: `${PRODUCT_NAME} ist ein Produkt von ${BRAND_NAME}, einem Unternehmen von ${COMPANY_NAME}.`,
         },
       ],
+      founder: {
+        label: "Die Person dahinter",
+        name: "Adilson Lopes",
+        role: "Gründer von Lintel · Schöpfer von Refract",
+        story:
+          "Refract wird von Adilson Lopes gebaut, Gründer von Lintel. Geboren in Angola, lebt er in Portugal. Er baut das Produkt um eine einfache Überzeugung: Wenn KI ändert, wie Software geschrieben wird, müssen die Werkzeuge, mit denen man sie hält — prüfen, aufräumen, wachsen lassen — sich mitändern.",
+        company: "Lintel ist das Unternehmen hinter Refract.",
+        linkedinLabel: "LinkedIn",
+      },
     },
   },
   home: {
