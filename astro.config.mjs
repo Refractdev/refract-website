@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const APP_URL = 'https://refract-dev.vercel.app';
+const APP_URL = 'https://app.devrefract.com';
 
 // Redirect stubs and app entry points must never reach the sitemap.
 const hiddenPaths = ['/login', '/signup', '/dashboard', '/help', '/changelog', '/roadmap', '/status'];
@@ -77,9 +77,9 @@ export default defineConfig({
   },
   output: 'static',
   redirects: {
-    '/login': APP_URL,
-    '/signup': APP_URL,
-    '/dashboard': APP_URL,
+    '/login': `${APP_URL}/login`,
+    '/signup': `${APP_URL}/signup`,
+    '/dashboard': `${APP_URL}/repositories`,
     '/help': '/docs/faq',
     '/faq': '/docs/faq',
     '/changelog': '/',

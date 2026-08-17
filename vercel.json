@@ -17,17 +17,17 @@
   "redirects": [
     {
       "source": "/login",
-      "destination": "https://refract-dev.vercel.app",
+      "destination": "https://app.devrefract.com/login",
       "permanent": false
     },
     {
       "source": "/signup",
-      "destination": "https://refract-dev.vercel.app",
+      "destination": "https://app.devrefract.com/signup",
       "permanent": false
     },
     {
       "source": "/dashboard",
-      "destination": "https://refract-dev.vercel.app",
+      "destination": "https://app.devrefract.com/repositories",
       "permanent": false
     },
     {

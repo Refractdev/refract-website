@@ -1,4 +1,7 @@
-export const APP_URL = "https://refract-dev.vercel.app";
+export const APP_URL = "https://app.devrefract.com";
+export const APP_LOGIN_URL = `${APP_URL}/login`;
+export const APP_SIGNUP_URL = `${APP_URL}/signup`;
+export const APP_DASHBOARD_URL = `${APP_URL}/repositories`;
 export const SITE_URL = "https://devrefract.com";
 /** Public product name. Titles, og:site_name, and product SEO stay product-led. */
 export const SITE_NAME = "Refract";
