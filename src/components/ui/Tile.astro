@@ -1,0 +1,75 @@
+---
+interface Props {
+  title?: string;
+  /** Accepts inline markup so the key phrase can be emphasised. */
+  body?: string;
+  kicker?: string;
+  span?: 3 | 4 | 5 | 6 | 7 | 8 | 9 | 12;
+  rows?: 1 | 2;
+  size?: 'default' | 'tall' | 'short';
+  index?: number;
+  href?: string;
+  external?: boolean;
+}
+
+const { title, body, kicker, span = 6, rows = 1, size = 'default', index = 0, href, external = false } = Astro.props;
+const hasArt = Astro.slots.has('art');
+const classes = [
+  'tile',
+  `tile--${span}`,
+  rows === 2 && 'tile--rows2',
+  size !== 'default' && `tile--${size}`,
+  !hasArt && 'tile--text',
+  href && 'tile--link',
+  'reveal',
+];
+const style = `--i:${index}`;
+---
+
+{
+  href ? (
+    <a
+      class:list={classes}
+      style={style}
+      href={href}
+      target={external ? '_blank' : undefined}
+      rel={external ? 'noopener noreferrer' : undefined}
+    >
+      {
+        title || body || kicker ? (
+          <div class="tile__copy">
+            {kicker ? <p class="tile__kicker">{kicker}</p> : null}
+            {title ? <h3 class="tile__title">{title}</h3> : null}
+            {body ? <p class="tile__body" set:html={body} /> : null}
+          </div>
+        ) : null
+      }
+      {
+        hasArt ? (
+          <div class="tile__art">
+            <slot name="art" />
+          </div>
+        ) : null
+      }
+    </a>
+  ) : (
+    <article class:list={classes} style={style}>
+      {
+        title || body || kicker ? (
+          <div class="tile__copy">
+            {kicker ? <p class="tile__kicker">{kicker}</p> : null}
+            {title ? <h3 class="tile__title">{title}</h3> : null}
+            {body ? <p class="tile__body" set:html={body} /> : null}
+          </div>
+        ) : null
+      }
+      {
+        hasArt ? (
+          <div class="tile__art">
+            <slot name="art" />
+          </div>
+        ) : null
+      }
+    </article>
+  )
+}

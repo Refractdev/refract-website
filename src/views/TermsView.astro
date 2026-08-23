@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AppShell from '../layouts/AppShell.astro';
+import PageShell from '@/components/sections/PageShell.astro';
+import { usePack } from '@/i18n/usePack';
+
+const { pack, html } = usePack(Astro.url.pathname);
+const { terms } = pack.legal;
+---
+
+<BaseLayout title={terms.title} description={terms.description}>
+  <AppShell variant="minimal">
+    <PageShell label={pack.ui.legalLabel} title={terms.headline}>
+      <div class="prose-copy">
+        <p>{terms.updated}</p>
+        <p>{terms.operator}</p>
+        <h2>{pack.ui.shortVersion}</h2>
+        {terms.short.map((p) => <p>{p}</p>)}
+        {terms.sections.map((section) => (
+          <>
+            <h2>{section.title}</h2>
+            {section.paragraphs.map((p) => <p>{p}</p>)}
+          </>
+        ))}
+        <h2>{pack.ui.contactHeading}</h2>
+        <p set:html={html(terms.contactHtml)} />
+        <h2>{pack.ui.changesHeading}</h2>
+        <p>{terms.changes}</p>
+      </div>
+    </PageShell>
+  </AppShell>
+</BaseLayout>

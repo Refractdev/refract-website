@@ -1,0 +1,21 @@
+---
+interface Props {
+  headline: string;
+  body?: string;
+  primary: { label: string; href: string };
+  secondary?: { label: string; href: string };
+}
+
+const { headline, body, primary, secondary } = Astro.props;
+---
+
+<section class="section-major">
+  <div class="mx-auto max-w-site px-5 text-center">
+    <h2 class="text-cta-display mx-auto max-w-[18ch] text-balance reveal">{headline}</h2>
+    {body ? <p class="text-tp-desc mx-auto mt-5 max-w-[48ch] reveal" style="--i:1">{body}</p> : null}
+    <div class="hero-actions hero-actions--center reveal" style="--i:2">
+      <a class="btn btn-primary" href={primary.href}>{primary.label}</a>
+      {secondary ? <a class="btn btn-secondary" href={secondary.href}>{secondary.label}</a> : null}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,45 @@
+---
+import { localeMeta, locales } from '@/i18n/config';
+import { switchLocalePath } from '@/i18n/href';
+import { usePack } from '@/i18n/usePack';
+
+interface Props {
+  placement?: 'down' | 'up';
+}
+
+const { placement = 'down' } = Astro.props;
+const { locale, pack } = usePack(Astro.url.pathname);
+const pathname = Astro.url.pathname;
+---
+
+<details class:list={['lang-switch', placement === 'up' && 'lang-switch--up']}>
+  <summary class="lang-switch__summary" aria-label={pack.ui.language}>
+    {localeMeta[locale].label}
+    <span class="lang-switch__caret" aria-hidden="true">▾</span>
+  </summary>
+  <div class="lang-switch__menu">
+    {
+      locales.map((code) => (
+        <a
+          href={switchLocalePath(pathname, code)}
+          class:list={['lang-switch__item', code === locale && 'is-current']}
+          data-locale={code}
+          aria-current={code === locale ? 'true' : undefined}
+        >
+          {localeMeta[code].label}
+        </a>
+      ))
+    }
+  </div>
+</details>
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll('.lang-switch__item[data-locale]').forEach(function (link) {
+      link.addEventListener('click', function () {
+        var code = link.getAttribute('data-locale');
+        if (code) try { localStorage.setItem('refract-locale', code); } catch (e) {}
+      });
+    });
+  })();
+</script>

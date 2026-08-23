@@ -1,0 +1,71 @@
+---
+interface Props {
+  kind?: 'add' | 'remove' | 'merge' | 'lock';
+}
+
+const { kind = 'add' } = Astro.props;
+---
+
+<div class="art" aria-hidden="true">
+  {
+    kind === 'remove' ? (
+      <svg viewBox="0 0 260 130" fill="none">
+        <rect class="d-panel" x="14" y="14" width="232" height="102" rx="8" />
+        <rect class="d-bar--soft" x="32" y="34" width="96" height="4" rx="2" />
+        <g class="d-out">
+          <rect class="d-rm-bg" x="14" y="52" width="232" height="14" />
+          <rect class="d-rm" x="32" y="57" width="126" height="4" rx="2" />
+        </g>
+        <rect class="d-bar--soft" x="32" y="82" width="70" height="4" rx="2" />
+        <rect class="d-bar--soft" x="32" y="98" width="112" height="4" rx="2" />
+        <g class="d-in">
+          <line class="d-link d-link--dash" x1="32" y1="59" x2="228" y2="59" />
+        </g>
+      </svg>
+    ) : kind === 'add' ? (
+      <svg viewBox="0 0 260 130" fill="none">
+        <rect class="d-panel" x="14" y="14" width="232" height="102" rx="8" />
+        <rect class="d-bar--soft" x="32" y="34" width="80" height="4" rx="2" />
+        <rect class="d-bar--soft" x="32" y="50" width="118" height="4" rx="2" />
+        <g class="d-in">
+          <rect class="d-add-bg" x="14" y="66" width="232" height="14" />
+          <rect class="d-add" x="32" y="71" width="104" height="4" rx="2" />
+        </g>
+        <rect class="d-bar--soft" x="32" y="96" width="64" height="4" rx="2" />
+      </svg>
+    ) : kind === 'merge' ? (
+      <svg viewBox="0 0 260 130" fill="none">
+        <g class="d-dup-a">
+          <rect class="d-panel" x="16" y="20" width="88" height="26" rx="6" />
+          <rect class="d-bar--soft" x="30" y="31" width="52" height="4" rx="2" />
+        </g>
+        <g class="d-dup-b">
+          <rect class="d-panel" x="16" y="84" width="88" height="26" rx="6" />
+          <rect class="d-bar--soft" x="30" y="95" width="40" height="4" rx="2" />
+        </g>
+        <path pathLength="1" class="d-link d-draw" d="M104 33 C 136 33, 136 65, 160 65" />
+        <path pathLength="1" class="d-link d-draw" style="--d:1" d="M104 97 C 136 97, 136 65, 160 65" />
+        <g class="d-in">
+          <rect class="d-panel" x="156" y="50" width="90" height="30" rx="6" />
+          <rect class="d-add-bg" x="156" y="50" width="90" height="30" rx="6" />
+          <rect class="d-add" x="170" y="63" width="50" height="4" rx="2" />
+        </g>
+      </svg>
+    ) : (
+      <svg viewBox="0 0 260 130" fill="none">
+        <rect class="d-panel" x="24" y="22" width="212" height="86" rx="8" />
+        <rect class="d-add-bg" x="42" y="42" width="120" height="12" rx="2" />
+        <rect class="d-add" x="50" y="46" width="54" height="4" rx="2" />
+        <g class="d-press">
+          <rect class="d-btn" x="42" y="70" width="76" height="22" rx="6" />
+          <text class="d-btn-text" x="63" y="84">
+            Approve
+          </text>
+        </g>
+        <g class="d-hand">
+          <path class="d-cursor" d="M110 78 L110 98 L115 93 L119 102 L123 100 L119 91 L126 91 Z" />
+        </g>
+      </svg>
+    )
+  }
+</div>

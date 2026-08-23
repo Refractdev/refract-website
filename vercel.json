@@ -1,5 +1,59 @@
 {
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "installCommand": "npm install --legacy-peer-deps"
+  "services": {
+    "web": {
+      "root": ".",
+      "framework": "astro",
+      "installCommand": "pnpm install",
+      "buildCommand": "pnpm build",
+      "outputDirectory": "dist"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": { "service": "web" }
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/login",
+      "destination": "https://app.devrefract.com/login",
+      "permanent": false
+    },
+    {
+      "source": "/signup",
+      "destination": "https://app.devrefract.com/signup",
+      "permanent": false
+    },
+    {
+      "source": "/dashboard",
+      "destination": "https://app.devrefract.com/repositories",
+      "permanent": false
+    },
+    {
+      "source": "/help",
+      "destination": "/docs/faq",
+      "permanent": false
+    },
+    {
+      "source": "/faq",
+      "destination": "/docs/faq",
+      "permanent": false
+    },
+    {
+      "source": "/changelog",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/roadmap",
+      "destination": "/product",
+      "permanent": false
+    },
+    {
+      "source": "/status",
+      "destination": "/",
+      "permanent": false
+    }
+  ]
 }

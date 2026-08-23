@@ -1,89 +1,196 @@
 ---
 import '../styles/global.css';
+import { BRAND_NAME, COMPANY_NAME, GITHUB_APP_URL, SITE_NAME, SITE_URL, TWITTER_HANDLE } from '@/lib/constants';
+import { localeMeta, locales } from '@/i18n/config';
+import { absoluteUrl, localizeHref, stripLocalePrefix } from '@/i18n/href';
+import { usePack } from '@/i18n/usePack';
 
 interface Props {
   title?: string;
   description?: string;
+  ogTitle?: string;
+  ogDescription?: string;
   canonicalURL?: string;
   ogImage?: string;
+  noindex?: boolean;
+  /** Homepage only — repeating SoftwareApplication on every URL confuses rich results. */
+  includeProduct?: boolean;
+  /** Extra schema.org nodes for this page, merged into the sitewide graph. */
+  schema?: Record<string, unknown>[];
 }
 
+const { locale, pack } = usePack(Astro.url.pathname);
+const meta = localeMeta[locale];
+const defaultSeo = {
+  title: pack.seo.defaultTitle,
+  description: pack.seo.defaultDescription,
+  ogTitle: pack.seo.ogTitle,
+  ogDescription: pack.seo.ogDescription,
+  ogImageAlt: pack.seo.ogImageAlt,
+};
+const jsonLdDescription = pack.seo.jsonLdDescription;
+
 const {
-  title = "Refract — Turn AI-Generated Code Into Production-Ready Codebases",
-  description = "Refract runs on every push, catches structural debt and security issues introduced by AI coding tools, and ships fixes as pull requests — with your approval.",
-  canonicalURL = Astro.url.href,
-  ogImage = "/og-image.png",
+  title = defaultSeo.title,
+  description = defaultSeo.description,
+  ogImage = '/og-image.png',
+  noindex = false,
+  includeProduct = false,
+  schema = [],
 } = Astro.props;
 
+// Social cards default to the page's own title and description, so a shared
+// docs or legal link never advertises the homepage message.
+const { ogTitle = title, ogDescription = description } = Astro.props;
+
+const canonicalURL = normalizeCanonical(Astro.props.canonicalURL ?? Astro.url.href, noindex);
 const ogImageURL = new URL(ogImage, Astro.site).toString();
+const logoURL = new URL('/logo.png', Astro.site).toString();
+const lintelId = `${SITE_URL}/#lintel`;
+const organizationId = `${SITE_URL}/#organization`;
+const websiteId = `${SITE_URL}/#website`;
+const softwareId = `${SITE_URL}/#software`;
+
+function normalizeCanonical(href: string, skipSlash: boolean) {
+  const url = new URL(href);
+  url.search = '';
+  url.hash = '';
+  const isFile = /\.[a-z0-9]+$/i.test(url.pathname);
+  if (!skipSlash && !isFile && !url.pathname.endsWith('/')) url.pathname += '/';
+  return url.toString();
+}
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': lintelId,
+      name: COMPANY_NAME,
+      description: 'Parent technology company.',
+    },
+    {
+      '@type': 'Organization',
+      '@id': organizationId,
+      name: BRAND_NAME,
+      url: SITE_URL,
+      description: 'Developer technology brand.',
+      parentOrganization: { '@id': lintelId },
+      logo: {
+        '@type': 'ImageObject',
+        url: logoURL,
+        width: 512,
+        height: 512,
+      },
+      image: ogImageURL,
+      sameAs: [`https://twitter.com/${TWITTER_HANDLE.replace('@', '')}`, GITHUB_APP_URL],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': websiteId,
+      name: SITE_NAME,
+      url: SITE_URL,
+      description: jsonLdDescription,
+      publisher: { '@id': organizationId },
+      inLanguage: meta.htmlLang,
+    },
+    {
+      '@type': 'WebPage',
+      '@id': `${canonicalURL}#webpage`,
+      url: canonicalURL,
+      name: title,
+      description,
+      isPartOf: { '@id': websiteId },
+      about: includeProduct ? { '@id': softwareId } : undefined,
+      primaryImageOfPage: {
+        '@type': 'ImageObject',
+        url: ogImageURL,
+        width: 1200,
+        height: 630,
+        caption: defaultSeo.ogImageAlt,
+      },
+      inLanguage: meta.htmlLang,
+    },
+    ...(includeProduct
+      ? [
+          {
+            '@type': 'SoftwareApplication',
+            '@id': softwareId,
+            name: SITE_NAME,
+            url: SITE_URL,
+            description: jsonLdDescription,
+            applicationCategory: 'DeveloperApplication',
+            operatingSystem: 'Web',
+            publisher: { '@id': organizationId },
+            brand: { '@id': organizationId },
+          },
+        ]
+      : []),
+    ...schema,
+  ],
+};
+
+const barePath = stripLocalePrefix(new URL(canonicalURL).pathname);
+const alternateUrls = locales.map((code) => ({
+  code,
+  href: absoluteUrl(localizeHref(barePath, code)),
+  hreflang: localeMeta[code].hreflang,
+}));
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang={meta.htmlLang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a0a0b" />
 
-    <!-- Primary SEO -->
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
+    {
+      alternateUrls.map((alt) => (
+        <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />
+      ))
+    }
+    <link rel="alternate" hreflang="x-default" href={absoluteUrl(barePath)} />
 
-    <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Refract" />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:locale" content={meta.og} />
+    {locales.filter((code) => code !== locale).map((code) => (
+      <meta property="og:locale:alternate" content={localeMeta[code].og} />
+    ))}
     <meta property="og:url" content={canonicalURL} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={ogDescription} />
     <meta property="og:image" content={ogImageURL} />
+    <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={defaultSeo.ogImageAlt} />
 
-    <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:site" content={TWITTER_HANDLE} />
+    <meta name="twitter:creator" content={TWITTER_HANDLE} />
+    <meta name="twitter:title" content={ogTitle} />
+    <meta name="twitter:description" content={ogDescription} />
     <meta name="twitter:image" content={ogImageURL} />
+    <meta name="twitter:image:alt" content={defaultSeo.ogImageAlt} />
 
-    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" type="image/svg+xml" href="/appicon-black.svg" />
-    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="mask-icon" href="/icon-white.svg" color="#0a0a0b" />
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
 
-    <!-- Structured data -->
-    <script type="application/ld+json" set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "Refract",
-      "url": "https://devrefract.com",
-      "description": "Refract is the infrastructure layer between AI coding tools and production. It detects structural debt and security issues on every push and ships fixes as pull requests with human approval.",
-      "applicationCategory": "DeveloperApplication",
-      "operatingSystem": "Web",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
-      "creator": {
-        "@type": "Organization",
-        "name": "Refract",
-        "url": "https://devrefract.com"
-      }
-    })} />
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Inter:opsz,wght@14..32,400..600&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body>
+    <a class="skip-link" href="#main">{pack.ui.skipToContent}</a>
     <slot />
   </body>
 </html>

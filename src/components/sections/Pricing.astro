@@ -1,0 +1,35 @@
+---
+import PlanGrid from '@/components/sections/PlanGrid.astro';
+import { usePack } from '@/i18n/usePack';
+
+const { pack } = usePack(Astro.url.pathname);
+const { pricing, ui } = pack;
+---
+
+<section id="pricing" class="pricing-root relative pb-8">
+  <input type="radio" name="billing" id="billing-monthly" checked />
+  <input type="radio" name="billing" id="billing-yearly" />
+
+  <div class="mx-auto max-w-site px-5 md:px-6">
+    <div class="rounded-lg border border-ld-border bg-ld-surface px-5 py-4 text-[14px] leading-relaxed text-ld-tertiary">
+      {pricing.hero.banner}
+    </div>
+
+    <div class="mt-8 flex items-center justify-center">
+      <div class="billing-switch" role="group" aria-label={ui.billingPeriod}>
+        <label for="billing-monthly">{ui.monthly}</label>
+        <label for="billing-yearly">
+          {ui.yearly} <span class="save">{ui.twoMonthsFree}</span>
+        </label>
+      </div>
+    </div>
+
+    <h2 class="text-h3 mt-14 reveal">{ui.individuals}</h2>
+    <PlanGrid plans={pricing.individualPlans} />
+
+    <h2 class="text-h3 mt-16 reveal">{ui.forTeams}</h2>
+    <PlanGrid plans={pricing.teamPlans} />
+
+    <p class="mt-10 max-w-[720px] text-[13px] leading-relaxed text-ld-muted reveal">{pricing.footnote}</p>
+  </div>
+</section>

@@ -1,0 +1,51 @@
+---
+import Header from '@/components/sections/Header.astro';
+import Footer from '@/components/sections/Footer.astro';
+
+interface Props {
+  variant?: 'marketing' | 'minimal' | 'docs';
+}
+
+const { variant = 'marketing' } = Astro.props;
+const headerVariant = variant === 'docs' ? 'marketing' : variant;
+---
+
+<div class="min-h-screen bg-ld-canvas">
+  <Header variant={headerVariant} />
+  <slot />
+  <Footer />
+</div>
+
+<script is:inline>
+  // Tiles always need .is-in so their inner diagrams can loop.
+  // Reveals and the film only need the observer when scroll-driven CSS is missing.
+  (function () {
+    var timeline = window.CSS && CSS.supports && CSS.supports('animation-timeline', 'view()');
+    var tiles = document.querySelectorAll('.tile');
+    var extra = timeline ? [] : document.querySelectorAll('.reveal, .film--scroll');
+    var targets = [];
+    tiles.forEach(function (el) { targets.push(el); });
+    extra.forEach(function (el) { if (targets.indexOf(el) === -1) targets.push(el); });
+    if (!targets.length) return;
+
+    if (!('IntersectionObserver' in window)) {
+      for (var i = 0; i < targets.length; i++) targets[i].classList.add('is-in');
+      return;
+    }
+
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-in');
+          observer.unobserve(entry.target);
+        });
+      },
+      { rootMargin: '120px 0px 18% 0px', threshold: 0.01 }
+    );
+
+    targets.forEach(function (target) {
+      observer.observe(target);
+    });
+  })();
+</script>

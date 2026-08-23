@@ -1,0 +1,49 @@
+---
+import { FOUNDER_NAME, FOUNDER_PHOTO, LINKEDIN_URL } from '@/lib/constants';
+
+interface Props {
+  label: string;
+  name: string;
+  role: string;
+  story: string;
+  company: string;
+  linkedinLabel: string;
+}
+
+const { label, name, role, story, company, linkedinLabel } = Astro.props;
+const photo = FOUNDER_PHOTO.trim();
+const initials = FOUNDER_NAME.split(' ')
+  .filter(Boolean)
+  .map((part) => part[0])
+  .join('')
+  .slice(0, 2);
+---
+
+<section class="founder" aria-labelledby="founder-name">
+  <p class="founder__label">{label}</p>
+
+  <div class="founder__layout">
+    <div class="founder__portrait">
+      {
+        photo ? (
+          <img src={photo} alt={name} width="160" height="200" />
+        ) : (
+          <span class="founder__monogram" aria-hidden="true">
+            {initials}
+          </span>
+        )
+      }
+    </div>
+
+    <div class="founder__copy">
+      <h2 id="founder-name" class="founder__name">{name}</h2>
+      <p class="founder__role">{role}</p>
+      <p class="founder__story">{story}</p>
+      <p class="founder__company">{company}</p>
+      <a class="founder__link" href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">
+        {linkedinLabel}
+        <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </div>
+</section>

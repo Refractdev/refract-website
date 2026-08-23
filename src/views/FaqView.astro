@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AppShell from '../layouts/AppShell.astro';
+import PageShell from '@/components/sections/PageShell.astro';
+import { breadcrumbSchema, faqPageSchema } from '@/lib/schema';
+import { usePack } from '@/i18n/usePack';
+import { localizeHref } from '@/i18n/href';
+
+const { locale, pack, href, html } = usePack(Astro.url.pathname);
+const allQuestions = pack.faq.groups.flatMap((group) => group.items);
+const schema = [
+  faqPageSchema(allQuestions),
+  breadcrumbSchema([
+    { name: pack.ui.homeCrumb, path: localizeHref('/', locale) },
+    { name: pack.docs.headline, path: localizeHref('/docs/', locale) },
+    { name: pack.faq.title, path: localizeHref('/docs/faq/', locale) },
+  ]),
+];
+---
+
+<BaseLayout title={pack.faq.seo.title} description={pack.faq.seo.description} schema={schema}>
+  <AppShell>
+    <PageShell label={pack.ui.documentation} title={pack.faq.title} maxWidth={720}>
+      <p class="mb-8">
+        <a href={href('/docs')} class="text-[13px] text-ld-muted underline underline-offset-2 hover:text-white">{pack.ui.allDocs}</a>
+      </p>
+      {
+        pack.faq.groups.map((group) => (
+          <section class="mb-12">
+            <h2 class="text-lg font-medium text-white">{group.title}</h2>
+            <div class="mt-4 border-y border-ld-border">
+              {group.items.map((item) => (
+                <details class="faq-item">
+                  <summary>{item.q}</summary>
+                  <p set:html={html(item.a)} />
+                </details>
+              ))}
+            </div>
+          </section>
+        ))
+      }
+    </PageShell>
+  </AppShell>
+</BaseLayout>

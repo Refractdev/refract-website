@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AppShell from '../layouts/AppShell.astro';
+import PageShell from '@/components/sections/PageShell.astro';
+import { CONTACT_EMAIL } from '@/lib/constants';
+import { usePack } from '@/i18n/usePack';
+
+const { pack } = usePack(Astro.url.pathname);
+const { contact } = pack.legal;
+const topicLinks = contact.topics.map((topic) => ({
+  topic,
+  href: `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(`Refract — ${topic}`)}`,
+}));
+---
+
+<BaseLayout title={contact.title} description={contact.description}>
+  <AppShell>
+    <PageShell title={contact.headline} description={contact.intro}>
+      <div class="prose-copy">
+        <p>
+          <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+        </p>
+        <p>{contact.bugs}</p>
+        <ul>
+          {topicLinks.map((item) => (
+            <li>
+              <a href={item.href}>{item.topic}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </PageShell>
+  </AppShell>
+</BaseLayout>

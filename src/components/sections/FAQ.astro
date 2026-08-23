@@ -1,0 +1,28 @@
+---
+interface Props {
+  items: { q: string; a: string }[] | readonly { q: string; a: string }[];
+  title?: string;
+  heading?: string;
+}
+
+const { items, title = 'FAQ', heading } = Astro.props;
+---
+
+<section class="section-default">
+  <div class="mx-auto max-w-[720px] px-5 md:px-8">
+    {title ? <p class="tp-mono text-center reveal">{title}</p> : null}
+    {heading ? (
+      <h2 class="text-tp-heading mx-auto mt-3 max-w-[640px] text-center text-balance reveal">{heading}</h2>
+    ) : null}
+    <div class:list={['border-y border-ld-border', heading ? 'mt-12' : 'mt-8']}>
+      {
+        items.map((f, i) => (
+          <details class="faq-item reveal" style={`--i:${i}`}>
+            <summary>{f.q}</summary>
+            <p set:html={f.a} />
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,52 @@
+---
+interface Props {
+  headline: string;
+  lede?: string;
+  after?: string;
+  aside?: string;
+  more?: { label: string; href: string };
+}
+
+const { headline, lede, after, aside, more } = Astro.props;
+const hasBody = Astro.slots.has('default');
+---
+
+<section class="band-section">
+  <div class="mx-auto max-w-site px-5">
+    <header class="band">
+      <h2 class="text-tp-heading max-w-[65ch] text-balance reveal">{headline}</h2>
+      {lede ? <p class="text-tp-desc mt-3 max-w-[65ch] reveal" style="--i:1">{lede}</p> : null}
+      {
+        more ? (
+          <p class="band__more reveal" style="--i:2">
+            <a href={more.href}>
+              {more.label}
+              <span aria-hidden="true">&nbsp;&rarr;</span>
+            </a>
+          </p>
+        ) : null
+      }
+    </header>
+    {
+      hasBody ? (
+        <div class="mt-10">
+          <slot />
+        </div>
+      ) : null
+    }
+    {
+      after ? (
+        <p class="band__after reveal" style="--i:1">
+          {after}
+        </p>
+      ) : null
+    }
+    {
+      aside ? (
+        <p class="band__aside reveal" style="--i:2">
+          {aside}
+        </p>
+      ) : null
+    }
+  </div>
+</section>

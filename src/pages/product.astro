@@ -1,14 +1,4 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import MarketingLayout from '../components/site/MarketingLayout';
-import ProductPage from '../components/pages/ProductPage';
+import ProductView from '@/views/ProductView.astro';
 ---
-
-<BaseLayout
-  title="Product — Refract"
-  description="From messy to mergeable. Refract connects to your repo, detects structural debt, and ships fixes as pull requests."
->
-  <MarketingLayout>
-    <ProductPage client:visible />
-  </MarketingLayout>
-</BaseLayout>
+<ProductView />

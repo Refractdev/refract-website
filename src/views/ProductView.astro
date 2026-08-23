@@ -1,0 +1,122 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AppShell from '../layouts/AppShell.astro';
+import CopyBlock from '@/components/sections/CopyBlock.astro';
+import FAQ from '@/components/sections/FAQ.astro';
+import Band from '@/components/ui/Band.astro';
+import Bento from '@/components/ui/Bento.astro';
+import Tile from '@/components/ui/Tile.astro';
+import ArtProject from '@/components/art/ArtProject.astro';
+import ArtMess from '@/components/art/ArtMess.astro';
+import ArtCleanup from '@/components/art/ArtCleanup.astro';
+import ArtCheck from '@/components/art/ArtCheck.astro';
+import ArtPlaces from '@/components/art/ArtPlaces.astro';
+import ArtStatus from '@/components/art/ArtStatus.astro';
+import ArtAudience from '@/components/art/ArtAudience.astro';
+import { faqPageSchema } from '@/lib/schema';
+import { usePack } from '@/i18n/usePack';
+
+const { pack, href } = usePack(Astro.url.pathname);
+const { product, home } = pack;
+const resultKinds = ['working', 'clear', 'ready', 'look', 'wrong'] as const;
+const audienceKinds = ['individual', 'team', 'stack'] as const;
+const schema = [faqPageSchema(product.faqs)];
+---
+
+<BaseLayout
+  title={product.seo.title}
+  description={product.seo.description}
+  ogTitle={product.seo.ogTitle}
+  ogDescription={product.seo.ogDescription}
+  schema={schema}
+>
+  <AppShell>
+    <main id="main">
+      <section class="relative overflow-hidden pb-16 pt-[calc(var(--header-height)+var(--space-hero-extra))]">
+        <div class="page-stage" aria-hidden="true">
+          <img src="/product-stage.png" alt="" width="1024" height="826" />
+        </div>
+        <div class="relative z-[1] mx-auto max-w-site px-5">
+          <div class="anim-hero max-w-[720px] text-left">
+            <h1 class="text-tp-heading text-balance">{product.hero.headline}</h1>
+            <p class="text-hero-lede mt-5 max-w-[600px]">{product.hero.subhead}</p>
+            <a href={href(product.hero.cta.href)} class="btn btn-primary mt-[22px]">{product.hero.cta.label}</a>
+          </div>
+        </div>
+      </section>
+
+      <Band headline={product.loop.headline}>
+        <Bento>
+          <Tile kicker={product.loop.beats[0].number} title={product.loop.beats[0].title} body={product.loop.beats[0].body} span={7} size="tall" index={0}>
+            <ArtProject slot="art" />
+          </Tile>
+          <Tile kicker={product.loop.beats[1].number} title={product.loop.beats[1].title} body={product.loop.beats[1].body} span={5} size="tall" index={1}>
+            <ArtMess slot="art" />
+          </Tile>
+          <Tile kicker={product.loop.beats[2].number} title={product.loop.beats[2].title} body={product.loop.beats[2].body} span={5} index={2}>
+            <ArtCleanup slot="art" />
+          </Tile>
+          <Tile kicker={product.loop.beats[3].number} title={product.loop.beats[3].title} body={product.loop.beats[3].body} span={7} index={3}>
+            <ArtCheck slot="art" />
+          </Tile>
+        </Bento>
+      </Band>
+
+      <Band headline={product.places.headline} after={product.places.close}>
+        <Bento>
+          <Tile title={product.places.github.title} span={6} index={0}>
+            <ArtPlaces slot="art" side="github" items={product.places.github.items} />
+          </Tile>
+          <Tile title={product.places.web.title} span={6} index={1}>
+            <ArtPlaces slot="art" side="web" items={product.places.web.items} />
+          </Tile>
+        </Bento>
+      </Band>
+
+      <Band headline={product.results.headline}>
+        <Bento>
+          {
+            product.results.items.map((item, i) => (
+              <Tile title={item.title} body={item.body} span={i < 3 ? 4 : 6} size="short" index={i}>
+                <ArtStatus slot="art" kind={resultKinds[i]} />
+              </Tile>
+            ))
+          }
+        </Bento>
+      </Band>
+
+      <Band headline={product.cleans.headline} lede={product.cleans.body} after={product.cleans.close}>
+        <Bento>
+          {product.cleans.bullets.map((item, i) => <Tile title={item} span={4} index={i} />)}
+        </Bento>
+      </Band>
+
+      <Band headline={product.start.headline} aside={product.start.note}>
+        <Bento>
+          {product.start.steps.map((step, i) => <Tile kicker={String(i + 1)} title={step} span={4} index={i} />)}
+        </Bento>
+        <p class="mt-8 text-center reveal" style="--i:1">
+          <a class="btn btn-primary" href={href(product.start.cta.href)}>{product.start.cta.label}</a>
+        </p>
+      </Band>
+
+      <Band headline={home.audience.headline}>
+        <Bento>
+          {
+            home.audience.points.map((point, i) => (
+              <Tile title={point.title} body={point.body} span={4} index={i}>
+                <ArtAudience slot="art" kind={audienceKinds[i]} />
+              </Tile>
+            ))
+          }
+        </Bento>
+      </Band>
+
+      <CopyBlock headline={home.honesty.headline}>
+        {home.honesty.paragraphs.map((p) => <p>{p}</p>)}
+      </CopyBlock>
+
+      <FAQ items={product.faqs} title={pack.faq.title} />
+    </main>
+  </AppShell>
+</BaseLayout>
