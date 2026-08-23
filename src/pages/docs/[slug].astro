@@ -1,0 +1,11 @@
+---
+import DocPageView from '@/views/DocPageView.astro';
+import { en } from '@/i18n/packs/en';
+
+export function getStaticPaths() {
+  return en.docs.pages.map((page) => ({ params: { slug: page.slug } }));
+}
+
+const { slug } = Astro.params;
+---
+<DocPageView slug={slug ?? ''} />

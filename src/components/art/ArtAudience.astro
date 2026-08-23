@@ -1,0 +1,59 @@
+---
+interface Props {
+  kind: 'individual' | 'team' | 'stack';
+}
+
+const { kind } = Astro.props;
+---
+
+<div class="art" aria-hidden="true">
+  {
+    kind === 'individual' ? (
+      <svg viewBox="0 0 220 150" fill="none">
+        <circle class="d-panel" cx="52" cy="70" r="16" />
+        <circle class="d-dot" cx="52" cy="64" r="5" />
+        <path class="d-link" d="M42 80 a10 8 0 0 1 20 0" />
+        <path pathLength="1" class="d-link d-draw" d="M72 70 L 128 70" />
+        <rect class="d-panel" x="128" y="48" width="72" height="44" rx="8" />
+        <rect class="d-bar" x="142" y="62" width="40" height="4" rx="2" />
+        <rect class="d-bar--soft" x="142" y="74" width="26" height="4" rx="2" />
+      </svg>
+    ) : kind === 'team' ? (
+      <svg viewBox="0 0 220 150" fill="none">
+        <circle class="d-panel" cx="40" cy="34" r="13" />
+        <circle class="d-dot" cx="40" cy="30" r="4" />
+        <circle class="d-panel" cx="40" cy="74" r="13" />
+        <circle class="d-dot" cx="40" cy="70" r="4" />
+        <circle class="d-panel" cx="40" cy="114" r="13" />
+        <circle class="d-dot" cx="40" cy="110" r="4" />
+
+        <path pathLength="1" class="d-link d-draw" style="--d:0" d="M56 34 C 88 34, 96 74, 128 74" />
+        <path pathLength="1" class="d-link d-draw" style="--d:1" d="M56 74 L 128 74" />
+        <path pathLength="1" class="d-link d-draw" style="--d:2" d="M56 114 C 88 114, 96 74, 128 74" />
+
+        <rect class="d-panel" x="128" y="52" width="76" height="44" rx="8" />
+        <rect class="d-bar" x="142" y="66" width="44" height="4" rx="2" />
+        <rect class="d-bar--soft" x="142" y="78" width="30" height="4" rx="2" />
+      </svg>
+    ) : (
+      <svg viewBox="0 0 220 150" fill="none">
+        <rect class="d-panel" x="20" y="34" width="80" height="30" rx="8" />
+        <text class="d-label" x="38" y="53">
+          React
+        </text>
+        <rect class="d-panel" x="20" y="80" width="80" height="30" rx="8" />
+        <text class="d-label" x="34" y="99">
+          TypeScript
+        </text>
+
+        <path pathLength="1" class="d-link d-draw" style="--d:0" d="M100 49 C 130 49, 130 72, 152 72" />
+        <path pathLength="1" class="d-link d-draw" style="--d:1" d="M100 95 C 130 95, 130 72, 152 72" />
+
+        <rect class="d-panel" x="148" y="56" width="56" height="32" rx="8" />
+        <circle class="d-add" cx="176" cy="72" r="4" />
+
+        <rect class="d-panel d-panel--ghost" x="20" y="122" width="80" height="18" rx="6" />
+      </svg>
+    )
+  }
+</div>

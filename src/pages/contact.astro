@@ -1,14 +1,4 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import MarketingLayout from '../components/site/MarketingLayout';
-import Contact from '../components/pages/Contact';
+import ContactView from '@/views/ContactView.astro';
 ---
-
-<BaseLayout
-  title="Contact — Refract"
-  description="Get in touch with the Refract team."
->
-  <MarketingLayout>
-    <Contact client:visible />
-  </MarketingLayout>
-</BaseLayout>
+<ContactView />

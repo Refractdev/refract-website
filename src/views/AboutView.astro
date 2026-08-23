@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AppShell from '../layouts/AppShell.astro';
+import PageShell from '@/components/sections/PageShell.astro';
+import Founder from '@/components/sections/Founder.astro';
+import { breadcrumbSchema } from '@/lib/schema';
+import { usePack } from '@/i18n/usePack';
+import { localizeHref } from '@/i18n/href';
+
+const { locale, pack } = usePack(Astro.url.pathname);
+const { about } = pack.brand;
+const schema = [
+  breadcrumbSchema([
+    { name: pack.ui.homeCrumb, path: localizeHref('/', locale) },
+    { name: about.headline, path: localizeHref('/about/', locale) },
+  ]),
+];
+---
+
+<BaseLayout title={about.title} description={about.description} schema={schema}>
+  <AppShell variant="minimal">
+    <PageShell label={about.label} title={about.headline} description={about.intro} stage="/about-stage.png">
+      <div class="prose-copy">
+        {
+          about.sections.map((section) => (
+            <>
+              <h2>{section.title}</h2>
+              <p>{section.body}</p>
+            </>
+          ))
+        }
+      </div>
+      <Founder {...about.founder} />
+    </PageShell>
+  </AppShell>
+</BaseLayout>

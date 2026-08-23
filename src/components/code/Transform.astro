@@ -1,0 +1,59 @@
+---
+import type { FilmLine, FilmState } from '@/lib/film';
+
+interface Props {
+  file: string;
+  lines: FilmLine[] | readonly FilmLine[];
+  caption?: string;
+  trigger?: 'load' | 'scroll';
+  chrome?: boolean;
+}
+
+const { file, lines, caption, trigger = 'scroll', chrome = false } = Astro.props;
+
+// The "before" state is what reserves the height: everything except the
+// lines that have not been written yet.
+const beforeCount = lines.filter((line) => line.state !== 'added').length;
+
+const markers: Record<FilmState, string> = { removed: '-', added: '+', kept: ' ' };
+
+// Each state staggers on its own index so removals cascade and the new
+// lines arrive together afterwards.
+const counters: Record<FilmState, number> = { removed: 0, added: 0, kept: 0 };
+const rows = lines.map((line) => ({ ...line, i: counters[line.state]++ }));
+---
+
+<div
+  class:list={['film', trigger === 'load' ? 'film--load' : 'film--scroll']}
+  style={`--lines:${beforeCount}`}
+>
+  <figure class="code-surface">
+    <div class="code-surface__bar">
+      {
+        chrome ? (
+          <span class="code-surface__dots" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        ) : null
+      }
+      <figcaption class="code-surface__path">{file}</figcaption>
+    </div>
+    <div class="film__body">
+      {
+        rows.map((row) => (
+          <div class="film__row" data-state={row.state} style={`--i:${row.i}`}>
+            <div class="film__line">
+              <span class="film__n" aria-hidden="true">
+                {markers[row.state]}
+              </span>
+              <span class="film__text">{row.text || '\u00a0'}</span>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </figure>
+  {caption ? <p class="film__caption shot-caption">{caption}</p> : null}
+</div>

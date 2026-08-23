@@ -1,0 +1,9 @@
+---
+import DocPageView from '@/views/DocPageView.astro';
+import { localeDocPaths } from '@/i18n/paths';
+
+export const getStaticPaths = localeDocPaths;
+
+const { slug } = Astro.params;
+---
+<DocPageView slug={slug ?? ''} />

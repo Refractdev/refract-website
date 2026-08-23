@@ -1,0 +1,44 @@
+---
+interface Props {
+  headline: string;
+  more: { label: string; href: string };
+  items: { date: string; title: string; href: string }[];
+}
+
+const { headline, more, items } = Astro.props;
+
+function isExternal(href: string) {
+  return href.startsWith('http');
+}
+---
+
+<section class="band-section">
+  <div class="mx-auto max-w-site px-5">
+    <div class="ships reveal">
+      <div class="ships__head">
+        <h2 class="ships__title">{headline}</h2>
+        <a class="ships__more" href={more.href}>
+          {more.label}
+          <span aria-hidden="true">&nbsp;&rarr;</span>
+        </a>
+      </div>
+      <ul class="ships__list">
+        {
+          items.map((item) => (
+            <li>
+              <a
+                class="ships__row"
+                href={item.href}
+                target={isExternal(item.href) ? '_blank' : undefined}
+                rel={isExternal(item.href) ? 'noopener noreferrer' : undefined}
+              >
+                <time class="ships__date">{item.date}</time>
+                <span class="ships__item">{item.title}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>

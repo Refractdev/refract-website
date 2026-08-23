@@ -1,11 +1,4 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import NotFound from '../components/pages/NotFound';
+import NotFoundView from '@/views/NotFoundView.astro';
 ---
-
-<BaseLayout
-  title="Page Not Found — Refract"
-  description="This page doesn't exist."
->
-  <NotFound client:load />
-</BaseLayout>
+<NotFoundView />

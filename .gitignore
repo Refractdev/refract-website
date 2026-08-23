@@ -13,9 +13,14 @@ dist-ssr
 .astro
 *.local
 
+# Bun is not this project's package manager; package-lock.json and
+# pnpm-lock.yaml are the tracked lockfiles.
+bun.lock
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
+.cursor
 .idea
 .DS_Store
 *.suo

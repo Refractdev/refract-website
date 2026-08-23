@@ -1,14 +1,4 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import MarketingLayout from '../components/site/MarketingLayout';
-import Index from '../components/pages/Index';
+import HomeView from '@/views/HomeView.astro';
 ---
-
-<BaseLayout
-  title="Refract — Turn AI-Generated Code Into Production-Ready Codebases"
-  description="Refract scans your repository, detects structural debt and security issues in AI-generated code, and ships fixes as pull requests. Production-ready code, without the manual review."
->
-  <MarketingLayout>
-    <Index client:visible />
-  </MarketingLayout>
-</BaseLayout>
+<HomeView />

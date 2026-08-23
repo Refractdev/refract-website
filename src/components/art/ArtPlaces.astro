@@ -1,0 +1,41 @@
+---
+interface Props {
+  side: 'github' | 'web';
+  items: readonly string[] | string[];
+}
+
+const { side, items } = Astro.props;
+---
+
+<div class="art art-places" aria-hidden="true">
+  <div class="places">
+    <div class="places__bar">
+      {
+        side === 'github' ? (
+          <svg viewBox="0 0 16 16" class="places__glyph" fill="none">
+            <circle cx="4" cy="4" r="2" />
+            <circle cx="4" cy="12" r="2" />
+            <circle cx="12" cy="8" r="2" />
+            <path d="M4 6v4M6 4h3a1 1 0 0 1 1 1v2" />
+          </svg>
+        ) : (
+          <svg viewBox="0 0 16 16" class="places__glyph" fill="none">
+            <rect x="1.5" y="2.5" width="13" height="11" rx="2" />
+            <path d="M1.5 6h13M5 6v7.5" />
+          </svg>
+        )
+      }
+      <span>{side === 'github' ? 'Pull request' : 'Refract'}</span>
+    </div>
+    <ul class="places__rows">
+      {
+        items.map((item, i) => (
+          <li class="places__row" style={`--i:${i}`}>
+            <span class="places__tick" />
+            <span>{item}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</div>

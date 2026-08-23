@@ -1,0 +1,35 @@
+---
+import Transform from '@/components/code/Transform.astro';
+import { heroFilm } from '@/content/home';
+import { usePack } from '@/i18n/usePack';
+
+const { pack, href } = usePack(Astro.url.pathname);
+const { hero } = pack.home;
+---
+
+<section class="hero">
+  <div class="hero-stage" aria-hidden="true">
+    <img src="/hero-stage.png" alt="" width="1024" height="778" />
+  </div>
+  <div class="hero__inner mx-auto max-w-site px-5">
+    <div class="hero-copy anim-hero">
+      <a class="hero-pill" href={href(hero.pill.href)}>
+        {hero.pill.label}
+        <span class="hero-pill__arrow" aria-hidden="true">&rarr;</span>
+      </a>
+      <h1 class="text-display text-balance">{hero.headline}</h1>
+      <p class="text-hero-lede">{hero.subhead}</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href={href(hero.primary.href)}>{hero.primary.label}</a>
+        <a class="btn btn-secondary" href={href(hero.secondary.href)}>{hero.secondary.label}</a>
+      </div>
+      <p class="hero-note">{hero.trust}</p>
+      <p class="hero-stack">{hero.stack}</p>
+    </div>
+    <div class="hero-product anim-hero-delay">
+      <div class="hero-window">
+        <Transform trigger="load" chrome file={heroFilm.file} lines={heroFilm.lines} caption={hero.caption} />
+      </div>
+    </div>
+  </div>
+</section>
