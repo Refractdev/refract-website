@@ -17,35 +17,81 @@ const headerVariant = variant === 'docs' ? 'marketing' : variant;
 </div>
 
 <script is:inline>
-  // Tiles always need .is-in so their inner diagrams can loop.
-  // Reveals and the film only need the observer when scroll-driven CSS is missing.
+  // Reveals fire once. Tiles stay observed for their whole life, because the
+  // diagrams inside them loop and must not keep running off screen.
   (function () {
+    // Marks the document as scripted; the reveal styles only hide content
+    // once this class is present, so no-JS still renders everything.
+    document.documentElement.classList.add('js');
+
     var timeline = window.CSS && CSS.supports && CSS.supports('animation-timeline', 'view()');
-    var tiles = document.querySelectorAll('.tile');
-    var extra = timeline ? [] : document.querySelectorAll('.reveal, .film--scroll');
-    var targets = [];
-    tiles.forEach(function (el) { targets.push(el); });
-    extra.forEach(function (el) { if (targets.indexOf(el) === -1) targets.push(el); });
-    if (!targets.length) return;
+    var tiles = [].slice.call(document.querySelectorAll('.tile'));
+    var reveals = timeline ? [] : [].slice.call(document.querySelectorAll('.reveal, .film--scroll'));
 
     if (!('IntersectionObserver' in window)) {
-      for (var i = 0; i < targets.length; i++) targets[i].classList.add('is-in');
+      tiles.concat(reveals).forEach(function (el) {
+        el.classList.add('is-in');
+        el.classList.add('is-live');
+      });
       return;
     }
 
-    var observer = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add('is-in');
-          observer.unobserve(entry.target);
-        });
-      },
-      { rootMargin: '120px 0px 18% 0px', threshold: 0.01 }
-    );
+    if (reveals.length) {
+      var once = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-in');
+            once.unobserve(entry.target);
+          });
+        },
+        { rootMargin: '120px 0px 18% 0px', threshold: 0.01 }
+      );
+      reveals.forEach(function (el) { once.observe(el); });
+    }
 
-    targets.forEach(function (target) {
-      observer.observe(target);
-    });
+    if (tiles.length) {
+      // .is-in is the one-way reveal latch; .is-live gates animation-play-state.
+      var live = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) entry.target.classList.add('is-in');
+            entry.target.classList.toggle('is-live', entry.isIntersecting);
+          });
+        },
+        { rootMargin: '120px 0px 18% 0px', threshold: 0.01 }
+      );
+      tiles.forEach(function (el) { live.observe(el); });
+
+      // A backgrounded tab should not be paying for twenty loops either.
+      document.addEventListener('visibilitychange', function () {
+        var hidden = document.hidden;
+        tiles.forEach(function (el) {
+          if (hidden) el.classList.remove('is-live');
+          else if (el.classList.contains('is-in')) el.classList.add('is-live');
+        });
+      });
+    }
+  })();
+
+  // The header gains its hairline only once the page has actually moved.
+  (function () {
+    var header = document.querySelector('.site-header');
+    if (!header) return;
+    var ticking = false;
+    function apply() {
+      header.setAttribute('data-scrolled', window.scrollY > 8 ? 'true' : 'false');
+      ticking = false;
+    }
+    apply();
+    window.addEventListener(
+      'scroll',
+      function () {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(apply);
+      },
+      { passive: true }
+    );
   })();
 </script>
