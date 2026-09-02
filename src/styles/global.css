@@ -120,43 +120,47 @@ a {
 
 /* --- Type --- */
 
+/* Headlines carry Inter's 510 — the weight Linear uses for display type. It
+   reads as authority without tipping into the chunkiness of a true 600. */
 .text-display {
-  font-size: 1.625rem;
-  font-weight: 400;
-  line-height: 1.25;
-  letter-spacing: -0.0125em;
+  font-size: clamp(2.5rem, 5.2vw, 3.5rem);
+  font-weight: var(--weight-display);
+  line-height: 1.06;
+  letter-spacing: -0.028em;
   color: var(--ld-secondary);
 }
 
 .text-tp-heading {
-  font-size: 1.375rem;
-  font-weight: 400;
-  line-height: 1.3;
-  letter-spacing: -0.005em;
+  font-size: clamp(1.75rem, 3.2vw, 2.25rem);
+  font-weight: var(--weight-display);
+  line-height: 1.16;
+  letter-spacing: -0.022em;
   color: var(--ld-secondary);
 }
 
+/* Sized to sit just under the hero: the page opens loudest, and the closing
+   ask answers it rather than shouting over it. */
 .text-cta-display {
-  font-size: clamp(2.25rem, 6vw, 4.5rem);
-  font-weight: 400;
-  line-height: 1.1;
-  letter-spacing: -0.03em;
+  font-size: clamp(2.25rem, 4.6vw, 3.25rem);
+  font-weight: var(--weight-display);
+  line-height: 1.08;
+  letter-spacing: -0.028em;
   color: var(--ld-secondary);
 }
 
 .text-h3 {
-  font-size: 1.375rem;
-  font-weight: 400;
-  line-height: 1.3;
-  letter-spacing: -0.005em;
+  font-size: 1.5rem;
+  font-weight: var(--weight-display);
+  line-height: 1.24;
+  letter-spacing: -0.016em;
   color: var(--ld-secondary);
 }
 
 .text-hero-lede {
-  font-size: 1rem;
+  font-size: 1.0625rem;
   font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0.005em;
+  line-height: 1.55;
+  letter-spacing: 0;
   color: var(--ld-tertiary);
 }
 
@@ -246,7 +250,20 @@ a {
   height: 100%;
   object-fit: cover;
   object-position: center 32%;
-  opacity: 0.38;
+  opacity: 0.34;
+  /* Pulling saturation back stops the browns turning to sludge where the
+     canvas gradient crosses them. Brightness comes down with it: the sky is
+     the lightest region of the plate and it should stay behind the type. */
+  filter: saturate(0.78) brightness(0.9);
+}
+
+/* Corners fall away so the frame has a centre. Left at z-index auto so the
+   canvas gradient in ::after still lands on top of it. */
+.hero-stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 92% at 52% 26%, transparent 26%, rgba(10, 10, 11, 0.72) 100%);
 }
 
 .hero-stage::after {
@@ -320,6 +337,22 @@ a {
   max-width: 65ch;
 }
 
+/* A display line wants a shorter measure than body copy — around 20 words
+   per line reads as a paragraph, not a statement. */
+.hero-copy .text-display {
+  max-width: 17ch;
+}
+
+.hero-copy .text-hero-lede {
+  max-width: 52ch;
+}
+
+@media (min-width: 900px) {
+  .hero-copy .text-display {
+    max-width: 20ch;
+  }
+}
+
 .hero-pill {
   display: inline-flex;
   align-items: center;
@@ -346,11 +379,11 @@ a {
 }
 
 .hero-copy .text-display {
-  margin-top: 12px;
+  margin-top: 18px;
 }
 
 .hero-copy .text-hero-lede {
-  margin-top: 12px;
+  margin-top: 20px;
 }
 
 .hero-actions {
@@ -381,12 +414,28 @@ a {
 }
 
 .hero-product {
+  position: relative;
   min-width: 0;
-  margin-top: 56px;
+  margin-top: 64px;
+}
+
+.hero-product::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: 50%;
+  top: -9%;
+  width: 92%;
+  height: 46%;
+  translate: -50% 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse 52% 60% at 50% 0%, rgba(255, 255, 255, 0.05), transparent 68%);
 }
 
 .hero-window {
-  border-radius: var(--radius-sm);
+  position: relative;
+  z-index: 1;
+  border-radius: calc(var(--radius-lg) + 1px);
   padding: 1px;
   background: var(--ld-border);
   box-shadow:
@@ -453,9 +502,11 @@ a {
   --line-h: 24px;
 }
 
+/* Matches the formula film-body-settle animates between, so the frame does
+   not jump 12px the moment the settle takes over. */
 .hero-product .film__body {
   padding: 16px 0 22px;
-  min-height: calc(var(--lines, 0) * var(--line-h) + 36px);
+  min-height: calc(var(--lines, 0) * var(--line-h) + 24px);
 }
 
 .hero-product .film__line {
@@ -955,6 +1006,34 @@ a {
   min-height: calc(var(--lines, 0) * var(--line-h) + 24px);
 }
 
+/* Reserving the "before" height forever left the frame holding a screenful
+   of dead space the cleaned file never fills. The body now closes down to
+   the height it actually needs, in step with the rows collapsing. */
+@keyframes film-body-settle {
+  from {
+    min-height: calc(var(--lines, 0) * var(--line-h) + 24px);
+  }
+  to {
+    min-height: calc(var(--lines-after, var(--lines, 0)) * var(--line-h) + 24px);
+  }
+}
+
+.film--load .film__body {
+  animation: film-body-settle 1750ms var(--ease-strong) 560ms both;
+}
+
+.film--scroll.is-in .film__body {
+  animation: film-body-settle 1500ms var(--ease-strong) both;
+}
+
+@supports (animation-timeline: view()) {
+  .film--scroll .film__body {
+    animation: film-body-settle linear both;
+    animation-timeline: view();
+    animation-range: cover 22% cover 62%;
+  }
+}
+
 .film__row {
   display: grid;
   grid-template-rows: 1fr;
@@ -1181,16 +1260,40 @@ a {
 }
 
 .tile {
+  position: relative;
   display: flex;
   flex-direction: column;
   min-width: 0;
   overflow: hidden;
   border: 0;
-  border-radius: var(--radius-md);
-  background: var(--ld-surface);
+  border-radius: var(--radius-lg);
+  /* Lit from above: a wash that fades out over the first 140px, so the top
+     of the card is where the light lands and the bottom sits in shadow. */
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0) 140px),
+    var(--ld-surface);
   box-shadow:
     inset 0 0 0 1px var(--ld-border),
+    inset 0 1px 0 rgba(255, 255, 255, 0.055),
     var(--lift-1);
+}
+
+/* The pointer carries its own light. A radial highlight tracked to the
+   cursor replaces the flat brightness() filter that used to wash the copy
+   and the diagram out along with the surface. */
+.tile::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    340px circle at var(--mx, 50%) var(--my, 0%),
+    rgba(255, 255, 255, 0.07),
+    rgba(255, 255, 255, 0) 68%
+  );
+  transition: opacity var(--regular) var(--ease-out);
 }
 
 /* Tablet keeps it simple: halves and full widths, no asymmetry to break rows. */
@@ -1251,16 +1354,23 @@ a {
 }
 
 @media (any-hover: hover) {
-  /* On a near-black surface a multiplicative brightness barely moves the
-     ground (16 x 1.16 is +2.6), so the surface is lifted explicitly and
-     brightness is left to carry the contents with it. */
+  /* The card rises into the light rather than being turned up: the edge
+     brightens, the shadow deepens, and the cursor highlight comes on. Copy
+     and diagram keep their own contrast throughout. */
   .tile:hover {
-    background: var(--ld-chip);
-    filter: brightness(1.28);
-    transform: translateY(-2px);
+    transform: translateY(-3px);
     box-shadow:
       inset 0 0 0 1px var(--ld-border-hover),
+      inset 0 1px 0 rgba(255, 255, 255, 0.09),
       var(--lift-2);
+  }
+
+  .tile:hover::before {
+    opacity: 1;
+  }
+
+  .tile:hover .tile__art {
+    background: color-mix(in srgb, var(--ld-panel) 82%, var(--ld-chip));
   }
 }
 
@@ -1312,21 +1422,39 @@ a.tile {
 }
 
 .community-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   text-decoration: none;
   color: inherit;
   border: 0;
-  border-radius: var(--radius-md);
-  background: var(--ld-surface);
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0) 140px),
+    var(--ld-surface);
   box-shadow:
     inset 0 0 0 1px var(--ld-border),
+    inset 0 1px 0 rgba(255, 255, 255, 0.055),
     var(--lift-1);
   transition:
-    filter var(--quick) var(--ease-out),
     transform var(--quick) var(--ease-out),
     box-shadow var(--quick) var(--ease-out);
+}
+
+.community-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    420px circle at var(--mx, 50%) var(--my, 0%),
+    rgba(255, 255, 255, 0.07),
+    rgba(255, 255, 255, 0) 68%
+  );
+  transition: opacity var(--regular) var(--ease-out);
 }
 
 .community-card:active {
@@ -1335,12 +1463,15 @@ a.tile {
 }
 
 .community-card:hover {
-  background: var(--ld-chip);
-  filter: brightness(1.28);
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   box-shadow:
     inset 0 0 0 1px var(--ld-border-hover),
+    inset 0 1px 0 rgba(255, 255, 255, 0.09),
     var(--lift-2);
+}
+
+.community-card:hover::before {
+  opacity: 1;
 }
 
 .community-card__copy {
@@ -1578,10 +1709,11 @@ a.tile {
 .tile__art {
   position: relative;
   flex: 1;
-  min-height: 168px;
+  min-height: 152px;
   overflow: hidden;
   border-top: 1px solid var(--ld-border);
   background: var(--ld-panel);
+  transition: background var(--regular) var(--ease-out);
 }
 
 .tile--7 .tile__art,
@@ -1802,10 +1934,31 @@ a.tile {
 
 .art > svg {
   width: 100%;
-  max-width: 420px;
+  max-width: 460px;
   height: auto;
   margin-bottom: -10px;
   overflow: visible;
+}
+
+/* A drawing sized for a small card leaves a tall card mostly empty. The
+   wide and double-height tiles take a drawing scaled to match them, so the
+   art fills its half of the card instead of floating in it. */
+.tile--7 .art > svg,
+.tile--8 .art > svg,
+.tile--9 .art > svg,
+.tile--12 .art > svg {
+  max-width: 540px;
+}
+
+.tile--rows2 .art > svg,
+.tile--tall .art > svg {
+  max-width: 600px;
+}
+
+@media (min-width: 1024px) {
+  .tile--rows2 .art > svg {
+    max-width: 680px;
+  }
 }
 
 .tile--4 .art > svg,
@@ -2869,19 +3022,43 @@ a.tile {
 }
 
 .plan-card {
-  box-shadow: var(--lift-1);
+  position: relative;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    var(--lift-1);
   transition:
-    filter var(--quick) var(--ease-out),
     transform var(--quick) var(--ease-out),
     box-shadow var(--quick) var(--ease-out);
 }
 
+/* Same cursor light as the bento cards, so a plan responds the way every
+   other surface on the site does. */
+.plan-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    320px circle at var(--mx, 50%) var(--my, 0%),
+    rgba(255, 255, 255, 0.06),
+    rgba(255, 255, 255, 0) 68%
+  );
+  transition: opacity var(--regular) var(--ease-out);
+}
+
 @media (any-hover: hover) {
   .plan-card:hover {
-    background: var(--ld-surface);
-    filter: brightness(1.2);
-    transform: translateY(-2px);
-    box-shadow: var(--lift-2);
+    transform: translateY(-3px);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.09),
+      var(--lift-2);
+  }
+
+  .plan-card:hover::before {
+    opacity: 1;
   }
 }
 
@@ -3023,31 +3200,57 @@ a.tile {
 
 /* --- Motion --- */
 
+/* Reveals move the independent `translate` property rather than `transform`.
+   These animations fill forwards, so writing to `transform` left every
+   revealed card pinned at translateY(0) — the hover lift had nothing to
+   move. Keeping the two on separate properties lets them compose. */
 @keyframes fade-up {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    translate: 0 18px;
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    translate: 0 0;
+  }
+}
+
+/* Surfaces travel further than copy and arrive with a touch of scale, so a
+   card reads as a plate settling into place rather than text sliding up. */
+@keyframes rise-surface {
+  from {
+    opacity: 0;
+    translate: 0 30px;
+    scale: 0.988;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+    scale: 1;
   }
 }
 
 /* Above the fold: the only motion that plays on load. */
 .anim-hero {
-  animation: fade-up var(--dur-slow) var(--ease-strong) both;
+  animation: fade-up 700ms var(--ease-strong) both;
 }
 
 .anim-hero-delay {
-  animation: fade-up var(--dur-slow) var(--ease-strong) 140ms both;
+  animation: rise-surface 900ms var(--ease-strong) 160ms both;
 }
 
 /* Everything else is tied to the scroll position, not to page load. */
 .reveal {
-  animation: fade-up var(--dur-slow) var(--ease-strong) both;
+  animation: fade-up var(--dur-reveal) var(--ease-strong) both;
   animation-timeline: view();
   animation-range: entry 0% cover 42%;
+}
+
+/* Cards get the heavier entrance. Ordering matters: this only sets the
+   name, so the range nudge further down still applies. */
+.tile.reveal {
+  animation-name: rise-surface;
+  animation-duration: var(--dur-reveal-surface);
 }
 
 @supports not (animation-timeline: view()) {
@@ -3058,8 +3261,13 @@ a.tile {
 
   .reveal.is-in {
     opacity: 1;
-    animation: fade-up var(--dur-slow) var(--ease-strong) both;
+    animation: fade-up var(--dur-reveal) var(--ease-strong) both;
     animation-delay: calc(var(--i, 0) * var(--stagger));
+  }
+
+  .tile.reveal.is-in {
+    animation-name: rise-surface;
+    animation-duration: var(--dur-reveal-surface);
   }
 }
 
@@ -3110,6 +3318,8 @@ a.tile {
     filter: none;
     opacity: 1;
     transform: none;
+    translate: none;
+    scale: none;
   }
   .film__row[data-state="removed"] {
     display: none;
@@ -3124,8 +3334,13 @@ a.tile {
     opacity: 1 !important;
   }
 
-  .film__body {
-    min-height: 0;
+  /* The hero's own rule is the more specific one, so it has to be named
+     here or reduced motion keeps the full "before" height reserved for a
+     file that has already collapsed. */
+  .film__body,
+  .hero-product .film__body {
+    animation: none !important;
+    min-height: calc(var(--lines-after, 0) * var(--line-h) + 24px);
     justify-content: flex-start;
   }
 
@@ -3229,7 +3444,12 @@ a.tile {
   }
 
   .js .reveal.is-in {
-    animation: fade-up var(--dur-slow) var(--ease-strong) calc(var(--i, 0) * var(--stagger)) both;
+    animation: fade-up var(--dur-reveal) var(--ease-strong) calc(var(--i, 0) * var(--stagger)) both;
+  }
+
+  .js .tile.reveal.is-in {
+    animation-name: rise-surface;
+    animation-duration: var(--dur-reveal-surface);
   }
 }
 

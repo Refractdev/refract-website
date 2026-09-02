@@ -45,6 +45,10 @@
   --ld-diff-remove: rgba(229, 72, 77, 0.09);
   --ld-diff-remove-text: #e5484d;
 
+  /* Inter Variable's display weight. Headlines take it, body copy stays at
+     400, and that one step is what separates the two voices. */
+  --weight-display: 510;
+
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-reveal: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-premium: var(--ease-reveal);
@@ -56,6 +60,11 @@
   --quick: 150ms;
   --regular: 220ms;
   --press: 100ms;
+
+  /* Reveals resolve fast. A 900ms fade reads as the page struggling to
+     load; two-thirds of that reads as deliberate. */
+  --dur-reveal: 620ms;
+  --dur-reveal-surface: 760ms;
 
   --dur-fast: 140ms;
   --dur-mid: 560ms;
@@ -73,19 +82,19 @@
   --header-height: 56px;
   --g: 10px;
 
-  --space-tight: 48px;
-  --space-default: 67px;
-  --space-major: 134px;
-  --space-hero-extra: 80px;
+  --space-tight: 56px;
+  --space-default: 80px;
+  --space-major: 152px;
+  --space-hero-extra: 88px;
   --space-section: var(--space-default);
 }
 
 @media (min-width: 900px) {
   :root {
     --header-height: 52px;
-    --space-tight: 48px;
-    --space-default: 67px;
-    --space-major: 134px;
-    --space-hero-extra: 112px;
+    --space-tight: 64px;
+    --space-default: 84px;
+    --space-major: 168px;
+    --space-hero-extra: 124px;
   }
 }

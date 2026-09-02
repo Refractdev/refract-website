@@ -15,6 +15,12 @@ const { file, lines, caption, trigger = 'scroll', chrome = false } = Astro.props
 // lines that have not been written yet.
 const beforeCount = lines.filter((line) => line.state !== 'added').length;
 
+// What is left once the removals have collapsed. The body opens at the
+// "before" height so the page never shifts under the reader, then closes
+// down to this — otherwise the frame keeps a screenful of dead space that
+// the cleaned file never fills.
+const afterCount = lines.filter((line) => line.state !== 'removed').length;
+
 const markers: Record<FilmState, string> = { removed: '-', added: '+', kept: ' ' };
 
 // Each state staggers on its own index so removals cascade and the new
@@ -25,7 +31,7 @@ const rows = lines.map((line) => ({ ...line, i: counters[line.state]++ }));
 
 <div
   class:list={['film', trigger === 'load' ? 'film--load' : 'film--scroll']}
-  style={`--lines:${beforeCount}`}
+  style={`--lines:${beforeCount};--lines-after:${afterCount}`}
 >
   <figure class="code-surface">
     <div class="code-surface__bar">
