@@ -1936,6 +1936,11 @@ a.tile {
   width: 100%;
   max-width: 460px;
   height: auto;
+  /* Width alone decides the height of a viewBox drawing, so scaling the art
+     up to fill the wide cards pushed the tall ones through the top of their
+     frame. The viewBox letterboxes rather than distorts, so capping the
+     height keeps every drawing whole inside its card. */
+  max-height: 100%;
   margin-bottom: -10px;
   overflow: visible;
 }
@@ -2130,15 +2135,18 @@ a.tile {
 /* d-out and d-in share a stage, so the "before" clears out completely. */
 @keyframes d-out {
   0%,
-  16% {
+  12% {
+    animation-timing-function: var(--ease-depart);
     opacity: 1;
     transform: none;
   }
-  36%,
-  86% {
+  34%,
+  90% {
     animation-timing-function: steps(1, end);
     opacity: 0;
-    transform: translateX(-3px);
+    /* Receding, not just fading: the extra 3px and the scale give the
+       departure somewhere to go. */
+    transform: translateX(-7px) scale(0.985);
   }
   100% {
     opacity: 1;
@@ -2148,19 +2156,20 @@ a.tile {
 
 @keyframes d-in {
   0%,
-  32% {
+  30% {
+    animation-timing-function: var(--ease-settle);
     opacity: 0;
-    transform: translateY(3px);
+    transform: translateY(7px) scale(0.985);
   }
-  52%,
-  86% {
+  50%,
+  90% {
     animation-timing-function: steps(1, end);
     opacity: 1;
     transform: none;
   }
   100% {
     opacity: 0;
-    transform: translateY(3px);
+    transform: translateY(7px) scale(0.985);
   }
 }
 
@@ -2179,10 +2188,11 @@ a.tile {
 
 @keyframes d-draw {
   0% {
+    animation-timing-function: var(--ease-arrive);
     stroke-dashoffset: 1;
   }
-  30%,
-  84% {
+  32%,
+  90% {
     animation-timing-function: steps(1, end);
     stroke-dashoffset: 0;
   }
@@ -2203,18 +2213,21 @@ a.tile {
 
 @keyframes d-sweep {
   0%,
-  22% {
+  18% {
+    animation-timing-function: var(--ease-scan);
     opacity: 0;
     transform: translateX(-110px);
   }
-  30% {
+  25% {
+    animation-timing-function: var(--ease-scan);
     opacity: 1;
   }
-  58% {
+  54% {
+    animation-timing-function: var(--ease-scan);
     opacity: 1;
     transform: translateX(110px);
   }
-  64%,
+  60%,
   100% {
     opacity: 0;
     transform: translateX(110px);
@@ -2268,15 +2281,16 @@ a.tile {
 
 @keyframes d-dup-a {
   0%,
-  20% {
+  16% {
+    animation-timing-function: var(--ease-arrive);
     transform: none;
     opacity: 1;
   }
-  50%,
-  86% {
+  46%,
+  90% {
     animation-timing-function: steps(1, end);
-    transform: translate(24px, 14px);
-    opacity: 0.2;
+    transform: translate(24px, 14px) scale(0.97);
+    opacity: 0.14;
   }
   100% {
     transform: none;
@@ -2284,17 +2298,20 @@ a.tile {
   }
 }
 
+/* The second copy leaves a beat after the first, so the pair converges
+   rather than collapsing as one block. */
 @keyframes d-dup-b {
   0%,
-  20% {
+  21% {
+    animation-timing-function: var(--ease-arrive);
     transform: none;
     opacity: 1;
   }
   50%,
-  86% {
+  90% {
     animation-timing-function: steps(1, end);
-    transform: translate(-24px, -14px);
-    opacity: 0.2;
+    transform: translate(-24px, -14px) scale(0.97);
+    opacity: 0.14;
   }
   100% {
     transform: none;
@@ -2310,15 +2327,16 @@ a.tile {
 
 @keyframes d-eject {
   0%,
-  18% {
+  16% {
+    animation-timing-function: var(--ease-depart);
     transform: none;
     opacity: 1;
   }
-  46%,
-  86% {
+  44%,
+  90% {
     animation-timing-function: steps(1, end);
-    transform: translate(96px, 34px);
-    opacity: 0.14;
+    transform: translate(96px, 34px) scale(0.94);
+    opacity: 0.1;
   }
   100% {
     transform: none;
@@ -2340,13 +2358,17 @@ a.tile {
   animation: d-sort-3 var(--dur-loop) var(--ease-loop) infinite;
 }
 
+/* Each row leaves a beat after the one before and lands with a settle, so
+   the three of them read as a list ordering itself rather than a block
+   sliding into place. */
 @keyframes d-sort-1 {
   0%,
-  26% {
+  22% {
+    animation-timing-function: var(--ease-settle);
     transform: translateY(72px);
   }
-  50%,
-  88% {
+  44%,
+  90% {
     animation-timing-function: steps(1, end);
     transform: none;
   }
@@ -2357,11 +2379,12 @@ a.tile {
 
 @keyframes d-sort-2 {
   0%,
-  26% {
+  28% {
+    animation-timing-function: var(--ease-settle);
     transform: translateY(-36px);
   }
   50%,
-  88% {
+  90% {
     animation-timing-function: steps(1, end);
     transform: none;
   }
@@ -2372,11 +2395,12 @@ a.tile {
 
 @keyframes d-sort-3 {
   0%,
-  26% {
+  34% {
+    animation-timing-function: var(--ease-settle);
     transform: translateY(-36px);
   }
-  50%,
-  88% {
+  56%,
+  90% {
     animation-timing-function: steps(1, end);
     transform: none;
   }
@@ -2395,38 +2419,64 @@ a.tile {
   animation: d-press var(--dur-loop) var(--ease-loop) infinite;
 }
 
+.tile.is-in .d-press .d-btn {
+  animation: d-btn-flash var(--dur-loop) var(--ease-loop) infinite;
+}
+
 @keyframes d-hand {
   0%,
   10% {
+    animation-timing-function: var(--ease-arrive);
     transform: translate(26px, 26px);
     opacity: 0;
   }
-  26% {
+  24% {
     opacity: 1;
   }
-  44%,
-  62% {
+  42%,
+  64% {
+    animation-timing-function: var(--ease-depart);
     transform: none;
     opacity: 1;
   }
-  78%,
+  80%,
   100% {
     transform: translate(26px, 26px);
     opacity: 0;
   }
 }
 
+/* A press has two halves that do not share a curve: it goes down quickly
+   under the finger and comes back up past its resting size. */
 @keyframes d-press {
   0%,
-  46%,
+  44% {
+    animation-timing-function: var(--ease-depart);
+    transform: none;
+  }
+  50% {
+    animation-timing-function: var(--ease-settle);
+    transform: scale(0.94);
+  }
+  62%,
   100% {
     transform: none;
   }
-  52% {
-    transform: scale(0.96);
+}
+
+/* The button acknowledges the press instead of only moving under it. */
+@keyframes d-btn-flash {
+  0%,
+  46% {
+    fill: var(--ld-primary);
   }
-  58% {
-    transform: none;
+  52%,
+  60% {
+    fill: #ffffff;
+  }
+  74%,
+  100% {
+    fill: var(--ld-primary);
   }
 }
 
@@ -2438,18 +2488,21 @@ a.tile {
 
 @keyframes d-travel {
   0%,
-  24% {
+  22% {
+    animation-timing-function: var(--ease-scan);
     opacity: 0;
     transform: translate(-60px, -30px);
   }
-  34% {
+  30% {
+    animation-timing-function: var(--ease-scan);
     opacity: 1;
   }
-  62% {
+  58% {
+    animation-timing-function: var(--ease-arrive);
     opacity: 1;
     transform: none;
   }
-  72%,
+  70%,
   100% {
     opacity: 0;
     transform: none;
@@ -3386,6 +3439,7 @@ a.tile {
    tile for its whole life, so a loop only runs while its tile is on screen
    (and never while the tab is in the background). --------------------- */
 
+.tile .art > svg,
 .tile .art > svg *,
 .tile .state-card,
 .tile .film__line,
@@ -3393,6 +3447,7 @@ a.tile {
   animation-play-state: paused;
 }
 
+.tile.is-live .art > svg,
 .tile.is-live .art > svg *,
 .tile.is-live .state-card,
 .tile.is-live .film__line,
@@ -3420,6 +3475,7 @@ a.tile {
     filter: none !important;
   }
 
+  .tile .art > svg,
   .tile .art > svg *,
   .tile .state-card {
     animation-play-state: paused !important;
@@ -3453,6 +3509,29 @@ a.tile {
   }
 }
 
+/* --- The cut --------------------------------------------------------------
+   Every element in a diagram snaps back to its "before" state on the same
+   frame, which read as the whole card blinking once a cycle. The drawing now
+   dims into that frame and recovers just after it: 0% and 100% hold the same
+   value, so the seam falls inside the dim instead of on full brightness. */
+
+@keyframes d-cut {
+  0% {
+    opacity: 0.52;
+  }
+  7%,
+  93% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.52;
+  }
+}
+
+.tile.is-in .art > svg {
+  animation: d-cut var(--dur-loop) var(--ease-out) infinite;
+}
+
 /* --- Diagram cadence -----------------------------------------------------
    Every diagram shares one 5.6s cycle and used to start the moment its tile
    entered view, so a row of cards pulsed in lockstep. A negative delay keyed
@@ -3460,7 +3539,19 @@ a.tile {
    children of the same tile share the offset, so a diagram stays internally
    in step. ------------------------------------------------------------- */
 
+.tile .art > svg,
 .tile .art > svg *,
 .tile .state-card {
   animation-delay: calc(var(--i, 0) * -1130ms);
+}
+
+/* Twenty diagrams on one duration beat like a metronome however you offset
+   their start. Three cycle lengths break that up; children of a tile share
+   the value, so a drawing stays internally in step. */
+.bento .tile:nth-child(3n + 2) .art {
+  --dur-loop: 6.5s;
+}
+
+.bento .tile:nth-child(3n + 3) .art {
+  --dur-loop: 4.9s;
 }
