@@ -74,6 +74,45 @@ const headerVariant = variant === 'docs' ? 'marketing' : variant;
     }
   })();
 
+  // Surfaces catch the light where the pointer actually is. One delegated
+  // listener, coalesced into a frame, writes the position onto whichever
+  // card is under the cursor — no per-card listeners, no layout reads.
+  (function () {
+    if (!window.matchMedia) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!window.matchMedia('(any-hover: hover)').matches) return;
+
+    var SELECTOR = '.tile, .community-card, .plan-card';
+    var pending = null;
+    var current = null;
+
+    function paint() {
+      pending = null;
+      if (!current) return;
+      var el = current.el;
+      var box = el.getBoundingClientRect();
+      if (!box.width || !box.height) return;
+      el.style.setProperty('--mx', ((current.x - box.left) / box.width) * 100 + '%');
+      el.style.setProperty('--my', ((current.y - box.top) / box.height) * 100 + '%');
+    }
+
+    document.addEventListener(
+      'pointermove',
+      function (event) {
+        if (event.pointerType !== 'mouse') return;
+        var el = event.target.closest && event.target.closest(SELECTOR);
+        if (!el) {
+          current = null;
+          return;
+        }
+        current = { el: el, x: event.clientX, y: event.clientY };
+        if (pending) return;
+        pending = window.requestAnimationFrame(paint);
+      },
+      { passive: true }
+    );
+  })();
+
   // The header gains its hairline only once the page has actually moved.
   (function () {
     var header = document.querySelector('.site-header');
