@@ -1323,6 +1323,80 @@ a {
   }
 }
 
+/* --- Sequence ------------------------------------------------------------
+   Steps drawn as a bento read as four unrelated cards. As rows that alternate
+   which side the drawing sits on, the eye travels 1 -> 2 -> 3 -> 4 down the
+   page and the numbers have somewhere to live. --------------------------- */
+
+.bento--sequence {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.bento--sequence .tile {
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 900px) {
+  .bento--sequence .tile {
+    flex-direction: row;
+    align-items: stretch;
+    min-height: 300px;
+  }
+
+  /* Each step mirrors the one before it. */
+  .bento--sequence .tile:nth-child(even) {
+    flex-direction: row-reverse;
+  }
+
+  .bento--sequence .tile__copy {
+    display: flex;
+    flex: 0 0 40%;
+    flex-direction: column;
+    justify-content: center;
+    padding: 44px 48px;
+  }
+
+  .bento--sequence .tile__art {
+    flex: 1 1 60%;
+    min-height: 0;
+    border-top: 0;
+    border-left: 1px solid var(--ld-border);
+  }
+
+  .bento--sequence .tile:nth-child(even) .tile__art {
+    border-left: 0;
+    border-right: 1px solid var(--ld-border);
+  }
+
+  .bento--sequence .art > svg {
+    max-width: 520px;
+  }
+}
+
+/* The step number stops being a label and becomes the marker you count by. */
+.bento--sequence .tile__kicker {
+  margin-bottom: 14px;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: var(--ld-meta);
+}
+
+.bento--sequence .tile__title {
+  font-size: 1.375rem;
+  font-weight: var(--weight-display);
+  line-height: 1.24;
+  letter-spacing: -0.018em;
+}
+
+.bento--sequence .tile__body {
+  margin-top: 12px;
+  max-width: 42ch;
+  font-size: 15px;
+}
+
 .tile {
   position: relative;
   display: flex;
@@ -1408,11 +1482,57 @@ a {
   }
 }
 
+/* --- Hero card -----------------------------------------------------------
+   Twenty cards at one weight give the eye nowhere to land. The card leading
+   a section is lit a step brighter, holds its copy at a larger size, and
+   gives its drawing more room — so a section has a subject and a chorus
+   rather than five equal voices. -------------------------------------- */
+
+.tile--hero {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0) 180px),
+    var(--ld-surface);
+  box-shadow:
+    inset 0 0 0 1px var(--ld-border-strong),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    var(--lift-2);
+}
+
+.tile--hero .tile__copy {
+  padding: 28px 28px 22px;
+}
+
+.tile--hero .tile__title {
+  font-size: 1.25rem;
+  font-weight: var(--weight-display);
+  line-height: 1.28;
+  letter-spacing: -0.016em;
+}
+
+.tile--hero .tile__body {
+  margin-top: 10px;
+  font-size: 15px;
+  max-width: 52ch;
+}
+
+.tile--hero .art {
+  padding: 32px 20px 0;
+}
+
+.tile--hero .art > svg {
+  max-width: 620px;
+}
+
+@media (min-width: 1024px) {
+  .tile--hero .art > svg {
+    max-width: 760px;
+  }
+}
+
 /* Hover lifts the whole tile at once — border, copy, and the diagram inside —
    rather than sliding a background out from under static contents. */
 .tile {
   transition:
-    filter var(--quick) var(--ease-out),
     transform var(--quick) var(--ease-out),
     box-shadow var(--quick) var(--ease-out);
 }
@@ -1685,6 +1805,12 @@ a.tile {
   }
 }
 
+/* --- What's new ----------------------------------------------------------
+   Three boxes carrying a date and a title, with the same date on all three,
+   spent a section's worth of page on almost nothing. A changelog is a list:
+   rows on a rule, the date set in the mono the product uses, and an arrow
+   that moves when the row is under the pointer. ------------------------- */
+
 .ships {
   margin: 0;
 }
@@ -1694,14 +1820,16 @@ a.tile {
   align-items: baseline;
   justify-content: space-between;
   gap: 16px;
-  margin-bottom: 22px;
+  padding-bottom: 20px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid var(--ld-border);
 }
 
 .ships__title {
-  font-size: 1.375rem;
-  font-weight: 400;
-  letter-spacing: -0.005em;
-  line-height: 1.3;
+  font-size: clamp(1.75rem, 3.2vw, 2.25rem);
+  font-weight: var(--weight-display);
+  letter-spacing: -0.022em;
+  line-height: 1.16;
   color: var(--ld-secondary);
 }
 
@@ -1710,64 +1838,96 @@ a.tile {
   color: var(--ld-muted);
   text-decoration: none;
   white-space: nowrap;
+  transition: color var(--quick) var(--ease-out);
 }
 
 @media (any-hover: hover) {
-  .ships__more:hover,
-  .ships__row:hover .ships__item {
+  .ships__more:hover {
     color: var(--ld-secondary);
   }
 }
 
 .ships__list {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-@media (min-width: 768px) {
-  .ships__list {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
+.ships__entry + .ships__entry {
+  border-top: 1px solid var(--ld-border);
 }
 
 .ships__row {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 18px;
-  border: 0;
-  border-radius: var(--radius);
-  background: var(--ld-surface);
-  box-shadow: inset 0 0 0 1px var(--ld-border);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: 4px 24px;
+  padding: 22px 4px;
   text-decoration: none;
-  transition:
-    background-color var(--dur-fast) var(--ease-out),
-    box-shadow var(--dur-fast) var(--ease-out);
+  transition: padding-inline-start var(--regular) var(--ease-out);
 }
 
-@media (any-hover: hover) {
-  .ships__row:hover {
-    background: var(--ld-chip);
-    box-shadow: inset 0 0 0 1px var(--ld-border-strong);
+@media (min-width: 700px) {
+  .ships__row {
+    grid-template-columns: 128px 1fr auto;
+    align-items: center;
+    padding: 26px 4px;
   }
 }
 
 .ships__date {
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: 0.01em;
-  color: var(--ld-muted);
+  order: -1;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--ld-meta);
+  white-space: nowrap;
 }
 
 .ships__item {
-  font-size: 1rem;
+  font-size: 1.125rem;
   font-weight: 400;
-  line-height: 1.4;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
   color: var(--ld-secondary);
+  transition: color var(--quick) var(--ease-out);
+}
+
+.ships__go {
+  justify-self: end;
+  font-size: 1rem;
+  color: var(--ld-meta);
+  transition:
+    transform var(--regular) var(--ease-out),
+    color var(--quick) var(--ease-out);
+}
+
+@media (any-hover: hover) {
+  /* The row steps toward the reader and the arrow leads it out. */
+  .ships__row:hover {
+    padding-inline-start: 12px;
+  }
+
+  .ships__row:hover .ships__item {
+    color: var(--ld-primary);
+  }
+
+  .ships__row:hover .ships__go {
+    color: var(--ld-secondary);
+    transform: translateX(4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ships__row,
+  .ships__row:hover {
+    padding-inline-start: 4px;
+    transition: none;
+  }
+
+  .ships__row:hover .ships__go {
+    transform: none;
+  }
 }
 
 .tile__art {
@@ -2074,9 +2234,19 @@ a.tile {
 
 /* Diagram vocabulary */
 
+/* The drawings sat flatter than the cards holding them: one flat fill, one
+   flat hairline, no light anywhere. They take the same lit-from-above paint
+   the surfaces around them use, from one shared set of gradients. */
+.art-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
 .d-panel {
-  fill: var(--d-fill);
-  stroke: var(--d-stroke);
+  fill: url(#d-grad-panel);
+  stroke: url(#d-grad-edge);
   stroke-width: 1;
 }
 
@@ -2087,11 +2257,11 @@ a.tile {
 }
 
 .d-bar {
-  fill: var(--d-bar);
+  fill: url(#d-grad-bar);
 }
 
 .d-bar--soft {
-  fill: var(--d-bar-soft);
+  fill: url(#d-grad-bar-soft);
 }
 
 .d-link {
@@ -2124,7 +2294,7 @@ a.tile {
 }
 
 .d-add-bg {
-  fill: var(--ld-diff-add);
+  fill: url(#d-grad-add);
 }
 
 .d-rm {
@@ -2132,7 +2302,7 @@ a.tile {
 }
 
 .d-rm-bg {
-  fill: var(--ld-diff-remove);
+  fill: url(#d-grad-rm);
 }
 
 .d-warn {
@@ -2189,51 +2359,39 @@ a.tile {
 }
 
 .tile.is-in .d-out {
-  animation: d-out var(--dur-loop) var(--ease-loop) infinite;
+  animation: d-out var(--art-dur) var(--ease-loop) 1 both;
 }
 
 .tile.is-in .d-in {
-  animation: d-in var(--dur-loop) var(--ease-loop) infinite;
+  animation: d-in var(--art-dur) var(--ease-loop) 1 both;
 }
 
 /* d-out and d-in share a stage, so the "before" clears out completely. */
 @keyframes d-out {
   0%,
-  12% {
+  10% {
     animation-timing-function: var(--ease-depart);
     opacity: 1;
     transform: none;
   }
-  34%,
-  90% {
-    animation-timing-function: steps(1, end);
-    opacity: 0;
-    /* Receding, not just fading: the extra 3px and the scale give the
-       departure somewhere to go. */
-    transform: translateX(-7px) scale(0.985);
-  }
+  62%,
   100% {
-    opacity: 1;
-    transform: none;
+    opacity: 0;
+    transform: translateX(-7px) scale(0.985);
   }
 }
 
 @keyframes d-in {
   0%,
-  30% {
+  34% {
     animation-timing-function: var(--ease-settle);
     opacity: 0;
     transform: translateY(7px) scale(0.985);
   }
-  50%,
-  90% {
-    animation-timing-function: steps(1, end);
+  82%,
+  100% {
     opacity: 1;
     transform: none;
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(7px) scale(0.985);
   }
 }
 
@@ -2246,7 +2404,7 @@ a.tile {
 }
 
 .tile.is-in .d-draw {
-  animation: d-draw var(--dur-loop) var(--ease-loop) infinite;
+  animation: d-draw var(--art-dur) var(--ease-loop) 1 both;
   animation-delay: calc(var(--d, 0) * 120ms);
 }
 
@@ -2255,13 +2413,9 @@ a.tile {
     animation-timing-function: var(--ease-arrive);
     stroke-dashoffset: 1;
   }
-  32%,
-  90% {
-    animation-timing-function: steps(1, end);
-    stroke-dashoffset: 0;
-  }
+  74%,
   100% {
-    stroke-dashoffset: 1;
+    stroke-dashoffset: 0;
   }
 }
 
@@ -2269,32 +2423,36 @@ a.tile {
 
 .d-sweep {
   opacity: 0;
+  /* Widened from the 2px rule it was drawn as, so the shared beam gradient
+     has room to fall off either side of its bright edge. */
+  x: 118px;
+  width: 44px;
+  fill: url(#d-grad-beam);
 }
 
 .tile.is-in .d-sweep {
-  animation: d-sweep var(--dur-loop) var(--ease-loop) infinite;
+  animation: d-sweep var(--art-dur) var(--ease-loop) 1 both;
 }
 
 @keyframes d-sweep {
-  0%,
-  18% {
+  0% {
     animation-timing-function: var(--ease-scan);
     opacity: 0;
-    transform: translateX(-110px);
+    transform: translateX(-120px);
   }
-  25% {
+  14% {
     animation-timing-function: var(--ease-scan);
     opacity: 1;
   }
-  54% {
+  70% {
     animation-timing-function: var(--ease-scan);
     opacity: 1;
-    transform: translateX(110px);
+    transform: translateX(120px);
   }
-  60%,
+  80%,
   100% {
     opacity: 0;
-    transform: translateX(110px);
+    transform: translateX(120px);
   }
 }
 
@@ -2318,47 +2476,41 @@ a.tile {
 }
 
 .tile.is-in .d-blink {
-  animation: d-blink var(--dur-loop) var(--ease-loop) infinite;
+  animation: d-blink var(--art-dur) var(--ease-loop) 1 both;
 }
 
 @keyframes d-blink {
   0%,
-  30%,
-  100% {
-    opacity: 0.28;
+  40% {
+    opacity: 0.24;
   }
-  45%,
-  70% {
-    opacity: 1;
+  78%,
+  100% {
+    opacity: 0.95;
   }
 }
 
 /* Duplicate: two copies slide together and become one */
 
 .tile.is-in .d-dup-a {
-  animation: d-dup-a var(--dur-loop) var(--ease-loop) infinite;
+  animation: d-dup-a var(--art-dur) var(--ease-loop) 1 both;
 }
 
 .tile.is-in .d-dup-b {
-  animation: d-dup-b var(--dur-loop) var(--ease-loop) infinite;
+  animation: d-dup-b var(--art-dur) var(--ease-loop) 1 both;
 }
 
 @keyframes d-dup-a {
   0%,
-  16% {
+  10% {
     animation-timing-function: var(--ease-arrive);
     transform: none;
     opacity: 1;
   }
-  46%,
-  90% {
-    animation-timing-function: steps(1, end);
+  64%,
+  100% {
     transform: translate(24px, 14px) scale(0.97);
     opacity: 0.14;
-  }
-  100% {
-    transform: none;
-    opacity: 1;
   }
 }
 
@@ -2366,60 +2518,50 @@ a.tile {
    rather than collapsing as one block. */
 @keyframes d-dup-b {
   0%,
-  21% {
+  16% {
     animation-timing-function: var(--ease-arrive);
     transform: none;
     opacity: 1;
   }
-  50%,
-  90% {
-    animation-timing-function: steps(1, end);
+  70%,
+  100% {
     transform: translate(-24px, -14px) scale(0.97);
     opacity: 0.14;
-  }
-  100% {
-    transform: none;
-    opacity: 1;
   }
 }
 
 /* Fetch: the block leaves the screen and becomes its own node */
 
 .tile.is-in .d-eject {
-  animation: d-eject var(--dur-loop) var(--ease-loop) infinite;
+  animation: d-eject var(--art-dur) var(--ease-loop) 1 both;
 }
 
 @keyframes d-eject {
   0%,
-  16% {
+  10% {
     animation-timing-function: var(--ease-depart);
     transform: none;
     opacity: 1;
   }
-  44%,
-  90% {
-    animation-timing-function: steps(1, end);
+  66%,
+  100% {
     transform: translate(96px, 34px) scale(0.94);
     opacity: 0.1;
-  }
-  100% {
-    transform: none;
-    opacity: 1;
   }
 }
 
 /* Order: three rows sort themselves */
 
 .tile.is-in .d-sort-1 {
-  animation: d-sort-1 var(--dur-loop) var(--ease-loop) infinite;
+  animation: d-sort-1 var(--art-dur) var(--ease-loop) 1 both;
 }
 
 .tile.is-in .d-sort-2 {
-  animation: d-sort-2 var(--dur-loop) var(--ease-loop) infinite;
+  animation: d-sort-2 var(--art-dur) var(--ease-loop) 1 both;
 }
 
 .tile.is-in .d-sort-3 {
-  animation: d-sort-3 var(--dur-loop) var(--ease-loop) infinite;
+  animation: d-sort-3 var(--art-dur) var(--ease-loop) 1 both;
 }
 
 /* Each row leaves a beat after the one before and lands with a settle, so
@@ -2427,33 +2569,25 @@ a.tile {
    sliding into place. */
 @keyframes d-sort-1 {
   0%,
-  22% {
+  18% {
     animation-timing-function: var(--ease-settle);
     transform: translateY(72px);
   }
-  44%,
-  90% {
-    animation-timing-function: steps(1, end);
-    transform: none;
-  }
+  58%,
   100% {
-    transform: translateY(72px);
+    transform: none;
   }
 }
 
 @keyframes d-sort-2 {
   0%,
-  28% {
+  26% {
     animation-timing-function: var(--ease-settle);
     transform: translateY(-36px);
   }
-  50%,
-  90% {
-    animation-timing-function: steps(1, end);
-    transform: none;
-  }
+  68%,
   100% {
-    transform: translateY(-36px);
+    transform: none;
   }
 }
 
@@ -2463,47 +2597,43 @@ a.tile {
     animation-timing-function: var(--ease-settle);
     transform: translateY(-36px);
   }
-  56%,
-  90% {
-    animation-timing-function: steps(1, end);
-    transform: none;
-  }
+  78%,
   100% {
-    transform: translateY(-36px);
+    transform: none;
   }
 }
 
 /* Approve: a cursor arrives and presses */
 
 .tile.is-in .d-hand {
-  animation: d-hand var(--dur-loop) var(--ease-loop) infinite;
+  animation: d-hand var(--art-dur) var(--ease-loop) 1 both;
 }
 
 .tile.is-in .d-press {
-  animation: d-press var(--dur-loop) var(--ease-loop) infinite;
+  animation: d-press var(--art-dur) var(--ease-loop) 1 both;
 }
 
 .tile.is-in .d-press .d-btn {
-  animation: d-btn-flash var(--dur-loop) var(--ease-loop) infinite;
+  animation: d-btn-flash var(--art-dur) var(--ease-loop) 1 both;
 }
 
 @keyframes d-hand {
   0%,
-  10% {
+  8% {
     animation-timing-function: var(--ease-arrive);
     transform: translate(26px, 26px);
     opacity: 0;
   }
-  24% {
+  26% {
     opacity: 1;
   }
-  42%,
-  64% {
+  46%,
+  74% {
     animation-timing-function: var(--ease-depart);
     transform: none;
     opacity: 1;
   }
-  80%,
+  92%,
   100% {
     transform: translate(26px, 26px);
     opacity: 0;
@@ -2514,15 +2644,15 @@ a.tile {
    under the finger and comes back up past its resting size. */
 @keyframes d-press {
   0%,
-  44% {
+  52% {
     animation-timing-function: var(--ease-depart);
     transform: none;
   }
-  50% {
+  60% {
     animation-timing-function: var(--ease-settle);
     transform: scale(0.94);
   }
-  62%,
+  76%,
   100% {
     transform: none;
   }
@@ -2531,14 +2661,14 @@ a.tile {
 /* The button acknowledges the press instead of only moving under it. */
 @keyframes d-btn-flash {
   0%,
-  46% {
+  54% {
     fill: var(--ld-primary);
   }
-  52%,
-  60% {
+  60%,
+  70% {
     fill: #ffffff;
   }
-  74%,
+  84%,
   100% {
     fill: var(--ld-primary);
   }
@@ -2547,26 +2677,26 @@ a.tile {
 /* Pulse travelling through the graph */
 
 .tile.is-in .d-travel {
-  animation: d-travel var(--dur-loop) var(--ease-loop) infinite;
+  animation: d-travel var(--art-dur) var(--ease-loop) 1 both;
 }
 
 @keyframes d-travel {
   0%,
-  22% {
+  12% {
     animation-timing-function: var(--ease-scan);
     opacity: 0;
     transform: translate(-60px, -30px);
   }
-  30% {
+  24% {
     animation-timing-function: var(--ease-scan);
     opacity: 1;
   }
-  58% {
+  74% {
     animation-timing-function: var(--ease-arrive);
     opacity: 1;
     transform: none;
   }
-  70%,
+  88%,
   100% {
     opacity: 0;
     transform: none;
@@ -2576,11 +2706,11 @@ a.tile {
 /* Tangle relaxing into order */
 
 .tile.is-in .d-tangle {
-  animation: d-out var(--dur-loop) var(--ease-loop) infinite;
+  animation: d-out var(--art-dur) var(--ease-loop) 1 both;
 }
 
 .tile.is-in .d-tidy {
-  animation: d-in var(--dur-loop) var(--ease-loop) infinite;
+  animation: d-in var(--art-dur) var(--ease-loop) 1 both;
 }
 
 .art-approve {
@@ -3498,31 +3628,57 @@ a.tile {
   }
 }
 
-/* --- Loop budget ---------------------------------------------------------
-   Twenty diagrams loop on a 5.6s cycle. The observer keeps watching each
-   tile for its whole life, so a loop only runs while its tile is on screen
-   (and never while the tab is in the background). --------------------- */
+/* --- Diagram playback ----------------------------------------------------
+   Twenty drawings looping on a shared clock is twenty things competing for
+   the same attention, which is the opposite of what it was meant to do. A
+   diagram now travels once, from the mess to the resolved state, and stays
+   there. One per section is promoted to hero and handed to the scroll, so
+   the reader drives the transformation instead of watching it replay. ---- */
 
-.tile .art > svg,
-.tile .art > svg *,
+.art {
+  --art-dur: 1500ms;
+}
+
+/* Calm diagrams play once as their card arrives, a beat behind it.
+   `.is-in` is carried here only for weight: the per-gesture rules above are
+   three classes deep and their `animation` shorthand resets both delay and
+   timeline, so anything meant to override them has to match it. */
+.tile.is-in .art > svg * {
+  animation-delay: calc(240ms + var(--i, 0) * 90ms);
+}
+
+/* The hero is scrubbed: its progress is the reader's scroll position, and it
+   holds the resolved state once the section is behind them. */
+@supports (animation-timeline: view()) {
+  .tile--hero.is-in .art > svg * {
+    animation-duration: auto;
+    animation-delay: 0s;
+    animation-timing-function: linear;
+    animation-timeline: view();
+    animation-range: entry 24% cover 58%;
+  }
+
+  .tile--hero.is-in .art > svg .d-draw {
+    animation-range: entry 28% cover 60%;
+  }
+}
+
+/* Only the pieces that actually move get promoted. */
+.tile .art > svg [class*="d-"],
+.tile .state-card {
+  will-change: transform, opacity;
+}
+
 .tile .state-card,
 .tile .film__line,
 .tile .film__row {
   animation-play-state: paused;
 }
 
-.tile.is-live .art > svg,
-.tile.is-live .art > svg *,
 .tile.is-live .state-card,
 .tile.is-live .film__line,
 .tile.is-live .film__row {
   animation-play-state: running;
-}
-
-/* Only the pieces that actually loop get promoted. */
-.tile .art > svg [class*="d-"],
-.tile .state-card {
-  will-change: transform, opacity;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -3539,10 +3695,10 @@ a.tile {
     filter: none !important;
   }
 
-  .tile .art > svg,
   .tile .art > svg *,
   .tile .state-card {
-    animation-play-state: paused !important;
+    animation: none !important;
+    animation-timeline: auto !important;
     will-change: auto;
   }
 }
@@ -3573,49 +3729,3 @@ a.tile {
   }
 }
 
-/* --- The cut --------------------------------------------------------------
-   Every element in a diagram snaps back to its "before" state on the same
-   frame, which read as the whole card blinking once a cycle. The drawing now
-   dims into that frame and recovers just after it: 0% and 100% hold the same
-   value, so the seam falls inside the dim instead of on full brightness. */
-
-@keyframes d-cut {
-  0% {
-    opacity: 0.52;
-  }
-  7%,
-  93% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.52;
-  }
-}
-
-.tile.is-in .art > svg {
-  animation: d-cut var(--dur-loop) var(--ease-out) infinite;
-}
-
-/* --- Diagram cadence -----------------------------------------------------
-   Every diagram shares one 5.6s cycle and used to start the moment its tile
-   entered view, so a row of cards pulsed in lockstep. A negative delay keyed
-   to the tile's index drops each one in at a different point of the cycle;
-   children of the same tile share the offset, so a diagram stays internally
-   in step. ------------------------------------------------------------- */
-
-.tile .art > svg,
-.tile .art > svg *,
-.tile .state-card {
-  animation-delay: calc(var(--i, 0) * -1130ms);
-}
-
-/* Twenty diagrams on one duration beat like a metronome however you offset
-   their start. Three cycle lengths break that up; children of a tile share
-   the value, so a drawing stays internally in step. */
-.bento .tile:nth-child(3n + 2) .art {
-  --dur-loop: 6.5s;
-}
-
-.bento .tile:nth-child(3n + 3) .art {
-  --dur-loop: 4.9s;
-}

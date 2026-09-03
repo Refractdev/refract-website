@@ -10,15 +10,22 @@ interface Props {
   index?: number;
   href?: string;
   external?: boolean;
+  /**
+   * One card per section leads. It carries the section's drawing at hero
+   * scale, hands that drawing to the scroll rather than playing it on a
+   * timer, and reads a step heavier than the cards supporting it.
+   */
+  hero?: boolean;
 }
 
-const { title, body, kicker, span = 6, rows = 1, size = 'default', index = 0, href, external = false } = Astro.props;
+const { title, body, kicker, span = 6, rows = 1, size = 'default', index = 0, href, external = false, hero = false } = Astro.props;
 const hasArt = Astro.slots.has('art');
 const classes = [
   'tile',
   `tile--${span}`,
   rows === 2 && 'tile--rows2',
   size !== 'default' && `tile--${size}`,
+  hero && 'tile--hero',
   !hasArt && 'tile--text',
   href && 'tile--link',
   'reveal',

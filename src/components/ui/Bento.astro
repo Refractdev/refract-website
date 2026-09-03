@@ -1,3 +1,16 @@
-<div class="bento">
+---
+interface Props {
+  /**
+   * `sequence` lays the cards out as full-width rows that alternate which
+   * side the drawing sits on. Numbered content is a sequence, and a bento of
+   * four unequal cards does not read as one.
+   */
+  variant?: 'grid' | 'sequence';
+}
+
+const { variant = 'grid' } = Astro.props;
+---
+
+<div class:list={['bento', variant === 'sequence' && 'bento--sequence']}>
   <slot />
 </div>
