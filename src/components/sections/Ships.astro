@@ -24,8 +24,8 @@ function isExternal(href: string) {
       </div>
       <ul class="ships__list">
         {
-          items.map((item) => (
-            <li>
+          items.map((item, i) => (
+            <li class="ships__entry" style={`--i:${i}`}>
               <a
                 class="ships__row"
                 href={item.href}
@@ -34,6 +34,7 @@ function isExternal(href: string) {
               >
                 <time class="ships__date">{item.date}</time>
                 <span class="ships__item">{item.title}</span>
+                <span class="ships__go" aria-hidden="true">&rarr;</span>
               </a>
             </li>
           ))

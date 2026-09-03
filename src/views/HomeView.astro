@@ -58,7 +58,7 @@ const shipsItems = home.ships.items.map((item) => ({
       <section class="band-section">
         <div class="mx-auto max-w-site px-5">
           <Bento>
-            <Tile title={home.problem.bullets[0]} span={6} rows={2} index={0}>
+            <Tile hero title={home.problem.bullets[0]} span={6} rows={2} index={0}>
               <ArtDuplicate slot="art" />
             </Tile>
             <Tile title={home.problem.bullets[1]} span={6} index={1}>
@@ -78,6 +78,7 @@ const shipsItems = home.ships.items.map((item) => ({
       </section>
 
       <Band
+        variant="statement"
         headline={home.turn.headline}
         lede={home.turn.lede}
         more={{ label: home.turn.more.label, href: href(home.turn.more.href) }}
@@ -85,7 +86,7 @@ const shipsItems = home.ships.items.map((item) => ({
 
       <Band headline={home.result.headline}>
         <Bento>
-          <Tile title={home.result.points[0].title} body={home.result.points[0].body} span={8} index={0} href={href('/product')}>
+          <Tile hero title={home.result.points[0].title} body={home.result.points[0].body} span={8} index={0} href={href('/product')}>
             <ArtDiff slot="art" kind="remove" />
           </Tile>
           <Tile title={home.result.points[1].title} body={home.result.points[1].body} span={4} index={1} href={href('/product')}>
@@ -101,17 +102,17 @@ const shipsItems = home.ships.items.map((item) => ({
       </Band>
 
       <Band headline={home.does.headline} more={{ label: home.does.more.label, href: href(home.does.more.href) }}>
-        <Bento>
-          <Tile kicker={home.does.points[0].number} title={home.does.points[0].title} body={home.does.points[0].body} span={5} index={0} href={href('/product')}>
+        <Bento variant="sequence">
+          <Tile kicker={home.does.points[0].number} title={home.does.points[0].title} body={home.does.points[0].body} span={12} index={0} href={href('/product')}>
             <ArtProject slot="art" />
           </Tile>
-          <Tile kicker={home.does.points[1].number} title={home.does.points[1].title} body={home.does.points[1].body} span={7} index={1} href={href('/product')}>
+          <Tile kicker={home.does.points[1].number} title={home.does.points[1].title} body={home.does.points[1].body} span={12} index={1} href={href('/product')}>
             <ArtMess slot="art" />
           </Tile>
-          <Tile kicker={home.does.points[2].number} title={home.does.points[2].title} body={home.does.points[2].body} span={7} index={2} href={href('/product')}>
+          <Tile kicker={home.does.points[2].number} title={home.does.points[2].title} body={home.does.points[2].body} span={12} index={2} href={href('/product')}>
             <ArtOrder slot="art" />
           </Tile>
-          <Tile kicker={home.does.points[3].number} title={home.does.points[3].title} body={home.does.points[3].body} span={5} index={3} href={href('/product')}>
+          <Tile kicker={home.does.points[3].number} title={home.does.points[3].title} body={home.does.points[3].body} span={12} index={3} href={href('/product')}>
             <ArtCleanup slot="art" />
           </Tile>
         </Bento>
@@ -119,7 +120,7 @@ const shipsItems = home.ships.items.map((item) => ({
 
       <Band headline={home.world.headline} lede={home.world.lede} after={home.world.close}>
         <Bento>
-          <Tile span={8} body={home.world.caption} index={0} href={href('/docs/on-github')}>
+          <Tile hero span={8} body={home.world.caption} index={0} href={href('/docs/on-github')}>
             <ResultNote slot="art" states={worldStates} primaryIndex={1} />
           </Tile>
           <Tile body={home.world.decide} span={4} index={1} href={href('/docs/connect-github')}>
@@ -130,7 +131,7 @@ const shipsItems = home.ships.items.map((item) => ({
 
       <Band headline={home.trust.headline} more={{ label: home.ships.more.label, href: href('/docs/approve') }}>
         <Bento>
-          <Tile title={home.trust.points[0].title} body={home.trust.points[0].body} span={7} size="tall" index={0} href={trustHrefs[0] ? href(trustHrefs[0]) : undefined}>
+          <Tile hero title={home.trust.points[0].title} body={home.trust.points[0].body} span={7} size="tall" index={0} href={trustHrefs[0] ? href(trustHrefs[0]) : undefined}>
             <ArtApprove slot="art" />
           </Tile>
           <Tile title={home.trust.points[1].title} body={home.trust.points[1].body} span={5} size="tall" index={1}>
@@ -149,6 +150,7 @@ const shipsItems = home.ships.items.map((item) => ({
       </Band>
 
       <Band
+        variant="centered"
         headline={home.steps.headline}
         aside={home.steps.note}
         more={{ label: home.steps.cta.label, href: href(home.steps.cta.href) }}
@@ -170,7 +172,7 @@ const shipsItems = home.ships.items.map((item) => ({
         items={shipsItems}
       />
 
-      <Band headline={home.social.headline} lede={home.social.line}>
+      <Band variant="centered" headline={home.social.headline} lede={home.social.line}>
         <div class="community-grid">
           <CommunityCard
             compact

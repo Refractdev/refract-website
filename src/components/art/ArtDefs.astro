@@ -1,0 +1,54 @@
+---
+/**
+ * Paint shared by every diagram. Inline SVGs live in the same document, so a
+ * gradient declared once here is addressable from CSS as url(#id) by all of
+ * them — which is what lets the drawings be lit from above the way the cards
+ * holding them are, without a filter per shape.
+ */
+---
+
+<svg class="art-defs" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <!-- Panels: the base fill with the light landing on the top edge. -->
+    <linearGradient id="d-grad-panel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1e2024" />
+      <stop offset="100%" stop-color="#141518" />
+    </linearGradient>
+
+    <!-- The hairline around a panel, brighter where the light hits it. -->
+    <linearGradient id="d-grad-edge" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.20)" />
+      <stop offset="100%" stop-color="rgba(255,255,255,0.06)" />
+    </linearGradient>
+
+    <!-- Content bars pick up the same directional light. -->
+    <linearGradient id="d-grad-bar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.42)" />
+      <stop offset="100%" stop-color="rgba(255,255,255,0.26)" />
+    </linearGradient>
+
+    <linearGradient id="d-grad-bar-soft" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.20)" />
+      <stop offset="100%" stop-color="rgba(255,255,255,0.11)" />
+    </linearGradient>
+
+    <!-- The scan reads as light passing over the file, not a moving rule. -->
+    <linearGradient id="d-grad-beam" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="rgba(255,255,255,0)" />
+      <stop offset="46%" stop-color="rgba(255,255,255,0.10)" />
+      <stop offset="72%" stop-color="rgba(255,255,255,0.62)" />
+      <stop offset="100%" stop-color="rgba(255,255,255,0)" />
+    </linearGradient>
+
+    <!-- Kept and removed rows carry their colour as a wash, not a flat block. -->
+    <linearGradient id="d-grad-add" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="rgba(63,185,80,0.22)" />
+      <stop offset="100%" stop-color="rgba(63,185,80,0.05)" />
+    </linearGradient>
+
+    <linearGradient id="d-grad-rm" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="rgba(229,72,77,0.22)" />
+      <stop offset="100%" stop-color="rgba(229,72,77,0.05)" />
+    </linearGradient>
+  </defs>
+</svg>

@@ -5,16 +5,29 @@ interface Props {
   after?: string;
   aside?: string;
   more?: { label: string; href: string };
+  /**
+   * Six consecutive bands with a left-aligned headline over a grid read as
+   * one section repeated. `statement` gives a band with no grid under it the
+   * scale and the breathing room to land as a pause; `centered` keeps the
+   * grid but re-centres its header, so neighbouring sections do not stack
+   * into the same silhouette.
+   */
+  variant?: 'default' | 'statement' | 'centered';
 }
 
-const { headline, lede, after, aside, more } = Astro.props;
+const { headline, lede, after, aside, more, variant = 'default' } = Astro.props;
 const hasBody = Astro.slots.has('default');
+const isStatement = variant === 'statement';
+const headlineClass = isStatement ? 'text-statement' : 'text-tp-heading';
 ---
 
-<section class="band-section">
+<section class:list={['band-section', `band-section--${variant}`]}>
   <div class="mx-auto max-w-site px-5">
-    <header class="band">
-      <h2 class="text-tp-heading max-w-[65ch] text-balance reveal">{headline}</h2>
+    {isStatement ? <div class="band__rule reveal" aria-hidden="true"></div> : null}
+    <header class:list={['band', `band--${variant}`]}>
+      <h2 class:list={[headlineClass, 'text-balance reveal', isStatement ? 'band__statement' : 'max-w-[65ch]']}>
+        {headline}
+      </h2>
       {lede ? <p class="text-tp-desc mt-3 max-w-[65ch] reveal" style="--i:1">{lede}</p> : null}
       {
         more ? (
