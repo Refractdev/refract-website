@@ -78,6 +78,7 @@ const shipsItems = home.ships.items.map((item) => ({
       </section>
 
       <Band
+        variant="statement"
         headline={home.turn.headline}
         lede={home.turn.lede}
         more={{ label: home.turn.more.label, href: href(home.turn.more.href) }}
@@ -149,6 +150,7 @@ const shipsItems = home.ships.items.map((item) => ({
       </Band>
 
       <Band
+        variant="centered"
         headline={home.steps.headline}
         aside={home.steps.note}
         more={{ label: home.steps.cta.label, href: href(home.steps.cta.href) }}
@@ -170,7 +172,7 @@ const shipsItems = home.ships.items.map((item) => ({
         items={shipsItems}
       />
 
-      <Band headline={home.social.headline} lede={home.social.line}>
+      <Band variant="centered" headline={home.social.headline} lede={home.social.line}>
         <div class="community-grid">
           <CommunityCard
             compact

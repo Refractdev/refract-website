@@ -1211,6 +1211,70 @@ a {
   text-align: left;
 }
 
+/* --- Band rhythm ---------------------------------------------------------
+   The page ran six bands of "headline left, grid under it" in a row, which
+   read as one section repeated rather than a page with a shape. These two
+   variants break the run without changing what a band is made of. ------- */
+
+.band--centered {
+  text-align: center;
+}
+
+.band--centered .text-tp-heading,
+.band--centered .text-tp-desc {
+  margin-inline: auto;
+}
+
+.band-section--centered .band__after,
+.band-section--centered .band__aside {
+  margin-inline: auto;
+  text-align: center;
+}
+
+/* The turn of the argument carries no grid, so it gets the room to be read
+   as a pause between two of them. */
+.band-section--statement {
+  padding: var(--space-major) 0;
+}
+
+.band--statement {
+  text-align: center;
+}
+
+.band__rule {
+  width: 100%;
+  height: 1px;
+  margin-bottom: var(--space-default);
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--ld-border-strong) 22%,
+    var(--ld-border-strong) 78%,
+    transparent
+  );
+}
+
+.text-statement {
+  margin-inline: auto;
+  max-width: 19ch;
+  font-size: clamp(2.25rem, 4.6vw, 3.25rem);
+  font-weight: var(--weight-display);
+  line-height: 1.1;
+  letter-spacing: -0.028em;
+  color: var(--ld-secondary);
+}
+
+.band--statement .text-tp-desc {
+  margin-inline: auto;
+  margin-top: 22px;
+  max-width: 46ch;
+  font-size: 1.0625rem;
+}
+
+.band--statement .band__more {
+  margin-top: 26px;
+}
+
 .band__after {
   margin: 28px 0 0;
   max-width: 65ch;
